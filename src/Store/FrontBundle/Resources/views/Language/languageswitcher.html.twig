@@ -1,0 +1,19 @@
+<li>
+    <div class="dropdown dropBox">
+        <a href="#" class="dropdown-toggle testy" data-toggle="dropdown">Langue <span class="caret"></span></a>
+        <ul class="dropdown-menu langMenu" role="menu">
+
+            {% for locale in locales %}
+                <li{% if current_locale == locale.locale %} class="locale_current"{% endif %}>
+                    <a href="{{ locale.link }}" title="{{ locale.locale_target_language }}">{{ locale.locale_target_language }}</a>
+                </li>
+            {% endfor %}
+            <!--
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+            -->
+        </ul>
+    </div>
+</li>

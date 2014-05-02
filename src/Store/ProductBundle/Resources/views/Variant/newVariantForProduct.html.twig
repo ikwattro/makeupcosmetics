@@ -1,0 +1,27 @@
+<form action="{{ path('create_for_product', {'productId': product.id}) }}" id="formvariant" method="post" role="form">
+    <h2>Nouvelle Variante</h2>
+    <h4>Choisissez les options de cette variante</h4>
+    {% for opt in options %}
+        <div class="form-group">
+            <label for="{{ opt.name }}">{{ opt.name }}</label>
+    <select name="variant_for_product[option][{{ opt.id }}]">
+        {% for value in opt.values %}
+            <option value="{{ value.id }}">{{ value.name }}</option>
+        {% endfor %}
+    </select>
+            </div>
+        {% endfor %}
+    <div class="form-group">
+    <label for="price_field">Prix : </label>
+    <input type="number" id="price_field" name="variant_for_product[price]"/>
+    </div>
+    <div class="form-group">
+        <input type="checkbox" name="variant_for_product[out_of_stock]" value="1"/> Out Of Stock ?
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Sauver"/>
+    </div>
+
+
+</form>

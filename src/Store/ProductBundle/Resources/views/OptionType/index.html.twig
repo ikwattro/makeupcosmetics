@@ -1,0 +1,53 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Liste des options</h1>
+
+    <div>
+        <a class="btn btn-warning" href="{{ path('optiontype_new') }}">+ nouvelle option</a>
+    </div>
+
+    <table class="records_list table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Valeurs</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('optiontype_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.name }}</td>
+                <td>
+                    <ul>
+                        {% for value in entity.values %}
+                            <li>{{ value.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('optiontype_show', { 'id': entity.id }) }}">voir</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('optiontype_edit', { 'id': entity.id }) }}">modifier</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('optiontype_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

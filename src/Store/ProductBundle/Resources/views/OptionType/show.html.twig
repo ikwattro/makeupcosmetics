@@ -1,0 +1,46 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>{{ entity.name }}</h1>
+
+    <table class="record_properties table">
+        <tbody>
+        <tr>
+            <th>Valeurs</th>
+            <td>
+                <ul>
+                    {% for value in entity.values %}
+                        <li>{{ value.name }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <form role="form" method="POST" action="{{ path('optionvalue_addforoption', {'option': entity.id}) }}">
+        <label for="value">+ Ajouter une valeur :</label>
+        <input name="value" id="value" type="text" />
+        <input type="submit"/>
+    </form>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('optiontype') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('optiontype_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('optiontype_delete', { 'id': entity.id }) }}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}

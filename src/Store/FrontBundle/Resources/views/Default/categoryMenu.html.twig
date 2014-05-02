@@ -1,0 +1,12 @@
+{% if categories is not empty %}
+
+    <ul class="list">
+        {% for category in categories %}
+            <li><a href="{{ path('category_page', {'id': category.id, 'slug': category.slug }) }}">{{ category.title }}</a></li>
+        {% endfor %}
+    </ul>
+
+    {#
+    {{ htmlTree | raw(true) }}
+    #}
+{% endif %}

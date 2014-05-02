@@ -1,0 +1,14 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    <h2>Welcome !</h2>
+
+    <table class="table">
+        <tr>
+            <td>Nombre de produits dans la base <br> (incluant les variantes)</td>
+            <td>{{ numberOfProducts }}</td>
+        </tr>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends '::front.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        {% for prod in products %}
+            {% include 'StoreProductBundle:Product:showIndexProduct.html.twig' with {'product': prod} %}
+            {% if loop.index is divisibleby(4) %}
+                <hr/>
+                </div><div class="row">
+            {% endif %}
+        {% endfor %}
+    </div>
+
+
+
+
+{% endblock %}

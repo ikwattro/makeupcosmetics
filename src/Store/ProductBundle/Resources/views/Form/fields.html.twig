@@ -1,0 +1,70 @@
+{% block form_widget_simple %}
+    {% spaceless %}
+        {% set type = type|default('text') %}
+            <input type="{{ type }}" class="form-control" id="{{ form.vars.id }}" placeholder="{{ form.vars.name }}"
+                   {% if value is not empty %}value="{{ value }}" {% endif %}
+                    />
+    {% endspaceless %}
+{% endblock form_widget_simple %}
+
+{% block textarea_widget %}
+    {% spaceless %}
+            <textarea class="form-control" rows="5">{{ value }}</textarea>
+    {% endspaceless %}
+{% endblock textarea_widget %}
+
+{% block form_row %}
+    {% spaceless %}
+
+        {% if 'checkbox' in form.vars.block_prefixes %}
+
+<div class="form-group">
+    {{ form_label(form) }}
+    {{ form_errors(form) }}
+    <div class="checkbox">
+        {{ form_widget(form) }}
+    </div>
+</div>
+
+        {% else %}
+
+
+        <div class="form-group">
+            {{ form_label(form) }}
+            {{ form_errors(form) }}
+            <div class="col-lg-5">
+            {{ form_widget(form) }}
+                </div>
+        </div>
+{% endif %}
+    {% endspaceless %}
+{% endblock form_row %}
+
+{% block integer_widget %}
+
+    {% set type = type|default('number') %}
+    {{ block('form_widget_simple') }}
+
+{% endblock %}
+
+{% block form_label %}
+    {% spaceless %}
+        {% if label is not sameas(false) %}
+            {% if not compound %}
+                {% if 'checkbox' in form.vars.block_prefixes %}
+                    {% set label_attr = label_attr|merge({'for': id, 'class': 'checkbox-inline'}) %}
+                {% else %}
+                {% set label_attr = label_attr|merge({'for': id, 'class': 'col-lg-2 control-label'}) %}
+                    {% endif %}
+            {% endif %}
+            {% if required %}
+                {% set label_attr = label_attr|merge({'class': (label_attr.class|default('col-lg-2 control-label') ~ ' required')|trim}) %}
+            {% endif %}
+            {% if label is empty %}
+                {% set label = name|humanize %}
+            {% endif %}
+            <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_label %}
+

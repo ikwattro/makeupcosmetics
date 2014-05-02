@@ -1,0 +1,31 @@
+<?php
+
+namespace Store\ProductBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+
+
+/**
+ * @ORM\Entity
+ */
+class Cart
+{
+
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $sessionId;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Store\ProductBundle\Entity\CartItem", mappedBy="cart")
+     */
+    protected $items;
+}

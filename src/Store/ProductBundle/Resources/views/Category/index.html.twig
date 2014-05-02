@@ -1,0 +1,44 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Catégories</h1>
+    <div>
+        <a class="btn btn-warning" href="{{ path('category_new') }}">+ nouvelle catégorie</a>
+    </div>
+    <table class="records_list table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Sous-Catégories</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                {{ entity.root }}
+                <td><a href="{{ path('category_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td><a href="{{ path('category_show', {'id': entity.id }) }}">{{ entity.title }}</a></td>
+                <td>
+                    <ul>
+                        {% for child in entity.children %}
+                            <li>{{ child.title }}</li>
+                        {% endfor %}
+                    </ul>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('category_show', { 'id': entity.id }) }}">voir</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('category_edit', { 'id': entity.id }) }}">modifier</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock %}

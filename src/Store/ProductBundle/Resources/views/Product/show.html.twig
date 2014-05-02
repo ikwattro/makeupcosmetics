@@ -1,0 +1,227 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+
+    <h1>Produit "{{ entity.name }}"</h1>
+
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="#">Général</a>
+        </li>
+        <li><a href="#">Options</a></li>
+        <li class="dropdown">
+            <a class="dropdown-toggle"
+               data-toggle="dropdown"
+               href="#">
+                Traductions
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="{{ path('product_edit_translation', {'id': entity.id, 'locale': 'nl'}) }}">Néerlandais</a></li>
+                <li><a href="{{ path('product_edit_translation', {'id': entity.id, 'locale': 'de'}) }}">Allemand</a></li>
+                <li><a href="{{ path('product_edit_translation', {'id': entity.id, 'locale': 'en'}) }}">Anglais</a></li>
+            </ul>
+        </li>
+    </ul>
+
+
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ entity.name }}</td>
+            </tr>
+            <tr>
+                <th>Sku</th>
+                <td>{{ entity.sku }}</td>
+            </tr>
+            <tr>
+
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ entity.description }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{ asset('uploads/documents/' ~ entity.path) | imagine_filter('my_thumb')}}" />
+                    <img data-src="holder.js/150x100" alt="">
+                </td>
+            </tr>
+         {#
+        <tr>
+            <th>Options :</th>
+            <td>
+                <ul>
+                    {% for option in entity.options %}
+                        <li>{{ option.name }}</li>
+                            <ul>
+                            {% for val in option.values %}
+                                <li>{{ val.name }}</li>
+                            {% endfor %}
+                            </ul>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        #}
+        </tbody>
+
+
+    </table>
+{#
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('product') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('product_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('product_delete', { 'id': entity.id }) }}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
+    #}
+
+
+        <h3>Variantes</h3>
+
+    {% if entity.options is not empty %}
+    <a data-toggle="modal" href="{{ path('new_variant_for_product', {'productId': entity.id}) }}" data-target="#variant_create_modal">
+        <button type="button" class="btn btn-success btn-small">
+            <span class="glyphicon glyphicon-plus-sign"></span> créer une nouvelle variante
+        </button>
+    </a>
+    {% endif %}
+
+{% for variant in entity.variants %}
+    <div class="row">
+        <table class="table">
+            <tr>
+                <td>
+                    {% if variant.isMaster is not empty %}
+                        <span class="glyphicon glyphicon-flag"></span>
+                    {% else %}
+                        <span class="glyphicon glyphicon-magnet"></span>
+                    {% endif %}
+                    <a href="#">#{{ variant.id }}</a></td>
+                <td>
+                    {% for options in variant.values %}
+                        <span class="label label-info">{{ options.option.name | capitalize }} : </span>&nbsp;
+                        {{ options.name }}<br />
+                    {% endfor %}
+
+                </td>
+                <td>
+                    <span class="label label-success">{{ variant.price }}&nbsp;&euro;</span>
+                </td>
+                <td>{{ variant.OutOfStock }}</td>
+
+                <td>
+                    <a data-toggle="modal" href="{{ path('edit_variant', {'id': variant.id}) }}" data-target="#variant_create_modal" refresh="true">
+                        <button type="button" class="btn btn-success btn-small">
+                            <span class="glyphicon glyphicon-plus-sign"></span> éditer
+                        </button>
+                    </a>
+                </td>
+
+                <td></td>
+            </tr>
+
+            <tr>
+                <td colspan="6">
+                    {% if variant.images is empty %}
+                        Pas d'images pour cette variante<br/>
+                        <a data-toggle="modal" href="{{ path('variantimage_new', {'variant': variant.id}) }}" data-target="#myModal">
+                            <button type="button" class="btn btn-success btn-small">
+                                <span class="glyphicon glyphicon-upload"></span> ajouter photo
+                            </button>
+                        </a>
+
+
+
+                    {% else %}
+                        <p>
+                        {%  for image in variant.images %}
+                            
+                        <img src="{{ asset('uploads/product_images/' ~ image.path) | imagine_filter('product_list_thumb')}}" />
+                        {% endfor %}
+                        </p>
+                        <p>
+                            <a data-toggle="modal" href="{{ path('variantimage_new', {'variant': variant.id}) }}" data-target="#myModal">
+                                <button type="button" class="btn btn-success btn-small">
+                                    <span class="glyphicon glyphicon-upload"></span> ajouter photo
+                                </button>
+                            </a>
+                        </p>
+
+                    {% endif %}
+
+                </td>
+            </tr>
+            <hr>
+        </table>
+    </div>
+
+
+{% endfor %}
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="variant_create_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Nouvelle variante</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <script type="text/javascript">
+        $('#variant_create_modal').on('hidden.bs.modal', function () {
+            $('#variant_create_modal').removeData('bs.modal')
+        });
+    </script>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Liste des produits</h1>
+    <div>
+        <button type="button" class="btn btn-default"><a href="{{ path('product_new') }}">+ nouveau</a></button>
+    </div>
+    <table class="records_list table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Image</th>
+                <th>Sku</th>
+                <th>Prix</th>
+                <th>Déscription</th>
+                <th>Catégories</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('product_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td><a href="{{ path('product_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
+                {% if entity.path is empty %}
+                    <td><img data-src="holder.js/70x70/text:no image" alt="no image" /></td>
+                {% else %}
+                <td><img src="{{ asset('uploads/documents/' ~ entity.path) | imagine_filter('product_list_thumb')}}" class=""/></td>
+                {% endif %}
+                <td>{{ entity.sku }}</td>
+                <td>{{ entity.getPrice }} &euro;</td>
+                <td>{{ entity.description | truncate(255, true, '...')}}</td>
+                <td><ul>
+                    {% for cat in entity.categories %}
+                        <li>{{ cat.title }}</li>
+                    {% endfor %}
+                    </ul>
+                </td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('product_show', { 'id': entity.id }) }}">voir</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('product_edit', { 'id': entity.id }) }}">modifier</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    {% endblock %}

@@ -1,0 +1,7 @@
+parameters:
+#    store_customer.example.class: Store\CustomerBundle\Example
+
+services:
+#    store_customer.example:
+#        class: %store_customer.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

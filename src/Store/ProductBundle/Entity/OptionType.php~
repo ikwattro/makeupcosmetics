@@ -1,0 +1,66 @@
+<?php
+
+namespace Store\ProductBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass="Store\ProductBundle\Repository\OptionTypeRepository")
+ */
+class OptionType
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $name;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Store\ProductBundle\Entity\OptionValue", mappedBy="option")
+     */
+    protected $values;
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Option
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+}

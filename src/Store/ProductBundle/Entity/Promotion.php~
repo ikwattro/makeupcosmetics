@@ -1,0 +1,45 @@
+<?php
+
+namespace Store\ProductBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ */
+class Promotion
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $title;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $start;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $end;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $discount;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    protected $disabled;
+
+
+}

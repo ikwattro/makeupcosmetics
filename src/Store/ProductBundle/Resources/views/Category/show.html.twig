@@ -1,0 +1,75 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h2>{{ entity.title }}</h2>
+
+    <ul class="nav nav-tabs">
+        <li class="dropdown">
+            <a class="dropdown-toggle"
+               data-toggle="dropdown"
+               href="#">
+                Traductions
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="{{ path('category_edit_translation', {'id': entity.id, 'locale': 'nl'}) }}">Néerlandais
+                {% if entity.translations.nl is defined %}
+                    : <span style="color:blue;">{{ entity.translations.nl.title }}</span>
+                {% else %}
+                    : aucune
+                {% endif %}
+                        </a>
+                </li>
+                <li><a href="{{ path('category_edit_translation', {'id': entity.id, 'locale': 'de'}) }}">Allemand
+                        {% if entity.translations.de is defined %}
+                            : <span style="color:blue;">{{ entity.translations.de.title }}</span>
+                        {% else %}
+                            : aucune
+                        {% endif %}
+                    </a>
+                </li>
+                <li><a href="{{ path('category_edit_translation', {'id': entity.id, 'locale': 'en'}) }}">Anglais
+                        {% if entity.translations.en is defined %}
+                            : <span style="color:blue;">{{ entity.translations.en.title }}</span>
+                        {% else %}
+                            : aucune
+                        {% endif %}
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <table class="table">
+       {% for child in entity.getChildren() %}
+            <td><a href="{{ path('category_show', {'id': child.id}) }}">{{ child.title }}</a></td>
+        {% endfor %}
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('category') }}">
+            Retour à la liste
+        </a>
+    </li>
+            {% if entity.parent is not empty %}
+    <li>
+        <a href="{{ path('category_show', { 'id': entity.parent.id }) }}">
+            Retour à la catégorie parente
+        </a>
+    </li>
+            {% endif %}
+    <li>
+        <a href="{{ path('category_edit', { 'id': entity.id }) }}">
+            Editer
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('category_delete', { 'id': entity.id }) }}" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+            <button type="submit">Supprimer</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}

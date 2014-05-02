@@ -1,0 +1,13 @@
+{% extends "::front.html.twig" %}
+
+{% block body %}
+    <div class="container">
+        <hr>
+    <h2>{{ category.title }}</h2>
+        <div class="row">
+            {% for product in products %}
+                {% include 'StoreProductBundle:Product:showIndexProduct.html.twig' with {'product': product} %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock body %}

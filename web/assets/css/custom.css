@@ -1,0 +1,181 @@
+.top_row, .categories_row
+{
+    line-height: 50px;
+}
+
+.top_row a
+{
+    color: #777;
+    letter-spacing: 2px;
+}
+
+.top_row a:hover
+{
+    text-decoration: none;
+    color:#8700ff;
+}
+
+.categories_row
+{
+    background-color: #000000;
+    color:#fff;
+}
+
+a.testy:hover
+{
+    text-decoration: none;
+}
+
+ul.navi li
+{
+    display: inline-block;
+    margin-left:35px;
+}
+
+.right
+{
+    text-align:right;
+    padding-right:30px;
+
+}
+
+.categories_row a
+{
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.catrow
+{
+    padding-left:0px;
+    margin-left:0px;
+}
+
+a.brand
+{
+    font-weight: bold;
+    letter-spacing: 5px;
+}
+
+.cat_last
+{
+    text-align: right;
+}
+
+.topsearchform
+{
+    padding-right: 15px;
+    margin-right: 0;
+    display: inline-block;
+}
+
+.secondrow
+{
+    padding-right:15px;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.bodycont
+{
+    padding-top:40px;
+}
+
+.frontproduct
+{
+    border: 1px solid #fff;
+    margin-top: 10px;
+}
+
+.frontproduct_imageblock p
+{
+    text-align: center;
+    padding-left:0px;
+}
+
+.frontproduct_imageblock p a img
+{
+
+}
+
+.frontproduct:hover
+{
+    border:1px solid #dfdfdf;
+}
+
+.frontproduct p
+{
+    text-align:center;
+}
+
+.product_show_title
+{
+    text-align: center;
+    margin-bottom:20px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+
+.prod_cat_title
+{
+    color:#8700ff;
+}
+
+.pricehead
+{
+    background-color: #9acfea;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-align: center;
+    line-height: 30px;
+}
+
+.priceamount
+{
+    letter-spacing: 5px;
+    font-weight: bold;
+    text-align: center;
+    text-align: center;
+}
+
+.numberCircle {
+    border-radius: 50%;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+
+    background: #fff;
+    border: 2px solid #666;
+    color: #666;
+    text-align: center;
+
+    font: 32px Arial, sans-serif;
+}
+
+.mediashare a img
+{
+    border:0;
+}
+
+.mediashare a
+{
+    margin:10px;
+}
+
+.mediashare
+{
+    text-align: center;
+    padding-top:20px;
+}
+
+.mediashare a:hover
+{
+    text-decoration: none;
+    border:0;
+}

@@ -1,0 +1,39 @@
+
+<h2>Panier</h2>
+
+{% if cart.items is empty %}
+<h4>Votre panier est vide</h4>
+{% else %}
+
+<table class="table table-bordered">
+    <tr>
+        <th>Produit</th>
+        <th>Quantité</th>
+        <th>Prix</th>
+    </tr>
+    {% for item in cart.items %}
+
+        <tr>
+            <td>{{ item.product.product.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.product.price }}&euro;</td>
+        </tr>
+    {% endfor %}
+    <tr>
+        <td colspan="2"></td>
+        <td>Total : {{ total }}&euro;</td>
+    </tr>
+
+    {% if promotion is not empty %}
+        <tr><td colspan="2"><span style="color:red;">{{ promotion.detail.title }} : -{{ promotion.detail.discount }}%</span></td>
+        <td><span style="color:red;">-{{ promotion.discount_amount }}&euro;</span></td>
+        </tr>
+        <tr>
+            <td colspan="2"></td>
+            <td>New total : {{ promotion.new_total }}&euro;</td>
+        </tr>
+        {% endif %}
+
+</table>
+    <p><a href="{{ path('reset_cart') }}" class="btn btn-warning btn-small">Reset</a></p>
+{% endif %}

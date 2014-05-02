@@ -1,0 +1,21 @@
+.jumbotron {
+margin-top: 0px;
+}
+
+.navbar
+{
+    background-color: #fff;
+    margin-bottom: 0px;
+}
+
+.jumbotron
+{
+    text-align: center;
+}
+
+div.frontproduct
+{
+    border: 1px solid #ccc;
+    padding:5px;
+    margin:15px;
+}

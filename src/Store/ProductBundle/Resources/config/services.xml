@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+
+    <parameters>
+        <parameter key="store.cart_storage.session.class">Store\ProductBundle\Storage\SessionCartStorage</parameter>
+        <parameter key="store.manager.class">Store\ProductBundle\Manager\StoreManager</parameter>
+    </parameters>
+
+    <services>
+        <service id="store.cart_storage.session" class="%store.cart_storage.session.class%">
+            <argument type="service" id="session" />
+        </service>
+
+        <service id="store.store_manager" class="%store.manager.class%" scope="request">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="store.cart_storage.session" />
+            <argument type="service" id="session" />
+            <argument type="service" id="request" />
+        </service>
+    </services>
+
+
+
+
+
+
+</container>

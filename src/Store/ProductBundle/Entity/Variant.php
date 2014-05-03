@@ -32,7 +32,7 @@ class Variant
     protected $sku;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     protected $price;
 

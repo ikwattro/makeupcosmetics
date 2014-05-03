@@ -30,7 +30,7 @@ class VariantType extends AbstractType
                 'label' => 'Définie comme variante maître ? :'
             ))
             ->add('sku')
-            ->add('price', null, array(
+            ->add('price', 'number', array(
                 'label' => 'Prix :'
             ))
             ->add('product', null, array(

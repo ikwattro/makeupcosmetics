@@ -190,3 +190,9 @@ a.brand
 {
     text-align: right;
 }
+
+.total_line_item
+{
+    text-align: right;
+    padding-right:2px;
+}

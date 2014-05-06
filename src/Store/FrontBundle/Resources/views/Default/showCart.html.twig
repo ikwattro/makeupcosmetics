@@ -22,12 +22,12 @@
                     {% if item.product.product.path is empty %}
                 <td><img data-src="holder.js/70x70/text:no image" alt="no image" /></td>
                     {% else %}
-                        <td><img src="{{ asset('uploads/documents/' ~ item.product.product.path) | imagine_filter('product_list_thumb')}}" class=""/></td>
+                        <td><img src="{{ asset('uploads/documents/' ~ item.product.product.path) | imagine_filter('cart_list_thumb')}}" class=""/></td>
                     {% endif %}
                 {% else %}
                 {% for img in item.product.images %}
                     {% if loop.index == 1 %}
-                <td><img src="{{ asset('uploads/product_images/' ~ img.path) | imagine_filter('product_list_thumb')}}" class=""/></td>
+                <td><img src="{{ asset('uploads/product_images/' ~ img.path) | imagine_filter('cart_list_thumb')}}" class=""/></td>
                     {% endif %}
                     {% endfor %}
                     {% endif %}</td>
@@ -38,7 +38,8 @@
         {% endfor %}
         <tr>
             <td colspan="2"></td>
-            <td>Total : {{ total }}&euro;</td>
+            <td class="total_line_item">Total :</td>
+            <td>{{ total }}&euro;</td>
         </tr>
 
         {% if promotion is not empty %}
@@ -47,13 +48,17 @@
             </tr>
             <tr>
                 <td colspan="2"></td>
-                <td>New total : {{ promotion.new_total }}&euro;</td>
+                <td class="total_line_item">New Total :</td>
+                <td>{{ promotion.new_total }}&euro;</td>
             </tr>
 
         {% endif %}
         <tr>
-            <td colspan="2"></td>
-            <td><a href="{{ path('reset_cart') }}" class="btn btn-warning btn-small">Vider</a> <a href="#" class="btn btn-success">Commander</a></td>
+            <td colspan="3"></td>
+            <td><a href="#" class="btn btn-success">Commander</a></td>
+            <!--
+            <a href="{{ path('reset_cart') }}" class="btn btn-warning btn-small">Vider</a>
+            -->
         </tr>
 
     </table>

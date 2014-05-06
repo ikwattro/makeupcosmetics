@@ -116,6 +116,40 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/cart", name="front_cart")
+     * @Template()
+     */
+    public function showCartAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('StoreProductBundle:Promotion');
+        $promotions = $repo->findIfActual();
+        $promotion = array();
+
+        $storeManager = $this->get('store.store_manager');
+        $cart = $storeManager->getCart();
+        $total = 0;
+        foreach ($cart->getItems() as $item) {
+            $total = $total + ($item->getProduct()->getPrice() * $item->getQuantity());
+        }
+
+        if ($total !== 0){
+            foreach($promotions as $pro){
+                $promotion['detail'] = $pro;
+                $promotion['discount_amount'] = (($total / 100) * $pro->getDiscount());
+                $promotion['new_total'] = $total - $promotion['discount_amount'];
+                break;
+            }
+        }
+
+        return array(
+            'cart'  =>  $cart,
+            'total' => $total,
+            'promotion' => $promotion,
+        );
+    }
+
+    /**
      * @Route("/add_item_to_cart/{productId}", name="add_item_to_cart")
      */
     public function addItemToCartAction($productId)
@@ -129,7 +163,9 @@ class DefaultController extends Controller
         $man = $this->get('store.store_manager');
         $man->addItemToCart($product);
 
-        return $this->redirect($this->generateUrl('homeweb'));
+        $referer = $this->getRequest()->headers->get('referer');
+
+        return $this->redirect($referer);
     }
 
     /**

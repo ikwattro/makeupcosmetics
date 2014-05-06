@@ -30,6 +30,7 @@
             <li><a href="#">LOGIN</a></li>
             <li><a href="#">A PROPOS</a></li>
             {{ locale_switcher() }}
+            <li><a href="{{ path('front_cart') }}" title="Panier">Panier</a></li>
 
             <!--
             <li>
@@ -100,15 +101,24 @@
 </div>
 
 <div class="container bodycont">
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
     {% block body %}
 
     {% endblock body %}
 
     {% block panier %}
 
-        <h5>Affichage Panier</h5>
-    {{ render(controller('StoreFrontBundle:Default:showMiniCart')) }}
 
+
+        <!--
+        <h5>Affichage Panier</h5>
+
+    {{ render(controller('StoreFrontBundle:Default:showMiniCart')) }}
+        -->
     {% endblock panier %}
 </div>
 

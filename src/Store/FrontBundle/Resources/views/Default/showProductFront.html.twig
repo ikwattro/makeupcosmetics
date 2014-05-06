@@ -63,6 +63,11 @@
                 <div class="row priceamount">
                     {{ variant.price }}&euro;
                 </div>
+                <div class="row add_to_cart">
+                    <a class="btn btn-primary btn-sm" href="{{ path('add_item_to_cart', {'productId': variant.id }) }}">
+                        <span class="glyphicon glyphicon-shopping-cart"></span>
+                        Ajouter au panier</a>
+                </div>
                 <div class="row mediashare">
                     <a href="#" title="Show your love on Facebook">
                     <img src="{{ asset('assets/icons/facebook.png') | imagine_filter('social_share_button')}}" alt="Show your love on Facebook"/>

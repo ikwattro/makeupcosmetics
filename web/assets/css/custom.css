@@ -179,3 +179,14 @@ a.brand
     text-decoration: none;
     border:0;
 }
+
+.add_to_cart
+{
+    padding-top: 10px;
+    text-align: center;
+}
+
+.cart_btm_btns
+{
+    text-align: right;
+}

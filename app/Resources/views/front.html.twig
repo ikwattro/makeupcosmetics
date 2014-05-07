@@ -74,28 +74,11 @@
     <div class="row categories_row">
 
         <div class="container">
+            <ul class="list-inline">
 
-        <div class="col-md-2 catrow">
-            <a href="#">Lèvres</a>
+            {{ render(controller('StoreFrontBundle:Default:getCategoryMenu')) }}
+            </ul>
         </div>
-        <div class="col-md-2 catrow catmid">
-            <a href="#">Yeux</a>
-        </div>
-        <div class="col-md-2 catrow catmid">
-            <a href="#">Corps</a>
-        </div>
-        <div class="col-md-2 catrow catmid">
-            <a href="#">Palettes</a>
-        </div>
-        <div class="col-md-2 catrow catmid">
-            <a href="#">Accesoires</a>
-        </div>
-        <div class="col-md-2 catrow cat_last">
-            <a href="#">Plus...</a>
-        </div>
-
-
-            </div>
     </div>
 
 </div>

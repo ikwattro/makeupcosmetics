@@ -83,12 +83,13 @@ class DefaultController extends Controller
     }
 
     /**
+     *
      * @Template()
      */
-    public function categoryMenuAction()
+    public function getCategoryMenuAction()
     {
         $man = $this->get('store.store_manager');
-        $categories = $man->getCategories();
+        $categories = $man->getCategories(true);
         $htmlTree = $man->getMyTree();
 
         return array(

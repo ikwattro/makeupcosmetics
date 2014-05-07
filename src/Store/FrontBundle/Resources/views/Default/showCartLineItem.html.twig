@@ -1,0 +1,19 @@
+<tr>
+    {% if item.images is empty %}
+    {% if product.path is empty %}
+        <td><img data-src="holder.js/70x70/text:no image" alt="no image" /></td>
+    {% else %}
+        <td><img src="{{ asset('uploads/documents/' ~ product.path) | imagine_filter('cart_list_thumb')}}" class=""/></td>
+    {% endif %}
+    {% else %}
+    {% for img in item.images %}
+        {% if loop.index == 1 %}
+            <td><img src="{{ asset('uploads/product_images/' ~ img.path) | imagine_filter('cart_list_thumb')}}" class=""/></td>
+        {% endif %}
+    {% endfor %}
+    {% endif %}</td>
+    <td>{{ product.name }} bla bla</td>
+    <td>{{ quantity }}</td>
+    <td>{{ item.price }}&euro;</td>
+    <td>VID: {{ item.id }}, VPID : {{ item.product.id }}, PID; {{ product.id }}</td>
+</tr>

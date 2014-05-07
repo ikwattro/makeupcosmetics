@@ -116,12 +116,14 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/cart", name="front_cart")
+     * @Route("/cart/view", name="front_cart")
      * @Template()
      */
     public function showCartAction()
     {
         $em = $this->getDoctrine()->getManager();
+        $req = $this->getRequest();
+        $em->getRepository('StoreProductBundle:Product')->findAllByLocaleForTrans($req->getLocale());
         $repo = $em->getRepository('StoreProductBundle:Promotion');
         $promotions = $repo->findIfActual();
         $promotion = array();
@@ -177,5 +179,31 @@ class DefaultController extends Controller
         $man->resetCart();
 
         return $this->redirect($this->generateUrl('homeweb'));
+    }
+
+    /**
+     * @Template()
+     */
+    public function showCartLineItemAction($itemId, $quantity)
+    {
+
+        $manager = $this->get('store.store_manager');
+
+        $em = $this->getDoctrine()->getManager();
+        $pr = $em->getRepository('StoreProductBundle:Product');
+        $r = $this->get('request');
+
+        $variant = $manager->getVariant($itemId);
+        $product = $pr->findSimpleByLocale($variant->getProduct()->getId(), $r->getLocale());
+
+        if(!$product){
+            throw new \InvalidArgumentException("The product does not exist");
+        }
+
+        return array(
+            'item'   => $variant,
+            'product'   =>  $product,
+            'quantity'  => $quantity,
+        );
     }
 }

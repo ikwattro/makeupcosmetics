@@ -144,9 +144,9 @@ class StoreManager
         return true;
     }
 
-    public function getMasterVariants()
+    public function getMasterVariants($locale = null, $limit = null)
     {
-        return $this->product_repository->findAllByLocale($this->locale);
+        return $this->product_repository->findAllByLocale($this->locale, $limit);
     }
 
     public function getVariant($variantId)

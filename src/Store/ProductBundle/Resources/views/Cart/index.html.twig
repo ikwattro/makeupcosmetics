@@ -1,41 +1,27 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Cart list</h1>
+    <h1>Derniers paniers</h1>
 
-    <table class="records_list">
+    <table class="records_list table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Sessionid</th>
-                <th>Actions</th>
+                <th>DateTime</th>
+                <th>Nombre de Produits</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('cart_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.sessionId }}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('cart_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('cart_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                    {{ entity.CartDtg |date('d-m-Y H:i:s') }}
                 </td>
+                <td>{{ entity.items.count }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('cart_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
     {% endblock %}

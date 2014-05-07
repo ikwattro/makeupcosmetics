@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Store\ProductBundle\Repository\CartRepository")
  */
 class Cart
 {
@@ -25,7 +25,7 @@ class Cart
     protected $sessionId;
 
     /**
-     * @ORM\OneToMany(targetEntity="Store\ProductBundle\Entity\CartItem", mappedBy="cart", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Store\ProductBundle\Entity\CartItem", mappedBy="cart", cascade={"persist", "remove"})
      */
     protected $items;
 

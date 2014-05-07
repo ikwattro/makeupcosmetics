@@ -21,7 +21,7 @@ class CartController extends Controller
     /**
      * Lists all Cart entities.
      *
-     * @Route("/", name="cart")
+     * @Route("/carts/view", name="cart")
      * @Method("GET")
      * @Template()
      */

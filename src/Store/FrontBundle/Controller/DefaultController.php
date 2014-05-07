@@ -105,6 +105,9 @@ class DefaultController extends Controller
     public function categoryAction($id, $slug)
     {
         $man = $this->get('store.store_manager');
+        $categories = $man->getCategories(true);
+        $htmlTree = $man->getMyTree();
+
         $category = $man->getCategory($id);
         if (!$category){
             throw new \InvalidParameterException('The category does not exist');
@@ -113,6 +116,8 @@ class DefaultController extends Controller
         return array(
             'category' => $category,
             'products' => $products,
+            'categories' => $categories,
+            'htmlTree' => $htmlTree,
         );
     }
 

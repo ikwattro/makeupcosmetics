@@ -2,12 +2,26 @@
 
 {% block body %}
     <div class="container">
-        <hr>
-    <h2>{{ category.title }}</h2>
-        <div class="row">
-            {% for product in products %}
-                {% include 'StoreProductBundle:Product:showIndexProduct.html.twig' with {'product': product} %}
-            {% endfor %}
-        </div>
-    </div>
+
+    <div class="row">
+
+        <div class="col-md-2">
+            <!--
+            {{ htmlTree | raw(true) }}
+            -->
+        </div> <!-- end col-md-3 -->
+
+        <div class="col-md-10">
+
+            <h2>{{ category.title }}</h2>
+
+                <div class="row">
+                    {% for product in products %}
+                        {% include 'StoreProductBundle:Product:showIndexProduct.html.twig' with {'product': product} %}
+                    {% endfor %}
+                </div> <!-- end row -->
+        </div> <!-- end col-md-9 -->
+    </div> <!-- end row -->
+
+    </div> <!-- end container -->
 {% endblock body %}

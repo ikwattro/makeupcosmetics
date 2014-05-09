@@ -38,16 +38,27 @@
                     <td>{{ item.product.price }}&euro;</td>
                 </tr>
             {% endfor %}
+
+
+
             <tr>
                 <td colspan="2"></td>
                 <td class="total_line_item">Total :</td>
                 <td>{{ total }}&euro;</td>
             </tr>
 
+            <tr><td colspan="3">Frais de ports estimés pour la Belgique</td><td>5.9€</td></tr>
+            {% set shipping = 5.9 %}
+
+            <tr><td class="total_line_item" colspan="3">Total (frais de port inclus):</td><td>{{ total + shipping }}€</td> </tr>
+
             {% if promotion is not empty %}
                 <tr><td colspan="2"><span style="color:red;">{{ promotion.detail.title }} : -{{ promotion.detail.discount }}%</span></td>
                     <td><span style="color:red;">-{{ promotion.discount_amount }}&euro;</span></td>
                 </tr>
+
+
+
                 <tr>
                     <td colspan="2"></td>
                     <td class="total_line_item">New Total :</td>

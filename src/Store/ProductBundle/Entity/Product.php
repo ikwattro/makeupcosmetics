@@ -490,4 +490,9 @@ class Product
     {
         return $this->getMasterVariant()->getPrice();
     }
+
+    public function setFile($file)
+    {
+        $this->file = $file;
+    }
 }

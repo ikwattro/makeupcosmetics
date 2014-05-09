@@ -11,6 +11,11 @@
                 <ul>
                     {% for value in entity.values %}
                         <li>{{ value.name }}</li>
+                        {% if value.path is not empty %}
+                            <li><img src="{{ asset('uploads/documents/vignettes/' ~ value.path) | imagine_filter('product_list_thumb')}}" class=""/></li>
+                        {% else %}
+                            <li>"pas d'image"</li>
+                        {% endif %}
                     {% endfor %}
                 </ul>
             </td>
@@ -18,9 +23,12 @@
         </tbody>
     </table>
 
-    <form role="form" method="POST" action="{{ path('optionvalue_addforoption', {'option': entity.id}) }}">
+    <form role="form" method="POST" enctype="multipart/form-data" action="{{ path('optionvalue_addforoption', {'option': entity.id}) }}">
         <label for="value">+ Ajouter une valeur :</label>
         <input name="value" id="value" type="text" />
+        <label for="image_path">Image: </label>
+        <input type="file" name="image_path" />
+        <hr />
         <input type="submit"/>
     </form>
 

@@ -70,6 +70,7 @@ class OptionValueController extends Controller
     public function addForOption(Request $request, $option)
     {
         $value = $request->request->get('value');
+        $file = $request->request->get('image_path');
         $em = $this->getDoctrine()->getManager();
         $opt = $em->getRepository('StoreProductBundle:OptionType')->find($option);
 
@@ -80,7 +81,10 @@ class OptionValueController extends Controller
         $optionValue = new OptionValue();
         $optionValue->setName($value);
         $optionValue->setOption($opt);
-
+        foreach($request->files as $imageFile){
+            $optionValue->setFile($imageFile);
+            break;
+        }
         $em->persist($optionValue);
         $em->flush();
 

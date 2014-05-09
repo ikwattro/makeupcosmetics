@@ -77,6 +77,7 @@ class StoreManager
         $cart = new Cart();
         $cart->setSessionId($this->session->getId());
         $cart->setCartDtg(new \DateTime("NOW"));
+        $cart->setState('CART');
         $this->em->persist($cart);
         $this->em->flush();
 

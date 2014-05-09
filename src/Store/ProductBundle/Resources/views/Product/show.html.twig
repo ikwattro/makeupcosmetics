@@ -50,7 +50,6 @@
             <tr>
                 <th>Image</th>
                 <td><img src="{{ asset('uploads/documents/' ~ entity.path) | imagine_filter('my_thumb')}}" />
-                    <img data-src="holder.js/150x100" alt="">
                 </td>
             </tr>
          {#
@@ -119,6 +118,18 @@
                     {% endif %}
                     <a href="#">#{{ variant.id }}</a></td>
                 <td>
+                    {% if variant.images is empty %}
+                        no img
+                    {% else %}
+                        {%  for image in variant.images %}
+
+                            <img src="{{ asset('uploads/product_images/' ~ image.path) | imagine_filter('product_list_thumb')}}" />
+                        {% endfor %}
+
+                    {% endif %}
+                </td>
+
+                <td>
                     {% for options in variant.values %}
                         <span class="label label-info">{{ options.option.name | capitalize }} : </span>&nbsp;
                         {{ options.name }}<br />
@@ -136,42 +147,17 @@
                             <span class="glyphicon glyphicon-plus-sign"></span> éditer
                         </button>
                     </a>
+
+                    <a data-toggle="modal" href="{{ path('variantimage_new', {'variant': variant.id}) }}" data-target="#myModal">
+                        <button type="button" class="btn btn-success btn-small">
+                            <span class="glyphicon glyphicon-upload"></span> ajouter photo
+                        </button>
+                    </a>
                 </td>
 
-                <td></td>
+
             </tr>
 
-            <tr>
-                <td colspan="6">
-                    {% if variant.images is empty %}
-                        Pas d'images pour cette variante<br/>
-                        <a data-toggle="modal" href="{{ path('variantimage_new', {'variant': variant.id}) }}" data-target="#myModal">
-                            <button type="button" class="btn btn-success btn-small">
-                                <span class="glyphicon glyphicon-upload"></span> ajouter photo
-                            </button>
-                        </a>
-
-
-
-                    {% else %}
-                        <p>
-                        {%  for image in variant.images %}
-                            
-                        <img src="{{ asset('uploads/product_images/' ~ image.path) | imagine_filter('product_list_thumb')}}" />
-                        {% endfor %}
-                        </p>
-                        <p>
-                            <a data-toggle="modal" href="{{ path('variantimage_new', {'variant': variant.id}) }}" data-target="#myModal">
-                                <button type="button" class="btn btn-success btn-small">
-                                    <span class="glyphicon glyphicon-upload"></span> ajouter photo
-                                </button>
-                            </a>
-                        </p>
-
-                    {% endif %}
-
-                </td>
-            </tr>
             <hr>
         </table>
     </div>

@@ -42,14 +42,18 @@
             <h6>Variantes</h6>
                 {% for variante in product.variants %}
                     {% if variante.id != variant.id %}
-                    <ul>
+
+                        <ul>
                         {% for options in variante.values %}
-                            <li>{{ options.option.name }} : {{ options.name }}</li>
+                            {% if options.option.isImageOption %}
+                                <a href="{{ path('product_front_show', {'id': variante.id, 'slug': product.slug }) }}" title="{{ options.name }}">
+                                    <img src="{{ asset('/uploads/documents/vignettes/' ~ options.path ) }}" alt="{{ options.name }}" />
+                                </a>
+                            {% else %}
+                                <li>{{ options.option.name }} : {{ options.name }}</li>
+                            {% endif %}
                         {% endfor %}
-                        <li><a href="{{ path('product_front_show', {'id': variante.id, 'slug': product.slug }) }}">
-                                link to variant
-                        </a></li>
-                    </ul>
+                        </ul>
                         {% endif %}
                 {% endfor %}
 

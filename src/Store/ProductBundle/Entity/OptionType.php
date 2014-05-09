@@ -27,6 +27,11 @@ class OptionType
     protected $values;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    protected $is_image_option;
+
+    /**
      * Set name
      *
      * @param string $name
@@ -102,5 +107,28 @@ class OptionType
     public function getValues()
     {
         return $this->values;
+    }
+
+    /**
+     * Set is_image_option
+     *
+     * @param boolean $isImageOption
+     * @return OptionType
+     */
+    public function setIsImageOption($isImageOption)
+    {
+        $this->is_image_option = $isImageOption;
+    
+        return $this;
+    }
+
+    /**
+     * Get is_image_option
+     *
+     * @return boolean 
+     */
+    public function getIsImageOption()
+    {
+        return $this->is_image_option;
     }
 }

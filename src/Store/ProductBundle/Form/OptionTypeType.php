@@ -15,7 +15,8 @@ class OptionTypeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name');
+            ->add('name')
+            ->add('is_image_option');
     }
 
     /**

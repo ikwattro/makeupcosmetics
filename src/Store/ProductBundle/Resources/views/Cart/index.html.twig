@@ -9,6 +9,7 @@
                 <th>Id</th>
                 <th>DateTime</th>
                 <th>Nombre de Produits</th>
+                <th>Statut</th>
             </tr>
         </thead>
         <tbody>
@@ -19,6 +20,11 @@
                     {{ entity.CartDtg |date('d-m-Y H:i:s') }}
                 </td>
                 <td>{{ entity.items.count }}</td>
+                <td>
+                    {% if (entity.state is empty or entity.state == 'CART') %}
+                        <span class="label label-default">Panier</span>
+                    {% endif %}
+                </td>
             </tr>
         {% endfor %}
         </tbody>

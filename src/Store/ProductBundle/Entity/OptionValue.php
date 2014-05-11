@@ -24,12 +24,13 @@ class OptionValue
     protected $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Store\ProductBundle\Entity\OptionType", inversedBy="values")
+     * @ORM\ManyToOne(targetEntity="Store\ProductBundle\Entity\OptionType", inversedBy="values", cascade={"persist", "remove"})
      */
     protected $option;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Variant", mappedBy="value")
+     * @ORM\ManyToMany(targetEntity="Variant", mappedBy="values")
+     * @ORM\JoinColumn(name="variant_id", referencedColumnName="id")
      */
     protected $variants;
 
@@ -193,7 +194,7 @@ class OptionValue
     public function removeUpload()
     {
         if ($file = $this->getAbsolutePath()) {
-            unlink($file);
+            @unlink($file);
         }
     }
 

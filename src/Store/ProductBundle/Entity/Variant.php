@@ -37,7 +37,7 @@ class Variant
     protected $price;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Store\ProductBundle\Entity\OptionValue", inversedBy="variants")
+     * @ORM\ManyToMany(targetEntity="Store\ProductBundle\Entity\OptionValue", inversedBy="variants", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="value_variant")
      */
     protected $values;

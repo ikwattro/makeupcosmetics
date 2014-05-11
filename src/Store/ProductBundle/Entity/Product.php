@@ -81,7 +81,7 @@ class Product
     protected $variants;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Store\ProductBundle\Entity\OptionType", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Store\ProductBundle\Entity\OptionType", cascade={"persist", "remove"}, inversedBy="products")
      * @ORM\JoinTable(name="product_optiontype",
      *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="optiontype_id", referencedColumnName="id", nullable=true)})

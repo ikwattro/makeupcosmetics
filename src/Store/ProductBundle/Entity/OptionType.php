@@ -22,9 +22,15 @@ class OptionType
     protected $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Store\ProductBundle\Entity\OptionValue", mappedBy="option")
+     * @ORM\OneToMany(targetEntity="Store\ProductBundle\Entity\OptionValue", mappedBy="option", cascade={"persist", "remove"})
      */
     protected $values;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Product", mappedBy="options")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $products;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)

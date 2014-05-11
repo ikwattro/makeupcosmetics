@@ -1,0 +1,7 @@
+parameters:
+#    store_address.example.class: Store\AddressBundle\Example
+
+services:
+#    store_address.example:
+#        class: %store_address.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

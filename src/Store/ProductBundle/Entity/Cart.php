@@ -65,6 +65,18 @@ class Cart
     protected $payment_state;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Store\AddressBundle\Entity\Address")
+     * @ORM\JoinColumn(name="billing_address_id", referencedColumnName="id", nullable=true)
+     */
+    protected $billing_address;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Store\AddressBundle\Entity\Address")
+     * @ORM\JoinColumn(name="shipping_address_id", referencedColumnName="id", nullable=true)
+     */
+    protected $shipping_address;
+
+    /**
      * Constructor
      */
     public function __construct()

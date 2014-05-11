@@ -1,0 +1,65 @@
+<?php
+
+namespace Store\AddressBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ */
+class Address
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $firstname;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $lastname;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $line1;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $line2;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $zip_code;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $state;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $province;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Store\CountryBundle\Entity\Country")
+     */
+    protected $country;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $phone;
+
+
+}

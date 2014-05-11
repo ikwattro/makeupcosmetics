@@ -212,4 +212,16 @@ class DefaultController extends Controller
             'quantity'  => $quantity,
         );
     }
+
+    /**
+     * @Route("order/address", name="order_address")
+     * @Template()
+     */
+    public function orderAddressAction()
+    {
+        $manager = $this->get('store.store_manager');
+        $cart = $manager->getCart();
+
+
+    }
 }

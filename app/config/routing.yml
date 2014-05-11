@@ -1,3 +1,7 @@
+store_address:
+    resource: "@StoreAddressBundle/Resources/config/routing.yml"
+    prefix:   /
+
 store_country:
     resource: "@StoreCountryBundle/Controller/"
     prefix:   /admin

@@ -84,6 +84,22 @@ class Category
 
     protected $translations = array();
 
+    /**
+     * @Gedmo\SortablePosition
+     * @ORM\Column(type="integer")
+     */
+    protected $position;
+
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    }
+
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
     public function setTranslations(array $translations = array())
     {
         $this->translations = $translations;

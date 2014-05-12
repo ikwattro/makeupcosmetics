@@ -70,6 +70,7 @@ class CategoryRepository extends NestedTreeRepository
         if ($onlyTops == true) {
             $qb->where('a.parent is NULL');
         }
+        $qb->addOrderBy('a.position');
 
         //->orderBy(...) customize it
 

@@ -69,6 +69,11 @@ doctrine:
                         alias: Gedmo
                         prefix: Gedmo\Tree\Entity
                         dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
+            sortable:
+                        type: annotation
+                        alias: Gedmo
+                        prefix: Gedmo\Sortable\Entity
+                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Sortable/Entity"
 
 # Swiftmailer Configuration
 swiftmailer:

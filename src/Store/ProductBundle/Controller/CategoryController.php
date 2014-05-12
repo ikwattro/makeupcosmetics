@@ -32,6 +32,14 @@ class CategoryController extends Controller
 
         $entities = $em->getRepository('StoreProductBundle:Category')->findAllByLocaleWithChildren('fr', true);
 
+        foreach($entities as $entity){
+            if($entity->getPosition() == 0){
+                $entity->setPosition(-1);
+                $em->persist($entity);
+                $em->flush();
+            }
+        }
+
         return array(
             'entities' => $entities,
         );

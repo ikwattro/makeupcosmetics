@@ -33,11 +33,9 @@
 
             <div>
 
-            {% for variantx in product.variants %}
-                {% for image in variantx.images %}
+                {% for image in variant.images %}
                 <img src="{{ asset('uploads/product_images/' ~ image.path) | imagine_filter('product_list_thumb')}}" />
                 {% endfor %}
-            {% endfor %}
 
             <h6>Variantes</h6>
                 {% for variante in product.variants %}
@@ -50,7 +48,9 @@
                                     <img src="{{ asset('/uploads/documents/vignettes/' ~ options.path ) }}" alt="{{ options.name }}" />
                                 </a>
                             {% else %}
-                                <li>{{ options.option.name }} : {{ options.name }}</li>
+                            <a href="{{ path('product_front_show', {'id': variante.id, 'slug': product.slug }) }}" title="{{ options.name }}">
+                                {{ options.option.name }} : {{ options.name }}
+                                </a>
                             {% endif %}
                         {% endfor %}
                         </ul>

@@ -2,6 +2,7 @@
 
 namespace Store\ProductBundle\Controller;
 
+use Store\ProductBundle\Entity\Variant;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -38,20 +39,26 @@ class VariantImageController extends Controller
     /**
      * Creates a new VariantImage entity.
      *
-     * @Route("/", name="variantimage_create")
+     * @Route("/{variant}", name="variantimage_create")
      * @Method("POST")
      * @Template("StoreProductBundle:VariantImage:new.html.twig")
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, $variant)
     {
         $entity = new VariantImage();
-        $form = $this->createCreateForm($entity);
+        $em = $this->getDoctrine()->getManager();
+        $var = $em->getRepository('StoreProductBundle:Variant')->find($variant);
+        $entity->setVariant($var);
+        $form = $this->createCreateForm($entity, $var);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+
+            $referer = $this->get('request')->headers->get('referer');
+            return $this->redirect($referer);
 
             return $this->redirect($this->generateUrl('variantimage_show', array('id' => $entity->getId())));
         }
@@ -69,10 +76,10 @@ class VariantImageController extends Controller
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(VariantImage $entity)
+    private function createCreateForm(VariantImage $entity, Variant $variant)
     {
         $form = $this->createForm(new VariantImageType(), $entity, array(
-            'action' => $this->generateUrl('variantimage_create'),
+            'action' => $this->generateUrl('variantimage_create', array('variant' => $variant->getId())),
             'method' => 'POST',
         ));
 
@@ -93,11 +100,11 @@ class VariantImageController extends Controller
         $em = $this->getDoctrine()->getManager();
         $var = $em->getRepository('StoreProductBundle:Variant')->find($variant);
         if(!$var){
-            throw $this->createNotFoundException('Unabel to find Variant Entity');
+            throw $this->createNotFoundException('Unable to find Variant Entity');
         }
         $entity = new VariantImage();
         $entity->setVariant($var);
-        $form   = $this->createCreateForm($entity);
+        $form   = $this->createCreateForm($entity, $var);
 
         return array(
             'entity' => $entity,

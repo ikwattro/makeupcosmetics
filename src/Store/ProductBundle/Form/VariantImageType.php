@@ -18,7 +18,7 @@ class VariantImageType extends AbstractType
             ->add('file', null, array(
                 'label' =>  'Fichier : ',
             ))
-            ->add('variant')
+            //->add('variant')
         ;
     }
     

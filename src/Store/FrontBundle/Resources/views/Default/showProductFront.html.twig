@@ -16,6 +16,7 @@
     </div>
     <div class="row product_show_2row">
         <div class="col-md-4">
+            <div class="row">
             {% if variant.images is not empty %}
             {% for image in variant.images %}
                 {% if loop.index <= 1 %}
@@ -25,6 +26,36 @@
             {% else %}
                 <img src="{{ asset('uploads/documents/' ~ product.path) | imagine_filter('product_show_bigimg')}}" />
             {% endif %}
+                </div>
+            <div class="row">
+                <h6>Variantes</h6>
+                {% for variante in product.variants %}
+                    {% if variante.id != variant.id %}
+
+                        <ul class="list-inline">
+                            {% for options in variante.values %}
+                                {% if options.option.isImageOption %}
+                                    <li><a href="{{ path('product_front_show', {'id': variante.id, 'slug': product.slug }) }}" title="{{ options.name }}">
+                                        <img src="{{ asset('/uploads/documents/vignettes/' ~ options.path ) }}" alt="{{ options.name }}" />
+                                    </a></li>
+                                {% else %}
+                                    <li><a href="{{ path('product_front_show', {'id': variante.id, 'slug': product.slug }) }}" title="{{ options.name }}">
+                                        {{ options.option.name }} : {{ options.name }}
+                                    </a></li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div>
+            {% for image in variant.images %}
+                <a class="fancybox" rel="variant-{{ variant.id }}" href="{{ asset('uploads/product_images/' ~ image.path) }}">
+                    <img src="{{ asset('uploads/product_images/' ~ image.path) | imagine_filter('product_list_thumb')}}" />
+                </a>
+            {% endfor %}
         </div>
 
         <div class="col-md-5">
@@ -33,29 +64,9 @@
 
             <div>
 
-                {% for image in variant.images %}
-                <img src="{{ asset('uploads/product_images/' ~ image.path) | imagine_filter('product_list_thumb')}}" />
-                {% endfor %}
 
-            <h6>Variantes</h6>
-                {% for variante in product.variants %}
-                    {% if variante.id != variant.id %}
 
-                        <ul>
-                        {% for options in variante.values %}
-                            {% if options.option.isImageOption %}
-                                <a href="{{ path('product_front_show', {'id': variante.id, 'slug': product.slug }) }}" title="{{ options.name }}">
-                                    <img src="{{ asset('/uploads/documents/vignettes/' ~ options.path ) }}" alt="{{ options.name }}" />
-                                </a>
-                            {% else %}
-                            <a href="{{ path('product_front_show', {'id': variante.id, 'slug': product.slug }) }}" title="{{ options.name }}">
-                                {{ options.option.name }} : {{ options.name }}
-                                </a>
-                            {% endif %}
-                        {% endfor %}
-                        </ul>
-                        {% endif %}
-                {% endfor %}
+
 
                 </div>
             </div>

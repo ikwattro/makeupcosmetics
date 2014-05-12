@@ -17,6 +17,7 @@
         </thead>
         <tbody>
         {% for entity in entities %}
+
             <tr>
                 {{ entity.root }}
                 <td><a href="{{ path('category_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
@@ -36,9 +37,16 @@
                     <li>
                         <a href="{{ path('category_edit', { 'id': entity.id }) }}">modifier</a>
                     </li>
+                    {% if prev is defined %}
+                        <li>
+                            <a href="{{ path('move_cat_to', {'category': entity.id, 'position': prev}) }}">MoveUp</a>
+                        </li>
+                    {% endif %}
+
                 </ul>
                 </td>
             </tr>
+                {% set prev = entity.position %}
         {% endfor %}
         </tbody>
     </table>

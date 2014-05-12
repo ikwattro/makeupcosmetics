@@ -45,6 +45,26 @@ class CategoryController extends Controller
         );
     }
 
+    /**
+     * @Route("/{category}/move/{position}", name="move_cat_to")
+     */
+    public function moveCategoryToAction($category, $position)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $category = $em->getRepository('StoreProductBundle:Category')->find($category);
+        if(!$category){
+            throw new \InvalidArgumentException('Category Not Found');
+        }
+        $category->setPosition($position);
+        $em->persist($category);
+        $em->flush();
+
+        $referer = $this->get('request')->headers->get('referer');
+
+        return $this->redirect($referer);
+    }
+
 
     /**
      * @Template()

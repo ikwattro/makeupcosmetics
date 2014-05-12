@@ -14,6 +14,9 @@ class PromotionRepository extends EntityRepository
             ->where('p.start < :now')
             ->andWhere('p.end is NULL')
             ->orWhere('p.end > :now')
+            ->andWhere('p.disabled = 0')
+            ->andWhere('p.archived is NULL')
+            ->orderBy('p.start')
             ->setParameter('now', $now);
 
         $query = $q->getQuery();

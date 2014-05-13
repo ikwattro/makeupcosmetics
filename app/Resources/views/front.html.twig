@@ -29,7 +29,11 @@
 
         <div class="col-md-9 right">
         <ul class="navi">
-            <li><a href="#">LOGIN</a></li>
+            {% if(is_granted('IS_AUTHENTICATED_REMEMBERED')) %}
+                <li><a href="/logout">LOGOUT</a></li>
+            {% else %}
+                <li><a href="login">LOGIN</a></li>
+            {% endif %}
             <li><a href="#">A PROPOS</a></li>
             {{ locale_switcher() }}
             <li><a href="{{ path('front_cart') }}" title="Panier">Panier</a></li>

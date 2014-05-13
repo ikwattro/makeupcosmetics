@@ -10,7 +10,7 @@
         <label for="fos_user_registration_form_email" class="col-sm-2 control-label">{{ 'form.email'|trans }}</label>
         <div class="col-sm-3">
             <input type="email" class="form-control" id="fos_user_registration_form_email" name="fos_user_registration_form[email]"
-                   required="required" />
+                   required="required" value="{{ form.vars.value.email }}"/>
         </div>
     </div>
     {{ form_errors(form.email) }}
@@ -19,7 +19,7 @@
         <label for="fos_user_registration_form_username" class="col-sm-2 control-label">{{ 'form.username'|trans }}</label>
         <div class="col-sm-3">
             <input type="text" class="form-control" id="fos_user_registration_form_username" name="fos_user_registration_form[username]"
-                   required="required" />
+                   required="required" value="{{ form.vars.value.username }}"/>
         </div>
     </div>
 

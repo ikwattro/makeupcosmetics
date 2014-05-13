@@ -50,7 +50,9 @@ class AuthenticationListener implements EventSubscriberInterface
         if(preg_match('/checkout/', $referer)) {
             $this->session->set('from_checkout', true);
         } else {
-            $this->session->set('from_checkout', false);
+            if(!preg_match('/register/', $referer)) {
+                $this->session->set('from_checkout', false);
+            }
         }
     }
 }

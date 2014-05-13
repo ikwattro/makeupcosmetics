@@ -1,11 +1,11 @@
-<li>
+<li class="dropdown">
     <div class="dropdown dropBox">
         <a href="#" class="dropdown-toggle testy" data-toggle="dropdown">Langue <span class="caret"></span></a>
-        <ul class="dropdown-menu langMenu" role="menu">
+        <ul class="dropdown-menu langMenu">
 
             {% for locale in locales %}
-                <li{% if current_locale == locale.locale %} class="locale_current"{% endif %}>
-                    <a href="{{ locale.link }}" title="{{ locale.locale_target_language }}">{{ locale.locale_target_language }}</a>
+                <li class="lang_item{% if current_locale == locale.locale %} locale_current{% endif %}">
+                    <a href="{{ locale.link }}" title="{{ locale.locale_target_language }}">{{ locale.locale_target_language|trim }}</a>
                 </li>
             {% endfor %}
             <!--

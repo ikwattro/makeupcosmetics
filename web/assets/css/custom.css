@@ -196,3 +196,8 @@ a.brand
     text-align: right;
     padding-right:2px;
 }
+
+ul.navi li.lang_item
+{
+    margin-left:5px;
+}

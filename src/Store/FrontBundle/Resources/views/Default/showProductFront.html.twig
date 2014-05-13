@@ -28,11 +28,12 @@
             {% endif %}
                 </div>
             <div class="row">
-                <h6>Variantes</h6>
+                <ul class="list-inline">
                 {% for variante in product.variants %}
+
                     {% if variante.id != variant.id %}
 
-                        <ul class="list-inline">
+
                             {% for options in variante.values %}
                                 {% if options.option.isImageOption %}
                                     <li><a href="{{ path('product_front_show', {'id': variante.id, 'slug': product.slug }) }}" title="{{ options.name }}">
@@ -44,9 +45,10 @@
                                     </a></li>
                                 {% endif %}
                             {% endfor %}
-                        </ul>
+
                     {% endif %}
                 {% endfor %}
+                    </ul>
             </div>
         </div>
 

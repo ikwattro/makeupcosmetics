@@ -65,6 +65,24 @@ class Cart
     protected $payment_state;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Store\AddressBundle\Entity\Address")
+     * @ORM\JoinColumn(name="billing_address_id", referencedColumnName="id", nullable=true)
+     */
+    protected $billing_address;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Store\AddressBundle\Entity\Address")
+     * @ORM\JoinColumn(name="shipping_address_id", referencedColumnName="id", nullable=true)
+     */
+    protected $shipping_address;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Store\CustomerBundle\Entity\Customer", inversedBy="carts")
+     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=true)
+     */
+    protected $customer;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -223,5 +241,143 @@ class Cart
     public function getState()
     {
         return $this->state;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Cart
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set user_id
+     *
+     * @param integer $userId
+     * @return Cart
+     */
+    public function setUserId($userId)
+    {
+        $this->user_id = $userId;
+    
+        return $this;
+    }
+
+    /**
+     * Get user_id
+     *
+     * @return integer 
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+
+    /**
+     * Set payment_state
+     *
+     * @param string $paymentState
+     * @return Cart
+     */
+    public function setPaymentState($paymentState)
+    {
+        $this->payment_state = $paymentState;
+    
+        return $this;
+    }
+
+    /**
+     * Get payment_state
+     *
+     * @return string 
+     */
+    public function getPaymentState()
+    {
+        return $this->payment_state;
+    }
+
+    /**
+     * Set billing_address
+     *
+     * @param \Store\AddressBundle\Entity\Address $billingAddress
+     * @return Cart
+     */
+    public function setBillingAddress(\Store\AddressBundle\Entity\Address $billingAddress = null)
+    {
+        $this->billing_address = $billingAddress;
+    
+        return $this;
+    }
+
+    /**
+     * Get billing_address
+     *
+     * @return \Store\AddressBundle\Entity\Address 
+     */
+    public function getBillingAddress()
+    {
+        return $this->billing_address;
+    }
+
+    /**
+     * Set shipping_address
+     *
+     * @param \Store\AddressBundle\Entity\Address $shippingAddress
+     * @return Cart
+     */
+    public function setShippingAddress(\Store\AddressBundle\Entity\Address $shippingAddress = null)
+    {
+        $this->shipping_address = $shippingAddress;
+    
+        return $this;
+    }
+
+    /**
+     * Get shipping_address
+     *
+     * @return \Store\AddressBundle\Entity\Address 
+     */
+    public function getShippingAddress()
+    {
+        return $this->shipping_address;
+    }
+
+    /**
+     * Set customer
+     *
+     * @param \Store\CustomerBundle\Entity\Customer $customer
+     * @return Cart
+     */
+    public function setCustomer(\Store\CustomerBundle\Entity\Customer $customer = null)
+    {
+        $this->customer = $customer;
+    
+        return $this;
+    }
+
+    /**
+     * Get customer
+     *
+     * @return \Store\CustomerBundle\Entity\Customer 
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
     }
 }

@@ -77,6 +77,12 @@ class Cart
     protected $shipping_address;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Store\CustomerBundle\Entity\Customer", inversedBy="carts")
+     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=true)
+     */
+    protected $customer;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -304,5 +310,74 @@ class Cart
     public function getPaymentState()
     {
         return $this->payment_state;
+    }
+
+    /**
+     * Set billing_address
+     *
+     * @param \Store\AddressBundle\Entity\Address $billingAddress
+     * @return Cart
+     */
+    public function setBillingAddress(\Store\AddressBundle\Entity\Address $billingAddress = null)
+    {
+        $this->billing_address = $billingAddress;
+    
+        return $this;
+    }
+
+    /**
+     * Get billing_address
+     *
+     * @return \Store\AddressBundle\Entity\Address 
+     */
+    public function getBillingAddress()
+    {
+        return $this->billing_address;
+    }
+
+    /**
+     * Set shipping_address
+     *
+     * @param \Store\AddressBundle\Entity\Address $shippingAddress
+     * @return Cart
+     */
+    public function setShippingAddress(\Store\AddressBundle\Entity\Address $shippingAddress = null)
+    {
+        $this->shipping_address = $shippingAddress;
+    
+        return $this;
+    }
+
+    /**
+     * Get shipping_address
+     *
+     * @return \Store\AddressBundle\Entity\Address 
+     */
+    public function getShippingAddress()
+    {
+        return $this->shipping_address;
+    }
+
+    /**
+     * Set customer
+     *
+     * @param \Store\CustomerBundle\Entity\Customer $customer
+     * @return Cart
+     */
+    public function setCustomer(\Store\CustomerBundle\Entity\Customer $customer = null)
+    {
+        $this->customer = $customer;
+    
+        return $this;
+    }
+
+    /**
+     * Get customer
+     *
+     * @return \Store\CustomerBundle\Entity\Customer 
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
     }
 }

@@ -61,6 +61,10 @@ class Address
      */
     protected $phone;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Store\CustomerBundle\Entity\Customer")
+     */
+    protected $customer;
 
 
     /**
@@ -278,5 +282,28 @@ class Address
     public function getCountry()
     {
         return $this->country;
+    }
+
+    /**
+     * Set customer
+     *
+     * @param \Store\CustomerBundle\Entity\Customer $customer
+     * @return Address
+     */
+    public function setCustomer(\Store\CustomerBundle\Entity\Customer $customer = null)
+    {
+        $this->customer = $customer;
+    
+        return $this;
+    }
+
+    /**
+     * Get customer
+     *
+     * @return \Store\CustomerBundle\Entity\Customer 
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
     }
 }

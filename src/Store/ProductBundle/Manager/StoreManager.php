@@ -2,6 +2,7 @@
 
 namespace Store\ProductBundle\Manager;
 
+use Doctrine\Common\Proxy\Exception\InvalidArgumentException;
 use Store\ProductBundle\Storage\SessionCartStorage;
 use Doctrine\ORM\EntityManager;
 use Store\ProductBundle\Entity\Cart;
@@ -129,6 +130,32 @@ class StoreManager
         $this->setMessage('Produit ajouté correctement au panier');
 
         return true;
+    }
+
+    public function incrementItem($item, $inverse = false)
+    {
+        $item = $this->cart_item_repository->find($item);
+        if (!$item) {
+            throw new InvalidArgumentException('Item not found');
+        }
+        $items = $this->getCart()->getItems();
+        if (!$items->contains($item)) {
+            throw new InvalidArgumentException('Item not in Cart');
+        }
+        foreach ($items as $it) {
+            if ($it->getId() == $item->getId()) {
+                $addition = true === $inverse ? -1 : +1;
+                $nq = $it->getQuantity() + $addition ;
+                $it->setQuantity($nq);
+            }
+        }
+
+        $cart = $this->getCart();
+        $this->em->persist($cart);
+        $this->em->flush();
+
+        return $item;
+
     }
 
     private function setMessage($message)

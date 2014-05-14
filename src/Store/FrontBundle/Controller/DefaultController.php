@@ -5,6 +5,7 @@ namespace Store\FrontBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
@@ -160,8 +161,12 @@ class DefaultController extends Controller
     /**
      * @Route("/add_item_to_cart/{productId}", name="add_item_to_cart")
      */
-    public function addItemToCartAction($productId)
+    public function addItemToCartAction($productId, Request $request)
     {
+        $qty = 1;
+        if ($request->getMethod() == 'POST') {
+            $qty = $request->request->get('form_quantity');
+        }
         $em = $this->getDoctrine()->getManager();
         $product = $em->getRepository('StoreProductBundle:Variant')->find($productId);
         if (!$product) {
@@ -169,10 +174,35 @@ class DefaultController extends Controller
         }
 
         $man = $this->get('store.store_manager');
-        $man->addItemToCart($product);
+        $man->addItemToCart($product, $qty);
 
         $referer = $this->getRequest()->headers->get('referer');
 
+        return $this->redirect($referer);
+    }
+
+    /**
+     * @Route("/increment/item/{item}", name="increment_item")
+     *
+     */
+    public function incrementItem($item)
+    {
+        $man = $this->get('store.store_manager');
+        $man->incrementItem($item);
+
+        $referer = $this->get('request')->headers->get('referer');
+        return $this->redirect($referer);
+    }
+
+    /**
+     * @Route("/decrement/item/{item}", name="decrement_item")
+     */
+    public function decrementItem($item)
+    {
+        $man = $this->get('store.store_manager');
+        $man->incrementItem($item, true);
+
+        $referer = $this->get('request')->headers->get('referer');
         return $this->redirect($referer);
     }
 

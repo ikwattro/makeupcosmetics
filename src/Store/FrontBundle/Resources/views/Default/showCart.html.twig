@@ -34,7 +34,9 @@
                     {% endfor %}
                     {% endif %}</td>
                     <td>{{ item.product.product.name }}</td>
-                    <td>{{ item.quantity }}</td>
+                    <td><a class="btn btn-warning btn-xs" href="{{ path('decrement_item', {'item': item.id }) }}">-</a>&nbsp; &nbsp;
+                        {{ item.quantity }}
+                        &nbsp; &nbsp; <a class="btn btn-success btn-xs" href="{{ path('increment_item', {'item':item.id }) }}">+</a></td>
                     <td>{{ item.product.price }}&euro;</td>
                 </tr>
             {% endfor %}

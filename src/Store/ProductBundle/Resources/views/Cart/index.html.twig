@@ -27,7 +27,12 @@
                         anonymous
                     {% endif %}
                 </td>
-                <td>{{ entity.items.count }}</td>
+                {% set quantity = 0 %}
+                <td>{% for item in entity.items %}
+                        {% set quantity = quantity + item.quantity %}
+                    {% endfor %}
+                    {{ quantity }}
+                </td>
                 <td>
                     {% if (entity.state is empty or entity.state == 'CART') %}
                         <span class="label label-default">Panier</span>

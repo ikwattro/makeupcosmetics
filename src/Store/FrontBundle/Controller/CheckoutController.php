@@ -97,9 +97,15 @@ class CheckoutController extends Controller
     public function checkoutConfirmAction()
     {
         $man = $this->get('store.store_manager');
+        $cart = $man->getCart();
+        if (count($cart->getItems()) <= 0) {
+            return $this->redirect($this->generateUrl('homeweb'));
+        }
+        if (!$cart->getBillingAddress() || $cart->getShippingAddress()) {
+            return $this->redirect($this->generateUrl('checkout_address'));
+        }
         $man->setCartConfirmStatus();
         return array(
-
         );
     }
 

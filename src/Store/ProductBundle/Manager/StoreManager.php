@@ -10,6 +10,7 @@ use Store\ProductBundle\Entity\Variant;
 use Store\ProductBundle\Entity\Product;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class StoreManager
 {
@@ -23,10 +24,11 @@ class StoreManager
     private $category_repository;
     private $session;
     private $locale;
+    private $security_context;
 
     private $cart;
 
-    public function __construct(EntityManager $em, SessionCartStorage $storage, SessionInterface $session, Request $request)
+    public function __construct(EntityManager $em, SessionCartStorage $storage, SessionInterface $session, Request $request, SecurityContextInterface $security_context)
     {
         $this->em = $em;
         $this->storage = $storage;
@@ -37,6 +39,7 @@ class StoreManager
         $this->category_repository = $em->getRepository('StoreProductBundle:Category');
         $this->session = $session;
         $this->locale = $request->getLocale();
+        $this->security_context = $security_context;
     }
 
     public function getProductRepository()
@@ -78,6 +81,9 @@ class StoreManager
         $cart->setSessionId($this->session->getId());
         $cart->setCartDtg(new \DateTime("NOW"));
         $cart->setState('CART');
+        if($this->isAuth()) {
+            $cart->setCustomer($this->security_context->getToken()->getUser());
+        }
         $this->em->persist($cart);
         $this->em->flush();
 
@@ -91,6 +97,8 @@ class StoreManager
 
     public function addItemToCart(Variant $product, $quantity = 1)
     {
+        $this->refreshIfLoggedIn();
+
         $p = $this->variant_repository->find($product->getId());
 
         if (!$p) {
@@ -196,6 +204,44 @@ class StoreManager
     public function getProductsForCategory($id)
     {
         return $this->product_repository->findAllByCategory($id, $this->locale);
+    }
+
+    public function isAuth()
+    {
+        if($this->security_context->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return true;
+        }
+        return false;
+    }
+
+    public function getCustomer()
+    {
+        if($this->security_context->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return $this->security_context->getToken()->getUser();
+        }
+        return false;
+    }
+
+    public function setCustomerForCart($andFlush = false)
+    {
+        if($this->isAuth()) {
+            $cart = $this->getCart();
+            $cart->setCustomer($this->getCustomer());
+            if($andFlush){
+                $this->em->persist($cart);
+                $this->em->flush();
+                return $cart;
+            }
+
+        }
+        return $this->getCart();
+    }
+
+    private function refreshIfLoggedIn()
+    {
+        if($this->isAuth() && $this->getCart()->getCustomer() == null) {
+            $this->setCustomerForCart(true);
+        }
     }
 
 

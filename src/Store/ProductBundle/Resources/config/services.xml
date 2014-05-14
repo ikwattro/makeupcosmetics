@@ -20,6 +20,7 @@
             <argument type="service" id="store.cart_storage.session" />
             <argument type="service" id="session" />
             <argument type="service" id="request" />
+            <argument type="service" id="security.context"/>
         </service>
     </services>
 

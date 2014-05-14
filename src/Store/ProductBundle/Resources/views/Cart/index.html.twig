@@ -6,6 +6,7 @@
             <tr>
                 <th>Id</th>
                 <th>DateTime</th>
+                <th>User</th>
                 <th>Nombre de Produits</th>
                 <th>Statut</th>
             </tr>
@@ -16,6 +17,13 @@
                 <td><a href="{{ path('cart_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>
                     {{ entity.CartDtg |date('d-m-Y H:i:s') }}
+                </td>
+                <td>
+                    {% if entity.customer is not empty %}
+                        {{ entity.customer.username }}
+                    {% else %}
+                        anonymous
+                    {% endif %}
                 </td>
                 <td>{{ entity.items.count }}</td>
                 <td>

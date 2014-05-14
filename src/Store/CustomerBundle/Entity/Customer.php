@@ -24,7 +24,7 @@ class Customer extends BaseUser
     protected $carts;
 
     /**
-     * @ORM\OneToOne(targetEntity="Store\CustomerBundle\Entity\Profile")
+     * @ORM\OneToOne(targetEntity="Store\CustomerBundle\Entity\Profile", inversedBy="customer", cascade={"persist"})
      * @ORM\JoinColumn(name="profile_id", referencedColumnName="id", nullable=true)
      */
     protected $profile;
@@ -34,6 +34,11 @@ class Customer extends BaseUser
      * @ORM\JoinColumn(name="address_id", referencedColumnName="id", nullable=true)
      */
     protected $addresses;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $preferredLanguage;
 
 
     public function __construct()
@@ -139,5 +144,28 @@ class Customer extends BaseUser
     public function getAddresses()
     {
         return $this->addresses;
+    }
+
+    /**
+     * Set preferredLanguage
+     *
+     * @param string $preferredLanguage
+     * @return Customer
+     */
+    public function setPreferredLanguage($preferredLanguage)
+    {
+        $this->preferredLanguage = $preferredLanguage;
+    
+        return $this;
+    }
+
+    /**
+     * Get preferredLanguage
+     *
+     * @return string 
+     */
+    public function getPreferredLanguage()
+    {
+        return $this->preferredLanguage;
     }
 }

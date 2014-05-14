@@ -2,57 +2,39 @@
 
 namespace Store\CoreBundle\EventListener;
 
-use FOS\UserBundle\FOSUserEvents;
-use FOS\UserBundle\Event\FormEvent;
-use FOS\UserBundle\Event\GetResponseUserEvent;
+use Store\CustomerBundle\Entity\Customer;
+use Symfony\Component\Security\Core\AuthenticationEvents;
+use Symfony\Component\Security\Http\SecurityEvents;
+use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
+use Symfony\Component\Security\Core\Event\AuthenticationEvent;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Store\CustomerBundle\Manager\CustomerManager;
 
 class AuthenticationListener implements EventSubscriberInterface
 {
-    private $router;
+    private $customerManager;
 
-    private $request;
-
-    private $session;
-
-    public function __construct(UrlGeneratorInterface $router, Request $request, SessionInterface $session)
+    public function __construct(CustomerManager $customerManager)
     {
-        $this->router = $router;
-        $this->request = $request;
-        $this->session = $session;
+        $this->customerManager = $customerManager;
     }
 
     public static function getSubscribedEvents()
     {
         return array(
-            FOSUserEvents::REGISTRATION_SUCCESS => 'onRegistrationSuccess',
-            FOSUserEvents::REGISTRATION_INITIALIZE => 'onRegistrationInit',
+            AuthenticationEvents::AUTHENTICATION_FAILURE => 'onAuthenticationFailure',
+            SecurityEvents::INTERACTIVE_LOGIN => 'onAuthenticationSuccess'
         );
     }
 
-    public function onRegistrationSuccess(FormEvent $event)
+    public function onAuthenticationFailure(AuthenticationFailureEvent $event)
     {
-        $url = $this->router->generate('checkout_account');
-        if($this->session->get('from_checkout', null)){
-            $this->session->set('from_checkout', false);
-            $event->setResponse(new RedirectResponse($url));
-        }
 
     }
 
-    public function onRegistrationInit(GetResponseUserEvent $event)
+    public function onAuthenticationSuccess(InteractiveLoginEvent $event)
     {
-        $referer = $this->request->headers->get('referer');
-        if(preg_match('/checkout/', $referer)) {
-            $this->session->set('from_checkout', true);
-        } else {
-            if(!preg_match('/register/', $referer)) {
-                $this->session->set('from_checkout', false);
-            }
-        }
+        $this->customerManager->createCustomerProfile();
     }
 }

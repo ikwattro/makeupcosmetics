@@ -7,11 +7,16 @@
 
 
     <services>
-        <service id="store_core.auth_failure" class="Store\CoreBundle\EventListener\AuthenticationListener" scope="request">
+        <service id="store_core.registration_listener" class="Store\CoreBundle\EventListener\RegistrationListener" scope="request">
             <tag name="kernel.event_subscriber"/>
             <argument type="service" id="router"/>
             <argument type="service" id="request"/>
             <argument type="service" id="session"/>
+        </service>
+
+        <service id="store_core.authentication_listener" class="Store\CoreBundle\EventListener\AuthenticationListener">
+            <tag name="kernel.event_subscriber"/>
+            <argument type="service" id="store.customer_manager"/>
         </service>
     </services>
 

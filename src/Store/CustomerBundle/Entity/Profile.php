@@ -37,7 +37,7 @@ class Profile
     protected $gender;
 
     /**
-     * @ORM\OneToOne(targetEntity="Store\CustomerBundle\Entity\Customer")
+     * @ORM\OneToOne(targetEntity="Store\CustomerBundle\Entity\Customer", mappedBy="profile")
      */
     protected $customer;
 

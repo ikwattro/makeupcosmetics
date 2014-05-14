@@ -1,12 +1,13 @@
 {% extends "::front.html.twig" %}
 
 {% block body %}
-
-<h3>Données de facturation &amp; livraison</h3>
     <div class="row">
         {{ form_start(form, {'action': path('checkout_address'), 'attr': {'role': 'form', 'class': 'form-horizontal'}}) }}
 
         <div class="col-md-6">
+                <h4>Données de facturation</h4>
+            <hr>
+            <div id="billing_info_block">
 
                 <div class="form-group">
                 <label class="col-sm-3 control-label" for="{{ form.firstname.vars.id }}">Prénom :</label>
@@ -69,12 +70,112 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-6">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="1" id="{{ form.both.vars.id }}" name="{{ form.both.vars.full_name }}"
+                                   value=""> Les données de livraison sont identiques aux données de facturation
+                        </label>
+                    </div>
+                </div>
+            </div>
+                </div>
+
+
         </div>
+
+
+
+        <div class="col-md-6">
+
+            <h4>Données de livraison</h4>
+            <hr>
+
+            <div id="shipping_info_block">
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="{{ form.firstname_2.vars.id }}">Prénom :</label>
+                <div class="col-sm-6">
+                    <input class="form-control" type="text" id="{{ form.firstname_2.vars.id }}" name="{{ form.firstname_2.vars.full_name }}"
+                           value=""/>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="{{ form.lastname_2.vars.id }}">Nom :</label>
+                <div class="col-sm-6">
+                    <input class="form-control" type="text" id="{{ form.lastname_2.vars.id }}" name="{{ form.lastname_2.vars.full_name }}"
+                           value=""/>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="{{ form.address_line_1_2.vars.id }}">Adresse :</label>
+                <div class="col-sm-6">
+                    <input class="form-control" type="text" id="{{ form.address_line_1_2.vars.id }}" name="{{ form.address_line_1_2.vars.full_name }}"
+                           value=""/>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="{{ form.address_line_2_2.vars.id }}"></label>
+                <div class="col-sm-6">
+                    <input class="form-control" type="text" id="{{ form.address_line_2_2.vars.id }}" name="{{ form.address_line_2_2.vars.full_name }}"
+                           value=""/>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="{{ form.zip_code_2.vars.id }}">Code Postal :</label>
+                <div class="col-sm-6">
+                    <input class="form-control" type="text" id="{{ form.zip_code_2.vars.id }}" name="{{ form.zip_code_2.vars.full_name }}"
+                           value=""/>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="{{ form.city_2.vars.id }}">Ville :</label>
+                <div class="col-sm-6">
+                    <input class="form-control" type="text" id="{{ form.city_2.vars.id }}" name="{{ form.city_2.vars.full_name }}"
+                           value=""/>
+                </div>
+                {{ form_errors(form.city_2) }}
+
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="{{form.country_2.vars.id}}">Pays :</label>
+                <div class="col-sm-6">
+                    {{ form_widget(form.country_2, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+
+        </div>
+
+
 
 
         {{ form_widget(form._token) }}
 
-        <input type="submit" value="submit"/>
+
+
+    </div>
+        <div class="col-md-6" id="same_as_billing">
+            <p>Données de livraison identiques aux données de facturation</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-offset-1">
+            <button type="submit" class="btn btn-success">Continuer</button>
+        </div>
+
     </div>
 
 {% endblock %}

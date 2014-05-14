@@ -52,7 +52,7 @@ class Address
     protected $province;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Store\CountryBundle\Entity\Country")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $country;
 
@@ -62,7 +62,7 @@ class Address
     protected $phone;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Store\CustomerBundle\Entity\Customer")
+     * @ORM\ManyToOne(targetEntity="Store\CustomerBundle\Entity\Customer", inversedBy="addresses")
      */
     protected $customer;
 
@@ -262,25 +262,25 @@ class Address
     }
 
     /**
-     * Set country
+     * Set customer
      *
-     * @param \Store\CountryBundle\Entity\Country $country
+     * @param \Store\CustomerBundle\Entity\Customer $customer
      * @return Address
      */
-    public function setCountry(\Store\CountryBundle\Entity\Country $country = null)
+    public function setCustomer(\Store\CustomerBundle\Entity\Customer $customer = null)
     {
-        $this->country = $country;
+        $this->customer = $customer;
     
         return $this;
     }
 
     /**
-     * Get country
+     * Get customer
      *
-     * @return \Store\CountryBundle\Entity\Country 
+     * @return \Store\CustomerBundle\Entity\Customer 
      */
-    public function getCountry()
+    public function getCustomer()
     {
-        return $this->country;
+        return $this->customer;
     }
 }

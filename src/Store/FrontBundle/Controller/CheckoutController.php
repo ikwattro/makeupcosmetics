@@ -20,6 +20,7 @@ use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Validator\Constraints\Country;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Store\AddressBundle\Entity\Address;
 
 class CheckoutController extends Controller
 {
@@ -46,15 +47,96 @@ class CheckoutController extends Controller
             return $this->redirect($this->generateUrl('checkout_account'));
         }
 
-        $billing_form = $this->createBillingAddressForm();
+        if($request->isMethod('POST')){
+            $formData = $request->request->get('form');
+            if (isset($formData['both'])) {
+                $newForm = array(
+                    'firstname' => $formData['firstname'],
+                    'lastname'  => $formData['lastname'],
+                    'address_line_1' => $formData['address_line_1'],
+                    'address_line_2' => $formData['address_line_2'],
+                    'zip_code' => $formData['zip_code'],
+                    'city' => $formData['city'],
+                    'country' => $formData['country'],
+                    'both' => $formData['both'],
+                    '_token' => $formData['_token']
+                );
+                $request->request->replace(array('form' => $newForm));
+        }}
+        $dat = $request->request->get('form');
+        if(isset($dat['both']) && $dat['both'] == 1) {
+            $billing_form = $this->createMiniBillingAddressForm();
+        } else {
+            $billing_form = $this->createBillingAddressForm();
+        }
+
         $billing_form->handleRequest($request);
 
         if ($billing_form->isValid()) {
             $data = $billing_form->getData();
-            var_dump($data);
+            $this->createAddress($data);
+
+            $this->redirect($this->generateUrl('checkout_confirm'));
         }
 
         return array('form' => $billing_form->createView());
+    }
+
+    /**
+     * @Route("/checkout/step/confirmation", name="checkout/confirm")
+     * @Template()
+     */
+    public function checkoutConfirmAction()
+    {
+        return array(
+
+        );
+    }
+
+    public function createAddress(array $data = array())
+    {
+        if (!$data) {
+            throw new \InvalidArgumentException('No Form Data');
+        }
+        $cart = $this->get('store.store_manager')->getCart();
+        $customer = $this->get('store.customer_manager')->getCustomer();
+        $address = new Address();
+        $address->setFirstname($data['firstname']);
+        $address->setLastname($data['lastname']);
+        $address->setCountry($data['country']);
+        $address->setLine1($data['address_line_1']);
+        $address->setLine2($data['address_line_2']);
+        $address->setZipCode($data['zip_code']);
+        $address->setState($data['city']);
+        $address->setCustomer($customer);
+
+
+        $em = $this->getDoctrine()->getManager();
+        $customer->addAddresse($address);
+        $cart->setBillingAddress($address);
+        if($data['both'] == 1) {
+            $address->setIsBothType();
+            $cart->setShippingAddress($address);
+        } else {
+            $address->setIsBillingType();
+            $address2 = new Address();
+            $address2->setFirstname($data['firstname_2']);
+            $address2->setLastname($data['lastname_2']);
+            $address2->setCountry($data['country_2']);
+            $address2->setLine1($data['address_line_1_2']);
+            $address2->setLine2($data['address_line_2_2']);
+            $address2->setZipCode($data['zip_code_2']);
+            $address2->setState($data['city_2']);
+            $address2->setCustomer($customer);
+            $address2->setIsShippingType();
+            $cart->setShippingAddress($address2);
+            $customer->addAddresse($address2);
+        }
+
+        $em->persist($customer);
+        $em->persist($cart);
+        $em->flush();
+
     }
 
     private function createBillingAddressForm($defaultData = array())
@@ -96,6 +178,89 @@ class CheckoutController extends Controller
                     new Country(),
                 )
             ))
+            ->add('firstname_2', 'text', array(
+                'constraints' => array(
+                    new NotBlank(),
+                    new Length(array('min' => 2))
+                )
+            ))
+            ->add('lastname_2', 'text', array(
+                'constraints' => array(
+                    new NotBlank(),
+                    new Length(array('min' => 2))
+                )
+            ))
+            ->add('address_line_1_2', 'text', array(
+                'constraints' => array(
+                    new NotBlank(),
+                    new Length(array('min' => 5))
+                )
+            ))
+            ->add('address_line_2_2', 'text')
+            ->add('zip_code_2', 'text', array(
+                'constraints' => array(
+                    new Length(array('min' => 3)),
+                    new NotBlank(),
+                )
+            ))
+            ->add('city_2', 'text', array(
+                'constraints' => array(
+                    new NotBlank(),
+                    new Length(array('min' => 2))
+                )
+            ))
+            ->add('country_2', 'country', array(
+                'constraints' => array(
+                    new Country(),
+                )
+            ))
+            ->add('both', 'checkbox')
+            ->add('submit', 'submit')
+            ->getForm();
+
+        return $form;
+    }
+
+    private function createMiniBillingAddressForm($defaultData = array())
+    {
+        $form = $this->createFormBuilder($defaultData)
+            ->add('firstname', 'text', array(
+                'constraints' => array(
+                    new NotBlank(),
+                    new Length(array('min' => 2))
+                )
+            ))
+            ->add('lastname', 'text', array(
+                'constraints' => array(
+                    new NotBlank(),
+                    new Length(array('min' => 2))
+                )
+            ))
+            ->add('address_line_1', 'text', array(
+                'constraints' => array(
+                    new NotBlank(),
+                    new Length(array('min' => 5))
+                )
+            ))
+            ->add('address_line_2', 'text')
+            ->add('zip_code', 'text', array(
+                'constraints' => array(
+                    new Length(array('min' => 3)),
+                    new NotBlank(),
+                )
+            ))
+            ->add('city', 'text', array(
+                'constraints' => array(
+                    new NotBlank(),
+                    new Length(array('min' => 2))
+                )
+            ))
+            ->add('country', 'country', array(
+                'constraints' => array(
+                    new Country(),
+                )
+            ))
+            ->add('both', 'checkbox')
             ->add('submit', 'submit')
             ->getForm();
 

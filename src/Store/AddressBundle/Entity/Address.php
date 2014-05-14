@@ -52,7 +52,7 @@ class Address
     protected $province;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Store\CountryBundle\Entity\Country")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $country;
 
@@ -62,9 +62,14 @@ class Address
     protected $phone;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Store\CustomerBundle\Entity\Customer")
+     * @ORM\ManyToOne(targetEntity="Store\CustomerBundle\Entity\Customer", inversedBy="addresses")
      */
     protected $customer;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $type;
 
 
     /**
@@ -262,29 +267,6 @@ class Address
     }
 
     /**
-     * Set country
-     *
-     * @param \Store\CountryBundle\Entity\Country $country
-     * @return Address
-     */
-    public function setCountry(\Store\CountryBundle\Entity\Country $country = null)
-    {
-        $this->country = $country;
-    
-        return $this;
-    }
-
-    /**
-     * Get country
-     *
-     * @return \Store\CountryBundle\Entity\Country 
-     */
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
-    /**
      * Set customer
      *
      * @param \Store\CustomerBundle\Entity\Customer $customer
@@ -305,5 +287,50 @@ class Address
     public function getCustomer()
     {
         return $this->customer;
+    }
+
+    /**
+     * Set country
+     *
+     * @param string $country
+     * @return Address
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+    
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return string 
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    public function setIsBillingType()
+    {
+        $this->type = 'BILLING';
+
+        return $this;
+    }
+
+    public function setIsShippingType()
+    {
+        $this->type = 'SHIPPING';
+    }
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function setIsBothType()
+    {
+        $this->type = 'ALL';
     }
 }

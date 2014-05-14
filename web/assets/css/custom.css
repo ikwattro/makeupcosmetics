@@ -201,3 +201,13 @@ ul.navi li.lang_item
 {
     margin-left:5px;
 }
+
+#same_as_billing p
+{
+    background-color: #f5e79e;
+    text-align: center;
+    margin:50px;
+    padding:30px;
+    font-weight: bold;
+    font-size: 18px;
+}

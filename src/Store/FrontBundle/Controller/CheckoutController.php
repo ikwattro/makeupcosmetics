@@ -76,7 +76,9 @@ class CheckoutController extends Controller
             $data = $billing_form->getData();
             $this->createAddress($data);
 
-            $this->redirect($this->generateUrl('checkout_confirm'));
+            return $this->redirect($this->generateUrl('checkout_confirm'));
+        } else {
+            $billing_form = $this->createBillingAddressForm();
         }
 
         return array('form' => $billing_form->createView());

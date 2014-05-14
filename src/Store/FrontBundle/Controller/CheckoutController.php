@@ -17,6 +17,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Model\UserInterface;
+use Symfony\Component\Validator\Constraints\Country;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class CheckoutController extends Controller
 {
@@ -37,13 +40,66 @@ class CheckoutController extends Controller
      * @Route("/checkout/step/address", name="checkout_address")
      * @Template()
      */
-    public function checkoutAddressAction()
+    public function checkoutAddressAction(Request $request)
     {
         if(!$this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirect($this->generateUrl('checkout_account'));
         }
 
-        return array();
+        $billing_form = $this->createBillingAddressForm();
+        $billing_form->handleRequest($request);
+
+        if ($billing_form->isValid()) {
+            $data = $billing_form->getData();
+            var_dump($data);
+        }
+
+        return array('form' => $billing_form->createView());
+    }
+
+    private function createBillingAddressForm($defaultData = array())
+    {
+        $form = $this->createFormBuilder($defaultData)
+            ->add('firstname', 'text', array(
+                'constraints' => array(
+                    new NotBlank(),
+                    new Length(array('min' => 2))
+                )
+            ))
+            ->add('lastname', 'text', array(
+                'constraints' => array(
+                    new NotBlank(),
+                    new Length(array('min' => 2))
+                )
+            ))
+            ->add('address_line_1', 'text', array(
+                'constraints' => array(
+                    new NotBlank(),
+                    new Length(array('min' => 5))
+                )
+            ))
+            ->add('address_line_2', 'text')
+            ->add('zip_code', 'text', array(
+                'constraints' => array(
+                    new Length(array('min' => 3)),
+                    new NotBlank(),
+                )
+            ))
+            ->add('city', 'text', array(
+                'constraints' => array(
+                    new NotBlank(),
+                    new Length(array('min' => 2))
+                )
+            ))
+            ->add('country', 'country', array(
+                'constraints' => array(
+                    new Country(),
+                )
+            ))
+            ->add('submit', 'submit')
+            ->getForm();
+
+        return $form;
     }
 
     /**

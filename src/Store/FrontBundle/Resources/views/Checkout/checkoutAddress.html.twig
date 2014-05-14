@@ -2,6 +2,79 @@
 
 {% block body %}
 
-<h3>Address</h3>
+<h3>Données de facturation &amp; livraison</h3>
+    <div class="row">
+        {{ form_start(form, {'action': path('checkout_address'), 'attr': {'role': 'form', 'class': 'form-horizontal'}}) }}
+
+        <div class="col-md-6">
+
+                <div class="form-group">
+                <label class="col-sm-3 control-label" for="{{ form.firstname.vars.id }}">Prénom :</label>
+                    <div class="col-sm-6">
+                        <input class="form-control" type="text" id="{{ form.firstname.vars.id }}" name="{{ form.firstname.vars.full_name }}"
+                               value=""/>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="{{ form.lastname.vars.id }}">Nom :</label>
+                    <div class="col-sm-6">
+                        <input class="form-control" type="text" id="{{ form.lastname.vars.id }}" name="{{ form.lastname.vars.full_name }}"
+                               value=""/>
+                    </div>
+
+                </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="{{ form.address_line_1.vars.id }}">Adresse :</label>
+                <div class="col-sm-6">
+                    <input class="form-control" type="text" id="{{ form.address_line_1.vars.id }}" name="{{ form.address_line_1.vars.full_name }}"
+                           value=""/>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="{{ form.address_line_2.vars.id }}"></label>
+                <div class="col-sm-6">
+                    <input class="form-control" type="text" id="{{ form.address_line_2.vars.id }}" name="{{ form.address_line_2.vars.full_name }}"
+                           value=""/>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="{{ form.zip_code.vars.id }}">Code Postal :</label>
+                <div class="col-sm-6">
+                    <input class="form-control" type="text" id="{{ form.zip_code.vars.id }}" name="{{ form.zip_code.vars.full_name }}"
+                           value=""/>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="{{ form.city.vars.id }}">Ville :</label>
+                <div class="col-sm-6">
+                    <input class="form-control" type="text" id="{{ form.city.vars.id }}" name="{{ form.city.vars.full_name }}"
+                           value=""/>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="{{form.country.vars.id}}">Pays :</label>
+                <div class="col-sm-6">
+                    {{ form_widget(form.country, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+
+        </div>
+
+
+        {{ form_widget(form._token) }}
+
+        <input type="submit" value="submit"/>
+    </div>
 
 {% endblock %}

@@ -244,6 +244,33 @@ class StoreManager
         }
     }
 
+    public function setCartAuthStatus()
+    {
+        $cart = $this->getCart();
+        $status = 'AUTH';
+        $cart->setProcessStatus($status);
+        $this->em->persist($cart);
+        $this->em->flush();
+    }
+
+    public function setCartAddressStatus()
+    {
+        $cart = $this->getCart();
+        $status = 'ADDR';
+        $cart->setProcessStatus($status);
+        $this->em->persist($cart);
+        $this->em->flush();
+    }
+
+    public function setCartConfirmStatus()
+    {
+        $cart = $this->getCart();
+        $status = 'CONF';
+        $cart->setProcessStatus($status);
+        $this->em->persist($cart);
+        $this->em->flush();
+    }
+
 
 
 }

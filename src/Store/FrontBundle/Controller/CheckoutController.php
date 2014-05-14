@@ -31,6 +31,8 @@ class CheckoutController extends Controller
     public function checkoutAccountAction()
     {
         if($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            $man = $this->get('store.store_manager');
+            $man->setCartAuthStatus();
             return $this->redirect($this->generateUrl('checkout_address'));
         }
 
@@ -46,6 +48,8 @@ class CheckoutController extends Controller
         if(!$this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirect($this->generateUrl('checkout_account'));
         }
+        $man = $this->get('store.store_manager');
+        $man->setCartAddressStatus();
 
         if($request->isMethod('POST')){
             $formData = $request->request->get('form');
@@ -76,6 +80,8 @@ class CheckoutController extends Controller
             $data = $billing_form->getData();
             $this->createAddress($data);
 
+
+
             return $this->redirect($this->generateUrl('checkout_confirm'));
         } else {
             $billing_form = $this->createBillingAddressForm();
@@ -90,6 +96,8 @@ class CheckoutController extends Controller
      */
     public function checkoutConfirmAction()
     {
+        $man = $this->get('store.store_manager');
+        $man->setCartConfirmStatus();
         return array(
 
         );

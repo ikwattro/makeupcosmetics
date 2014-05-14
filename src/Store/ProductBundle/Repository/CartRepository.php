@@ -13,6 +13,8 @@ class CartRepository extends EntityRepository
             ->leftJoin('c.items', 'i')
             ->orderBy('c.cart_dtg', 'DESC');
 
+
+
         $q = $qb->getQuery();
 
         return $q->getResult();

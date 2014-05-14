@@ -9,10 +9,12 @@
                 <th>User</th>
                 <th>Nombre de Produits</th>
                 <th>Statut</th>
+                <th>Processus</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
+            {% if entity.items.count > 0 %}
             <tr>
                 <td><a href="{{ path('cart_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>
@@ -31,7 +33,15 @@
                         <span class="label label-default">Panier</span>
                     {% endif %}
                 </td>
+                <td>
+                    {% if (entity.processStatus is empty) %}
+                        <span class="label label-default">CART</span>
+                    {% else %}
+                        <span class="label label-info">{{ entity.processStatus }}</span>
+                    {% endif %}
+                </td>
             </tr>
+            {% endif %}
         {% endfor %}
         </tbody>
     </table>

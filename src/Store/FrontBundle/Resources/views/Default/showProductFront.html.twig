@@ -1,5 +1,7 @@
 {% extends "::front.html.twig" %}
 
+{% block title %} {{ product.name }} | {{ parent() }} {% endblock %}
+
 {% block body %}
 
     <div class="row">

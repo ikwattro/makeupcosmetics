@@ -78,6 +78,11 @@ class Cart
     protected $customer;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $process_status;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -352,5 +357,28 @@ class Cart
     public function getCustomer()
     {
         return $this->customer;
+    }
+
+    /**
+     * Set process_status
+     *
+     * @param integer $processStatus
+     * @return Cart
+     */
+    public function setProcessStatus($processStatus)
+    {
+        $this->process_status = $processStatus;
+    
+        return $this;
+    }
+
+    /**
+     * Get process_status
+     *
+     * @return integer 
+     */
+    public function getProcessStatus()
+    {
+        return $this->process_status;
     }
 }

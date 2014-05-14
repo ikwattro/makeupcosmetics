@@ -83,7 +83,7 @@ class CheckoutController extends Controller
     }
 
     /**
-     * @Route("/checkout/step/confirmation", name="checkout/confirm")
+     * @Route("/checkout/step/confirmation", name="checkout_confirm")
      * @Template()
      */
     public function checkoutConfirmAction()

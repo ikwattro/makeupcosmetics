@@ -1,10 +1,10 @@
 {% extends "::front.html.twig" %}
 
 {% block body %}
-    <div class="row">
+    <div class="row" {% if isSet %} id="form_to_be_disabled"{% endif %}>
         {{ form_start(form, {'action': path('checkout_address'), 'attr': {'role': 'form', 'class': 'form-horizontal'}}) }}
 
-        <div class="col-md-6"  {% if isSet %} id="form_to_be_disabled"{% endif %}>
+        <div class="col-md-6">
                 <h4>Données de facturation</h4>
             <hr>
             <div id="billing_info_block">
@@ -75,7 +75,7 @@
                     <div class="checkbox">
                         <label>
                             <input type="checkbox"
-                                   {% if form.vars.value.both is defined%}checked="checked"{% endif %} value="1" id="{{ form.both.vars.id }}" name="{{ form.both.vars.full_name }}"
+                                   {% if form.vars.value.both is defined and form.vars.value.both is not empty %}checked="checked"{% endif %} value="1" id="{{ form.both.vars.id }}" name="{{ form.both.vars.full_name }}"
                                    value=""> Les données de livraison sont identiques aux données de facturation
                         </label>
                     </div>

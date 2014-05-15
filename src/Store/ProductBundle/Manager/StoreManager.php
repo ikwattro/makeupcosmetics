@@ -107,12 +107,15 @@ class StoreManager
         }
 
         $cart = $this->getCart();
+        $itemsTotal = $cart->getItemsTotal() != null ? $cart->getItemsTotal() : 0;
 
         $items = $cart->getItems();
         foreach ($items as $item) {
             if($item->getProduct() == $p) {
                 $item->incrementQuantity($quantity);
+                $cart->setItemsTotal($itemsTotal + $quantity);
                 $this->em->persist($item);
+                $this->em->persist($cart);
                 $this->em->flush();
                 return true;
             }
@@ -123,6 +126,7 @@ class StoreManager
         $item->setProduct($product);
 
         $this->cart->addItem($item);
+        $this->cart->setItemsTotal($itemsTotal + $quantity);
 
         $this->em->persist($this->cart);
         $this->em->flush();
@@ -142,15 +146,17 @@ class StoreManager
         if (!$items->contains($item)) {
             throw new InvalidArgumentException('Item not in Cart');
         }
+        $addition = true === $inverse ? -1 : +1;
         foreach ($items as $it) {
             if ($it->getId() == $item->getId()) {
-                $addition = true === $inverse ? -1 : +1;
                 $nq = $it->getQuantity() + $addition ;
                 $it->setQuantity($nq);
             }
         }
 
         $cart = $this->getCart();
+        $itemsTotal = $cart->getItemsTotal() != null ? $cart->getItemsTotal() : 0;
+        $cart->setItemsTotal($itemsTotal + $addition);
         $this->em->persist($cart);
         $this->em->flush();
 

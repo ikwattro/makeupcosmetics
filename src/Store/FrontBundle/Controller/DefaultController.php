@@ -257,4 +257,20 @@ class DefaultController extends Controller
 
 
     }
+
+    /**
+     * @Route("/cart/item/remove/{itemId}", name="remove_cart_item")
+     */
+    public function removeCartItemAction($itemId)
+    {
+        $man = $this->get('store.store_manager');
+        $referer = $this->get('request')->headers->get('referer');
+        if ($man->removeItem($itemId)) {
+            $man->setMessage('Le produit a été retiré du panier');
+            return $this->redirect($referer);
+        }
+        $man->setMessage('Impossible de retirer le produit du panier');
+        return $this->redirect($referer);
+
+    }
 }

@@ -1,5 +1,7 @@
 {% extends "::front.html.twig" %}
 
+{% block title %} Votre Panier | {{ parent() }} {% endblock %}
+
 {% block body %}
 
     <h2>Panier</h2>
@@ -7,13 +9,15 @@
     {% if cart.items is empty %}
         <h4>Votre panier est vide</h4>
     {% else %}
-
+        <div class="row">
         <table class="table table-bordered">
             <tr>
                 <th>Image</th>
                 <th>Produit</th>
                 <th>Quantité</th>
-                <th>Prix</th>
+                <th>Prix/unité</th>
+                <th>Total</th>
+                <th></th>
             </tr>
             {% for item in cart.items %}
                 <!--
@@ -38,33 +42,39 @@
                         {{ item.quantity }}
                         &nbsp; &nbsp; <a class="btn btn-success btn-xs" href="{{ path('increment_item', {'item':item.id }) }}">+</a></td>
                     <td>{{ item.product.price }}&euro;</td>
+                    <td>{{ item.product.price * item.quantity }}</td>
+                    <td>
+                        <a href="{{ path('remove_cart_item', {'itemId': item.id }) }}">
+                            <span class="glyphicon glyphicon-remove" style="color:red;"></span>
+                        </a>
+                    </td>
                 </tr>
             {% endfor %}
 
 
 
             <tr>
-                <td colspan="2"></td>
+                <td colspan="3"></td>
                 <td class="total_line_item">Total :</td>
                 <td>{{ total }}&euro;</td>
             </tr>
 
             {% if promotion is not empty %}
-                <tr><td colspan="3"><span style="color:red;">{{ promotion.detail.title }} : -{{ promotion.detail.discount }}%</span></td>
+                <tr><td colspan="4"><span style="color:red;">{{ promotion.detail.title }} : -{{ promotion.detail.discount }}%</span></td>
                     <td><span style="color:red;">-{{ promotion.discount_amount }}&euro;</span></td>
                 </tr>
 
 
 
                 <tr>
-                    <td colspan="2"></td>
+                    <td colspan="3"></td>
                     <td class="total_line_item">New Total :</td>
                     <td>{{ promotion.new_total }}&euro;</td>
                 </tr>
 
             {% endif %}
 
-            <tr><td colspan="3">Frais de ports estimés pour la Belgique</td><td>5.9€</td></tr>
+            <tr><td colspan="4">Frais de ports estimés pour la Belgique <span style="color:red;">*</span></td><td>5.9€</td></tr>
             {% set shipping = 5.9 %}
 
             {% if promotion is not empty %}
@@ -73,10 +83,10 @@
                 {% set bigtotal = total + shipping %}
             {% endif %}
 
-            <tr><td class="total_line_item" colspan="3">Total (frais de port inclus):</td><td>{{ bigtotal }}€</td> </tr>
+            <tr><td class="total_line_item" colspan="4">Total (frais de port inclus):</td><td>{{ bigtotal }}€</td> </tr>
 
             <tr>
-                <td colspan="3"></td>
+                <td colspan="4"></td>
                 <td><a href="{{ path('checkout_account') }}" class="btn btn-success">Commander</a></td>
                 <!--
             <a href="{{ path('reset_cart') }}" class="btn btn-warning btn-small">Vider</a>
@@ -84,6 +94,11 @@
             </tr>
 
         </table>
+        </div>
+        <div class="row">
+            <p><span style="color:red;">*</span> Les frais définitifs de livraison seront calculés sur base du pays spécifié
+            pour l'adresse de livraison</p>
+        </div>
     {% endif %}
 
 {% endblock body %}

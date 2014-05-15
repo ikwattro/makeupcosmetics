@@ -164,7 +164,7 @@ class StoreManager
 
     }
 
-    private function setMessage($message)
+    public function setMessage($message)
     {
         $bag = $this->session->getFlashBag();
         $bag->add('notice', $message);
@@ -312,6 +312,22 @@ class StoreManager
         $this->em->persist($cart);
         $this->em->flush();
 
+    }
+
+    public function removeItem($item)
+    {
+        $em = $this->em;
+        $it = $this->cart_item_repository->find($item);
+        if (!$it) {
+            throw new \InvalidArgumentException('Item not found');
+        }
+        $cart = $this->getCart();
+        $cart->setItemsTotal($cart->getItemsTotal() - $it->getQuantity());
+        $cart->removeItem($it);
+        $em->remove($it);
+        $em->flush();
+        $this->cart = $cart;
+        return $this->cart;
     }
 
 

@@ -29,7 +29,7 @@ class CartController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('StoreProductBundle:Cart')->findAll();
+        $entities = $em->getRepository('StoreProductBundle:Cart')->findAllForAdmin();
 
         return array(
             'entities' => $entities,

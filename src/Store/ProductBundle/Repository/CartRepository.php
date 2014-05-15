@@ -20,4 +20,20 @@ class CartRepository extends EntityRepository
         return $q->getResult();
 
     }
+
+    public function findAllForAdmin()
+    {
+        $qb = $this->createQueryBuilder('c');
+            $qb->orderBy('c.cart_dtg', 'DESC')
+                ->setFirstResult(0)
+                ->setMaxResults(50);
+
+
+
+
+        $q = $qb->getQuery();
+
+        return $q->getResult();
+
+    }
 }

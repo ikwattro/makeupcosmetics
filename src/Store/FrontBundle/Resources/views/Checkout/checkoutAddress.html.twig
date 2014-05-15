@@ -75,7 +75,7 @@
                     <div class="checkbox">
                         <label>
                             <input type="checkbox"
-                                   {% if form.vars.value.both %}checked="checked"{% endif %} value="1" id="{{ form.both.vars.id }}" name="{{ form.both.vars.full_name }}"
+                                   {% if form.vars.value.both is defined%}checked="checked"{% endif %} value="1" id="{{ form.both.vars.id }}" name="{{ form.both.vars.full_name }}"
                                    value=""> Les données de livraison sont identiques aux données de facturation
                         </label>
                     </div>
@@ -178,7 +178,7 @@
             {% if isSet %}
 
                 <a href="#" id="modify_address_form" class="btn btn-warning">Modifier</a>
-                <a href="{{ path('checkout_confirm') }}" id="next_step_link" class="btn btn-info" title="Continue">Continuer</a>
+                <a href="{{ path('checkout_shipping') }}" id="next_step_link" class="btn btn-info" title="Continue">Continuer</a>
                 <button type="submit" id="submit_form_modif" class="btn btn-success">Continuer</button>
 
             {% else %}

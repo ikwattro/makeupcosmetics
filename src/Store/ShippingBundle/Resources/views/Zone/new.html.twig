@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Zone creation</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form.title) }}
+    <div class="countries">
+        {% for country in form.countries.vars.choices %}
+            <div>
+                <input type="checkbox" id="store_shippingbundle_zone_countries_{{ loop.index }}" value="{{ country.value }}"
+                        name="store_shippingbundle_zone[countries][]"/>
+                <label for="store_shippingbundle_zone_countries_{{ loop.index }}">{{ country.label }}</label>
+            </div>
+        {% endfor %}
+    </div>
+
+    {{ form_widget(form._token) }}
+    <button type="submit" value="Enregistrer" class="btn btn-success">Enregistrer</button>
+
+        <ul class="record_actions">
+
+{% endblock %}

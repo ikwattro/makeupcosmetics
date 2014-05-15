@@ -83,6 +83,17 @@ class Cart
     protected $process_status;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Store\ShippingBundle\Entity\ShippingMethod")
+     * @ORM\JoinColumn(name="shipping_method_id", referencedColumnName="id", nullable=true)
+     */
+    protected $shipping_method;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    protected $shipping_price;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -380,5 +391,51 @@ class Cart
     public function getProcessStatus()
     {
         return $this->process_status;
+    }
+
+    /**
+     * Set shipping_price
+     *
+     * @param float $shippingPrice
+     * @return Cart
+     */
+    public function setShippingPrice($shippingPrice)
+    {
+        $this->shipping_price = $shippingPrice;
+    
+        return $this;
+    }
+
+    /**
+     * Get shipping_price
+     *
+     * @return float 
+     */
+    public function getShippingPrice()
+    {
+        return $this->shipping_price;
+    }
+
+    /**
+     * Set shipping_method
+     *
+     * @param \Store\ShippingBundle\Entity\ShippingMethod $shippingMethod
+     * @return Cart
+     */
+    public function setShippingMethod(\Store\ShippingBundle\Entity\ShippingMethod $shippingMethod = null)
+    {
+        $this->shipping_method = $shippingMethod;
+    
+        return $this;
+    }
+
+    /**
+     * Get shipping_method
+     *
+     * @return \Store\ShippingBundle\Entity\ShippingMethod 
+     */
+    public function getShippingMethod()
+    {
+        return $this->shipping_method;
     }
 }

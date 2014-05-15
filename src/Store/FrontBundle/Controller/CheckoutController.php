@@ -2,6 +2,7 @@
 
 namespace Store\FrontBundle\Controller;
 
+use Doctrine\Common\Proxy\Exception\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -21,6 +22,7 @@ use Symfony\Component\Validator\Constraints\Country;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Store\AddressBundle\Entity\Address;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class CheckoutController extends Controller
 {
@@ -82,7 +84,7 @@ class CheckoutController extends Controller
 
 
 
-            return $this->redirect($this->generateUrl('checkout_confirm'));
+            return $this->redirect($this->generateUrl('checkout_shipping'));
         }
         $cart = $man->getCart();
         $addrSet = false;
@@ -104,12 +106,68 @@ class CheckoutController extends Controller
             return $this->redirect($this->generateUrl('homeweb'));
         }
         if (!$cart->getBillingAddress() || !$cart->getShippingAddress()) {
-            return $this->redirect($this->generateUrl('checkout_address'));
+            return $this->redirect($this->generateUrl('checkout_shipping'));
         }
+
         $man->setCartConfirmStatus();
         return array(
         );
     }
+
+    /**
+     * @Route("/checkout/step/shipping", name="checkout_shipping")
+     * @Template()
+     */
+    public function checkoutShippingAction(Request $request)
+    {
+        if ($request->getMethod() == 'POST') {
+            if ($this->verifyAndSaveShippingMethod($request)) {
+                return $this->redirect($this->generateUrl('checkout_confirm'));
+            }
+        }
+
+        $man = $this->get('store.store_manager');
+        $man->setCartShippingStatus();
+        $cart = $man->getCart();
+        $country = $cart->getShippingAddress()->getCountry();
+        $em = $this->getDoctrine()->getManager();
+        $available_methods = array();
+        $shippingMethods = $em->getRepository('StoreShippingBundle:ShippingMethod')->findAll();
+        foreach ($shippingMethods as $method) {
+            if (in_array($country, $method->getZone()->getCountries())) {
+                $available_methods[] = $method;
+            }
+        }
+        return array(
+            'methods' => $available_methods
+        );
+    }
+
+    private function verifyAndSaveShippingMethod(Request $request)
+    {
+        $man = $this->get('store.store_manager');
+        $em = $this->getDoctrine()->getManager();
+        $data = $request->request->all();
+        if (isset($data['form_shipping_method'])) {
+            $method = $em->getRepository('StoreShippingBundle:ShippingMethod')->find($data['form_shipping_method']);
+            if (!$method) {
+                throw new InvalidArgumentException('Shipping Method Not Found');
+            }
+            $cart = $man->getCart();
+            $cart->setShippingMethod($method);
+            $cart->setShippingPrice($method->getPrice());
+            $em->persist($cart);
+            $em->flush();
+
+            return true;
+        } else { return false; }
+
+    }
+
+    /**
+     * @param array $data
+     * @throws \InvalidArgumentException
+     */
 
     public function createAddress(array $data = array())
     {

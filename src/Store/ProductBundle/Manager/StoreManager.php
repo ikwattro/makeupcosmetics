@@ -298,6 +298,16 @@ class StoreManager
         $this->em->flush();
     }
 
+    public function setCartShippingStatus()
+    {
+        $cart = $this->getCart();
+        $status = 'SHIPPING';
+        $cart->setProcessStatus($status);
+        $this->em->persist($cart);
+        $this->em->flush();
+
+    }
+
 
 
 }

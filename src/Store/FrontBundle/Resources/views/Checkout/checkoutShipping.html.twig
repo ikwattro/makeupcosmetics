@@ -1,0 +1,21 @@
+{% extends "::front.html.twig" %}
+
+{% block body %}
+<div class="row">
+    <h1>Méthode de livraison</h1>
+</div>
+<div class="row">
+    {% if methods is not empty %}
+        <form action="{{ path('checkout_shipping') }}" method="post">
+            {% for method in methods %}
+                <input id="form_shipping_method_{{ loop.index }}" name="form_shipping_method" type="checkbox" value="{{ method.id }}"/>
+                <label for="form_shipping_method_{{ loop.index }}"><h3>{{ method.title }}</h3> | {{ method.price }}&euro;</label>
+            {% endfor %}
+        <button type="submit" class="btn btn-success">Valider</button>
+        </form>
+    {% else %}
+        <h3>Désolé, aucune méthode de livraison est disponible pour votre pays</h3>
+        <p>Vous pouvez cliquer <a href="{{ path('checkout_address') }}">ici</a> pour faire livrer vers un autre pays</p>
+    {% endif %}
+</div>
+{% endblock %}

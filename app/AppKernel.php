@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new Store\CustomerBundle\StoreCustomerBundle(),
             new Store\CountryBundle\StoreCountryBundle(),
             new Store\AddressBundle\StoreAddressBundle(),
+            new Store\ShippingBundle\StoreShippingBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

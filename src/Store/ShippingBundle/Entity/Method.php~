@@ -1,0 +1,43 @@
+<?php
+
+namespace Store\ShippingBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ */
+class Method
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $title;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $informations;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Store\ShippingBundle\Entity\Zone")
+     */
+    protected $zone;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Store\ShippingBundle\Entity\Zone")
+     */
+    protected $company;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    protected $price;
+}

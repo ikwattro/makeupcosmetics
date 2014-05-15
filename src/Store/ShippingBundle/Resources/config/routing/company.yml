@@ -1,0 +1,30 @@
+company:
+    path:     /
+    defaults: { _controller: "StoreShippingBundle:Company:index" }
+
+company_show:
+    path:     /{id}/show
+    defaults: { _controller: "StoreShippingBundle:Company:show" }
+
+company_new:
+    path:     /new
+    defaults: { _controller: "StoreShippingBundle:Company:new" }
+
+company_create:
+    path:     /create
+    defaults: { _controller: "StoreShippingBundle:Company:create" }
+    requirements: { _method: post }
+
+company_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "StoreShippingBundle:Company:edit" }
+
+company_update:
+    path:     /{id}/update
+    defaults: { _controller: "StoreShippingBundle:Company:update" }
+    requirements: { _method: post|put }
+
+company_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "StoreShippingBundle:Company:delete" }
+    requirements: { _method: post|delete }

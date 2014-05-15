@@ -1,0 +1,3 @@
+store_shipping_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: StoreShippingBundle:Default:index }

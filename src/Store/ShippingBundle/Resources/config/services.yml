@@ -1,0 +1,7 @@
+parameters:
+#    store_shipping.example.class: Store\ShippingBundle\Example
+
+services:
+#    store_shipping.example:
+#        class: %store_shipping.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,3 +1,8 @@
+store_shipping:
+    resource: "@StoreShippingBundle/Controller/"
+    type:     annotation
+    prefix:   /admin
+
 store_address:
     resource: "@StoreAddressBundle/Resources/config/routing.yml"
     prefix:   /

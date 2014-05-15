@@ -32,6 +32,11 @@ class CartItem
     protected $cart;
 
     /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    protected $item_price;
+
+    /**
      * Constructor
      *
      * @param int $quantity The bootstraped quantity for this CartItem
@@ -132,5 +137,28 @@ class CartItem
     {
         $this->quantity = $this->quantity + $quantity;
         return $this;
+    }
+
+    /**
+     * Set item_price
+     *
+     * @param float $itemPrice
+     * @return CartItem
+     */
+    public function setItemPrice($itemPrice)
+    {
+        $this->item_price = $itemPrice;
+    
+        return $this;
+    }
+
+    /**
+     * Get item_price
+     *
+     * @return float 
+     */
+    public function getItemPrice()
+    {
+        return $this->item_price;
     }
 }

@@ -3,9 +3,131 @@
 {% block body %}
 
     <div class="row">
-        <h1>Merci pour votre commande</h1>
-        <h4>Veuillez vérifier les informations ci-dessous avant de procéder au paiement</h4>
-        <p>Ici viendra le récaptitulatif de la commande</p>
+        <div class="col-md-12">
+            <h1>Merci pour votre commande</h1>
+            <h4>Veuillez vérifier les informations ci-dessous avant de procéder au paiement</h4>
+        </div>
+
+    </div>
+    <hr/>
+
+    <div class="recap_order">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Adresse de facturation</h4>
+            <table class="table">
+                <tr>
+                    <td>
+                        <address>
+                            <strong>{{ cart.billingAddress.firstName }} {{ cart.billingAddress.lastName }}</strong><br/>
+                            {{ cart.billingAddress.line1 }}<br/>
+                            {{ cart.billingAddress.line2 }} {% if cart.billingAddress.line2 is not empty %}<br/>{% endif %}
+                            {{ cart.billingAddress.zipCode }} {{ cart.billingAddress.state }}<br/>
+                            {{ countries[cart.billingAddress.country] }}
+                        </address>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+
+
+
+
+        <div class="col-md-6">
+            <h4>Adresse de livraison</h4>
+            <table class="table">
+                <tr>
+                    <td>
+                        <address>
+                            <strong>{{ cart.shippingAddress.firstName }} {{ cart.shippingAddress.lastName }}</strong><br/>
+                            {{ cart.shippingAddress.line1 }}<br/>
+                            {{ cart.shippingAddress.line2 }} {% if cart.billingAddress.line2 is not empty %}<br/>{% endif %}
+                            {{ cart.shippingAddress.zipCode }} {{ cart.billingAddress.state }}<br/>
+                            {{ countries[cart.shippingAddress.country] }}
+                        </address>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Récapitualif Commande</h4>
+            <table class="table">
+                <th>Produit</th>
+                <th>Quantité</th>
+                <th>Prix/unité</th>
+                <th>Total</th>
+                {% for item in cart.items %}
+                    <tr>
+                        <td>
+                            {{ item.product.product.name }}
+                        </td>
+                        <td>
+                            {{ item.quantity }}
+                        </td>
+                        <td>
+                            {{ item.product.price }}&euro;
+                        </td>
+                        <td>
+                            {{ item.quantity * item.product.price }}
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                <tr>
+                    <td colspan="2"></td>
+                    <td class="total_line_item">Total :</td>
+                    <td>{{ total }}&euro;</td>
+                </tr>
+
+                {% if promotion is not empty %}
+                    <tr><td colspan="3"><span style="color:red;">{{ promotion.detail.title }} : -{{ promotion.detail.discount }}%</span></td>
+                        <td><span style="color:red;">-{{ promotion.discount_amount }}&euro;</span></td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td colspan="2"></td>
+                        <td class="total_line_item">Total :</td>
+                        <td>{{ promotion.new_total }}&euro;</td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <td colspan="3">
+                            Livraison vers <strong>{{ countries[cart.shippingAddress.country] }}</strong> : {{ cart.shippingMethod.title }}
+                        </td>
+                        <td>
+                            {{ cart.shippingMethod.price }}&euro;
+                        </td>
+                    </tr>
+                    {% if promotion is not empty %}
+                        {% set bigtotal = promotion.new_total + cart.shippingMethod.price %}
+                    {% else %}
+                        {% set bigtotal = total + cart.shippingMethod.price %}
+                    {% endif %}
+                    <tr>
+                        <td colspan="3" class="total_line_item"><span style="color:red;">Total :</span></td>
+                        <td><span style="color:red;">{{ bigtotal }}&euro;</span></td>
+                    </tr>
+
+
+            </table>
+        </div>
+
+
+    </div>
+    </div>
+
+    <div class="row" style="padding:15px;">
+        <button type="submit" class="btn btn-warning">Confirmer et procéder au paiement</button>
     </div>
 
 {% endblock %}

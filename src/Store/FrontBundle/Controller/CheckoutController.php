@@ -23,6 +23,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Store\AddressBundle\Entity\Address;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Intl\Intl;
 
 class CheckoutController extends Controller
 {
@@ -103,6 +104,9 @@ class CheckoutController extends Controller
      */
     public function checkoutConfirmAction()
     {
+        $em = $this->getDoctrine()->getManager();
+        $req = $this->getRequest();
+        $em->getRepository('StoreProductBundle:Product')->findAllByLocaleForTrans($req->getLocale());
         $man = $this->get('store.store_manager');
         $cart = $man->getCart();
         if (count($cart->getItems()) <= 0) {
@@ -112,8 +116,27 @@ class CheckoutController extends Controller
             return $this->redirect($this->generateUrl('checkout_shipping'));
         }
 
+        $repo = $em->getRepository('StoreProductBundle:Promotion');
+        $promotions = $repo->findIfActual();
+        $promotion = array();
+        $total = 0;
+        foreach ($cart->getItems() as $item) {
+            $total = $total + ($item->getProduct()->getPrice() * $item->getQuantity());
+        }
+        foreach($promotions as $pro){
+            $promotion['detail'] = $pro;
+            $promotion['discount_amount'] = (($total / 100) * $pro->getDiscount());
+            $promotion['new_total'] = $total - $promotion['discount_amount'];
+            break;
+        }
+
         $man->setCartConfirmStatus();
+        $countries = Intl::getRegionBundle()->getCountryNames();
         return array(
+            'cart' => $cart,
+            'countries' => $countries,
+            'promotion' => $promotion,
+            'total' => $total
         );
     }
 

@@ -17,11 +17,11 @@ class CartItem
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Store\ProductBundle\Entity\Product")
+     * @ORM\ManyToOne(targetEntity="Store\ProductBundle\Entity\Variant")
      */
     protected $product;
 
-    /*
+    /**
      * @ORM\Column(type="integer")
      */
     protected $quantity;
@@ -30,6 +30,24 @@ class CartItem
      * @ORM\ManyToOne(targetEntity="Store\ProductBundle\Entity\Cart", inversedBy="items")
      */
     protected $cart;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    protected $item_price;
+
+    /**
+     * Constructor
+     *
+     * @param int $quantity The bootstraped quantity for this CartItem
+     * @return CartItem
+     */
+    public function __construct($quantity = 1)
+    {
+        $this->quantity = $quantity;
+        return $this;
+    }
+
 
     /**
      * Get id
@@ -47,7 +65,7 @@ class CartItem
      * @param \Store\ProductBundle\Entity\Product $product
      * @return CartItem
      */
-    public function setProduct(\Store\ProductBundle\Entity\Product $product = null)
+    public function setProduct(\Store\ProductBundle\Entity\Variant $product = null)
     {
         $this->product = $product;
     

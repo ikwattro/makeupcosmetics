@@ -83,11 +83,13 @@ class CheckoutController extends Controller
 
 
             return $this->redirect($this->generateUrl('checkout_confirm'));
-        } else {
-            $billing_form = $this->createBillingAddressForm();
         }
-
-        return array('form' => $billing_form->createView());
+        $cart = $man->getCart();
+        $addrSet = false;
+        if ($cart->getBillingAddress() && $cart->getShippingAddress()) {
+            $addrSet = true;
+        }
+        return array('form' => $billing_form->createView(), 'isSet' => $addrSet);
     }
 
     /**
@@ -101,7 +103,7 @@ class CheckoutController extends Controller
         if (count($cart->getItems()) <= 0) {
             return $this->redirect($this->generateUrl('homeweb'));
         }
-        if (!$cart->getBillingAddress() || $cart->getShippingAddress()) {
+        if (!$cart->getBillingAddress() || !$cart->getShippingAddress()) {
             return $this->redirect($this->generateUrl('checkout_address'));
         }
         $man->setCartConfirmStatus();
@@ -157,6 +159,8 @@ class CheckoutController extends Controller
 
     private function createBillingAddressForm($defaultData = array())
     {
+        $defaultData = $this->getDefaultAddressData();
+
         $form = $this->createFormBuilder($defaultData)
             ->add('firstname', 'text', array(
                 'constraints' => array(
@@ -281,6 +285,49 @@ class CheckoutController extends Controller
             ->getForm();
 
         return $form;
+    }
+
+    private function getDefaultAddressData()
+    {
+        $store = $this->get('store.store_manager');
+        $cart = $store->getCart();
+        if ($cart->getBillingAddress() && $cart->getShippingAddress()) {
+            if ($cart->getBillingAddress() == $cart->getShippingAddress()) {
+                $address = $cart->getBillingAddress();
+                return array(
+                    'firstname' =>  $address->getFirstName(),
+                    'lastname'  =>  $address->getLastName(),
+                    'address_line_1'    =>  $address->getLine1(),
+                    'address_line_2'    =>  $address->getLine2(),
+                    'zip_code'  =>  $address->getZipCode(),
+                    'city'  =>  $address->getState(),
+                    'country' => $address->getCountry(),
+                    'both'  => true,
+                );
+            } else {
+                $address = $cart->getBillingAddress();
+                $address2 = $cart->getShippingAddress();
+                return array(
+                    'firstname' =>  $address->getFirstName(),
+                    'lastname'  =>  $address->getLastName(),
+                    'address_line_1'    =>  $address->getLine1(),
+                    'address_line_2'    =>  $address->getLine2(),
+                    'zip_code'  =>  $address->getZipCode(),
+                    'city'  =>  $address->getState(),
+                    'country' => $address->getCountry(),
+                    'both'  => false,
+                    'firstname_2' =>  $address2->getFirstName(),
+                    'lastname_2'  =>  $address2->getLastName(),
+                    'address_line_1_2'    =>  $address2->getLine1(),
+                    'address_line_2_2'    =>  $address2->getLine2(),
+                    'zip_code_2'  =>  $address2->getZipCode(),
+                    'city_2'  =>  $address2->getState(),
+                    'country_2' => $address2->getCountry(),
+                );
+            }
+
+        }
+        return array();
     }
 
     /**

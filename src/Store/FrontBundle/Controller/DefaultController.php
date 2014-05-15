@@ -136,7 +136,10 @@ class DefaultController extends Controller
         $promotion = array();
 
         $storeManager = $this->get('store.store_manager');
+
+
         $cart = $storeManager->getCart();
+
         $total = 0;
         foreach ($cart->getItems() as $item) {
             $total = $total + ($item->getProduct()->getPrice() * $item->getQuantity());

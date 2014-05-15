@@ -4,7 +4,7 @@
     <div class="row">
         {{ form_start(form, {'action': path('checkout_address'), 'attr': {'role': 'form', 'class': 'form-horizontal'}}) }}
 
-        <div class="col-md-6">
+        <div class="col-md-6"  {% if isSet %} id="form_to_be_disabled"{% endif %}>
                 <h4>Données de facturation</h4>
             <hr>
             <div id="billing_info_block">
@@ -13,7 +13,7 @@
                 <label class="col-sm-3 control-label" for="{{ form.firstname.vars.id }}">Prénom :</label>
                     <div class="col-sm-6">
                         <input class="form-control" type="text" id="{{ form.firstname.vars.id }}" name="{{ form.firstname.vars.full_name }}"
-                               value=""/>
+                               value="{{ form.vars.value.firstname|default('') }}"/>
                     </div>
                 </div>
 
@@ -22,7 +22,7 @@
                     <label class="col-sm-3 control-label" for="{{ form.lastname.vars.id }}">Nom :</label>
                     <div class="col-sm-6">
                         <input class="form-control" type="text" id="{{ form.lastname.vars.id }}" name="{{ form.lastname.vars.full_name }}"
-                               value=""/>
+                               value="{{ form.vars.value.lastname|default('') }}"/>
                     </div>
 
                 </div>
@@ -31,7 +31,7 @@
                 <label class="col-sm-3 control-label" for="{{ form.address_line_1.vars.id }}">Adresse :</label>
                 <div class="col-sm-6">
                     <input class="form-control" type="text" id="{{ form.address_line_1.vars.id }}" name="{{ form.address_line_1.vars.full_name }}"
-                           value=""/>
+                           value="{{ form.vars.value.address_line_1|default('') }}"/>
                 </div>
 
             </div>
@@ -40,7 +40,7 @@
                 <label class="col-sm-3 control-label" for="{{ form.address_line_2.vars.id }}"></label>
                 <div class="col-sm-6">
                     <input class="form-control" type="text" id="{{ form.address_line_2.vars.id }}" name="{{ form.address_line_2.vars.full_name }}"
-                           value=""/>
+                           value="{{ form.vars.value.address_line_2|default('') }}"/>
                 </div>
 
             </div>
@@ -49,7 +49,7 @@
                 <label class="col-sm-3 control-label" for="{{ form.zip_code.vars.id }}">Code Postal :</label>
                 <div class="col-sm-6">
                     <input class="form-control" type="text" id="{{ form.zip_code.vars.id }}" name="{{ form.zip_code.vars.full_name }}"
-                           value=""/>
+                           value="{{ form.vars.value.zip_code|default('') }}"/>
                 </div>
 
             </div>
@@ -58,7 +58,7 @@
                 <label class="col-sm-3 control-label" for="{{ form.city.vars.id }}">Ville :</label>
                 <div class="col-sm-6">
                     <input class="form-control" type="text" id="{{ form.city.vars.id }}" name="{{ form.city.vars.full_name }}"
-                           value=""/>
+                           value="{{ form.vars.value.city|default('') }}"/>
                 </div>
 
             </div>
@@ -74,7 +74,8 @@
                 <div class="col-sm-offset-3 col-sm-6">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" value="1" id="{{ form.both.vars.id }}" name="{{ form.both.vars.full_name }}"
+                            <input type="checkbox"
+                                   {% if form.vars.value.both %}checked="checked"{% endif %} value="1" id="{{ form.both.vars.id }}" name="{{ form.both.vars.full_name }}"
                                    value=""> Les données de livraison sont identiques aux données de facturation
                         </label>
                     </div>
@@ -98,7 +99,7 @@
                 <label class="col-sm-3 control-label" for="{{ form.firstname_2.vars.id }}">Prénom :</label>
                 <div class="col-sm-6">
                     <input class="form-control" type="text" id="{{ form.firstname_2.vars.id }}" name="{{ form.firstname_2.vars.full_name }}"
-                           value=""/>
+                           value="{{ form.vars.value.firstname_2|default('') }}"/>
                 </div>
             </div>
 
@@ -107,7 +108,7 @@
                 <label class="col-sm-3 control-label" for="{{ form.lastname_2.vars.id }}">Nom :</label>
                 <div class="col-sm-6">
                     <input class="form-control" type="text" id="{{ form.lastname_2.vars.id }}" name="{{ form.lastname_2.vars.full_name }}"
-                           value=""/>
+                           value="{{ form.vars.value.lastname_2|default('') }}"/>
                 </div>
 
             </div>
@@ -116,7 +117,7 @@
                 <label class="col-sm-3 control-label" for="{{ form.address_line_1_2.vars.id }}">Adresse :</label>
                 <div class="col-sm-6">
                     <input class="form-control" type="text" id="{{ form.address_line_1_2.vars.id }}" name="{{ form.address_line_1_2.vars.full_name }}"
-                           value=""/>
+                           value="{{ form.vars.value.address_line_1_2|default('') }}"/>
                 </div>
 
             </div>
@@ -125,7 +126,7 @@
                 <label class="col-sm-3 control-label" for="{{ form.address_line_2_2.vars.id }}"></label>
                 <div class="col-sm-6">
                     <input class="form-control" type="text" id="{{ form.address_line_2_2.vars.id }}" name="{{ form.address_line_2_2.vars.full_name }}"
-                           value=""/>
+                           value="{{ form.vars.value.address_line_2_2|default('') }}"/>
                 </div>
 
             </div>
@@ -134,7 +135,7 @@
                 <label class="col-sm-3 control-label" for="{{ form.zip_code_2.vars.id }}">Code Postal :</label>
                 <div class="col-sm-6">
                     <input class="form-control" type="text" id="{{ form.zip_code_2.vars.id }}" name="{{ form.zip_code_2.vars.full_name }}"
-                           value=""/>
+                           value="{{ form.vars.value.zip_code_2|default('') }}"/>
                 </div>
 
             </div>
@@ -143,7 +144,7 @@
                 <label class="col-sm-3 control-label" for="{{ form.city_2.vars.id }}">Ville :</label>
                 <div class="col-sm-6">
                     <input class="form-control" type="text" id="{{ form.city_2.vars.id }}" name="{{ form.city_2.vars.full_name }}"
-                           value=""/>
+                           value="{{ form.vars.value.city_2|default('') }}"/>
                 </div>
                 {{ form_errors(form.city_2) }}
 
@@ -173,9 +174,35 @@
 
     <div class="row">
         <div class="col-sm-offset-1">
-            <button type="submit" class="btn btn-success">Continuer</button>
+
+            {% if isSet %}
+
+                <a href="#" id="modify_address_form" class="btn btn-warning">Modifier</a>
+                <a href="{{ path('checkout_confirm') }}" id="next_step_link" class="btn btn-info" title="Continue">Continuer</a>
+                <button type="submit" id="submit_form_modif" class="btn btn-success">Continuer</button>
+
+            {% else %}
+                <button type="submit" class="btn btn-success">Continuer</button>
+            {% endif %}
         </div>
 
     </div>
 
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript" src="/assets/js/custom/billing_shipping.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+       $('#submit_form_modif').hide();
+        $('#form_to_be_disabled').find('input, textarera, button, select').attr('disabled', 'disabled');
+        $('#modify_address_form').click(function(){
+            $('#form_to_be_disabled').find('input, textarea, button, select').removeAttr('disabled');
+            $('#modify_address_form').hide();
+            $('#submit_form_modif').show();
+            $('#next_step_link').hide();
+        });
+    });
+
+</script>
 {% endblock %}

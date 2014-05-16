@@ -273,4 +273,25 @@ class DefaultController extends Controller
         return $this->redirect($referer);
 
     }
+
+    /**
+     * @Route("/email1234567890RYRYRYRYRYRYRY/", name="send_email")
+     * @Template()
+     */
+    public function sendEmailAction()
+    {
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Hello Email')
+            ->setFrom(array('info@makeup-cosmetics.eu'=> 'MakeupCosmetics.eu'))
+            ->setTo(array('claudehaest@skynet.be' => 'Claude Haest'))
+            ->setSender('support@makeup-cosmetics.eu')
+            ->setReplyTo('absoluttly@gmail.com')
+            ->setBody(
+                $this->renderView('StoreFrontBundle:Default:email.txt.twig')
+            );
+
+        $this->get('mailer')->send($message);
+
+        return array();
+    }
 }

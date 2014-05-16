@@ -21,9 +21,8 @@ store_front:
     type:     annotation
     prefix:   /
 
-_imagine:
-    resource: .
-    type:     imagine
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
 
 store_core:
     resource: "@StoreCoreBundle/Controller/"

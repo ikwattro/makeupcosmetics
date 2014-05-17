@@ -1,0 +1,13 @@
+<div class="col-md-3 frontproduct">
+    <div class="frontproduct_imageblock">
+        <p>
+            <a href="{{ path('product_front_show', {'id': product.masterVariant.id, 'slug': product.slug }) }}">
+            <img src="{{ asset('uploads/documents/' ~ product.path) | imagine_filter('frontlist_thumb')}}" />
+            </a>
+        </p>
+    </div>
+    <p>{{ product.masterVariant.price }}&euro;  --  {{ product.name }}</p>
+    <p><a class="btn btn-primary btn-sm" href="{{ path('add_item_to_cart', {'productId': product.masterVariant.id }) }}">
+            <span class="glyphicon glyphicon-shopping-cart"></span>
+            Ajouter au panier</a></p>
+</div>

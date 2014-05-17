@@ -1,13 +1,21 @@
-<div class="col-md-3 frontproduct">
-    <div class="frontproduct_imageblock">
+<div class="col-md-4 col-lg-3 product_mini_fiche demo">
+    <div class="mini_fiche_holder">
+
+    <div class="mini_fiche_holder_img">
+        <a href="{{ path('product_front_show', {'id': product.masterVariant.id, 'slug': product.slug }) }}">
+            <img class="img-responsive" src="{{ asset('uploads/documents/' ~ product.path) | imagine_filter('frontlist_thumb')}}" />
+        </a>
+    </div>
+
+    <div class="mini_fiche_holder_name">
+        <p><a href="#">{{ product.name }}</a></p>
+    </div>
+    <div class="mini_fiche_holder_price">
         <p>
-            <a href="{{ path('product_front_show', {'id': product.masterVariant.id, 'slug': product.slug }) }}">
-            <img src="{{ asset('uploads/documents/' ~ product.path) | imagine_filter('frontlist_thumb')}}" />
-            </a>
+            85&euro;
         </p>
     </div>
-    <p>{{ product.masterVariant.price }}&euro;  --  {{ product.name }}</p>
-    <p><a class="btn btn-primary btn-sm" href="{{ path('add_item_to_cart', {'productId': product.masterVariant.id }) }}">
-            <span class="glyphicon glyphicon-shopping-cart"></span>
-            Ajouter au panier</a></p>
+
+        </div>
+
 </div>

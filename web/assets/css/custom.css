@@ -217,3 +217,52 @@ ul.navi li.lang_item
     background-color: #f7f7f7;
     padding:15px;
 }
+
+.navbar-inverse .navbar-nav > li > a.nav-user
+{
+    color: #1c94c4;
+}
+
+.navbar-inverse .navbar-nav > li > a.nav-cart
+{
+    color: #8700ff;
+}
+
+body
+{
+    background-color: #f5f5f5;
+}
+
+.product_mini_fiche
+{
+    padding:20px;
+}
+
+.mini_fiche_holder
+{
+    background-color: #fff;
+    padding:15px;
+}
+
+.mini_fiche_holder_img
+{
+    border-bottom: 1px solid #8700ff;
+    padding-bottom:15px;
+}
+
+.mini_fiche_holder_name
+{
+    margin-top: 5px;
+}
+
+.mini_fiche_holder_img > a
+{
+    text-align: center;
+    display: block;
+}
+
+.mini_fiche_holder_price > p
+{
+    padding-right:10px;
+    text-align: right;
+}

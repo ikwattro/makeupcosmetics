@@ -1,32 +1,29 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Cart</h1>
 
-    <table class="record_properties">
-        <tbody>
+    <h2>Panier #{{ entity.id }}</h2>
+    <hr/>
+
+    <h4>Statut : <span class="label label-primary">{{ entity.processStatus }}</span></h4>
+
+    {% set total = 0 %}
+
+    <table class="table table-bordered">
+        <tr>
+            <th>Produit</th>
+            <th>Quantité</th>
+        </tr>
+        {% for item in entity.items %}
             <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
+                <td>{{ item.product.product.name }}</td>
+                <td>{{ item.quantity }}</td>
             </tr>
-            <tr>
-                <th>Sessionid</th>
-                <td>{{ entity.sessionId }}</td>
-            </tr>
-        </tbody>
+
+            {% set total = total + item.product.price %}
+        {% endfor %}
+
+
+        <tr><td colspan="2"><strong>Montant hors promotions et livraison: <span class="label label-primary">{{ total }}&euro;</span></strong></td></tr>
     </table>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('cart') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('cart_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
 {% endblock %}

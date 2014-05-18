@@ -19,25 +19,60 @@
 </head>
 
 <body>
-<!--
-<div class="container">
 
 
-    <div class="col-md-2 pull-right">
-        <ul class="list-inline pull-right">
-            <li><a href="#" title="Find us on Facebook">
-                    <img src="{{ asset('assets/icons/facebook.jpg') }}" alt="Find us on Facebook"/></a></li>
-            <li><a href="#" title="Find us on Twitter">
-                    <img src="{{ asset('assets/icons/twitter.jpg') }}" alt="Find us on Twitter"/></a></li>
-            <li><a href="#" title="Find us on Pinterest">
-                    <img src="{{ asset('assets/icons/pinterest.jpg') }}" alt="Find us on Pinterest"/></a></li>
-        </ul>
+{% include "::navbar.html.twig" %}
+
+<div class="row">
+    <div class="container">
+        <div class="col-md-3 col-xs-12">
+            <h1><a href="{{ path('homeweb') }}" title="Accueil | MakeUp Cosmetics Professional">M.C.P.</a></h1>
+            <h6>MakeUp Cosmetics Professional</h6>
+        </div>
+
+
+
+        <div class="col-md-9">
+
+            <div class="account">
+                <ul>
+                    <li id="your-account">
+                        <div class="hidden-xs">
+                            <h4><a href="#"><img src="{{ asset('assets/icons/customer32.png') }}"/> Mon compte</a></h4>
+                            <p>Welcome, <a href="login.html">log in</a></p>
+                        </div>
+                        <div class="visible-xs">
+                            <a href="login.html" class="btn btn-primary"><i class="fa fa-user"></i></a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="hidden-xs">
+                            <h4><a href="{{ path('front_cart') }}"><img src="{{ asset('assets/icons/shopping-cart32.png') }}" alt="cart icon"/> Panier</a></h4>
+                            <p><strong>3 Product(s)</strong></p>
+                        </div>
+                        <div class="visible-xs">
+                            <a href="cart.html" class="btn btn-primary"><span class="cart-item">3</span> <i class="fa fa-shopping-cart"></i></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+
+
+            <!--
+            <ul class="list-inline pull-right acccart">
+                <li class="nav-account"><a href="#"><img src="{{ asset('assets/icons/customer32.png') }}"/> My Account</a></li>
+                <li class="nav-cart"><a href="#"><img src="{{ asset('assets/icons/shopping-cart32.png') }}" alt="cart icon"/> (5)</a></li>
+            </ul>
+            -->
+        </div>
+
     </div>
+
 </div>
--->
 
+<hr/>
 
-        {% include "::navbar.html.twig" %}
 
 
 <div class="container">

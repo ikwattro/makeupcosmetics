@@ -8,15 +8,38 @@
 
 
     <div class="col-md-3">
-        <h5>Catégories</h5>
+        <h5>Catalogue</h5>
+        <ul class="nav nav-stacked">
+            <li>Rouge à lèvres</li>
+            <li>Visage</li>
+                <ul class="nav nav-stacked">
+                    <li>1.1 ddddd</li>
+                    <li>1.2 eeeee</li>
+                </ul>
+            <li>Soins</li>
+            <li class="dropdown nav nav-stacked">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Panier</a>
+                <ul class="dropdown-menu nav nav-stacked">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                </ul>
+            </li>
+        </ul>
     </div>
 
     <div class="col-md-9">
 
-        <div class="row">
+        <div class="row demo">
 
             {% for prod in products %}
                 {% include 'StoreProductBundle:Product:showIndexProduct.html.twig' with {'product': prod} %}
+            {% if loop.index is divisibleby(4) %}
+        </div><div class="row demo">
+            {% endif %}
             {% endfor %}
 
         </div>

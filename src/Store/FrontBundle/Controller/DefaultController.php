@@ -84,7 +84,6 @@ class DefaultController extends Controller
     }
 
     /**
-     *
      * @Template()
      */
     public function getCategoryMenuAction()

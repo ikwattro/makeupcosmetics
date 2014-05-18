@@ -233,11 +233,6 @@ body
     background-color: #f5f5f5;
 }
 
-.product_mini_fiche
-{
-    padding:20px;
-}
-
 .mini_fiche_holder
 {
     background-color: #fff;
@@ -248,6 +243,7 @@ body
 {
     border-bottom: 1px solid #8700ff;
     padding-bottom:15px;
+    text-align: center;
 }
 
 .mini_fiche_holder_name
@@ -257,12 +253,24 @@ body
 
 .mini_fiche_holder_img > a
 {
-    text-align: center;
-    display: block;
+    display: inline-block;
 }
 
 .mini_fiche_holder_price > p
 {
     padding-right:10px;
     text-align: right;
+}
+
+.catalogh
+{
+    background-color: #0088cc;
+    color:#fff;
+    font-weight: bold;
+    text-align: center;
+}
+
+.demo
+{
+    margin-bottom:20px;
 }

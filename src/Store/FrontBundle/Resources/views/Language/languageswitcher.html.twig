@@ -1,11 +1,10 @@
 <li class="dropdown">
-    <div class="dropdown dropBox">
-        <a href="#" class="dropdown-toggle testy" data-toggle="dropdown">Langue <span class="caret"></span></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">LANGUE ({{ app.request.locale|upper }})<b class="caret"></b></a>
         <ul class="dropdown-menu langMenu">
 
             {% for locale in locales %}
-                <li class="lang_item{% if current_locale == locale.locale %} locale_current{% endif %}">
-                    <a href="{{ locale.link }}" title="{{ locale.locale_target_language }}">{{ locale.locale_target_language|trim }}</a>
+                <li class="{% if current_locale == locale.locale %} locale_current{% endif %}">
+                    <a href="{{ locale.link }}" title="{{ locale.locale_target_language }}">{{ locale.locale_target_language|capitalize }}</a>
                 </li>
             {% endfor %}
             <!--
@@ -15,5 +14,4 @@
             <li><a href="#">One more separated link</a></li>
             -->
         </ul>
-    </div>
 </li>

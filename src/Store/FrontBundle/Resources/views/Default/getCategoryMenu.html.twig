@@ -1,5 +1,7 @@
-{% if categories is not empty %}
-    {% for category in categories %}
-        <li><a href="{{ path('category_page', {'id': category.id, 'slug': category.slug }) }}">{{ category.title }}</a></li>
-    {% endfor %}
-{% endif %}
+<ul class="nav nav-pills nav-stacked">
+    {% if categories is not empty %}
+        {% for category in categories %}
+            <li><a href="{{ path('category_page', {'id': category.id, 'slug': category.slug }) }}">{{ category.title }}</a></li>
+        {% endfor %}
+    {% endif %}
+</ul>

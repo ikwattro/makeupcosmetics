@@ -307,6 +307,12 @@ h1 span
     color: #212121;
 }
 
+body > div:nth-child(2) > div > div.col-md-9 > div > ul > li:nth-child(2) > div.hidden-xs > p > span
+{
+    font-size: 14px;
+    background-color: #0088cc;
+}
+
 
 .account ul > li:nth-child(1), .account ul > #your-account {
     border-right: 1px solid #333;

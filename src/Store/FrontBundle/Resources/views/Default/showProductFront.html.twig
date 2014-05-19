@@ -1,9 +1,76 @@
-{% extends "::front.html.twig" %}
+{% extends "StoreFrontBundle:Default:layout.html.twig" %}
 
 {% block title %} {{ product.name }} | {{ parent() }} {% endblock %}
 
-{% block body %}
+{% block content %}
 
+    <ol class="breadcrumb">
+        <li><a href="#">Catalogue</a></li>
+        <li><a href="#">Teint</a></li>
+        <li class="active">Fonds de teint</li>
+    </ol>
+<h4 class="ps_title">
+    <a href="#">{{ product.name|upper }}<span>.</span></a>
+</h4>
+
+    <div class="row">
+        <div class="col-md-8 col-xs-12">
+            <div class="row">
+                <div class="col-md-6">
+                    {% if variant.images is not empty %}
+                        {% for image in variant.images %}
+                            {% if loop.index <= 1 %}
+                                <img class="img-responsive" src="{{ asset('uploads/product_images/' ~ image.path) | imagine_filter('product_show_bigimg')}}" />
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <img src="{{ asset('uploads/documents/' ~ product.path) | imagine_filter('product_show_bigimg')}}" />
+                    {% endif %}
+                </div>
+
+                <div class="col-md-6">
+                    {% for image in variant.images %}
+                        <div class="ps_mini_img">
+                            <a class="fancybox" rel="variant-{{ variant.id }}" href="{{ asset('uploads/product_images/' ~ image.path) }}">
+                                <img class="img-responsive" src="{{ asset('uploads/product_images/' ~ image.path) | imagine_filter('product_list_thumb')}}" />
+                            </a>
+                        </div>
+
+                    {% endfor %}
+                </div>
+
+
+
+            </div>
+
+
+
+        </div>
+
+        <div class="col-md-4 col-xs-12">
+            <div class="ps_man_store">
+                <p>
+                <strong>Brand : </strong>PB Cosmetics<br/>
+                <strong>Disponibilité : </strong>En Stock<br/>
+                <strong>EAN : </strong>12345678
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row ps_details">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#">Déscription</a></li>
+            <li><a href="#">Conseils d'utilisation</a></li>
+            <li><a href="#">Messages</a></li>
+        </ul>
+    </div>
+    <div class="row ps_description">
+        <p>{{ product.description|nl2br }}</p>
+    </div>
+
+{#
     <div class="row">
         <div class="col-md-12 product_show_title">
             <h3>{{ product.name }}</h3>
@@ -113,5 +180,5 @@
             </div>
         </div>
 
-
-{% endblock body %}
+#}
+{% endblock content %}

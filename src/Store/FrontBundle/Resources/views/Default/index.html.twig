@@ -1,61 +1,14 @@
-{% extends '::front.html.twig' %}
+{% extends 'StoreFrontBundle:Default:layout.html.twig' %}
 
 {% block title %}{{ parent() }} | Bienvenue {% endblock %}
 
-{% block body %}
-
-    <div class="container">
-
-
-    <div class="col-md-2">
-        <div class="row catalogh"><h5>Catalogue</h5></div>
-        <div class="row">
-            {{ render(controller('StoreFrontBundle:Default:getCategoryMenu')) }}
-        </div>
-
-
-    </div>
-
-    <div class="col-md-10">
-
-        <div class="row demo">
-
-            {% for prod in products %}
+{% block content %}
+    <div class="row demo">
+  {% for prod in products %}
                 {% include 'StoreProductBundle:Product:showIndexProduct.html.twig' with {'product': prod} %}
             {% if loop.index is divisibleby(4) %}
         </div><div class="row demo">
             {% endif %}
             {% endfor %}
-
-        </div>
-
-        {#
-        {% for prod in products %}
-        {% include 'StoreProductBundle:Product:showIndexProduct.html.twig' with {'product': prod} %}
-        {% endfor %}
-        #}
-
     </div>
-
-
-
-{#
-
-    <div class="col-md-9">
-
-        {% for prod in products %}
-        {% include 'StoreProductBundle:Product:showIndexProduct.html.twig' with {'product': prod} %}
-        {% if loop.index is divisibleby(3) %}
-    </div><div class="row">
-            {% endif %}
-            {% endfor %}
-
-    </div>
-
-#}
-
-</div>
-
-
-
 {% endblock %}

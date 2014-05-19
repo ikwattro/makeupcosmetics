@@ -1,0 +1,34 @@
+{% extends '::front.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+
+
+        <div class="col-md-2">
+            <div class="row catalogh"><h5>Catalogue</h5></div>
+            <div class="row">
+                {{ render(controller('StoreFrontBundle:Default:getCategoryMenu')) }}
+            </div>
+
+
+        </div>
+
+        <div class="col-md-10">
+
+
+
+                {% block content %}
+
+                {% endblock %}
+
+
+
+
+        </div>
+
+    </div>
+
+
+
+{% endblock %}

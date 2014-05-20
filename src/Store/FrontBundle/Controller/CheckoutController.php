@@ -206,6 +206,21 @@ class CheckoutController extends Controller
     }
 
     /**
+     * @Route("/checkout/order/payment/result", name="checkout_payment_result")
+     * @Template()
+     */
+    public function checkoutOrderResultAction(Request $request)
+    {
+        $outSig = 'error!666CWX@RtRY';
+
+        $params = $request->query->all();
+
+        var_dump($params);
+
+        return array();
+    }
+
+    /**
      * @Route("/checkout/step/shipping", name="checkout_shipping")
      * @Template()
      */

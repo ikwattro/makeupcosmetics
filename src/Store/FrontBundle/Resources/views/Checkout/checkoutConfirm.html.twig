@@ -129,6 +129,7 @@
     </div>
 
     <div class="row" style="padding:15px;">
+        {% include('StoreFrontBundle:Checkout:ogoneForm.html.twig') with {'ogone': ogone} %}
         <button type="submit" class="btn btn-warning">Confirmer et procéder au paiement</button>
     </div>
 

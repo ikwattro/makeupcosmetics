@@ -370,3 +370,21 @@ ul.catnav li.cat_child
     font-size:13px;
 }
 
+#footer
+{
+    padding-top: 30px;
+    padding-bottom: 30px;
+    color: #fff;
+    background-color: #212121;
+}
+
+#maincontent
+{
+    padding-bottom: 50px;
+}
+
+#footer .payment_methods
+{
+    text-align: center;
+}
+

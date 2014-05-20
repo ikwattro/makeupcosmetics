@@ -1,0 +1,17 @@
+<form method="post" action="https://secure.ogone.com/ncol/test/orderstandard.asp" id=form1
+      name=form1>
+    <!-- general parameters -->
+    <input type="hidden" name="PSPID" value="{{ ogone.pspid }}">
+    <input type="hidden" name="ORDERID" value="{{ ogone.orderId }}">
+    <input type="hidden" name="AMOUNT" value="{{ ogone.amount }}">
+    <input type="hidden" name="CURRENCY" value="{{ ogone.currency|default('EUR') }}">
+    <input type="hidden" name="LANGUAGE" value="{{ ogone.language }}">
+    <input type="hidden" name="CN" value="{{ ogone.cn|default('') }}">
+    <input type="hidden" name="EMAIL" value="{{ ogone.email }}">
+    <input type="hidden" name="OWNERZIP" value="{{ ogone.zipCode }}">
+    <input type="hidden" name="OWNERADDRESS" value="{{ ogone.address }}">
+    <input type="hidden" name="OWNERCTY" value="{{ ogone.cty }}">
+    <input type="hidden" name="OWNERTOWN" value="{{ ogone.town }}">
+    <input type="hidden" name="OWNERTELNO" value="{{ ogone.phone|default('') }}">
+    <!-- vérification avant le paiement : voir: Sécurité : vérification avant le paiement -->
+    <input type="hidden" name="SHASIGN" value="{{ ogone.shaSign }}">

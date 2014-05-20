@@ -129,14 +129,59 @@ class CheckoutController extends Controller
             break;
         }
 
+
+
         $man->setCartConfirmStatus();
         $countries = Intl::getRegionBundle()->getCountryNames();
+
+        $ogone = $this->buildOgoneForm($total, $cart, $promotion, $countries);
+
         return array(
             'cart' => $cart,
             'countries' => $countries,
             'promotion' => $promotion,
-            'total' => $total
+            'total' => $total,
+            'ogone' => $ogone,
         );
+    }
+
+    private function buildOgoneForm($total, $cart, $promotion, $countries)
+    {
+        $pspid = 'mucosmeticseu';
+        $orderId = date('dmY').$cart->getId();
+        $total = ($total * 100 );
+        $currency = 'EUR';
+        $language = $this->get('request')->getLocale();
+        $email = $cart->getCustomer()->getEmail();
+        $zipCode = $cart->getBillingAddress()->getZipCode();
+        $address = $cart->getBillingAddress()->getLine1();
+        $city = $cart->getBillingAddress()->getState();
+        $country = $cart->getBillingAddress()->getCountry();
+
+        $signature = 'error!2758CWX@RxX';
+
+        $keys = array(
+            'pspid' => $pspid,
+            'orderId' => $orderId,
+            'amount' => $total,
+            'currency' => $currency,
+            'language' => $language,
+            'email' => $email,
+            'zipCode' => $zipCode,
+            'address' => $address,
+            'town' => $city,
+            'cty' => $country
+        );
+
+        $shaSign = '';
+        foreach ($keys as $k => $v) {
+            $shaSign .= strtoupper($k).'='.$v.$signature;
+        }
+
+        $hash = sha1($shaSign);
+        $keys['shaSign'] = $hash;
+
+        return $keys;
     }
 
     /**

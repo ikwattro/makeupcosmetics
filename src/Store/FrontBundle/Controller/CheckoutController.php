@@ -148,7 +148,7 @@ class CheckoutController extends Controller
     private function buildOgoneForm($total, $cart, $promotion, $countries)
     {
         $pspid = 'mucosmeticseu';
-        $orderId = date('dmY').$cart->getId();
+        $orderId = date('YmdHiS').$cart->getId();
         $total = ($total * 100 );
         $currency = 'EUR';
         $language = $this->get('request')->getLocale();
@@ -181,25 +181,6 @@ class CheckoutController extends Controller
         }
         $hash = sha1($shaSign);
         $keys['shaSign'] = strtoupper($hash);
-
-        $test = array('AMOUNT' => '1500',
-        'CURRENCY' => 'EUR',
-        'LANGUAGE' => 'en_US',
-        'ORDERID' => '1234',
-        'PSPID' => 'MyPSPID'
-        );
-
-        ksort($test);
-
-        $k = 'Mysecretsig1875!?';
-        $sig = '';
-        foreach ($test as $ke => $va) {
-            $sig .= $ke.'='.$va.$k;
-        }
-        $ver = 'AMOUNT=1500Mysecretsig1875!?CURRENCY=EURMysecretsig1875!?LANGUAGE=en_USMysecretsig1875!?ORDERID=1234Mysecretsig1875!?PSPID=MyPSPIDMysecretsig1875!?';
-
-
-        $h = strtoupper(sha1($sig));
 
 
         return $keys;

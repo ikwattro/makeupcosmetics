@@ -166,11 +166,11 @@ class CheckoutController extends Controller
             'amount' => $total,
             'currency' => $currency,
             'language' => $language,
-            'email' => $email,
-            'zipCode' => $zipCode,
-            'address' => $address,
-            'town' => $city,
-            'cty' => $country
+            //'email' => $email,
+            //'zipCode' => $zipCode,
+            //'address' => $address,
+            //'town' => $city,
+            //'cty' => $country
         );
 
         ksort($keys);
@@ -181,6 +181,26 @@ class CheckoutController extends Controller
         }
         $hash = sha1($shaSign);
         $keys['shaSign'] = strtoupper($hash);
+
+        $test = array('AMOUNT' => '1500',
+        'CURRENCY' => 'EUR',
+        'LANGUAGE' => 'en_US',
+        'ORDERID' => '1234',
+        'PSPID' => 'MyPSPID'
+        );
+
+        ksort($test);
+
+        $k = 'Mysecretsig1875!?';
+        $sig = '';
+        foreach ($test as $ke => $va) {
+            $sig .= $ke.'='.$va.$k;
+        }
+        $ver = 'AMOUNT=1500Mysecretsig1875!?CURRENCY=EURMysecretsig1875!?LANGUAGE=en_USMysecretsig1875!?ORDERID=1234Mysecretsig1875!?PSPID=MyPSPIDMysecretsig1875!?';
+
+
+        $h = strtoupper(sha1($sig));
+
 
         return $keys;
     }

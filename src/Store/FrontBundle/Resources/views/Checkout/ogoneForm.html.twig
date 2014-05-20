@@ -6,6 +6,7 @@
     <input type="hidden" name="AMOUNT" value="{{ ogone.amount }}">
     <input type="hidden" name="CURRENCY" value="{{ ogone.currency|default('EUR') }}">
     <input type="hidden" name="LANGUAGE" value="{{ ogone.language }}">
+    {#
     <input type="hidden" name="CN" value="{{ ogone.cn|default('') }}">
     <input type="hidden" name="EMAIL" value="{{ ogone.email }}">
     <input type="hidden" name="OWNERZIP" value="{{ ogone.zipCode }}">
@@ -13,5 +14,6 @@
     <input type="hidden" name="OWNERCTY" value="{{ ogone.cty }}">
     <input type="hidden" name="OWNERTOWN" value="{{ ogone.town }}">
     <input type="hidden" name="OWNERTELNO" value="{{ ogone.phone|default('') }}">
+    #}
     <!-- vérification avant le paiement : voir: Sécurité : vérification avant le paiement -->
     <input type="hidden" name="SHASIGN" value="{{ ogone.shaSign }}">

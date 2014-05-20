@@ -72,7 +72,6 @@ class CheckoutController extends Controller
         }}
         $dat = $request->request->get('form');
         if(isset($dat['both']) && $dat['both'] == 1) {
-            var_dump($dat['both']);
             $billing_form = $this->createMiniBillingAddressForm();
         } else {
             $billing_form = $this->createBillingAddressForm();

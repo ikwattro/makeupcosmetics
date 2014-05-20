@@ -1,4 +1,4 @@
-<ul class="nav nav-pills nav-stacked">
+<ul class="nav nav-pills nav-stacked catnav">
     {% if categories is not empty %}
         {% for category in categories %}
             <li><a href="{{ path('category_page', {'id': category.id, 'slug': category.slug }) }}">{{ category.title }}</a></li>

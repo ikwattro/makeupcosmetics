@@ -1,6 +1,8 @@
-{% extends "::front.html.twig" %}
+{% extends "StoreFrontBundle:Default:layout.html.twig" %}
 
-{% block body %}
+{% block title %}Données de facturation &amp; livraison | {{ parent() }} {% endblock %}
+
+{% block content %}
     <div class="row" {% if isSet %} id="form_to_be_disabled"{% endif %}>
         {{ form_start(form, {'action': path('checkout_address'), 'attr': {'role': 'form', 'class': 'form-horizontal'}}) }}
 
@@ -10,8 +12,8 @@
             <div id="billing_info_block">
 
                 <div class="form-group">
-                <label class="col-sm-3 control-label" for="{{ form.firstname.vars.id }}">Prénom :</label>
-                    <div class="col-sm-6">
+                <label class="col-sm-4 control-label" for="{{ form.firstname.vars.id }}">Prénom :</label>
+                    <div class="col-sm-8">
                         <input class="form-control" type="text" id="{{ form.firstname.vars.id }}" name="{{ form.firstname.vars.full_name }}"
                                value="{{ form.vars.value.firstname|default('') }}"/>
                     </div>
@@ -19,8 +21,8 @@
 
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label" for="{{ form.lastname.vars.id }}">Nom :</label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-4 control-label" for="{{ form.lastname.vars.id }}">Nom :</label>
+                    <div class="col-sm-8">
                         <input class="form-control" type="text" id="{{ form.lastname.vars.id }}" name="{{ form.lastname.vars.full_name }}"
                                value="{{ form.vars.value.lastname|default('') }}"/>
                     </div>
@@ -28,8 +30,8 @@
                 </div>
 
             <div class="form-group">
-                <label class="col-sm-3 control-label" for="{{ form.address_line_1.vars.id }}">Adresse :</label>
-                <div class="col-sm-6">
+                <label class="col-sm-4 control-label" for="{{ form.address_line_1.vars.id }}">Adresse :</label>
+                <div class="col-sm-8">
                     <input class="form-control" type="text" id="{{ form.address_line_1.vars.id }}" name="{{ form.address_line_1.vars.full_name }}"
                            value="{{ form.vars.value.address_line_1|default('') }}"/>
                 </div>
@@ -37,8 +39,8 @@
             </div>
 
             <div class="form-group">
-                <label class="col-sm-3 control-label" for="{{ form.address_line_2.vars.id }}"></label>
-                <div class="col-sm-6">
+                <label class="col-sm-4 control-label" for="{{ form.address_line_2.vars.id }}"></label>
+                <div class="col-sm-8">
                     <input class="form-control" type="text" id="{{ form.address_line_2.vars.id }}" name="{{ form.address_line_2.vars.full_name }}"
                            value="{{ form.vars.value.address_line_2|default('') }}"/>
                 </div>
@@ -46,8 +48,8 @@
             </div>
 
             <div class="form-group">
-                <label class="col-sm-3 control-label" for="{{ form.zip_code.vars.id }}">Code Postal :</label>
-                <div class="col-sm-6">
+                <label class="col-sm-4 control-label" for="{{ form.zip_code.vars.id }}">Code Postal :</label>
+                <div class="col-sm-8">
                     <input class="form-control" type="text" id="{{ form.zip_code.vars.id }}" name="{{ form.zip_code.vars.full_name }}"
                            value="{{ form.vars.value.zip_code|default('') }}"/>
                 </div>
@@ -55,8 +57,8 @@
             </div>
 
             <div class="form-group">
-                <label class="col-sm-3 control-label" for="{{ form.city.vars.id }}">Ville :</label>
-                <div class="col-sm-6">
+                <label class="col-sm-4 control-label" for="{{ form.city.vars.id }}">Ville :</label>
+                <div class="col-sm-8">
                     <input class="form-control" type="text" id="{{ form.city.vars.id }}" name="{{ form.city.vars.full_name }}"
                            value="{{ form.vars.value.city|default('') }}"/>
                 </div>
@@ -64,14 +66,14 @@
             </div>
 
             <div class="form-group">
-                <label class="col-sm-3 control-label" for="{{form.country.vars.id}}">Pays :</label>
-                <div class="col-sm-6">
+                <label class="col-sm-4 control-label" for="{{form.country.vars.id}}">Pays :</label>
+                <div class="col-sm-8">
                     {{ form_widget(form.country, {'attr': {'class': 'form-control'}}) }}
                 </div>
             </div>
 
             <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-6">
+                <div class="col-sm-offset-4 col-sm-8">
                     <div class="checkbox">
                         <label>
                             <input type="checkbox"
@@ -96,8 +98,8 @@
             <div id="shipping_info_block">
 
             <div class="form-group">
-                <label class="col-sm-3 control-label" for="{{ form.firstname_2.vars.id }}">Prénom :</label>
-                <div class="col-sm-6">
+                <label class="col-sm-4 control-label" for="{{ form.firstname_2.vars.id }}">Prénom :</label>
+                <div class="col-sm-8">
                     <input class="form-control" type="text" id="{{ form.firstname_2.vars.id }}" name="{{ form.firstname_2.vars.full_name }}"
                            value="{{ form.vars.value.firstname_2|default('') }}"/>
                 </div>
@@ -105,8 +107,8 @@
 
 
             <div class="form-group">
-                <label class="col-sm-3 control-label" for="{{ form.lastname_2.vars.id }}">Nom :</label>
-                <div class="col-sm-6">
+                <label class="col-sm-4 control-label" for="{{ form.lastname_2.vars.id }}">Nom :</label>
+                <div class="col-sm-8">
                     <input class="form-control" type="text" id="{{ form.lastname_2.vars.id }}" name="{{ form.lastname_2.vars.full_name }}"
                            value="{{ form.vars.value.lastname_2|default('') }}"/>
                 </div>
@@ -114,8 +116,8 @@
             </div>
 
             <div class="form-group">
-                <label class="col-sm-3 control-label" for="{{ form.address_line_1_2.vars.id }}">Adresse :</label>
-                <div class="col-sm-6">
+                <label class="col-sm-4 control-label" for="{{ form.address_line_1_2.vars.id }}">Adresse :</label>
+                <div class="col-sm-8">
                     <input class="form-control" type="text" id="{{ form.address_line_1_2.vars.id }}" name="{{ form.address_line_1_2.vars.full_name }}"
                            value="{{ form.vars.value.address_line_1_2|default('') }}"/>
                 </div>
@@ -123,8 +125,8 @@
             </div>
 
             <div class="form-group">
-                <label class="col-sm-3 control-label" for="{{ form.address_line_2_2.vars.id }}"></label>
-                <div class="col-sm-6">
+                <label class="col-sm-4 control-label" for="{{ form.address_line_2_2.vars.id }}"></label>
+                <div class="col-sm-8">
                     <input class="form-control" type="text" id="{{ form.address_line_2_2.vars.id }}" name="{{ form.address_line_2_2.vars.full_name }}"
                            value="{{ form.vars.value.address_line_2_2|default('') }}"/>
                 </div>
@@ -132,8 +134,8 @@
             </div>
 
             <div class="form-group">
-                <label class="col-sm-3 control-label" for="{{ form.zip_code_2.vars.id }}">Code Postal :</label>
-                <div class="col-sm-6">
+                <label class="col-sm-4 control-label" for="{{ form.zip_code_2.vars.id }}">Code Postal :</label>
+                <div class="col-sm-8">
                     <input class="form-control" type="text" id="{{ form.zip_code_2.vars.id }}" name="{{ form.zip_code_2.vars.full_name }}"
                            value="{{ form.vars.value.zip_code_2|default('') }}"/>
                 </div>
@@ -141,8 +143,8 @@
             </div>
 
             <div class="form-group">
-                <label class="col-sm-3 control-label" for="{{ form.city_2.vars.id }}">Ville :</label>
-                <div class="col-sm-6">
+                <label class="col-sm-4 control-label" for="{{ form.city_2.vars.id }}">Ville :</label>
+                <div class="col-sm-8">
                     <input class="form-control" type="text" id="{{ form.city_2.vars.id }}" name="{{ form.city_2.vars.full_name }}"
                            value="{{ form.vars.value.city_2|default('') }}"/>
                 </div>
@@ -151,8 +153,8 @@
             </div>
 
             <div class="form-group">
-                <label class="col-sm-3 control-label" for="{{form.country_2.vars.id}}">Pays :</label>
-                <div class="col-sm-6">
+                <label class="col-sm-4 control-label" for="{{form.country_2.vars.id}}">Pays :</label>
+                <div class="col-sm-8">
                     {{ form_widget(form.country_2, {'attr': {'class': 'form-control'}}) }}
                 </div>
             </div>

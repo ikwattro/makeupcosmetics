@@ -293,4 +293,19 @@ class DefaultController extends Controller
 
         return array();
     }
+
+    /**
+     * @Template()
+     */
+    public function showFrontCartAction()
+    {
+        $cart = $this->get('store.store_manager')->getCart();
+        $items = $cart->getItems();
+        $c = count($items);
+
+        return array(
+            'cart' => $cart,
+            'items' => $c,
+        );
+    }
 }

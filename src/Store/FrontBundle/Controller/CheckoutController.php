@@ -173,12 +173,16 @@ class CheckoutController extends Controller
             'cty' => $country
         );
 
+        ksort($keys);
+
         $shaSign = '';
         foreach ($keys as $k => $v) {
             $shaSign .= strtoupper($k).'='.$v.$signature;
         }
 
+        var_dump($shaSign);
         $hash = sha1($shaSign);
+        var_dump($hash);
         $keys['shaSign'] = $hash;
 
         return $keys;

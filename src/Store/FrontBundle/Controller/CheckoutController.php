@@ -147,11 +147,24 @@ class CheckoutController extends Controller
 
     private function buildOgoneForm($total, $cart, $promotion, $countries)
     {
+        $locale = $this->get('request')->getLocale();
+        $toLangs = array(
+            'fr' => 'fr_FR',
+            'nl' => 'nl_NL',
+            'de' => 'de_DE',
+            'en' => 'en_US'
+        );
+        $loc = explode('_', $locale);
+        if(array_key_exists(strtolower($loc[0]), $toLangs)) {
+            $lang = $toLangs[strtolower($loc[0])];
+        } else {
+            $lang = 'en_US';
+        }
         $pspid = 'mucosmeticseu';
         $orderId = date('YmdHis').$cart->getId();
         $total = ($total * 100 );
         $currency = 'EUR';
-        $language = $this->get('request')->getLocale();
+        $language = $lang;
         $email = $cart->getCustomer()->getEmail();
         $zipCode = $cart->getBillingAddress()->getZipCode();
         $address = $cart->getBillingAddress()->getLine1();

@@ -179,11 +179,8 @@ class CheckoutController extends Controller
         foreach ($keys as $k => $v) {
             $shaSign .= strtoupper($k).'='.$v.$signature;
         }
-
-        var_dump($shaSign);
         $hash = sha1($shaSign);
-        var_dump($hash);
-        $keys['shaSign'] = $hash;
+        $keys['shaSign'] = strtoupper($hash);
 
         return $keys;
     }

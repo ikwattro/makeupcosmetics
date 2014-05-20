@@ -1,0 +1,12 @@
+<li id="your-account">
+    <div class="hidden-xs">
+        <h4><a href="#"><img src="{{ asset('assets/icons/customer32.png') }}"/> Mon compte</a></h4>
+        <p>Bienvenue, {{ app.user|default('Invité') }}.
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') == false %}
+            <a href="{{ path('fos_user_security_login') }}">Connexion</a></p>
+            {% endif %}
+    </div>
+    <div class="visible-xs">
+        <a href="login.html" class="btn btn-primary"><i class="fa fa-user"></i></a>
+    </div>
+</li>

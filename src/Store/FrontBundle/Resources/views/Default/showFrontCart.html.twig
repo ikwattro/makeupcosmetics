@@ -11,5 +11,6 @@
     <p><span class="badge">{{ cart.itemsTotal }}</span> {{ word }}</p>
 </div>
 <div class="visible-xs">
-    <a href="{{ path('front_cart') }}" class="btn btn-primary"><span class="cart-item">{{ cart.itemsTotal }}</span> <i class="fa fa-shopping-cart"></i></a>
+    <a href="{{ path('front_cart') }}" class="btn btn-primary"><span class="cart-item">
+            <img src="{{ asset('assets/icons/shopping-cart32.png') }}" alt="cart icon"/>({{ cart.itemsTotal }})</span> <i class="fa fa-shopping-cart"></i></a>
 </div>

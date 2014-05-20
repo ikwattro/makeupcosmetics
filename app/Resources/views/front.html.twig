@@ -36,15 +36,7 @@
 
             <div class="account">
                 <ul>
-                    <li id="your-account">
-                        <div class="hidden-xs">
-                            <h4><a href="#"><img src="{{ asset('assets/icons/customer32.png') }}"/> Mon compte</a></h4>
-                            <p>(Invité) <a href="{{ path('fos_user_security_login') }}">Connexion</a></p>
-                        </div>
-                        <div class="visible-xs">
-                            <a href="login.html" class="btn btn-primary"><i class="fa fa-user"></i></a>
-                        </div>
-                    </li>
+                    {{ include('StoreFrontBundle:UserAccount:miniAccount.html.twig') }}
                     <li>
                         {{ render(controller('StoreFrontBundle:Default:showFrontCart')) }}
                     </li>

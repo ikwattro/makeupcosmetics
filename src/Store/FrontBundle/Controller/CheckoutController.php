@@ -129,6 +129,12 @@ class CheckoutController extends Controller
             break;
         }
 
+        if (count($promotion) > 0) {
+            $cart->setPromotionDiscount($promotion['discount_amount']);
+            $em->persist($cart);
+            $em->flush();
+        }
+
 
 
         $man->setCartConfirmStatus();
@@ -161,8 +167,13 @@ class CheckoutController extends Controller
             $lang = 'en_US';
         }
         $pspid = 'mucosmeticseu';
-        $orderId = date('YmdHis').$cart->getId();
-        $total = ($total * 100 );
+        $orderId = $cart->getOrderId();
+
+        $amount = $total;
+        $amount = $amount + $cart->getShippingMethod()->getPrice();
+        $amount = $amount - $cart->getPromotionDiscount();
+
+        $total = ($amount * 100 );
         $currency = 'EUR';
         $language = $lang;
         $email = $cart->getCustomer()->getEmail();

@@ -94,6 +94,16 @@ class Cart
     protected $shipping_price;
 
     /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    protected $promotion_discount;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $orderId;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -437,5 +447,53 @@ class Cart
     public function getShippingMethod()
     {
         return $this->shipping_method;
+    }
+
+    /**
+     * Set promotion_discount
+     *
+     * @param float $promotionDiscount
+     *
+     * @return Cart
+     */
+    public function setPromotionDiscount($promotionDiscount)
+    {
+        $this->promotion_discount = $promotionDiscount;
+
+        return $this;
+    }
+
+    /**
+     * Get promotion_discount
+     *
+     * @return float 
+     */
+    public function getPromotionDiscount()
+    {
+        return $this->promotion_discount;
+    }
+
+    /**
+     * Set orderId
+     *
+     * @param string $orderId
+     *
+     * @return Cart
+     */
+    public function setOrderId($orderId)
+    {
+        $this->orderId = $orderId;
+
+        return $this;
+    }
+
+    /**
+     * Get orderId
+     *
+     * @return string 
+     */
+    public function getOrderId()
+    {
+        return $this->orderId;
     }
 }

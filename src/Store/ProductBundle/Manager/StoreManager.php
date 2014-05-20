@@ -82,9 +82,14 @@ class StoreManager
         $cart->setSessionId($this->session->getId());
         $cart->setCartDtg(new \DateTime("NOW"));
         $cart->setState('CART');
+        $cart->setPromotionDiscount(0);
         if($this->isAuth()) {
             $cart->setCustomer($this->security_context->getToken()->getUser());
         }
+        $this->em->persist($cart);
+        $this->em->flush();
+
+        $cart->setOrderId(date('Ymd').$cart->getId());
         $this->em->persist($cart);
         $this->em->flush();
 

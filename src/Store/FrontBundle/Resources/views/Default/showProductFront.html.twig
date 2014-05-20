@@ -14,9 +14,9 @@
 </h4>
 
     <div class="row">
-        <div class="col-md-8 col-xs-12">
+        <div class="col-md-6 col-xs-12 ps_img">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-9">
                     {% if variant.images is not empty %}
                         {% for image in variant.images %}
                             {% if loop.index <= 1 %}
@@ -28,7 +28,7 @@
                     {% endif %}
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-3">
                     {% for image in variant.images %}
                         <div class="ps_mini_img">
                             <a class="fancybox" rel="variant-{{ variant.id }}" href="{{ asset('uploads/product_images/' ~ image.path) }}">

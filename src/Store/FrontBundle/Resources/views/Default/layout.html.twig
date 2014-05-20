@@ -32,3 +32,20 @@
 
 
 {% endblock %}
+
+{% block custom_js %}
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            $('.cat_child').each(function(){
+                $(this).hide();
+            });
+            $('.parent_cat').click(function(){
+                var idx = $(this).attr('id');
+                var cl = 'child_' + idx;
+                $('.child_' + idx).toggle();
+            });
+        });
+
+    </script>
+{% endblock %}

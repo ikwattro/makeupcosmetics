@@ -1,6 +1,6 @@
-{% extends "::front.html.twig" %}
+{% extends "StoreFrontBundle:Default:layout.html.twig" %}
 
-{% block body %}
+{% block content %}
 <div>
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
@@ -23,4 +23,4 @@
     {% endblock fos_user_content %}
 </div>
 
-{% endblock body %}
+{% endblock content %}

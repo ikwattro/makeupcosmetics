@@ -68,9 +68,13 @@
             </div>
             #}
 
+
+                {% if product.variants.count > 1 %}
+
             <h4>Variantes</h4>
 
             <div>
+
                 <select class="form-control">
                 {% for variante in product.variants %}
 
@@ -95,8 +99,10 @@
                     {% endif %}
                 {% endfor %}
                 </select>
+            </div>
+                    {% endif %}
 
-        </div>
+
 
             <div class="ps_price">
                 <h4>Prix :</h4>

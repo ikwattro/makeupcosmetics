@@ -1,7 +1,16 @@
-<ul class="nav nav-pills nav-stacked catnav">
+<ul class="nav nav-pills nav-stacked catnav" role="menu">
     {% if categories is not empty %}
         {% for category in categories %}
-            <li><a href="{{ path('category_page', {'id': category.id, 'slug': category.slug }) }}">{{ category.title }}</a></li>
+            {% if category.children is empty %}
+            <li><a href="{{ path('category_page', {'id': category.id, 'slug': category.slug }) }}">{{ category.title|upper }}</a></li>
+            {% else %}
+                <li class="parent_cat" id="{{ category.id }}"><a href="#">{{ category.title|upper }} <span class="caret"></span></a>
+                {% for child in category.children %}
+                    <li class="cat_child child_{{ category.id }}"><a href="{{ path('category_page', {'id': category.id, 'slug': child.slug }) }}">{{ child.title|upper }}</a></li>
+                {% endfor %}
+            {% endif %}
         {% endfor %}
     {% endif %}
 </ul>
+
+

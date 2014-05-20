@@ -149,6 +149,9 @@ class StoreManager
         $addition = true === $inverse ? -1 : +1;
         foreach ($items as $it) {
             if ($it->getId() == $item->getId()) {
+                if ($it->getQuantity() == 1) {
+                    return true;
+                }
                 $nq = $it->getQuantity() + $addition ;
                 $it->setQuantity($nq);
             }

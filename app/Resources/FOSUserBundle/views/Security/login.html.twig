@@ -4,6 +4,10 @@
 
 {% block fos_user_content %}
 
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+    <div></div>
+    {% else %}
+
     <h3>Login</h3>
 
     {% if error %}
@@ -44,5 +48,7 @@
         </div>
 
     </form>
+
+{% endif %}
 
 {% endblock fos_user_content %}

@@ -36,6 +36,13 @@ class CheckoutController extends Controller
         if($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $man = $this->get('store.store_manager');
             $man->setCartAuthStatus();
+            $em = $this->getDoctrine()->getManager();
+            $cart = $man->getCart();
+            if (!$cart->getCustomer()) {
+                $cart->setCustomer($this->get('security.context')->getToken()->getUser());
+                $em->persist($cart);
+                $em->flush();
+            }
             return $this->redirect($this->generateUrl('checkout_address'));
         }
 

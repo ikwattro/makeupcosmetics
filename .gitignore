@@ -19,3 +19,5 @@ web/images/*
 web/app_dev.php
 *.md
 !README.md
+Capfile
+app/config/deploy.rb

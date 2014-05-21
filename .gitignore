@@ -23,3 +23,4 @@ Capfile
 app/config/deploy.rb
 app/config/production.rb
 app/config/staging.rb
+app/config/parameters/*

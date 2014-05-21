@@ -27,3 +27,14 @@ set :update_vendors, true
 
 # Be more verbose by uncommenting the following line
 logger.level = Logger::MAX_LEVEL
+
+task :upload_parameters do
+  origin_file = "app/config/parameters/parameters_staging.yml"
+  destination_file = shared_path + "/app/config/parameters.yml" # Notice the
+  shared_path
+
+  try_sudo "mkdir -p #{File.dirname(destination_file)}"
+  top.upload(origin_file, destination_file)
+end
+
+after "symfony:composer:install", "upload_parameters"

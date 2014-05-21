@@ -1,3 +1,7 @@
+store_payment:
+    resource: "@StorePaymentBundle/Resources/config/routing.yml"
+    prefix:   /
+
 store_shipping:
     resource: "@StoreShippingBundle/Controller/"
     type:     annotation

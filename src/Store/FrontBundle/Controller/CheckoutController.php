@@ -24,6 +24,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Store\AddressBundle\Entity\Address;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Intl\Intl;
+use Store\PaymentBundle\Entity\PaymentResult;
 
 class CheckoutController extends Controller
 {
@@ -223,11 +224,31 @@ class CheckoutController extends Controller
      */
     public function checkoutOrderResultAction(Request $request)
     {
+        $customer = $this->get('security.context')->getToken()->getUser();
         $outSig = 'error!666CWX@RtRY';
-
         $params = $request->query->all();
+        //var_dump($params);
 
-        var_dump($params);
+        $result = new PaymentResult();
+        $result->setDtg(new \DateTime("NOW"));
+        $result->setUser($customer->getId());
+        $result->setOrderId($request->query->get('orderID'));
+        $result->setPaymentPlatform('Ogone');
+        $result->setResponseStatus($request->query->get('STATUS'));
+        $result->setBrand($request->query->get('BRAND'));
+        $result->setIp($request->query->get('IP'));
+        if ($request->query->get('STATUS') == 5) {
+            $result->setPaymentValid(true);
+            $cart = $this->get('store.store_manager')->getCart();
+            $cart->setState('PAYMENT_COMPLETE');
+
+        }
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($cart);
+        $em->persist($result);
+        $em->flush();
+        $this->get('store.store_manager')->resetCart();
+
 
         return array();
     }

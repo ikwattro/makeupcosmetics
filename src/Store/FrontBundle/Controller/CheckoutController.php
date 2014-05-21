@@ -250,7 +250,10 @@ class CheckoutController extends Controller
         $this->get('store.store_manager')->resetCart();
 
 
-        return array();
+        return array(
+            'status' => $cart->getState(),
+            'orderId' => $cart->getOrderId()
+        );
     }
 
     /**

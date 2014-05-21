@@ -1,5 +1,7 @@
 {% extends "StoreFrontBundle:Default:layout.html.twig" %}
 
 {% block content %}
-<h1>Résultat Paiement</h1>
+    <div class="row payment_result_block">
+        {% include "StoreFrontBundle:Checkout/Payments:" ~ status ~ ".html.twig" with {'orderId': orderId} %}
+    </div>
 {% endblock %}

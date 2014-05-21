@@ -246,7 +246,7 @@ class CheckoutController extends Controller
         $em->persist($cart);
         $em->persist($result);
         $em->flush();
-        $this->get('store.store_manager')->resetCart();
+        $this->get('store.store_manager')->resetCart(true);
 
 
         return array(

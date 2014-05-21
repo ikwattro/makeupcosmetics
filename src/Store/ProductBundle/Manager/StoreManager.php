@@ -185,11 +185,14 @@ class StoreManager
         return count($cart->getItems());
     }
 
-    public function resetCart()
+    public function resetCart($afterPayment = false)
     {
         $this->cart = null;
         $this->storage->resetCurrentCartIdentifier();
-        $this->setMessage('Votre panier a été réinitialisé');
+        if (!$afterPayment) {
+            $this->setMessage('Votre panier a été réinitialisé');
+        }
+
 
         return true;
     }

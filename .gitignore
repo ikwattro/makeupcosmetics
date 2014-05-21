@@ -21,3 +21,5 @@ web/app_dev.php
 !README.md
 Capfile
 app/config/deploy.rb
+app/config/production.rb
+app/config/staging.rb

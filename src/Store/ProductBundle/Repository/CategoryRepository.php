@@ -90,7 +90,7 @@ class CategoryRepository extends NestedTreeRepository
             $locale
         );
 
-        $query->setHint(\Gedmo\Translatable\TranslatableListener::HINT_INNER_JOIN, true);
+        //$query->setHint(\Gedmo\Translatable\TranslatableListener::HINT_INNER_JOIN, true);
 
         if (true === $arrayze) {
             return $query->getArrayResult();

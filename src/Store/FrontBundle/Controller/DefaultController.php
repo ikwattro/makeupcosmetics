@@ -89,7 +89,8 @@ class DefaultController extends Controller
     public function getCategoryMenuAction()
     {
         $man = $this->get('store.store_manager');
-        $categories = $man->getCategories();
+        $parcours = $man->getCategoriesWithChildren();
+        $categories = $man->getCategories(true);
         $htmlTree = $man->getMyTree();
 
         return array(

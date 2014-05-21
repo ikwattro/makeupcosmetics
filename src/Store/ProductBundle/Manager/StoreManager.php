@@ -217,6 +217,11 @@ class StoreManager
         return $this->category_repository->findAllByLocale($this->locale, $onlyRoots, $to_array = $arrayze);
     }
 
+    public function getCategoriesWithChildren()
+    {
+        return $this->category_repository->findAllByLocaleWithChildren($this->locale);
+    }
+
     public function getCategory($id)
     {
         return $this->category_repository->findByLocale($id, $this->locale);

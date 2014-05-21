@@ -31,13 +31,8 @@
                 <td>
                     {% if (entity.state is empty or entity.state == 'CART') %}
                         <span class="label label-default">Panier</span>
-                    {% endif %}
-                </td>
-                <td>
-                    {% if (entity.processStatus is empty) %}
-                        <span class="label label-default">CART</span>
                     {% else %}
-                        <span class="label label-info">{{ entity.processStatus }}</span>
+                        <span class="label label-success">Payment OK</span>
                     {% endif %}
                 </td>
             </tr>

@@ -100,7 +100,6 @@ class CheckoutController extends Controller
         if ($cart->getBillingAddress() && $cart->getShippingAddress()) {
             $addrSet = true;
         }
-        var_dump($addrSet);
 
         return array('form' => $billing_form->createView(), 'isSet' => $addrSet);
     }

@@ -1,5 +1,5 @@
 set :domain,      "46.226.109.127"
-set :deploy_to,   "/home/angusyoung/www/cosmetics/site/deploys"
+set :deploy_to,   "/srv/datadisk01/web/cap3/cosmetics/site/deploys"
 set :app_path,    "app"
 
 set :repository,  "git@github.com:kwattro/makeupcosmetics.git"
@@ -33,12 +33,14 @@ task :upload_parameters do
   shared_path
 
   try_sudo "mkdir -p #{File.dirname(destination_file)}"
+  try_sudo "chown -R angusyoung:www-data #{shared_path}"
   top.upload(origin_file, destination_file)
 end
 
 
 
 before "symfony:composer:install", "upload_parameters"
+before "symfony:composer:update", "upload_parameters"
 
 before 'symfony:composer:install', 'composer:copy_vendors'
 before 'symfony:composer:update', 'composer:copy_vendors'
@@ -52,8 +54,17 @@ namespace :composer do
   end
 end
 
+before :deploy, "deploy:copy_database_config"
+
+namespace :deploy do
+task :copy_database_config do
+    try_sudo "chown -R angusyoung:www-data #{shared_path}"
+    end
+end
+
+
 set :writable_dirs,       ["app/cache", "app/logs"]
-set :webserver_user,      "www-data"
+set :webserver_user,      "angusyoung"
 set :permission_method,   :chown
 set :use_set_permissions, true
 

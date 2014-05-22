@@ -37,6 +37,11 @@ class PaymentResult
     protected $responseStatus;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $responseStatusHuman;
+
+    /**
      * @ORM\Column(type="string")
      */
     protected $paymentPlatform;
@@ -285,5 +290,28 @@ class PaymentResult
     public function getPaymentValid()
     {
         return $this->paymentValid;
+    }
+
+    /**
+     * Set responseStatusHuman
+     *
+     * @param string $responseStatusHuman
+     * @return PaymentResult
+     */
+    public function setResponseStatusHuman($responseStatusHuman)
+    {
+        $this->responseStatusHuman = $responseStatusHuman;
+
+        return $this;
+    }
+
+    /**
+     * Get responseStatusHuman
+     *
+     * @return string 
+     */
+    public function getResponseStatusHuman()
+    {
+        return $this->responseStatusHuman;
     }
 }

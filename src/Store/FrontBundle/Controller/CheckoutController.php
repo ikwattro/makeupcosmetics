@@ -25,6 +25,7 @@ use Store\AddressBundle\Entity\Address;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Intl\Intl;
 use Store\PaymentBundle\Entity\PaymentResult;
+use Store\PaymentBundle\StatusResolver\OgoneStatusResolver;
 
 class CheckoutController extends Controller
 {
@@ -223,35 +224,70 @@ class CheckoutController extends Controller
      */
     public function checkoutOrderResultAction(Request $request)
     {
-        $customer = $this->get('security.context')->getToken()->getUser();
+        if (is_object($this->get('security.context')->getToken()->getUser())) {
+            $customer_id = $this->get('security.context')->getToken()->getUser()->getId() ?: null;
+        } else {
+            $customer_id = null;
+        }
         $outSig = $this->container->getParameter('ogone_sha1_out');
         $params = $request->query->all();
-        //var_dump($params);
+
+        $ogoneResolver = new OgoneStatusResolver($params['STATUS']);
 
         $result = new PaymentResult();
         $result->setDtg(new \DateTime("NOW"));
-        $result->setUser($customer->getId());
+        $result->setUser($customer_id);
         $result->setOrderId($request->query->get('orderID'));
         $result->setPaymentPlatform('Ogone');
-        $result->setResponseStatus($request->query->get('STATUS'));
+        $result->setResponseStatus($ogoneResolver->getStatusCode());
+        $result->setResponseStatusHuman($ogoneResolver->getExplanation());
         $result->setBrand($request->query->get('BRAND'));
         $result->setIp($request->query->get('IP'));
-        if ($request->query->get('STATUS') == 5) {
+
+        $em = $this->getDoctrine()->getManager();
+
+        if ($ogoneResolver->isPaymentValid()) {
             $result->setPaymentValid(true);
             $cart = $this->get('store.store_manager')->getCart();
             $cart->setState('PAYMENT_COMPLETE');
 
-        }
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($cart);
-        $em->persist($result);
-        $em->flush();
-        $this->get('store.store_manager')->resetCart(true);
+            $em->persist($cart);
+            $em->persist($result);
+            $em->flush();
 
+            return array(
+                'status' => $cart->getState(),
+                'orderId' => $cart->getOrderId(),
+            );
+
+        } else {
+            $cart = $this->get('store.store_manager')->getCart();
+            $cart->setState($ogoneResolver->getExplanation());
+            $em->persist($cart);
+            $result->setPaymentValid(false);
+            $em->persist($result);
+            $em->flush();
+            return $this->render(
+                'StoreFrontBundle:Checkout:checkoutInvalid.html.twig',
+                array('status' => $params['STATUS'])
+            );
+        }
+    }
+
+    /**
+     * @Route("/checkout/payment/invalid", name="checkout_invalid")
+     * @Template()
+     */
+    public function checkoutInvalidAction(array $params)
+    {
+        if (!$params['STATUS']) {
+            throw new \InvalidArgumentException('Status Code Invalid');
+        }
+
+        $resolver = new OgoneStatusResolver($params['STATUS']);
 
         return array(
-            'status' => $cart->getState(),
-            'orderId' => $cart->getOrderId()
+            'status' => $resolver->getExplanation()
         );
     }
 

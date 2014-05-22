@@ -32,7 +32,7 @@
                     {% if (entity.state is empty or entity.state == 'CART') %}
                         <span class="label label-default">Panier</span>
                     {% else %}
-                        <span class="label label-success">Payment OK</span>
+                        <span class="label label-success">{{ entity.state }}</span>
                     {% endif %}
                 </td>
             </tr>

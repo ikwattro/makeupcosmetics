@@ -21,7 +21,7 @@ default_run_options[:pty] = true
 
 #Symfony2 Config
 set :shared_files,      ["app/config/parameters.yml"]
-set :shared_children,     [app_path + "/logs", web_path + "/uploads", "vendor"]
+set :shared_children,     [app_path + "/logs", web_path + "/uploads", "vendor", "/media"]
 set :use_composer, true
 set :update_vendors, true
 
@@ -38,3 +38,8 @@ task :upload_parameters do
 end
 
 after "symfony:composer:install", "upload_parameters"
+
+set :writable_dirs,       ["app/cache", "app/logs", "web/media", "web/uploads"]
+set :webserver_user,      "angusyoung"
+set :permission_method,   :chown
+set :use_set_permissions, true

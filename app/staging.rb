@@ -1,5 +1,5 @@
-set :domain,      "217.70.189.241"
-set :deploy_to,   "/srv/webdisk/web/www/makeupcosmetics/"
+set :domain,      "46.226.109.127"
+set :deploy_to,   "/srv/datadisk01/web/makeupcosmetics/"
 set :app_path,    "app"
 
 set :repository,  "git@github.com:kwattro/makeupcosmetics.git"

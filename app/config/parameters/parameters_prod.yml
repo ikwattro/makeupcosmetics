@@ -5,10 +5,10 @@ parameters:
     database_port: null
     database_name: cosmetics
     database_user: root
-    database_password: error
+    database_password: "error!2101CWX"
     mailer_transport: smtp
     mailer_host: mail.gandi.net
     mailer_user: support@makeup-cosmetics.eu
     mailer_password: error!2101CWX
     locale: fr
-    secret: ThisTokenIsNotSoSecretChangeIt
+    secret: 5><Z>]s19LG6F(8Egzo>87D1`JD;Ta

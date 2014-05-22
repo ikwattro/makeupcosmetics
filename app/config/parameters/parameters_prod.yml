@@ -15,3 +15,4 @@ parameters:
     ogone_pspid: ClaudeHaest
     ogone_sha1_in: bqTBKC88VxTn_:15
     ogone_sha1_out: i9+kR4vNOt,D:13eFGH
+    ogone_mode: prod

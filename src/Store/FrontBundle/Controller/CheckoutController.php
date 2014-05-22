@@ -156,6 +156,7 @@ class CheckoutController extends Controller
             'promotion' => $promotion,
             'total' => $total,
             'ogone' => $ogone,
+            'ogoneMode' => $this->container->getParameter('ogone_mode')
         );
     }
 

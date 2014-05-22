@@ -1,5 +1,5 @@
 set :domain,      "46.226.109.127"
-set :deploy_to,   "/srv/datadisk01/web/cosmetics/site/deploys"
+set :deploy_to,   "/home/angusyoung/www/cosmetics/site/deploys"
 set :app_path,    "app"
 
 set :repository,  "git@github.com:kwattro/makeupcosmetics.git"
@@ -36,5 +36,24 @@ task :upload_parameters do
   top.upload(origin_file, destination_file)
 end
 
-after "symfony:composer:install", "upload_parameters"
+
+
+before "symfony:composer:install", "upload_parameters"
+
+before 'symfony:composer:install', 'composer:copy_vendors'
+before 'symfony:composer:update', 'composer:copy_vendors'
+
+namespace :composer do
+  task :copy_vendors, :except => { :no_release => true } do
+    capifony_pretty_print "--> Copy vendor file from previous release"
+
+    run "vendorDir=#{current_path}/vendor; if [ -d $vendorDir ] || [ -h $vendorDir ]; then cp -a $vendorDir #{latest_release}/vendor; fi;"
+    capifony_puts_ok
+  end
+end
+
+set :writable_dirs,       ["app/cache", "app/logs"]
+set :webserver_user,      "www-data"
+set :permission_method,   :chown
+set :use_set_permissions, true
 

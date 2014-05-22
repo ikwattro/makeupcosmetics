@@ -127,9 +127,11 @@ class VariantController extends Controller
             $variant->removeValue($value);
         }
 
+        if (isset($form['option'])) {
         foreach ($form['option'] as $key => $val) {
             $optionValue = $em->getRepository('StoreProductBundle:OptionValue')->find($val);
             $variant->addValue($optionValue);
+        }
         }
 
         $em->persist($variant);

@@ -5,7 +5,7 @@ set :cache_path,          app_path + "/cache"
 
 set :repository,  "git@github.com:kwattro/makeupcosmetics.git"
 set :scm,         :git
-set :branch, "staging"
+set :branch, "master"
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `subversion`, `mercurial`, `perforce`, or `none`
 
 set :model_manager, "doctrine"
@@ -30,7 +30,7 @@ set :update_vendors, true
 logger.level = Logger::MAX_LEVEL
 
 task :upload_parameters do
-  origin_file = "app/config/parameters/parameters_staging.yml"
+  origin_file = "app/config/parameters/parameters_prod.yml"
   destination_file = shared_path + "/app/config/parameters.yml" # Notice the
   shared_path
 
@@ -58,7 +58,7 @@ before "deploy:restart", "set_correct_cache"
 before "deploy:restart", "set_media_writable"
 
 
-
+after "deploy:finalize_update", "upload_parameters"
 before "symfony:composer:install", "upload_parameters"
 before "symfony:composer:update", "upload_parameters"
 

@@ -1,14 +1,17 @@
-# This file is auto-generated during the composer install
+# This file is production specific
 parameters:
     database_driver: pdo_mysql
     database_host: 127.0.0.1
     database_port: null
     database_name: cosmetics
     database_user: root
-    database_password: "error!2101CWX"
+    database_password: error!2101CWX
     mailer_transport: smtp
     mailer_host: mail.gandi.net
     mailer_user: support@makeup-cosmetics.eu
     mailer_password: error!2101CWX
     locale: fr
     secret: 5><Z>]s19LG6F(8Egzo>87D1`JD;Ta
+    ogone_pspid: ClaudeHaest
+    ogone_sha1_in: bqTBKC88VxTn_:15
+    ogone_sha1_out: i9+kR4vNOt,D:13eFGH

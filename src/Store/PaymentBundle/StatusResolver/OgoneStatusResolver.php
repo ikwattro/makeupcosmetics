@@ -12,8 +12,11 @@ class OgoneStatusResolver
         41 => 'WAITING FOR PAYMENT',
         5 => 'AUTHORIZED',
         6 => 'AUTHORIZED AND CANCELLED',
-        7 => 'DELETED'
+        7 => 'DELETED',
+        9 => 'PAYMENT REQUESTED',
     );
+
+    protected $validCodes = array(5, 4, 41, 9);
 
     private $code;
 
@@ -31,7 +34,7 @@ class OgoneStatusResolver
 
     public function isPaymentValid()
     {
-        if ($this->getExplanation($this->code) == 'AUTHORIZED') {
+        if (in_array($this->code, $this->validCodes)) {
             return true;
         }
         return false;

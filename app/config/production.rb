@@ -59,6 +59,7 @@ before "deploy:restart", "set_media_writable"
 
 
 after "deploy:finalize_update", "upload_parameters"
+after "deploy:update", "set_correct_cache"
 before "symfony:composer:install", "upload_parameters"
 before "symfony:composer:update", "upload_parameters"
 
@@ -75,6 +76,7 @@ namespace :composer do
 end
 
 before :deploy, "deploy:copy_database_config"
+before "deploy:restart", "symfony:doctrine:schema:update"
 #before "deploy:restart", "deploy:set_permissions"
 
 namespace :deploy do
@@ -87,4 +89,4 @@ end
 set :writable_dirs,       ["app/cache", "app/logs"]
 set :webserver_user,      "angusyoung"
 set :permission_method,   :chown
-set :use_set_permissions, true
+set :use_set_permissions, false

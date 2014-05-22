@@ -16,7 +16,7 @@ role :app,        domain, :primary => true       # This may be the same as your 
 
 set  :keep_releases,  3
 set  :use_sudo, true
-set  :user, "angusyoung"
+set  :user, "ikwattro"
 set  :ssh_options, { :forward_agent => true }
 default_run_options[:pty] = true
 
@@ -35,21 +35,21 @@ task :upload_parameters do
   shared_path
 
   try_sudo "mkdir -p #{File.dirname(destination_file)}"
-  try_sudo "chown -R angusyoung:www-data #{shared_path}"
+  try_sudo "chown -R ikwattro:www-data #{shared_path}"
   #try_sudo "mkdir -p #{app_path}/cache"
-  #try_sudo "chown -R angusyoung:www-data #{app_path}/cache"
+  #try_sudo "chown -R ikwattro:www-data #{app_path}/cache"
   try_sudo "chmod -R g+w #{latest_release}/#{cache_path}"
   top.upload(origin_file, destination_file)
 end
 
 task :set_correct_cache do
-    try_sudo "chown -R angusyoung:www-data #{latest_release}/#{cache_path}"
+    try_sudo "chown -R ikwattro:www-data #{latest_release}/#{cache_path}"
     try_sudo "chmod -R g+w #{latest_release}/#{cache_path}"
 end
 
 task :set_media_writable do
-    try_sudo "chown -R angusyoung:www-data #{shared_path}/web/uploads"
-    try_sudo "chown -R angusyoung:www-data #{shared_path}/web/media"
+    try_sudo "chown -R ikwattro:www-data #{shared_path}/web/uploads"
+    try_sudo "chown -R ikwattro:www-data #{shared_path}/web/media"
     try_sudo "chmod -R g+w #{shared_path}/web/uploads"
     try_sudo "chmod -R g+w #{shared_path}/web/media"
 end
@@ -80,12 +80,12 @@ before "deploy:restart", "symfony:doctrine:schema:update"
 
 namespace :deploy do
 task :copy_database_config do
-    try_sudo "chown -R angusyoung:www-data #{shared_path}"
+    try_sudo "chown -R ikwattro:www-data #{shared_path}"
     end
 end
 
 
 set :writable_dirs,       ["app/cache", "app/logs"]
-set :webserver_user,      "angusyoung"
+set :webserver_user,      "ikwattro"
 set :permission_method,   :chown
 set :use_set_permissions, true

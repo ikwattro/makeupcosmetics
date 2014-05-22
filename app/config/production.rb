@@ -1,9 +1,10 @@
 set :domain,      "46.226.109.127"
-set :deploy_to,   "/srv/datadisk01/web/cap3/cosmetics/site/deploys"
+set :deploy_to,   "/srv/datadisk01/web/makeupcosmetics/"
 set :app_path,    "app"
 
 set :repository,  "git@github.com:kwattro/makeupcosmetics.git"
 set :scm,         :git
+set :branch, "staging"
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `subversion`, `mercurial`, `perforce`, or `none`
 
 set :model_manager, "doctrine"

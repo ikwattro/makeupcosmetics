@@ -173,7 +173,7 @@ class CheckoutController extends Controller
         } else {
             $lang = 'en_US';
         }
-        $pspid = 'mucosmeticseu';
+        $pspid = $this->container->getParameter('ogone_pspid');
         $orderId = $cart->getOrderId();
 
         $amount = $total;
@@ -189,7 +189,7 @@ class CheckoutController extends Controller
         $city = $cart->getBillingAddress()->getState();
         $country = $cart->getBillingAddress()->getCountry();
 
-        $signature = 'error!2758CWX@RxX';
+        $signature = $this->container->getParameter('ogone_sha1_in');
 
         $keys = array(
             'pspid' => $pspid,
@@ -224,7 +224,7 @@ class CheckoutController extends Controller
     public function checkoutOrderResultAction(Request $request)
     {
         $customer = $this->get('security.context')->getToken()->getUser();
-        $outSig = 'error!666CWX@RtRY';
+        $outSig = $this->container->getParameter('ogone_sha1_out');
         $params = $request->query->all();
         //var_dump($params);
 

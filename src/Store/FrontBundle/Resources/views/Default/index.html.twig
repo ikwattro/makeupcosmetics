@@ -4,9 +4,13 @@
 
 {% block content %}
     <div class="row demo">
+    {% set looping = 0 %}
   {% for prod in products %}
+      {% if prod.masterVariant.outOfStock is empty %}
                 {% include 'StoreProductBundle:Product:showIndexProduct.html.twig' with {'product': prod} %}
-            {% if loop.index is divisibleby(4) %}
+          {% set looping = looping + 1 %}
+      {% endif %}
+            {% if looping is divisibleby(4) %}
         </div><div class="row demo">
             {% endif %}
             {% endfor %}

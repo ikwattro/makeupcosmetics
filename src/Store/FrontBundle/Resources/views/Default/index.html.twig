@@ -6,7 +6,7 @@
     <div class="row demo">
     {% set looping = 0 %}
   {% for prod in products %}
-      {% if prod.masterVariant.outOfStock is empty %}
+      {% if prod.masterVariant.outOfStock is empty and looping < 20 %}
                 {% include 'StoreProductBundle:Product:showIndexProduct.html.twig' with {'product': prod} %}
           {% set looping = looping + 1 %}
       {% endif %}

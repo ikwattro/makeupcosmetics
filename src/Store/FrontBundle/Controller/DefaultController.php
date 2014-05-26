@@ -19,7 +19,7 @@ class DefaultController extends Controller
 
         $man = $this->get('store.store_manager');
 
-        $masterVariants = $man->getMasterVariants();
+        $masterVariants = $man->getMasterVariants(null, 20);
 
         $cart = $man->getCart();
 

@@ -75,18 +75,23 @@
 
             <div>
 
-                <select class="form-control">
+                <select class="form-control" id="product_option_select">
                 {% for variante in product.variants %}
 
 
-                    {% if variante.id != variant.id %}
 
 
 
 
                         {% for options in variante.values %}
                             {% if options.option.isImageOption %}
-                                <option><a href="{{ path('product_front_show', {'id': variante.id, 'slug': product.slug }) }}" title="{{ options.name }}">
+                                {% if variante.id == variant.id %}
+                                    {% set select = 'selected="selected"' %}
+                                {% else %}
+                                    {% set select = '' %}
+                                {% endif %}
+                                <option value="{{ variante.id }}" {{ select }} rel="{{ path('product_front_show', {'id': variante.id, 'slug': product.slug }) }}">
+                                    <a href="{{ path('product_front_show', {'id': variante.id, 'slug': product.slug }) }}" title="{{ options.name }}">
                                         <img src="{{ asset('/uploads/documents/vignettes/' ~ options.path ) }}" alt="{{ options.name }}" /> {{ options.name }}
                                     </a></option>
                             {% else %}
@@ -96,7 +101,6 @@
                             {% endif %}
                         {% endfor %}
 
-                    {% endif %}
                 {% endfor %}
                 </select>
             </div>
@@ -244,3 +248,14 @@
 
 #}
 {% endblock content %}
+
+{% block custom_js %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#product_option_select").change(function(e){
+            var variant_path = $('option:selected', this).attr('rel');
+            window.location = variant_path;
+        });
+    });
+</script>
+{% endblock %}

@@ -75,7 +75,7 @@
 
             <div>
 
-                <select class="form-control" id="product_option_select">
+                <select class="form-control" id="product_option_select" current-page="{{ path('product_front_show', {'id': variant.id, 'slug': product.slug }) }}">
                 {% for variante in product.variants %}
 
 
@@ -90,10 +90,9 @@
                                 {% else %}
                                     {% set select = '' %}
                                 {% endif %}
-                                <option value="{{ variante.id }}" {{ select }} rel="{{ path('product_front_show', {'id': variante.id, 'slug': product.slug }) }}">
-                                    <a href="{{ path('product_front_show', {'id': variante.id, 'slug': product.slug }) }}" title="{{ options.name }}">
-                                        <img src="{{ asset('/uploads/documents/vignettes/' ~ options.path ) }}" alt="{{ options.name }}" /> {{ options.name }}
-                                    </a></option>
+                                <option value="{{ variante.id }}" {{ select }} rel="{{ path('product_front_show', {'id': variante.id, 'slug': product.slug }) }}"
+                                        data-imagesrc="{{ asset('/uploads/documents/vignettes/' ~ options.path ) }}"
+                                        data-description="{{ options.name }}">{{ options.name }}</option>
                             {% else %}
                                 <option><a href="{{ path('product_front_show', {'id': variante.id, 'slug': product.slug }) }}" title="{{ options.name }}">
                                         {{ options.option.name }} : {{ options.name }}
@@ -252,6 +251,19 @@
 {% block custom_js %}
 <script type="text/javascript">
     $(document).ready(function(){
+        var current = $('#product_option_select').attr('current-page');
+        $('#product_option_select').ddslick({
+
+            onSelected: function(selectedData){
+                var index = selectedData.selectedIndex;
+                var relLink = selectedData.original.context[index].getAttribute('rel');
+                if (relLink != current) {
+                    window.location = relLink;
+                }
+
+
+            }
+        });
         $("#product_option_select").change(function(e){
             var variant_path = $('option:selected', this).attr('rel');
             window.location = variant_path;

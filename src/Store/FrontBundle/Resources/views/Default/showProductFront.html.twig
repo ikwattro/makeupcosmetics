@@ -20,7 +20,9 @@
                     {% if variant.images is not empty %}
                         {% for image in variant.images %}
                             {% if loop.index <= 1 %}
+                                <a href="{{ asset('uploads/product_images/' ~ image.path) }}" class="fancybox" title="{{ product.name }}">
                                 <img class="img-responsive" src="{{ asset('uploads/product_images/' ~ image.path) | imagine_filter('product_show_bigimg')}}" />
+                                </a>
                             {% endif %}
                         {% endfor %}
                     {% else %}

@@ -1,6 +1,15 @@
 {% extends "StoreFrontBundle:Default:layout.html.twig" %}
 
-{% block title %} {{ product.name }} | {{ parent() }} {% endblock %}
+{% set titlevariant = '' %}
+{% if variant.values is not empty %}
+    {% set titlevariant = ' | ' %}
+{% endif %}
+{% for option in variant.values %}
+    {% set titlevariant = titlevariant ~ option.name %}
+{% endfor %}
+
+
+{% block title %} {{ product.name }} {{ titlevariant }} | {{ parent() }} {% endblock %}
 
 {% block content %}
     {#
@@ -11,7 +20,7 @@
     </ol>
     #}
 <h4 class="ps_title">
-    <a href="#">{{ product.name|upper }}<span>.</span></a>
+    <a href="#">{{ product.name|upper }} {{ titlevariant|upper }}<span>.</span></a>
 </h4>
 
     <div class="row">

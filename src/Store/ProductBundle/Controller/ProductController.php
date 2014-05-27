@@ -35,7 +35,7 @@ class ProductController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('StoreProductBundle:Product')->findAllByLocale();
+        $entities = $em->getRepository('StoreProductBundle:Product')->findAllByLocale(null, null, false);
 
         return array(
             'entities' => $entities,

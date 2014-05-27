@@ -92,7 +92,7 @@ liip_imagine:
         product_list_thumb:
                     quality: 75
                     filters:
-                        thumbnail: { size: [70, 70], mode: outbound }
+                        thumbnail: { size: [24, 24], mode: outbound }
         frontlist_thumb:
                     quality: 75
                     filters:

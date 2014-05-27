@@ -7,7 +7,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class ProductRepository extends TranslationRepository
 {
-    public function findAllByLocale($locale = 'fr', $limit = null)
+    public function findAllByLocale($locale = 'fr', $limit = null, $onlyAvailable = 1)
     {
         $strip = explode('_', $locale);
         $locale = $strip[0];
@@ -17,10 +17,14 @@ class ProductRepository extends TranslationRepository
         $qb->addSelect('c')
             ->addSelect('v')
             ->leftJoin('a.categories', 'c')
-            ->leftJoin('a.variants', 'v')
-            ->orderBy('a.id')
-            ->where('v.is_master IS NOT null')
-            ->andWhere('a.available IS NOT null');
+            ->leftJoin('a.variants', 'v');
+        if ($onlyAvailable) {
+            $qb->where('a.available = 1');
+        }
+
+        $qb->andWhere('v.is_master IS NOT null')
+            ->orderBy('a.id');
+
         //->orderBy(...) customize it
 
 

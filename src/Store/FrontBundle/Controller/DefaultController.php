@@ -30,7 +30,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/product/{id}/{slug}", name="product_front_show", defaults={"slug"=null})
+     * @Route("catalog/product/{id}/{slug}", name="product_front_show", defaults={"slug"=null})
      * @Template()
      */
     public function showProductFrontAction($id, $slug)

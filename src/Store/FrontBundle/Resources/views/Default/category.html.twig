@@ -8,10 +8,8 @@
 
                 <div class="row">
                     {% for product in products %}
-                        {% if product.masterVariant.outOfStock is empty %}
                             {% include 'StoreProductBundle:Product:showIndexProduct.html.twig' with {'product': product} %}
                             {% set looping = looping + 1 %}
-                        {% endif %}
                         {% if looping is divisibleby(4) %}
                             </div><div class="row demo">
                         {% endif %}

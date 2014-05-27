@@ -63,7 +63,10 @@
                 <strong>Disponibilité :
                     {% if variant.outOfStock is empty %}
                         <span class="glyphicon glyphicon-ok" style="color:green;"></span> En stock<br>
+                    {% else %}
+                        <span class="glyphicon glyphicon-ban-circle" style="color:red;"></span> Rupture<br>
                     {% endif %}
+
                 <!--<strong>EAN : </strong>12345678-->
                 </p>
             </div>

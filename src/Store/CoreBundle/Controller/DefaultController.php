@@ -21,4 +21,19 @@ class DefaultController extends Controller
             'numberOfProducts'  =>  count($products),
         );
     }
+
+    /**
+     * @Route("/customers", name="admin_customers")
+     * @Template()
+     */
+    public function customersAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $customers = $em->getRepository('StoreCustomerBundle:Customer')->findAll();
+
+        return array(
+            'customers' => $customers
+        );
+    }
 }

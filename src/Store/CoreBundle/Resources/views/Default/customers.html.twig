@@ -1,0 +1,35 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <h2>Clientèle</h2>
+    <table class="table">
+        <th>Id</th>
+        <th>Nom d'utilisateur</th>
+        <th>Email</th>
+        <th>Dernière connexion</th>
+        <th>Administrateur</th>
+        {% for customer in customers %}
+            <tr>
+                <td>
+                    {{ customer.id }}
+                </td>
+                <td>
+                    {{ customer.username }}
+                </td>
+                <td>
+                    {{ customer.email }}
+                </td>
+                <td>
+                    {{ customer.lastLogin|date('d/m/Y H:i:s') }}
+                </td>
+                <td>
+                        {% for role in customer.roles %}
+                            {% if role == 'ROLE_ADMIN' %}
+                            <span class="glyphicon glyphicon-ok"></span>
+                            {% endif %}
+                        {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

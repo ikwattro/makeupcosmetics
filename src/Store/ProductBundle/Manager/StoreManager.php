@@ -26,6 +26,7 @@ class StoreManager
     private $session;
     private $locale;
     private $security_context;
+    private $userAgent;
 
     private $cart;
 
@@ -41,6 +42,7 @@ class StoreManager
         $this->session = $session;
         $this->locale = $request->getLocale();
         $this->security_context = $security_context;
+        $this->userAgent = $request->server->get('HTTP_USER_AGENT');
     }
 
     public function getProductRepository()
@@ -81,6 +83,10 @@ class StoreManager
         $cart = new Cart();
         $cart->setSessionId($this->session->getId());
         $cart->setCartDtg(new \DateTime("NOW"));
+        $cart->setUserAgent($this->userAgent);
+        if ($this->isBotdetected()) {
+            $cart->setIsBot(true);
+        }
         $cart->setState('CART');
         $cart->setPromotionDiscount(0);
         if($this->isAuth()) {
@@ -344,6 +350,18 @@ class StoreManager
         $em->flush();
         $this->cart = $cart;
         return $this->cart;
+    }
+
+    public function isBotdetected()
+    {
+
+        if (preg_match('/bot|crawl|slurp|spider/i', $this->userAgent)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
     }
 
 

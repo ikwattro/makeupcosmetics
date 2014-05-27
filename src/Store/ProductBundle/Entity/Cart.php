@@ -104,6 +104,16 @@ class Cart
     protected $orderId;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $userAgent;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    protected $isBot;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -495,5 +505,51 @@ class Cart
     public function getOrderId()
     {
         return $this->orderId;
+    }
+
+    /**
+     * Set userAgent
+     *
+     * @param string $userAgent
+     * @return Cart
+     */
+    public function setUserAgent($userAgent)
+    {
+        $this->userAgent = $userAgent;
+
+        return $this;
+    }
+
+    /**
+     * Get userAgent
+     *
+     * @return string 
+     */
+    public function getUserAgent()
+    {
+        return $this->userAgent;
+    }
+
+    /**
+     * Set isBot
+     *
+     * @param boolean $isBot
+     * @return Cart
+     */
+    public function setIsBot($isBot)
+    {
+        $this->isBot = $isBot;
+
+        return $this;
+    }
+
+    /**
+     * Get isBot
+     *
+     * @return boolean 
+     */
+    public function getIsBot()
+    {
+        return $this->isBot;
     }
 }

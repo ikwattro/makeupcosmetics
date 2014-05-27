@@ -309,4 +309,13 @@ class DefaultController extends Controller
             'items' => $c,
         );
     }
+
+    /**
+     * @Route("/conditions-generales-de-vente", name="page_cgv")
+     * @Template()
+     */
+    public function cgvAction()
+    {
+        return array();
+    }
 }

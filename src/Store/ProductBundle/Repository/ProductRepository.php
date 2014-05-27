@@ -86,7 +86,8 @@ class ProductRepository extends TranslationRepository
             ->leftJoin('x.option', 'o')
           ->setParameter('id', $id)
             ->andWhere('v.is_master IS NOT null')
-            ->orderBy('o.name', 'ASC');
+            ->orderBy('o.name', 'ASC')
+            ->addOrderBy('v.id', 'ASC');
 
         $query = $q->getQuery();
         $query->setHint(\Gedmo\Translatable\TranslatableListener::HINT_FALLBACK, 1);
@@ -114,6 +115,7 @@ class ProductRepository extends TranslationRepository
             ->leftJoin('a.variants', 'v')
             ->orderBy('a.id')
             ->where('v.is_master IS NOT null')
+            ->andWhere('a.available = 1')
             ->andWhere('c.id = :cat')
             ->setParameter('cat', $category);
         //->orderBy(...) customize it

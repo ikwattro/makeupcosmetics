@@ -60,8 +60,11 @@
             <div class="ps_man_store">
                 <p>
                 <strong>Catégorie : </strong><span itemprop="category" content="{{ product.categories[0].title }}">{{ product.categories[0].title }}</span><br/>
-                <strong>Disponibilité : </strong>En Stock<br/>
-                <strong>EAN : </strong>12345678
+                <strong>Disponibilité :
+                    {% if variant.outOfStock is empty %}
+                        <span class="glyphicon glyphicon-ok" style="color:green;"></span> En stock<br>
+                    {% endif %}
+                <!--<strong>EAN : </strong>12345678-->
                 </p>
             </div>
 

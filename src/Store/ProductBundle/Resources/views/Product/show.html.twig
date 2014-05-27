@@ -8,7 +8,6 @@
         <li class="active">
             <a href="#">Général</a>
         </li>
-        <li><a href="#">Options</a></li>
         <li class="dropdown">
             <a class="dropdown-toggle"
                data-toggle="dropdown"
@@ -106,9 +105,10 @@
     </a>
     {% endif %}
 
+    <table class="table table-responsive">
 {% for variant in entity.variants %}
     <div class="row">
-        <table class="table">
+
             <tr>
                 <td>
                     {% if variant.isMaster is not empty %}
@@ -122,8 +122,12 @@
                         no img
                     {% else %}
                         {%  for image in variant.images %}
+                            <a href="#" data-toggle="modal" data-target="{{ '#imageModal' ~ image.id }}">
+                                <img src="{{ asset('uploads/product_images/' ~ image.path) | imagine_filter('cart_list_thumb')}}" />
+                            </a>
 
-                            <img src="{{ asset('uploads/product_images/' ~ image.path) | imagine_filter('product_list_thumb')}}" />
+                            {% include 'StoreProductBundle:Product:variantImageModal.html.twig' with {'image': image} %}
+
                         {% endfor %}
 
                     {% endif %}
@@ -131,8 +135,7 @@
 
                 <td>
                     {% for options in variant.values %}
-                        <span class="label label-info">{{ options.option.name | capitalize }} : </span>&nbsp;
-                        {{ options.name }}<br />
+                        <span class="label label-info">{{ options.option.name }} : </span>&nbsp;{{ options.name }}<br />
                     {% endfor %}
 
                 </td>
@@ -143,13 +146,13 @@
 
                 <td>
                     <a data-toggle="modal" href="{{ path('edit_variant', {'id': variant.id}) }}" data-target="#variant_create_modal" refresh="true">
-                        <button type="button" class="btn btn-success btn-small">
+                        <button type="button" class="btn btn-warning btn-xs">
                             <span class="glyphicon glyphicon-plus-sign"></span> éditer
                         </button>
                     </a>
 
                     <a data-toggle="modal" href="{{ path('variantimage_new', {'variant': variant.id}) }}" data-target="#myModal">
-                        <button type="button" class="btn btn-success btn-small">
+                        <button type="button" class="btn btn-info btn-xs">
                             <span class="glyphicon glyphicon-upload"></span> ajouter photo
                         </button>
                     </a>
@@ -158,12 +161,11 @@
 
             </tr>
 
-            <hr>
-        </table>
     </div>
 
 
 {% endfor %}
+    </table>
 
 
     <!-- Modal -->
@@ -205,6 +207,13 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+
+
+
+
+
+
 
     <script type="text/javascript">
         $('#variant_create_modal').on('hidden.bs.modal', function () {

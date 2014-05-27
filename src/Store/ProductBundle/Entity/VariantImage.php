@@ -19,7 +19,7 @@ class VariantImage
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Store\ProductBundle\Entity\Variant", cascade={"persist", "remove"}, inversedBy="images")
+     * @ORM\ManyToOne(targetEntity="Store\ProductBundle\Entity\Variant", cascade={"persist"}, inversedBy="images")
      */
     protected $variant;
 

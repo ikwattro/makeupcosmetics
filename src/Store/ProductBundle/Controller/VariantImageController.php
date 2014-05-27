@@ -138,6 +138,24 @@ class VariantImageController extends Controller
     }
 
     /**
+     * @Route("/{id}/remove", name="remove_variant_image")
+     */
+    public function removeVariantImage($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        if (!$entity = $em->getRepository('StoreProductBundle:VariantImage')->find($id)) {
+            throw new \InvalidArgumentException('VariantImage not valid');
+        }
+
+        $em->remove($entity);
+        $em->flush();
+
+        $ref = $this->get('request')->headers->get('referer');
+        return $this->redirect($ref);
+    }
+
+    /**
      * Displays a form to edit an existing VariantImage entity.
      *
      * @Route("/{id}/edit", name="variantimage_edit")

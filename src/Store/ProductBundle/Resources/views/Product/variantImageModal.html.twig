@@ -1,0 +1,20 @@
+<!-- Modal -->
+<div class="modal fade" id="{{ 'imageModal' ~ image.id }}" tabindex="-1" role="dialog" aria-labelledby="Image" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Variant Image</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12" style="text-align: center">
+                    <p><img src="{{ asset('uploads/product_images/' ~ image.path) }}" class="img-responsive"/></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="{{ path('remove_variant_image', {'id': image.id}) }}" class="btn btn-danger">Supprimer image</a>
+                <button type="button" class="btn btn-info" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>

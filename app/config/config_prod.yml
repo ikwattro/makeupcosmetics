@@ -6,6 +6,10 @@ framework:
         cache: apc
     session:
       handler_id: session.handler.pdo
+    templating:
+      assets_base_urls:
+                  http:   [http://cosmetics.sainte-bernadette.be]
+                  ssl:   [https://www.website.com]
 
 parameters:
     pdo.db_options:

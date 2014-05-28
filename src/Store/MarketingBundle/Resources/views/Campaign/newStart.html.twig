@@ -3,22 +3,22 @@
 <head>
     <meta charset="utf-8">
     <title>MakeUpCosmetics.eu</title>
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/campaign/email.css">
+    <link rel="stylesheet" href="{{ asset('/assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/campaign/email.css') }}">
 
 </head>
 <body>
 
 <div class="container">
     <div class="row top">
-        <h1><span><strong>makeupcosmeticsdiscount1euro.eu</strong> <br/>devient<br/></span><a href="{{ followback_url }}?campaignLabel=newStart&amp;action=site&amp;targetEmail={{ email }}"><img src="/assets/campaign/logo2mucwhite.png" alt="MakeUp Cosmetics"/></a></h1>
+        <h1><span><strong>makeupcosmeticsdiscount1euro.eu</strong> <br/>devient<br/></span><a href="{{ followback_url }}?campaignLabel=newStart&amp;action=site&amp;targetEmail={{ email }}"><img src="{{ asset('/assets/campaign/logo2mucwhite.png') }}" alt="MakeUp Cosmetics"/></a></h1>
     </div><!-- top -->
 
     <div class="row content">
 
         <div class="col-lg-4 col-md-4 imgbox">
             <a href="#">
-                <img class="img-responsive" src="/assets/campaign/newsite.jpg" alt="">
+                <img class="img-responsive" src="{{ asset('/assets/campaign/newsite.jpg') }}" alt="">
             </a>
         </div>
 
@@ -36,7 +36,7 @@
 
         <div class="col-lg-4 col-md-4 imgbox">
             <a href="#">
-                <img class="img-responsive" src="/assets/campaign/fb.jpg" alt="">
+                <img class="img-responsive" src="{{ asset('/assets/campaign/fb.jpg') }}" alt="">
             </a>
         </div>
 
@@ -55,7 +55,7 @@
 
         <div class="col-lg-4 col-md-4 imgbox">
             <a href="#">
-                <img class="img-responsive" src="/assets/campaign/tw.jpg" alt="">
+                <img class="img-responsive" src="{{ asset('/assets/campaign/tw.jpg') }}" alt="">
             </a>
         </div>
 
@@ -75,6 +75,5 @@
 
 
 </div> <!-- container -->
-<script src="/assets/js/bootstrap.min.js"></script>
 </body>
 </html>

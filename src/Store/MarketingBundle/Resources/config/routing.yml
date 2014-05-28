@@ -1,0 +1,3 @@
+store_marketing_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: StoreMarketingBundle:Default:index }

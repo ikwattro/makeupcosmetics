@@ -1,0 +1,51 @@
+h1, h3
+{
+    text-align:center;
+    color: #fff;
+}
+
+h4
+{
+    color: #428bca;
+}
+
+.container
+{
+    width:580px;
+}
+
+h1 span
+{
+    font-size: 18px;
+    color: #fcfcfc;
+}
+
+body
+{
+    background-color: #ccc;
+}
+
+.content
+{
+    min-height: 170px;
+    background-color: #fff;
+    overflow: hidden;
+    padding-top:25px;
+    padding-bottom:25px;
+}
+
+.top, .footer
+{
+    background-color: #000;
+}
+
+.subheading
+{
+    margin-top:0px;
+}
+
+.footer
+{
+    text-align: center;
+    padding:15px;
+}

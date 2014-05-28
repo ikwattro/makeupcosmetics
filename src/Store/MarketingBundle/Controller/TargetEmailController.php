@@ -45,6 +45,7 @@ class TargetEmailController extends Controller
     public function createAction(Request $request)
     {
         $entity = new TargetEmail();
+        $entity->setSubscribedAt(new \DateTime("NOW"));
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 

@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class CampaignController
+class CampaignController extends Controller
 {
     /**
      * @Route("/campaign/email/newstart", name="campaign_newstart")
@@ -16,6 +16,9 @@ class CampaignController
      */
     public function newStartAction()
     {
-        return array();
+        //var_dump($this->generateUrl('email_followback'));
+        return array(
+            'followback_url' => $this->generateUrl('email_followback'),
+        );
     }
 }

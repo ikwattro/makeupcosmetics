@@ -40,4 +40,129 @@ class FollowBack
      * @ORM\Column(type="string")
      */
     protected $browserLanguage;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set campaignLabel
+     *
+     * @param string $campaignLabel
+     * @return FollowBack
+     */
+    public function setCampaignLabel($campaignLabel)
+    {
+        $this->campaignLabel = $campaignLabel;
+
+        return $this;
+    }
+
+    /**
+     * Get campaignLabel
+     *
+     * @return string 
+     */
+    public function getCampaignLabel()
+    {
+        return $this->campaignLabel;
+    }
+
+    /**
+     * Set dtg
+     *
+     * @param \DateTime $dtg
+     * @return FollowBack
+     */
+    public function setDtg($dtg)
+    {
+        $this->dtg = $dtg;
+
+        return $this;
+    }
+
+    /**
+     * Get dtg
+     *
+     * @return \DateTime 
+     */
+    public function getDtg()
+    {
+        return $this->dtg;
+    }
+
+    /**
+     * Set action
+     *
+     * @param string $action
+     * @return FollowBack
+     */
+    public function setAction($action)
+    {
+        $this->action = $action;
+
+        return $this;
+    }
+
+    /**
+     * Get action
+     *
+     * @return string 
+     */
+    public function getAction()
+    {
+        return $this->action;
+    }
+
+    /**
+     * Set targetEmail
+     *
+     * @param string $targetEmail
+     * @return FollowBack
+     */
+    public function setTargetEmail($targetEmail)
+    {
+        $this->targetEmail = $targetEmail;
+
+        return $this;
+    }
+
+    /**
+     * Get targetEmail
+     *
+     * @return string 
+     */
+    public function getTargetEmail()
+    {
+        return $this->targetEmail;
+    }
+
+    /**
+     * Set browserLanguage
+     *
+     * @param string $browserLanguage
+     * @return FollowBack
+     */
+    public function setBrowserLanguage($browserLanguage)
+    {
+        $this->browserLanguage = $browserLanguage;
+
+        return $this;
+    }
+
+    /**
+     * Get browserLanguage
+     *
+     * @return string 
+     */
+    public function getBrowserLanguage()
+    {
+        return $this->browserLanguage;
+    }
 }

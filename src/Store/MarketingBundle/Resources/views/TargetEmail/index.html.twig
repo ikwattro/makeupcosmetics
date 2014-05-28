@@ -1,0 +1,55 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>TargetEmail list</h1>
+
+    <table class="records_list table table-condensed">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Language</th>
+                <th>testAllowed</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('targetemail_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.email }}</td>
+                <td>{{ entity.language }}</td>
+                <td>{{ entity.testAllowed }}</td>
+                <td>
+                <ul class="list-inline">
+                    <li>
+                        <a href="{{ path('targetemail_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('targetemail_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                    {% if entity.testAllowed is empty %}
+                    <li>
+                        <a href="{{ path('targetemail_allowtest', {'id': entity.id}) }}">allow test</a>
+                    </li>
+                    {% else %}
+                        <li>
+                            <a href="{{ path('targetemail_disallowtest', {'id': entity.id}) }}">disallow test</a>
+                        </li>
+
+                    {% endif %}
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('targetemail_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

@@ -1,0 +1,22 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+
+<table class="table table-condensed">
+    {% for target in import %}
+
+        <tr>
+            <td>
+                {{ target.action }}
+            </td>
+            <td>
+                {{ target.email }}
+            </td>
+            <td>
+                {{ target.language }}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

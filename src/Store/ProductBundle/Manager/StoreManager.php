@@ -62,6 +62,10 @@ class StoreManager
 
     public function getCart()
     {
+        if ($this->isBotdetected()) {
+            return;
+        }
+
         if (null !== $this->cart) {
             return $this->cart;
         }
@@ -355,7 +359,7 @@ class StoreManager
     public function isBotdetected()
     {
 
-        if (preg_match('/bot|crawl|slurp|spider/i', $this->userAgent)) {
+        if (preg_match('/bot|crawl|slurp|spider|facebook/i', $this->userAgent)) {
             return true;
         }
         else {

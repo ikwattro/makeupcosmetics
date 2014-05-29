@@ -11,9 +11,13 @@
 
 {% block title %} {{ product.name }} {{ titlevariant }} | {{ parent() }} {% endblock %}
 
-{% if product.description is not empty %}
-    {% block meta_description %} {{ product.description }} {% endblock %}
+{% block meta_description %}
+{% if product.description is not empty %}{{ product.name }}{{ titlevariant }}
+{{ product.description }}
+{% else %}
+{{ product.name }}{{ titlevariant }}, MakeUpCosmetics.eu spécialiste du maquillage discount.
 {% endif %}
+{% endblock %}
 
 {% block content %}
     {#

@@ -57,6 +57,7 @@ class CampaignController extends Controller
         }
 
         return array(
+            'count' => count($targets),
             'targets' => $targets
         );
 

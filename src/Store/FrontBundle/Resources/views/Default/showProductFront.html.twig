@@ -11,6 +11,10 @@
 
 {% block title %} {{ product.name }} {{ titlevariant }} | {{ parent() }} {% endblock %}
 
+{% if product.description is not empty %}
+    {% block meta_description %} {{ product.description }} {% endblock %}
+{% endif %}
+
 {% block content %}
     {#
     <ol class="breadcrumb">

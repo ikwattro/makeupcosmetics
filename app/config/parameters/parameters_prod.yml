@@ -6,9 +6,8 @@ parameters:
     database_name: cosmetics
     database_user: root
     database_password: error!2101CWX
-    mailer_transport: smtp
-    mailer_host: mail.gandi.net
-    mailer_user: support@makeup-cosmetics.eu
+    mailer_transport: gmail
+    mailer_user: makeupcosmetics.eu@gmail.com
     mailer_password: error!2101CWX
     locale: fr
     secret: 5><Z>]s19LG6F(8Egzo>87D1`JD;Ta

@@ -27,7 +27,7 @@ class CampaignController extends Controller
     {
         $message = \Swift_Message::newInstance()
             ->setSubject('MakeUp Cosmetics de Claude Haest')
-            ->setFrom(array('support@makeup-cosmetics.eu' => 'MakeUp Cosmetics.eu'))
+            ->setFrom(array('makeupcosmetics.eu@gmail.com' => 'MakeUp Cosmetics.eu'))
             ->setTo($email)
             ->setBody($this->renderView('StoreMarketingBundle:Campaign:newStart.html.twig', array(
                 'followback_url' => $followbackUrl,

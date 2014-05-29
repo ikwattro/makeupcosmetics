@@ -305,7 +305,7 @@ class TargetEmailController extends Controller
     }
 
     /**
-     * @Route("/allowtest/{id}", name="targetemail_disallowtest")
+     * @Route("/disallowtest/{id}", name="targetemail_disallowtest")
      */
     public function disallowTestAction($id)
     {

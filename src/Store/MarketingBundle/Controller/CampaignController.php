@@ -19,6 +19,7 @@ class CampaignController extends Controller
         //var_dump($this->generateUrl('email_followback'));
         return array(
             'followback_url' => $this->generateUrl('email_followback'),
+            'email' => 'willemsen.christophe@gmail.com'
         );
     }
 
@@ -49,7 +50,7 @@ class CampaignController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entities = $em->getRepository('StoreMarketingBundle:TargetEmail')->findAll();
         foreach ($entities as $target) {
-            if ($target->getTestAllowed()) {
+            if ($target->getTestAllowed() == true) {
                 $this->sendCampaignEmail($this->generateUrl('email_followback'), $target->getEmail());
                 $targets[] = $target->getEmail();
             }

@@ -23,8 +23,12 @@ class ProductType extends AbstractType
                     'placeholder' => 'Entrez ici le nom du produit ...'
                 )
             ))
-            ->add('description', null, array(
-                'label' => 'Déscription : '
+            ->add('description', 'textarea', array(
+                'label' => 'Déscription : ',
+                'attr' => array(
+                    'cols' => 70,
+                    'rows' => 30
+                )
             ))
             ->add('available', null, array(
                 'label' =>  'Disponible : ',

@@ -38,8 +38,7 @@ class CartRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('c');
             $qb->orderBy('c.cart_dtg', 'DESC')
-                ->setFirstResult(0)
-                ->setMaxResults(50);
+                ->where('c.items_total > 0');
 
 
 

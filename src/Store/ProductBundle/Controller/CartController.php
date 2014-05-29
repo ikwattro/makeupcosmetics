@@ -116,6 +116,8 @@ class CartController extends Controller
             throw $this->createNotFoundException('Unable to find Cart entity.');
         }
 
+        $this->get('store.store_manager')->findAllByLocale('fr');
+
         $deleteForm = $this->createDeleteForm($id);
 
         return array(

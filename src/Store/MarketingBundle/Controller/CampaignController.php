@@ -50,8 +50,8 @@ class CampaignController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entities = $em->getRepository('StoreMarketingBundle:TargetEmail')->findAll();
         foreach ($entities as $target) {
-            if ($target->getTestAllowed() == true) {
-                $this->sendCampaignEmail($this->generateUrl('email_followback'), $target->getEmail());
+            if ($this->isValidForFrench($target)) {
+                //$this->sendCampaignEmail($this->generateUrl('email_followback'), $target->getEmail());
                 $targets[] = $target->getEmail();
             }
         }
@@ -60,6 +60,25 @@ class CampaignController extends Controller
             'targets' => $targets
         );
 
+    }
+
+    public function isValidForFrench($target)
+    {
+        if ($target->getLanguage() == 'fr') {
+            return true;
+        }
+
+        $email = $target->getEmail();
+        $expl = explode('.', $email);
+        $c = count($expl);
+        $e = $expl[$c-1];
+        if ($e == 'nl' || $e == 'de') {
+            return false;
+        }
+        if (preg_match('/telenet/', $email)) {
+            return false;
+        }
+        return true;
     }
 
 

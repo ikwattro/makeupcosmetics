@@ -13,8 +13,8 @@
     <div class="mini_fiche_holder_price">
         <p>
             {% if product.masterVariant.isPromo is not empty %}
-                <span class="price-striped">{{ product.masterVariant.price }}&euro;</span>&nbsp;&nbsp;
-            <span class="price-promo">{{ product.masterVariant.promoPrice }}&euro;</span>
+                <span class="price-striped">{{ product.masterVariant.promoPrice }}&euro;</span>&nbsp;&nbsp;
+            <span class="price-promo">{{ product.masterVariant.price }}&euro;</span>
             {% else %}
             {{ product.masterVariant.price }}&euro;
             {% endif %}

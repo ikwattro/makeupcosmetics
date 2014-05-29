@@ -129,8 +129,8 @@
                 <span itemprop="offerDetails" itemscope itemtype="http://data-vocabulary.org/Offer">
                     <meta itemprop="currency" content="EUR" />
                 <p><span itemprop="price">
-                        {% if variant.isPromo is not empty %}<span class="price-striped">{{ variant.price }}&euro;</span>
-                        <span class="price-promo">{{ variant.promoPrice }}&euro;</span>
+                        {% if variant.isPromo is not empty %}<span class="price-striped">{{ variant.promoPrice }}&euro;</span>
+                        <span class="price-promo">{{ variant.price }}&euro;</span>
                         {% else %}
                         {{ variant.price }}</span>&euro;
                         {% endif %}</p>

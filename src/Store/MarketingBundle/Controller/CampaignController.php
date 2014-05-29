@@ -51,7 +51,7 @@ class CampaignController extends Controller
         $entities = $em->getRepository('StoreMarketingBundle:TargetEmail')->findAll();
         foreach ($entities as $target) {
             if ($this->isValidForFrench($target)) {
-                //$this->sendCampaignEmail($this->generateUrl('email_followback'), $target->getEmail());
+                $this->sendCampaignEmail($this->generateUrl('email_followback'), strtolower($target->getEmail()));
                 $targets[] = $target->getEmail();
             }
         }

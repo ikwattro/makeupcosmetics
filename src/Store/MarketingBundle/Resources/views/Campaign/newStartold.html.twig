@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>MakeUpCosmetics.eu</title>
+    <link rel="stylesheet" href="{{ asset('/assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/campaign/email.css') }}">
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row top">
+        <h1><span><strong>makeupcosmeticsdiscount1euro.eu</strong> <br/>devient<br/></span><a href="{{ followback_url }}?campaignLabel=newStart&amp;action=site&amp;targetEmail={{ email }}"><img src="{{ asset('/assets/campaign/logo2mucwhite.png') }}" alt="MakeUp Cosmetics"/></a></h1>
+    </div><!-- top -->
+
+    <div class="row content">
+
+        <div class="col-lg-4 col-md-4 imgbox">
+            <a href="#">
+                <img class="img-responsive" src="{{ asset('/assets/campaign/newsite.jpg') }}" alt="">
+            </a>
+        </div>
+
+        <div class="col-lg-8 col-md-8">
+            <h4 class="subheading">Découvrez notre nouveau site</h4>
+            <p>Retrouvez vos produits favoris sur notre nouveau site qui a été complètement mis à jour. Visuellement plus beau, clair et facile, vous découvrirez notre gamme de produits avec convivialité.</p>
+            <a class="btn btn-info btn-small" href="{{ followback_url }}?campaignLabel=newStart&amp;action=site&amp;targetEmail={{ email }}">Découvrez ! <span class="glyphicon glyphicon-chevron-right"></span></a>
+        </div>
+
+        <hr>
+
+    </div>
+
+    <div class="row content">
+
+        <div class="col-lg-4 col-md-4 imgbox">
+            <a href="#">
+                <img class="img-responsive" src="{{ asset('/assets/campaign/fb.jpg') }}" alt="">
+            </a>
+        </div>
+
+        <div class="col-lg-8 col-md-8">
+            <h4 class="subheading">Likez notre page Facebook</h4>
+            <p>A l'occasion de ce renouveau, nous avons créé une page facebook où nous publierons régulièrement les nouveaux arrivages, les infos pratiques, des conseils, etc...<br/>
+                N'hésitez pas à rejoindre notre communauté en cliquant j'aime sur notre page facebook.</p>
+            <a class="btn btn-info" href="{{ followback_url }}?campaignLabel=newStart&amp;action=facebook&amp;targetEmail={{ email }}">Likez-nous ! <span class="glyphicon glyphicon-chevron-right"></span></a>
+        </div>
+
+        <hr>
+
+    </div>
+
+    <div class="row content">
+
+        <div class="col-lg-4 col-md-4 imgbox">
+            <a href="#">
+                <img class="img-responsive" src="{{ asset('/assets/campaign/tw.jpg') }}" alt="">
+            </a>
+        </div>
+
+        <div class="col-lg-8 col-md-8">
+            <h4 class="subheading">Suivez-nous sur Twitter</h4>
+            <p>Notre présence sur Twitter nous permet d'offrir un support réactif à nos clients. Nous retweetons également les nouvelles du monde du maquillage et de la cosmétique. Faites nous signe en nous suivant sur twitter.</p>
+            <a class="btn btn-info btn-small" href="{{ followback_url }}?campaignLabel=newStart&amp;action=twitter&amp;targetEmail={{ email }}">Suivez-nous ! <span class="glyphicon glyphicon-chevron-right"></span></a>
+        </div>
+
+        <hr>
+
+    </div>
+
+    <div class="row footer">
+        <p><a href="http://www.makeup-cosmetics.eu" title="MakeUp Cosmetics">http://www.makeup-cosmetics.eu</a></p>
+    </div>
+
+
+</div> <!-- container -->
+</body>
+</html>

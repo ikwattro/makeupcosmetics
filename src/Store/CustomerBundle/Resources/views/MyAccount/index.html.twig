@@ -1,0 +1,38 @@
+{% extends "StoreFrontBundle:Default:layout.html.twig" %}
+
+{% block title %}My Account{% endblock %}
+
+{% block content %}
+<div class="col-md-12">
+    <h1>My account</h1>
+
+    <h3>
+        Mon profil
+    </h3>
+
+    <h3>Mes commandes</h3>
+    {% if orders is not empty %}
+        <table class="table table-condensed">
+            <th>Commande n°</th>
+            <th>Date</th>
+            <th>Statut</th>
+            {% for order in orders %}
+                <tr>
+                    <td>
+                        {{ order.orderId }}
+                    </td>
+                    <td>
+                        {{ order.getCartDtg()|date('d/m/Y') }}
+                    </td>
+                    <td>
+                        {{ order.state }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>Aucune commande à afficher</p>
+    {% endif %}
+</div>
+
+{% endblock %}

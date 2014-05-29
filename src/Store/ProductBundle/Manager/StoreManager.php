@@ -368,6 +368,13 @@ class StoreManager
 
     }
 
+    public function getOrdersForUser($user)
+    {
+        $repo = $this->cart_repository;
+
+        return $repo->findAllForUser($user->getId());
+    }
+
 
 
 }

@@ -21,6 +21,19 @@ class CartRepository extends EntityRepository
 
     }
 
+    public function findAllForUser($userId)
+    {
+        $q = $this->createQueryBuilder('c')
+            ->where('c.customer = :user')
+            ->andWhere('c.state = :state')
+            ->setParameter('user', $userId)
+            ->setParameter('state', 'PAYMENT_COMPLETE');
+
+        $qu = $q->getQuery();
+
+        return $qu->getResult();
+    }
+
     public function findAllForAdmin()
     {
         $qb = $this->createQueryBuilder('c');

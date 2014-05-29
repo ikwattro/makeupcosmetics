@@ -22,8 +22,9 @@ store_country:
     type: annotation
 
 store_customer:
-    resource: "@StoreCustomerBundle/Resources/config/routing.yml"
-    prefix:   /
+    resource: "@StoreCustomerBundle/Controller/"
+    type:     annotation
+    prefix:   /secure
 
 store_front:
     resource: "@StoreFrontBundle/Controller/"

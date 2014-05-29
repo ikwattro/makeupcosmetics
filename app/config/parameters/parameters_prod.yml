@@ -7,8 +7,11 @@ parameters:
     database_user: root
     database_password: error!2101CWX
     mailer_transport: gmail
+    mailer_encryption: ssl
+    mailer_auth_mode: login
+    mailer_host: smtp.gmail.com
     mailer_user: makeupcosmetics.eu@gmail.com
-    mailer_password: error!2101CWX
+    mailer_password: error!2758CWX
     locale: fr
     secret: 5><Z>]s19LG6F(8Egzo>87D1`JD;Ta
     ogone_pspid: ClaudeHaest

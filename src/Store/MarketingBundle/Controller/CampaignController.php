@@ -40,7 +40,7 @@ class CampaignController extends Controller
     }
 
     /**
-     * @Route("/campaign/email/send/newStart", name="campaign_send_newstart")
+     * @Route("/admin/campaign/email/send/newStart", name="campaign_send_newstart")
      * @Template()
      */
     public function sendNewStartEmailAction()
@@ -51,7 +51,7 @@ class CampaignController extends Controller
         $entities = $em->getRepository('StoreMarketingBundle:TargetEmail')->findAll();
         foreach ($entities as $target) {
             if ($this->isValidForFrench($target)) {
-                $this->sendCampaignEmail($this->generateUrl('email_followback'), strtolower($target->getEmail()));
+                //$this->sendCampaignEmail($this->generateUrl('email_followback'), strtolower($target->getEmail()));
                 $targets[] = $target->getEmail();
             }
         }

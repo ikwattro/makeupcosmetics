@@ -128,7 +128,12 @@
                 <h4>Prix :</h4>
                 <span itemprop="offerDetails" itemscope itemtype="http://data-vocabulary.org/Offer">
                     <meta itemprop="currency" content="EUR" />
-                <p><span itemprop="price">{{ variant.price }}</span>&euro;</p>
+                <p><span itemprop="price">
+                        {% if variant.isPromo is not empty %}<span class="price-striped">{{ variant.price }}&euro;</span>
+                        <span class="price-promo">{{ variant.promoPrice }}&euro;</span>
+                        {% else %}
+                        {{ variant.price }}</span>&euro;
+                        {% endif %}</p>
             </div>
 
             <div class="ps_add_to_cart">

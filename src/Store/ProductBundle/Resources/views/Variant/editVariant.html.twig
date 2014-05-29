@@ -22,6 +22,16 @@
                 {% endif %}
                 /> Out Of Stock ?
     </div>
+    <div class="form-group">
+        <input type="checkbox" name="variant_for_product[isPromo]" value="1"
+               {% if isPromo is not empty %}
+                    checked="checked"
+               {% endif %}
+                /> En Promo ?
+    </div>
+    <div class="form-group">
+        <input type="number" step="0.1" name="variant_for_product[promoPrice]" value="{{ promoPrice }}"/>
+    </div>
 
     <div class="form-group">
         <input type="submit" value="Sauver"/>

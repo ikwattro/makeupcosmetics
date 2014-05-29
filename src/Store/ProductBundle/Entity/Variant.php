@@ -53,6 +53,16 @@ class Variant
     protected $out_of_stock;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    protected $isPromo;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    protected $promoPrice;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -244,5 +254,74 @@ class Variant
         $this->out_of_stock = $OutOfStock;
 
         return $this;
+    }
+
+    /**
+     * Set isPromo
+     *
+     * @param boolean $isPromo
+     * @return Variant
+     */
+    public function setIsPromo($isPromo)
+    {
+        $this->isPromo = $isPromo;
+
+        return $this;
+    }
+
+    /**
+     * Get isPromo
+     *
+     * @return boolean 
+     */
+    public function getIsPromo()
+    {
+        return $this->isPromo;
+    }
+
+    /**
+     * Set promoPrice
+     *
+     * @param float $promoPrice
+     * @return Variant
+     */
+    public function setPromoPrice($promoPrice)
+    {
+        $this->promoPrice = $promoPrice;
+
+        return $this;
+    }
+
+    /**
+     * Get promoPrice
+     *
+     * @return float 
+     */
+    public function getPromoPrice()
+    {
+        return $this->promoPrice;
+    }
+
+    /**
+     * Add images
+     *
+     * @param \Store\ProductBundle\Entity\VariantImage $images
+     * @return Variant
+     */
+    public function addImage(\Store\ProductBundle\Entity\VariantImage $images)
+    {
+        $this->images[] = $images;
+
+        return $this;
+    }
+
+    /**
+     * Remove images
+     *
+     * @param \Store\ProductBundle\Entity\VariantImage $images
+     */
+    public function removeImage(\Store\ProductBundle\Entity\VariantImage $images)
+    {
+        $this->images->removeElement($images);
     }
 }

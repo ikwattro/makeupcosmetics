@@ -388,3 +388,14 @@ ul.catnav li.cat_child
     text-align: center;
 }
 
+.price-striped
+{
+    text-decoration: line-through;
+}
+
+.price-promo
+{
+    font-weight: bold;
+    color: #fa0df2;
+}
+

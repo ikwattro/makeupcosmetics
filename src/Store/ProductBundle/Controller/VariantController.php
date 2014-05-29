@@ -104,6 +104,8 @@ class VariantController extends Controller
             'options' => $options,
             'price' => $variant->getPrice(),
             'out_of_stock' => $variant->getOutOfStock(),
+            'isPromo' => $variant->getIsPromo(),
+            'promoPrice' => $variant->getPromoPrice(),
         );
     }
 
@@ -132,6 +134,14 @@ class VariantController extends Controller
             $optionValue = $em->getRepository('StoreProductBundle:OptionValue')->find($val);
             $variant->addValue($optionValue);
         }
+        }
+
+        if(isset($form['isPromo'])) {
+            $variant->setIsPromo(true);
+            $variant->setPromoPrice($form['promoPrice']);
+        } else {
+            $variant->setIsPromo(false);
+            $variant->setPromoPrice(null);
         }
 
         $em->persist($variant);

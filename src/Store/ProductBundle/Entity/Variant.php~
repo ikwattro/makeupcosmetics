@@ -32,14 +32,35 @@ class Variant
     protected $sku;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     protected $price;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Store\ProductBundle\Entity\OptionValue", mappedBy="variants")
+     * @ORM\ManyToMany(targetEntity="Store\ProductBundle\Entity\OptionValue", inversedBy="variants", cascade={"persist", "remove"})
+     * @ORM\JoinTable(name="value_variant")
      */
     protected $values;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Store\ProductBundle\Entity\VariantImage", mappedBy="variant")
+     */
+    protected $images;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    protected $out_of_stock;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    protected $isPromo;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    protected $promoPrice;
 
     /**
      * Get id
@@ -141,5 +162,97 @@ class Variant
     public function getProduct()
     {
         return $this->product;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->values = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function getImages()
+    {
+        return $this->images;
+    }
+    
+    /**
+     * Add values
+     *
+     * @param \Store\ProductBundle\Entity\OptionValue $values
+     * @return Variant
+     */
+    public function addValue(\Store\ProductBundle\Entity\OptionValue $values)
+    {
+        $this->values[] = $values;
+    
+        return $this;
+    }
+
+    /**
+     * Remove values
+     *
+     * @param \Store\ProductBundle\Entity\OptionValue $values
+     */
+    public function removeValue(\Store\ProductBundle\Entity\OptionValue $values)
+    {
+        $this->values->removeElement($values);
+    }
+
+    /**
+     * Get values
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getValues()
+    {
+        return $this->values;
+    }
+
+    protected $vals;
+
+    public function getVals()
+    {
+        return $this->vals;
+    }
+
+    public function setVals(\Doctrine\Common\Collections\ArrayCollection $vals)
+    {
+        $this->vals = $vals;
+    }
+
+    public function addVal($val, $c)
+    {
+        $this->vals[$c] = $val;
+    }
+
+    public function getValFor($i)
+    {
+        return $this->vals[$i];
+    }
+
+    public function __toString()
+    {
+        $values = $this->getValues();
+        $str = '';
+        $options = array();
+        foreach ($values as $val) {
+            $str .= $val->getOption()->getName().' : '.$val->getName().' - ';
+        }
+        return $str;
+
+    }
+
+    public function getOutOfStock()
+    {
+        return $this->out_of_stock;
+    }
+
+    public function setOutOfStock($OutOfStock)
+    {
+        $this->out_of_stock = $OutOfStock;
+
+        return $this;
     }
 }

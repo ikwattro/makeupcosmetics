@@ -63,7 +63,7 @@ class StoreManager
     public function getCart()
     {
         if ($this->isBotdetected()) {
-            return;
+            //return;
         }
 
         if (null !== $this->cart) {

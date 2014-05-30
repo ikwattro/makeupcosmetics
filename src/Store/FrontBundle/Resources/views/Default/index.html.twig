@@ -3,6 +3,18 @@
 {% block title %}{{ parent() }} | Bienvenue {% endblock %}
 
 {% block content %}
+
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <p style="text-align: center;">
+                <a href="http://www.makeup-cosmetics.eu/catalog/product/37/french-manucure" title="French Manucure">
+                <img class="img-responsive" src="{{ asset('/promofmjuin.jpg') }}" alt="Promotion French Manucure"/>
+                    </a>
+            </p>
+        </div>
+    </div>
+    <hr>
+
     <div class="row demo">
     {% set looping = 0 %}
   {% for prod in products %}

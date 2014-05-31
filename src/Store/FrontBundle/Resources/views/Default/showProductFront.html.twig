@@ -43,7 +43,10 @@
                             {% endif %}
                         {% endfor %}
                     {% else %}
-                        <img itemprop="image" class=img-responsive" src="{{ asset('uploads/documents/' ~ product.path) | imagine_filter('product_show_bigimg')}}" />
+                        <a href="{{ asset('uploads/documents/' ~ product.path) }}" class="fancybox" title="{{ product.name }}">
+                            <img itemprop="image" class="img-responsive" src="{{ asset('uploads/documents/' ~ product.path) | imagine_filter('product_show_bigimg')}}" />
+                        </a>
+
                     {% endif %}
                 </div>
 

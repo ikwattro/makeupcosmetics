@@ -27,7 +27,7 @@
         <li class="active">Fonds de teint</li>
     </ol>
     #}
-<h4 class="ps_title">
+<h4 class="ps_title" xmlns="http://www.w3.org/1999/html">
     <a href="#"><span itemprop="name">{{ product.name|upper }} {{ titlevariant|upper }}</span><span>.</span></a>
 </h4>
 
@@ -144,6 +144,8 @@
                         {% endif %}</p>
             </div>
 
+
+
             <div class="ps_add_to_cart">
                 <form role="form" action="{{ path('add_item_to_cart', {'productId': variant.id }) }}" method="POST">
                     <label for="form_quantity">Quantité:</label><br/>
@@ -152,6 +154,10 @@
                 </form>
 
             </div>
+
+            <script type="text/javascript">
+                document.write('<div class="fb-like ps_fb" data-href=" '+ pathname + ' " data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>');
+            </script>
 
     </div>
     </div>

@@ -30,9 +30,10 @@ class CampaignController extends Controller
     public function promoFmAction()
     {
         //var_dump($this->generateUrl('email_followback'));
+        $em = $this->get('request')->query->get('targetEmail') ?: '';
         return array(
             'followback_url' => $this->generateUrl('email_followback'),
-            'email' => 'willemsen.christophe@gmail.com'
+            'email' => $em,
         );
     }
 
@@ -88,9 +89,7 @@ class CampaignController extends Controller
         $entities = $em->getRepository('StoreMarketingBundle:TargetEmail')->findAll();
         foreach ($entities as $target) {
             if ($this->isValidForFrench($target)) {
-                if ($target->getTestAllowed() == true) {
                 $this->sendCampaignEmail($this->generateUrl('email_followback'), strtolower($target->getEmail()));
-                }
                 $targets[] = $target->getEmail();
             }
         }

@@ -21,7 +21,8 @@ class FollowBackController extends Controller
         $actionTargets = array(
             'site' => $this->generateUrl('homeweb'),
             'facebook' => 'https://www.facebook.com/pages/MakeUp-Cosmetics-Professional/643352275751858',
-            'twitter' => 'https://twitter.com/mUpCosmetics'
+            'twitter' => 'https://twitter.com/mUpCosmetics',
+            'promoFm' => 'http://www.makeup-cosmetics.eu/catalog/product/37/french-manucure',
         );
 
         if (!isset($params['targetEmail']) || !isset($params['campaignLabel'])) {

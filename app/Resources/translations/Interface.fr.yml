@@ -1,0 +1,48 @@
+# Interface
+catalogue: Catalogue
+langue: Langue
+mon_compte: Mon Compte
+panier: Panier
+vide: Vide
+produit: produit
+produits: produits
+quantity: quantité
+image: image
+total: total
+new_total: nouveau total
+
+#Connexion
+connexion:
+  welcome: bienvenue
+  anonymous: invité
+  login: Connexion
+  register: Créer un compte
+
+#Product Page
+product_page:
+    category: catégorie
+    status: disponibilité
+    available: disponible
+    variant: variantes
+    price: prix
+    quantity: quantité
+    description: déscription
+    advice: conseil d'utilisation
+
+# Cart
+cart:
+  shop: acheter
+  add: ajouter
+  increment: ajouter
+  decrement: retirer
+  remove: retirer du panier
+  product_added: produit ajouté au panier
+  reset_complete: votre panier a été vidé
+  cart: panier
+  price_by_unit: prix/unité
+  incl_shipping: frais de port inclus
+  estim_shipping: estimation des frais de port
+  shipping_note: les frais de port définitifs seront calculés sur base de l'adresse de livraison pendant la commande.
+  reset: vider
+  order: commander
+  your_cart: votre panier

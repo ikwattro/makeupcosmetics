@@ -21,6 +21,7 @@
             <argument type="service" id="session" />
             <argument type="service" id="request" />
             <argument type="service" id="security.context"/>
+            <argument type="service" id="translator"/>
         </service>
         
     </services>

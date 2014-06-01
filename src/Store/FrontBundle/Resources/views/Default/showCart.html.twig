@@ -1,10 +1,13 @@
 {% extends "StoreFrontBundle:Default:layout.html.twig" %}
 
-{% block title %} Votre Panier | {{ parent() }} {% endblock %}
+{% trans_default_domain 'Interface' %}
+
+{% block title %} {{ 'cart.your_cart'|trans|capitalize }} | {{ parent() }} {% endblock %}
 
 {% block content %}
+    <div class="row demo">
 
-    <h2>Panier</h2>
+    <h2>{{ 'panier'|trans|capitalize }}</h2>
 
     {% if cart.items is empty %}
         <h4>Votre panier est vide</h4>
@@ -12,11 +15,11 @@
         <div class="row">
         <table class="table table-bordered table-responsive">
             <tr>
-                <th>Image</th>
-                <th>Produit</th>
-                <th>Quantité</th>
-                <th>Prix/unité</th>
-                <th>Total</th>
+                <th>{{ 'image'|trans|capitalize }}</th>
+                <th>{{ 'produit'|trans|capitalize }}</th>
+                <th>{{ 'quantity'|trans|capitalize }}</th>
+                <th>{{ 'cart.price_by_unit'|trans|capitalize }}</th>
+                <th>{{ 'total'|trans|capitalize }}</th>
                 <th></th>
             </tr>
             {% for item in cart.items %}
@@ -42,7 +45,7 @@
                         {{ item.quantity }}
                         &nbsp; &nbsp; <a class="btn btn-success btn-xs" href="{{ path('increment_item', {'item':item.id }) }}">+</a></td>
                     <td>{{ item.product.price }}&euro;</td>
-                    <td>{{ item.product.price * item.quantity }}</td>
+                    <td>{{ item.product.price * item.quantity }}&euro;</td>
                     <td>
                         <a href="{{ path('remove_cart_item', {'itemId': item.id }) }}">
                             <span class="glyphicon glyphicon-remove" style="color:red;"></span>
@@ -68,14 +71,14 @@
 
                 <tr>
                     <td colspan="3"></td>
-                    <td class="total_line_item">New Total :</td>
+                    <td class="total_line_item">{{ 'new_total'|trans|capitalize }} :</td>
                     <td>{{ promotion.new_total }}&euro;</td>
                 </tr>
 
             {% endif %}
 
-            <tr><td colspan="4">Frais de ports estimés pour la Belgique <span style="color:red;">*</span></td><td>5.9€</td></tr>
-            {% set shipping = 5.9 %}
+            <tr><td colspan="4">{{ 'cart.estim_shipping'|trans|capitalize }} <span style="color:red;">*</span></td><td>5.95€</td></tr>
+            {% set shipping = 5.95 %}
 
             {% if promotion is not empty %}
                 {% set bigtotal = promotion.new_total + shipping %}
@@ -83,24 +86,21 @@
                 {% set bigtotal = total + shipping %}
             {% endif %}
 
-            <tr><td class="total_line_item" colspan="4">Total (frais de port inclus):</td><td>{{ bigtotal }}€</td> </tr>
+            <tr><td class="total_line_item" colspan="4">{{ 'total'|trans|capitalize }} ({{ 'cart.incl_shipping'|trans }}):</td><td>{{ bigtotal }}€</td> </tr>
 
             <tr>
                 <td colspan="4"></td>
                 <td>
-                    <a href="{{ path('reset_cart') }}" class="btn btn-warning">Vider</a>
-                    <a href="{{ path('checkout_account') }}" class="btn btn-success">Commander</a></td>
-
-
-
+                    <a href="{{ path('checkout_account') }}" class="btn btn-success">{{ 'cart.order'|trans|capitalize }}</a>
+                    <a href="{{ path('reset_cart') }}" class="btn btn-warning">{{ 'cart.reset'|trans|capitalize }}</a>
+                </td>
             </tr>
 
         </table>
         </div>
         <div class="row">
-            <p><span style="color:red;">*</span> Les frais définitifs de livraison seront calculés sur base du pays spécifié
-            pour l'adresse de livraison</p>
+            <p><span style="color:red;">*</span> {{ 'cart.shipping_note'|trans|capitalize }}</p>
         </div>
     {% endif %}
-
+</div>
 {% endblock content %}

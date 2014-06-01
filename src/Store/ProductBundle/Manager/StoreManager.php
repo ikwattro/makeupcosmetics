@@ -27,10 +27,11 @@ class StoreManager
     private $locale;
     private $security_context;
     private $userAgent;
+    private $translator;
 
     private $cart;
 
-    public function __construct(EntityManager $em, SessionCartStorage $storage, SessionInterface $session, Request $request, SecurityContextInterface $security_context)
+    public function __construct(EntityManager $em, SessionCartStorage $storage, SessionInterface $session, Request $request, SecurityContextInterface $security_context, $translator)
     {
         $this->em = $em;
         $this->storage = $storage;
@@ -43,6 +44,7 @@ class StoreManager
         $this->locale = $request->getLocale();
         $this->security_context = $security_context;
         $this->userAgent = $request->server->get('HTTP_USER_AGENT');
+        $this->translator = $translator;
     }
 
     public function getProductRepository()
@@ -146,7 +148,7 @@ class StoreManager
         $this->em->persist($this->cart);
         $this->em->flush();
 
-        $this->setMessage('Produit ajouté correctement au panier');
+        $this->setMessage(ucfirst($this->translator->trans('cart.product_added', array(), 'Interface')));
 
         return true;
     }
@@ -200,7 +202,7 @@ class StoreManager
         $this->cart = null;
         $this->storage->resetCurrentCartIdentifier();
         if (!$afterPayment) {
-            $this->setMessage('Votre panier a été réinitialisé');
+            $this->setMessage(ucfirst($this->translator->trans('cart.reset_complete', array(), 'Interface')));
         }
 
 

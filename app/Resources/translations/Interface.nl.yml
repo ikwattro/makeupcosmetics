@@ -1,0 +1,47 @@
+#Interface
+
+catalogue: Catalogus
+langue: Taal
+mon_compte: Mijn Account
+panier: Winkelmandje
+vide: Leeg
+produit: product
+produits: producten
+image: image
+quantity: aantal
+total: totaal
+new_total: Nieuwe totaal
+
+#Connexion:
+connexion:
+    welcome: Welkom
+    anonymous: Anoniem
+    login: aanmelden
+    register: registreren
+
+#Product Page
+product_page:
+    category: categorie
+    status: status
+    available: op voorraad
+    variant: variaties
+    price: prijs
+    quantity: aantal
+    description: beschrijving
+    advice: make-up advies
+
+cart:
+  shop: in winkelmandje
+  add: toevoegen
+  increment: toevoegen
+  decrement: een verwijderen
+  remove: verwijderen van de mandje
+  product_added: product toegevoegd aan de winkelmandje
+  reset_complete: uw winkelmandje is nu leeg
+  price_by_unit: prijs/st.
+  incl_shipping: Verz. kosten inbegrepen
+  estim_shipping: inschatting van de verzendingkosten
+  shipping_note: verzendingkosten zullen op basis van de leveringadres tijdens de bestelling gerekend worden.
+  reset: legen
+  order: bestellen
+  your_cart: uw winkelmandje

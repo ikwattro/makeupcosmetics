@@ -1,13 +1,15 @@
+{% trans_default_domain 'Interface' %}
+
 {% if items > 1 %}
-    {% set word = 'Produits' %}
+    {% set word = 'produits'|trans %}
 {% elseif items == 1 %}
-    {% set word = 'Produit' %}
+    {% set word = 'produit'|trans %}
 {% else %}
-    {% set word = 'Vide' %}
+    {% set word = 'vide'|trans %}
 {% endif %}
 
 <div class="hidden-xs">
-    <h4><a href="{{ path('front_cart') }}"><img src="{{ asset('assets/icons/shopping-cart32.png') }}" alt="cart icon"/> Panier</a></h4>
+    <h4><a href="{{ path('front_cart') }}"><img src="{{ asset('assets/icons/shopping-cart32.png') }}" alt="cart icon"/> {{ 'panier'|trans }}</a></h4>
     <p><span class="badge">{{ cart.itemsTotal }}</span> {{ word }}</p>
 </div>
 <div class="visible-xs">

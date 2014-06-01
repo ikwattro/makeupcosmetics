@@ -1,12 +1,14 @@
 {% extends '::front.html.twig' %}
 
+{% trans_default_domain 'Interface' %}
+
 {% block body %}
 
     <div class="container" id="maincontent">
 
 
         <div class="col-md-2">
-            <div class="row catalogh"><h5>Catalogue</h5></div>
+            <div class="row catalogh"><h5>{{ 'catalogue'|trans }}</h5></div>
             <div class="row">
                 {{ render(controller('StoreFrontBundle:Default:getCategoryMenu')) }}
             </div>

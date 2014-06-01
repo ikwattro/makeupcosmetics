@@ -1,7 +1,7 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 <div class="col-sm-offset-2">
-    <h3>Création d'un nouveau compte</h3>
+    <h3>{{ 'account.create_title'|trans({}, 'Interface')|capitalize }}</h3>
 </div>
 
 <form role="form" class="form-horizontal fos_user_registration_register" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST">

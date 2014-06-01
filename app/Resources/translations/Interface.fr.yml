@@ -11,6 +11,8 @@ image: image
 total: total
 new_total: nouveau total
 home: accueil
+continue: continuer
+validate: valider
 
 #Connexion
 connexion:
@@ -47,3 +49,29 @@ cart:
   reset: vider
   order: commander
   your_cart: votre panier
+
+account:
+  already_one: Vous avez-déjà un compte? Connectez-vous ;-)
+  not_yet: Vous n'avez pas encore de compte, créez-en un en une seule étape !
+  create: Créer mon compte
+
+checkout:
+    billing_infos: données de facturation
+    shipping_infos: données de livraison
+    firstname: prénom
+    lastname: nom
+    address: adresse
+    zip: code postal
+    city: ville
+    country: pays
+    billing_equal_shipping: les données de livraison sont identiques aux données de facturation
+    bill_ship_info_title: Données de facturation & de livraison
+    shipping_method: méthode de livraison
+
+order:
+  thanks_for_your_order: merci pour votre commande
+  check_before_pay: vérifiez les informations ci-dessous avant de procéder au paiement
+  shipping_to: Livraison vers
+  validate_and_proceed: Valider et procéder au paiement
+  overview: récapitulatif de la commande
+

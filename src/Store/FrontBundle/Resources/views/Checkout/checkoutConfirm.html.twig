@@ -1,13 +1,15 @@
 {% extends "StoreFrontBundle:Default:layout.html.twig" %}
 
-{% block title %}Confirmation Commande | {{ parent() }}{% endblock %}
+{% trans_default_domain 'Interface' %}
+
+{% block title %}{{ 'order.confirm_title'|trans|capitalize }} | {{ parent() }}{% endblock %}
 
 {% block content %}
 
     <div class="row">
         <div class="col-md-12">
-            <h1>Merci pour votre commande</h1>
-            <h4>Veuillez vérifier les informations ci-dessous avant de procéder au paiement</h4>
+            <h1>{{ 'order.thanks_for_your_order'|trans|capitalize }}</h1>
+            <h4>{{ 'order.check_before_pay'|trans|capitalize }}</h4>
         </div>
 
     </div>
@@ -17,7 +19,7 @@
 
     <div class="row">
         <div class="col-md-6">
-            <h4>Adresse de facturation</h4>
+            <h4>{{ 'checkout.billing_infos'|trans|capitalize }}</h4>
             <table class="table">
                 <tr>
                     <td>
@@ -40,7 +42,7 @@
 
 
         <div class="col-md-6">
-            <h4>Adresse de livraison</h4>
+            <h4>{{ 'checkout.shipping_infos'|trans|capitalize }}</h4>
             <table class="table">
                 <tr>
                     <td>
@@ -60,12 +62,12 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h4>Récapitualif Commande</h4>
+            <h4>{{ 'order.overview'|trans|capitalize }}</h4>
             <table class="table">
-                <th>Produit</th>
-                <th>Quantité</th>
-                <th>Prix/unité</th>
-                <th>Total</th>
+                <th>{{ 'produit'|trans|capitalize }}</th>
+                <th>{{ 'quantity'|trans|capitalize }}</th>
+                <th>{{ 'cart.price_by_unit'|trans|capitalize }}</th>
+                <th>{{ 'total'|trans|capitalize }}</th>
                 {% for item in cart.items %}
                     <tr>
                         <td>
@@ -78,14 +80,14 @@
                             {{ item.product.price }}&euro;
                         </td>
                         <td>
-                            {{ item.quantity * item.product.price }}
+                            {{ item.quantity * item.product.price }}&euro;
                         </td>
                     </tr>
                 {% endfor %}
 
                 <tr>
                     <td colspan="2"></td>
-                    <td class="total_line_item">Total :</td>
+                    <td class="total_line_item">{{ 'total'|trans|capitalize }} :</td>
                     <td>{{ total }}&euro;</td>
                 </tr>
 
@@ -98,13 +100,13 @@
 
                     <tr>
                         <td colspan="2"></td>
-                        <td class="total_line_item">Total :</td>
+                        <td class="total_line_item">{{ 'total'|trans|capitalize }} :</td>
                         <td>{{ promotion.new_total }}&euro;</td>
                     </tr>
                     {% endif %}
                     <tr>
                         <td colspan="3">
-                            Livraison vers <strong>{{ countries[cart.shippingAddress.country] }}</strong> : {{ cart.shippingMethod.title }}
+                            {{ 'order.shipping_to'|trans|capitalize }} <strong>{{ countries[cart.shippingAddress.country] }}</strong> : {{ cart.shippingMethod.title }}
                         </td>
                         <td>
                             {{ cart.shippingMethod.price }}&euro;
@@ -116,7 +118,7 @@
                         {% set bigtotal = total + cart.shippingMethod.price %}
                     {% endif %}
                     <tr>
-                        <td colspan="3" class="total_line_item"><span style="color:red;">Total :</span></td>
+                        <td colspan="3" class="total_line_item"><span style="color:red;">{{ 'total'|trans|capitalize }} :</span></td>
                         <td><span style="color:red;">{{ bigtotal }}&euro;</span></td>
                     </tr>
 
@@ -130,7 +132,7 @@
 
     <div class="row" style="padding:15px;">
         {% include('StoreFrontBundle:Checkout:ogoneForm.html.twig') with {'ogone': ogone} %}
-        <button type="submit" class="btn btn-warning">Confirmer et procéder au paiement</button>
+        <button type="submit" class="btn btn-warning">{{ 'order.validate_and_proceed'|trans|capitalize }}</button>
     </div>
 
 {% endblock %}

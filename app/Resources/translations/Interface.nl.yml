@@ -12,6 +12,8 @@ quantity: aantal
 total: totaal
 new_total: Nieuwe totaal
 home: welkome
+continue: doorgaan
+validate: Kiezen
 
 #Connexion:
 connexion:
@@ -46,3 +48,29 @@ cart:
   reset: legen
   order: bestellen
   your_cart: uw winkelmandje
+
+account:
+  already_one: U hebt al een account, meld aan ;-)
+  not_yet: Nog geen account? Maak een in slecht een stap !
+  create: mijn account maken
+  create_title: een nieuwe account opmaken
+
+checkout:
+    billing_infos: facturatie gegevens
+    shipping_infos: levering gegevens
+    firstname: voornaam
+    lastname: naam
+    address: adres
+    zip: zip code
+    city: stad
+    country: land
+    billing_equal_shipping: levering gegevens zijn identiek facturatie gegevens
+    bill_ship_info_title: facturatie en levering gegevens
+    shipping_method: levering mogelijkheden
+
+order:
+  thanks_for_your_order: dank u voor uw bestelling
+  check_before_pay: gelieve de gegevens te controleren voor de betaling proces
+  shipping_to: levering naar
+  validate_and_proceed: valideren en betalen
+  overview: overzicht van de bestelling

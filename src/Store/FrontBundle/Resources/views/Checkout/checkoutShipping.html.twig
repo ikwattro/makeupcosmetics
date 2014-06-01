@@ -1,8 +1,10 @@
 {% extends "StoreFrontBundle:Default:layout.html.twig" %}
 
+{% trans_default_domain 'Interface' %}
+
 {% block content %}
 <div class="row">
-    <h1>Méthode de livraison</h1>
+    <h1>{{ 'checkout.shipping_method'|trans|capitalize }}</h1>
 </div>
 <div class="row">
     {% if methods is not empty %}
@@ -11,7 +13,7 @@
                 <input id="form_shipping_method_{{ loop.index }}" name="form_shipping_method" type="checkbox" value="{{ method.id }}"/>
                 <label for="form_shipping_method_{{ loop.index }}"><h3>{{ method.title }}</h3> | {{ method.price }}&euro;</label>
             {% endfor %}
-        <button type="submit" class="btn btn-success">Valider</button>
+        <button type="submit" class="btn btn-success">{{ 'validate'|trans|capitalize }}</button>
         </form>
     {% else %}
         <h3>Désolé, aucune méthode de livraison est disponible pour votre pays</h3>

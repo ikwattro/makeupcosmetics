@@ -1,6 +1,8 @@
 {% extends 'StoreFrontBundle:Default:layout.html.twig' %}
 
-{% block title %}{{ parent() }} | Bienvenue {% endblock %}
+{% trans_default_domain 'Interface' %}
+
+{% block title %}{{ parent() }} | {{ 'welcome'|trans|capitalize }} {% endblock %}
 
 {% block content %}
 
@@ -8,7 +10,7 @@
         <div class="col-xs-12 col-md-12">
             <p style="text-align: center;">
                 <a href="http://www.makeup-cosmetics.eu/catalog/product/37/french-manucure" title="French Manucure">
-                <img class="img-responsive" src="{{ asset('/promofmjuin.jpg') }}" alt="Promotion French Manucure"/>
+                <img class="img-responsive" src="{{ asset('/promofmjuin_' ~ app.session.get('lunetics_locale') ~ '.jpg') }}" alt="Promotion French Manucure"/>
                     </a>
             </p>
         </div>

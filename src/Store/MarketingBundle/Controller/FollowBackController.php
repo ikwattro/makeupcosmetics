@@ -54,7 +54,7 @@ class FollowBackController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('StoreMarketingBundle:FollowBack')->findAll();
+        $entities = $em->getRepository('StoreMarketingBundle:FollowBack')->findAllDesc();
 
         return array(
             'follows' => $entities,

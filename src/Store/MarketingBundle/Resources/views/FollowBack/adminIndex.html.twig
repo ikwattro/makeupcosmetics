@@ -3,14 +3,18 @@
 {% block body %}
 
 <table class="table">
+    <th>id</th>
     <th>datetime</th>
     <th>email</th>
+    <th>language</th>
     <th>action</th>
     <th>label</th>
     {% for follow in follows %}
         <tr>
+            <td>{{ follow.id }}</td>
             <td>{{ follow.dtg|date('d-m-Y H:i:s') }}</td>
             <td>{{ follow.targetEmail }}</td>
+            <td>{{ follow.browserLanguage }}</td>
             <td>{{ follow.action }}</td>
             <td>{{ follow.campaignLabel }}</td>
         </tr>

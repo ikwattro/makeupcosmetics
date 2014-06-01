@@ -5,7 +5,7 @@ namespace Store\MarketingBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Store\MarketingBundle\Repository\FollowBackRepository")
  */
 class FollowBack
 {

@@ -11,6 +11,7 @@ image: image
 quantity: aantal
 total: totaal
 new_total: Nieuwe totaal
+home: welkome
 
 #Connexion:
 connexion:

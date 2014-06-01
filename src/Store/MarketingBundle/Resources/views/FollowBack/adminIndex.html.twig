@@ -1,0 +1,19 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+
+<table class="table">
+    <th>datetime</th>
+    <th>email</th>
+    <th>action</th>
+    <th>label</th>
+    {% for follow in follows %}
+        <tr>
+            <td>{{ follow.dtg|date('d-m-Y H:i:s') }}</td>
+            <td>{{ follow.targetEmail }}</td>
+            <td>{{ follow.action }}</td>
+            <td>{{ follow.campaignLabel }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

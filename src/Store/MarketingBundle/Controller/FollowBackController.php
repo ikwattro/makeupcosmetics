@@ -46,4 +46,19 @@ class FollowBackController extends Controller
 
     }
 
+    /**
+     * @Route("/admin/followback", name="admin_followback")
+     * @Template()
+     */
+    public function adminIndexAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('StoreMarketingBundle:FollowBack')->findAll();
+
+        return array(
+            'follows' => $entities,
+        );
+    }
+
 }

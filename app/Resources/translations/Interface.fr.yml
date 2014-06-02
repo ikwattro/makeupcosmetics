@@ -54,6 +54,7 @@ account:
   already_one: Vous avez-déjà un compte? Connectez-vous ;-)
   not_yet: Vous n'avez pas encore de compte, créez-en un en une seule étape !
   create: Créer mon compte
+  create_title: Création d'un compte
 
 checkout:
     billing_infos: données de facturation

@@ -6,12 +6,13 @@
 
     <div class="container" id="maincontent">
 
+        <div class="row">
+
 
         <div class="col-md-2">
-            <div class="row catalogh"><h5>{{ 'catalogue'|trans }}</h5></div>
-            <div class="row">
+            <div class="row catalogh">
+                <h5>{{ 'catalogue'|trans }}</h5></div>
                 {{ render(controller('StoreFrontBundle:Default:getCategoryMenu')) }}
-            </div>
 
 
         </div>
@@ -28,6 +29,8 @@
 
 
 
+
+        </div>
 
         </div>
 

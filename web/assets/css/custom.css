@@ -353,16 +353,20 @@ body > div:nth-child(2) > div > div.col-md-9 > div > ul > li:nth-child(2) > div.
 
 h4.ps_title a
 {
-    letter-spacing: 2px;
-    margin-left: 10px;
-    border-bottom: 1px solid #CB4B16;
-    color: #212121;
+    color: #f40a9f;
+    font-size: 24px;
     text-decoration: none;
+    font-family: 'BenchNine', 'sans-serif';
 }
 
 h4.ps_title a span
 {
-    color: #CB4B16;
+    color: #f40a9f;
+}
+
+h4.ps_title a:hover
+{
+    text-decoration: underline;
 }
 
 .ps_details
@@ -409,6 +413,7 @@ ul.catnav li.cat_child
     padding-bottom: 30px;
     color: #fff;
     background-color: #212121;
+    border-top:2px solid #f40a9f;
 }
 
 #maincontent
@@ -436,5 +441,15 @@ ul.catnav li.cat_child
 {
     font-family: 'BenchNine', sans-serif;
     font-size: 36px;
+}
+
+li#your-account:hover
+{
+    color: #f40a9f;
+}
+
+.account ul li:hover h4, .account ul li:hover h4 a
+{
+    color: #f40a9f;
 }
 

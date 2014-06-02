@@ -24,7 +24,7 @@
                 {% include 'StoreProductBundle:Product:showIndexProduct.html.twig' with {'product': prod} %}
           {% set looping = looping + 1 %}
       {% endif %}
-            {% if looping is divisibleby(4) %}
+            {% if looping is divisibleby(4) and looping < 20 %}
         </div><div class="row demo">
             {% endif %}
             {% endfor %}

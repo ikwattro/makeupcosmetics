@@ -129,10 +129,20 @@
 
     </div>
     </div>
+    <div>
+
+
+    </div>
 
     <div class="row" style="padding:15px;">
         {% include('StoreFrontBundle:Checkout:ogoneForm.html.twig') with {'ogone': ogone} %}
-        <button type="submit" class="btn btn-warning">{{ 'order.validate_and_proceed'|trans|capitalize }}</button>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" required="required" name="accept_cgv" value="1"> {{ 'checkout.accept_cgv'|trans|capitalize }} (<a href="http://www.makeup-cosmetics.eu/conditions-generales-de-vente">CGV/AVV</a>)<br/>
+            </label>
+        </div>
+
+        <button type="submit" class="btn btn-success">{{ 'order.validate_and_proceed'|trans|capitalize }}</button>
     </div>
 
 {% endblock %}

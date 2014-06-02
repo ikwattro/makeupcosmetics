@@ -67,6 +67,7 @@ checkout:
     billing_equal_shipping: levering gegevens zijn identiek facturatie gegevens
     bill_ship_info_title: facturatie en levering gegevens
     shipping_method: levering mogelijkheden
+    accept_cgv: ik accepteer de algemeen verkoopsvoorwaarden
 
 order:
   thanks_for_your_order: dank u voor uw bestelling

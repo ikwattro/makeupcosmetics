@@ -68,6 +68,7 @@ checkout:
     billing_equal_shipping: les données de livraison sont identiques aux données de facturation
     bill_ship_info_title: Données de facturation & de livraison
     shipping_method: méthode de livraison
+    accept_cgv: j'accepte les conditions générales de vente
 
 order:
   thanks_for_your_order: merci pour votre commande

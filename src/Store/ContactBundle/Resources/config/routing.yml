@@ -1,0 +1,3 @@
+store_contact_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: StoreContactBundle:Default:index }

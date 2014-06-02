@@ -1,3 +1,8 @@
+store_contact:
+    resource: "@StoreContactBundle/Controller/"
+    prefix:   /
+    type: annotation
+
 store_marketing:
     resource: "@StoreMarketingBundle/Controller/"
     type:     annotation

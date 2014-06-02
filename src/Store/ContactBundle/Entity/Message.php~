@@ -1,0 +1,145 @@
+<?php
+
+namespace Store\ContactBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ */
+class Message
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $name;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $email;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    protected $message;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $dtg;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $language;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Message
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Message
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set dtg
+     *
+     * @param \DateTime $dtg
+     * @return Message
+     */
+    public function setDtg($dtg)
+    {
+        $this->dtg = $dtg;
+
+        return $this;
+    }
+
+    /**
+     * Get dtg
+     *
+     * @return \DateTime 
+     */
+    public function getDtg()
+    {
+        return $this->dtg;
+    }
+
+    /**
+     * Set language
+     *
+     * @param string $language
+     * @return Message
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+
+        return $this;
+    }
+
+    /**
+     * Get language
+     *
+     * @return string 
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+}

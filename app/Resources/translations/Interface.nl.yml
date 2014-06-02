@@ -75,3 +75,12 @@ order:
   shipping_to: levering naar
   validate_and_proceed: valideren en betalen
   overview: overzicht van de bestelling
+
+contact:
+  title: contact formulier
+  name: uw naam :
+  email: uw e-mail adres :
+  message: uw bericht :
+  submit: verzenden
+  sent: uw bericht werd verzonden, wij antwoorden in de beste tijden
+  sent_title: bericht verzonden

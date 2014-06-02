@@ -77,3 +77,11 @@ order:
   validate_and_proceed: Valider et procéder au paiement
   overview: récapitulatif de la commande
 
+contact:
+  title: formulaire de contact
+  name: votre nom :
+  email: votre adresse e-mail :
+  message: votre message :
+  submit: envoyer
+  sent: votre message a été envoyé, nous le traiterons dans les plus brefs délais
+  sent_title: bericht_verzonden

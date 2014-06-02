@@ -453,3 +453,24 @@ li#your-account:hover
     color: #f40a9f;
 }
 
+.catnavstyle:hover
+{
+    border-left:1px solid #f40a9f;
+}
+
+.catalog_pill_white
+{
+    background-color: #fff;
+}
+
+ul.catnav > li.catalog_pill_white > a
+{
+    color: #f40a9f;
+}
+
+ul.catnav > li.catalog_pill_white > a:hover
+{
+    color: #f40a9f;
+    background-color: #fff;
+}
+

@@ -1,13 +1,15 @@
 {% extends "StoreFrontBundle:Default:layout.html.twig" %}
 
 {% block title %}{{ category.title }} | {{ parent() }} {% endblock %}
-
 {% block content %}
-    <div class="row">
-        <h2 class="category_page_title">{{ category.title }}</h2>
+    <div class="row product_show_div cat_title_div">
+        <h4 class="ps_title">
+            <a href="#">{{ category.title|upper }}<span>.</span></a>
+        </h4>
+        <hr/>
     </div>
 
-    <hr />
+
     {% set looping = 0 %}
 
                 <div class="row">

@@ -441,6 +441,8 @@ ul.catnav li.cat_child
 {
     font-family: 'BenchNine', sans-serif;
     font-size: 36px;
+    margin-top: 0px;
+    padding: 10px 10px 0px 0px;
 }
 
 li#your-account:hover
@@ -479,3 +481,17 @@ ul.catnav > li.catalog_pill_white > a:hover
     background-color: #fff;
 }
 
+.product_mini_fiche
+{
+    padding-left:0px;
+}
+
+.cat_title_div
+{
+    margin-bottom:15px;
+}
+
+.cat_title_div > h4
+{
+    padding-left:10px;
+}

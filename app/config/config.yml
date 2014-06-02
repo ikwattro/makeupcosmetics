@@ -98,6 +98,10 @@ liip_imagine:
                     quality: 75
                     filters:
                         thumbnail: { size: [150, 150], mode: outbound }
+        frontlist_thumb_new:
+                            quality: 75
+                            filters:
+                                thumbnail: { size: [220, 220], mode: outbound }
         product_show_bigimg:
                     quality: 75
                     filters:

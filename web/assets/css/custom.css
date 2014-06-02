@@ -236,19 +236,36 @@ body
 .mini_fiche_holder
 {
     background-color: #fff;
-    padding:15px;
+    border-top: 3px solid #f40a9f;
+    padding-bottom:15px;
+    margin-bottom:20px;
 }
 
 .mini_fiche_holder_img
 {
-    border-bottom: 1px solid #8700ff;
+    #border-bottom: 1px solid #8700ff;
     padding-bottom:15px;
     text-align: center;
 }
 
 .mini_fiche_holder_name
 {
-    margin-top: 5px;
+    margin: 15px;
+    margin-bottom:5px;
+    padding-top: 10px;
+    font-size:18px;
+    min-height:60px;
+    font-family: 'BenchNine', sans-serif;
+}
+
+.mini_fiche_holder_name > p > a
+{
+    color: #434242;
+}
+
+.mini_fiche_holder_name > p > a:hover
+{
+    color: #f40a9f;
 }
 
 .mini_fiche_holder_img > a
@@ -260,12 +277,21 @@ body
 {
     padding-right:10px;
     text-align: right;
+    #font-family: 'BenchNine', sans-serif;
+    font-size: 15px;
+    color: #f40a9f;
 }
 
 .catalogh
 {
     font-weight: bold;
-    text-align: center;
+    font-family: 'BenchNine', sans-serif;
+}
+
+.catalogh > h5
+{
+    font-size: 24px;
+    color: #f40a9f;
 }
 
 .demo
@@ -361,12 +387,14 @@ h4.ps_title a span
 
 ul.catnav > li > a
 {
-    color: #212121;
+    color: #434242;
+    font-family: 'BenchNine', sans-serif;
+    font-size: 21px;
 }
 
 ul.catnav > li > a:hover
 {
-    color: #a94442;
+    color: #f40a9f;
 }
 
 ul.catnav li.cat_child
@@ -402,5 +430,11 @@ ul.catnav li.cat_child
 {
     font-weight: bold;
     color: #fa0df2;
+}
+
+.category_page_title
+{
+    font-family: 'BenchNine', sans-serif;
+    font-size: 36px;
 }
 

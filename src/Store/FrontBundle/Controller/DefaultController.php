@@ -318,4 +318,23 @@ class DefaultController extends Controller
     {
         return array();
     }
+
+    /**
+     * @Route("/mentions-legales", name="page_mentions")
+     * @Template()
+     */
+    public function mentionsAction()
+    {
+        return array();
+    }
+
+    /**
+     * @Route("/shipping-info", name="page_shipping")
+     * @Template()
+     */
+    public function shippingInfoAction()
+    {
+        return array();
+    }
+
 }

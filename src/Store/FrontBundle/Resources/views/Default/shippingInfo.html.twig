@@ -1,0 +1,25 @@
+{% extends "StoreFrontBundle:Default:layout.html.twig" %}
+
+{% block title %}Condtions générales de vente | {{ parent() }} {% endblock %}
+
+{% block content %}
+
+    <div class="row product_show_div">
+        <div class="col-md-12">
+            <h3>Informations de Livraison</h3>
+            <p>Nous livrons en Belgique, France, Allemagne, Pays-Bas et au Luxembourg</p>
+            <p>Les livraisons sont effectuées par colis BPost.</p>
+            <p></p>
+            <h3>Frais de livraison</h3>
+            <h4>Pour la Belgique :</h4>
+            <p>Standard : 5,95€</p>
+            <p>Livraison gratuite pour les commandes de plus de 45€</p>
+            <h4>France, Allemagne, Pays-Bas, Luxembourg :</h4>
+            <p>Standard: 6,95€</p>
+            <p>Livraison gratuite pour les commandes de plus de 45€ <strong>*</strong></p>
+            <p><small>* Action promotionnelle limitée dans le temps</small></p>
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -145,6 +145,21 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $(".fancybox").fancybox();
+
+        $(function() {
+
+            blinking($(".blink"));
+
+        });
+
+        function blinking(elm) {
+            timer = setInterval(blink, 3000);
+            function blink() {
+                elm.fadeOut(700, function() {
+                    elm.fadeIn(700);
+                });
+            }
+        }
     });
 </script>
 {% block custom_js %} {% endblock %}

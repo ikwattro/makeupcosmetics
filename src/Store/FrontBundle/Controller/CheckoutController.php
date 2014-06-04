@@ -246,6 +246,9 @@ class CheckoutController extends Controller
      */
     public function checkoutOrderResultAction(Request $request)
     {
+        $locale = $this->get('session')->get('lunetics_locale');
+        $e = explode('_', $locale);
+        $loc = $e[0];
         if (is_object($this->get('security.context')->getToken()->getUser())) {
             $customer_id = $this->get('security.context')->getToken()->getUser()->getId() ?: null;
         } else {
@@ -282,6 +285,7 @@ class CheckoutController extends Controller
             return array(
                 'status' => $cart->getState(),
                 'orderId' => $cart->getOrderId(),
+                'locale' => $loc,
             );
 
         } else {
@@ -293,7 +297,7 @@ class CheckoutController extends Controller
             $em->flush();
             return $this->render(
                 'StoreFrontBundle:Checkout:checkoutInvalid.html.twig',
-                array('status' => $params['STATUS'])
+                array('status' => $params['STATUS'], 'locale' => $loc)
             );
         }
     }

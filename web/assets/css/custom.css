@@ -495,3 +495,9 @@ ul.catnav > li.catalog_pill_white > a:hover
 {
     padding-left:10px;
 }
+
+.fb-like-box
+{
+    margin:5px;
+    width: 120px;
+}

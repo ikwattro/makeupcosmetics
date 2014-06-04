@@ -137,11 +137,21 @@ class CheckoutController extends Controller
             break;
         }
 
+        if (!empty($promotion)) {
+            if ($promotion['new_total'] > 45) {
+                $cart->setShippingPrice(0);
+            }
+        } elseif ($total > 45) {
+            $free_shipping = true;
+            $cart->setShippingPrice(0);
+        }
+
         if (count($promotion) > 0) {
             $cart->setPromotionDiscount($promotion['discount_amount']);
             $em->persist($cart);
             $em->flush();
         }
+        var_dump($total);
 
 
 
@@ -156,7 +166,7 @@ class CheckoutController extends Controller
             'promotion' => $promotion,
             'total' => $total,
             'ogone' => $ogone,
-            'ogoneMode' => $this->container->getParameter('ogone_mode')
+            'ogoneMode' => $this->container->getParameter('ogone_mode'),
         );
     }
 
@@ -316,6 +326,18 @@ class CheckoutController extends Controller
         foreach ($shippingMethods as $method) {
             if (in_array($country, $method->getZone()->getCountries())) {
                 $available_methods[] = $method;
+            }
+        }
+        $total = 0;
+        foreach ($cart->getItems() as $item) {
+            $total = $total + ($item->getProduct()->getPrice() * $item->getQuantity());
+        }
+        if (null != $cart->getPromotionDiscount()) {
+            $total = ($total - $cart->getPromotionDiscount());
+        }
+        if ($total > 45) {
+            foreach ($available_methods as $m) {
+                $m->setPrice(0);
             }
         }
         return array(

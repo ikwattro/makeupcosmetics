@@ -154,10 +154,21 @@ class DefaultController extends Controller
             }
         }
 
+        $free_shipping = false;
+
+        if (!empty($promotion)) {
+            if ($promotion['new_total'] > 45) {
+                $free_shipping = true;
+            }
+        } elseif ($total > 45) {
+            $free_shipping = true;
+        }
+
         return array(
             'cart'  =>  $cart,
             'total' => $total,
             'promotion' => $promotion,
+            'free_shipping' => $free_shipping,
         );
     }
 

@@ -109,13 +109,13 @@
                             {{ 'order.shipping_to'|trans|capitalize }} <strong>{{ countries[cart.shippingAddress.country] }}</strong> : {{ cart.shippingMethod.title }}
                         </td>
                         <td>
-                            {{ cart.shippingMethod.price }}&euro;
+                            {{ cart.shippingPrice }}&euro;
                         </td>
                     </tr>
                     {% if promotion is not empty %}
-                        {% set bigtotal = promotion.new_total + cart.shippingMethod.price %}
+                        {% set bigtotal = promotion.new_total + cart.shippingPrice %}
                     {% else %}
-                        {% set bigtotal = total + cart.shippingMethod.price %}
+                        {% set bigtotal = total + cart.shippingPrice %}
                     {% endif %}
                     <tr>
                         <td colspan="3" class="total_line_item"><span style="color:red;">{{ 'total'|trans|capitalize }} :</span></td>

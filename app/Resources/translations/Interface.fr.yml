@@ -49,6 +49,7 @@ cart:
   reset: vider
   order: commander
   your_cart: votre panier
+  free_shipping: Frais de port offerts pour une commande dépassant 45€
 
 account:
   already_one: Vous avez-déjà un compte? Connectez-vous ;-)
@@ -76,6 +77,7 @@ order:
   shipping_to: Livraison vers
   validate_and_proceed: Valider et procéder au paiement
   overview: récapitulatif de la commande
+  confirm_title: Confirmation et paiement de votre commande
 
 contact:
   title: formulaire de contact

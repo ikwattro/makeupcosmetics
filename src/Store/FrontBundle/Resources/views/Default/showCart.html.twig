@@ -77,8 +77,16 @@
 
             {% endif %}
 
-            <tr><td colspan="4">{{ 'cart.estim_shipping'|trans|capitalize }} <span style="color:red;">*</span></td><td>5.95€</td></tr>
-            {% set shipping = 5.95 %}
+            {% if free_shipping is not empty %}
+                <tr><td colspan="4">{{ 'cart.free_shipping'|trans|capitalize }}</td><td>0.00€</td> </tr>
+                {% set shipping = 0 %}
+            {% else %}
+                <tr><td colspan="4">{{ 'cart.estim_shipping'|trans|capitalize }} <span style="color:red;">*</span></td><td>5.95€</td></tr>
+                {% set shipping = 5.95 %}
+            {% endif %}
+
+
+
 
             {% if promotion is not empty %}
                 {% set bigtotal = promotion.new_total + shipping %}
@@ -98,9 +106,11 @@
 
         </table>
         </div>
+        {% if free_shipping is empty %}
         <div class="row">
             <p><span style="color:red;">*</span> {{ 'cart.shipping_note'|trans|capitalize }}</p>
         </div>
+        {% endif %}
     {% endif %}
 </div>
 {% endblock content %}

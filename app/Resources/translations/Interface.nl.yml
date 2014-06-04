@@ -48,6 +48,7 @@ cart:
   reset: legen
   order: bestellen
   your_cart: uw winkelmandje
+  free_shipping: Gratis verzendingkosten voor bestellingen van meer dan 45€
 
 account:
   already_one: U hebt al een account, meld aan ;-)
@@ -75,6 +76,7 @@ order:
   shipping_to: levering naar
   validate_and_proceed: valideren en betalen
   overview: overzicht van de bestelling
+  order_title: Bevestiging en betaling van uw bestelling
 
 contact:
   title: contact formulier

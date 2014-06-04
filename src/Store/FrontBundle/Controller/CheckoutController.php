@@ -134,6 +134,7 @@ class CheckoutController extends Controller
             $promotion['detail'] = $pro;
             $promotion['discount_amount'] = (($total / 100) * $pro->getDiscount());
             $promotion['new_total'] = $total - $promotion['discount_amount'];
+            $promotion['disabled'] = $pro->getDisabled();
             break;
         }
 
@@ -151,7 +152,6 @@ class CheckoutController extends Controller
             $em->persist($cart);
             $em->flush();
         }
-        var_dump($total);
 
 
 
@@ -189,8 +189,19 @@ class CheckoutController extends Controller
         $orderId = $cart->getOrderId();
 
         $amount = $total;
-        $amount = $amount + $cart->getShippingMethod()->getPrice();
-        $amount = $amount - $cart->getPromotionDiscount();
+
+        if (!empty($promotion)) {
+                if ($promotion['disabled'] == false) {
+                    $amount = $amount - $cart->getPromotionDiscount();
+                }
+
+        }
+
+        if ($amount <= 45) {
+            $amount = $amount + $cart->getShippingMethod()->getPrice();
+        }
+
+
 
         $total = ($amount * 100 );
         $currency = 'EUR';

@@ -124,6 +124,8 @@ class VariantController extends Controller
         $variant->setPrice($form['price']);
         if(isset($form['out_of_stock'])){
             $variant->setOutOfStock($form['out_of_stock']);
+        } else {
+            $variant->setOutOfStock(0);
         }
         foreach ($variant->getValues() as $value) {
             $variant->removeValue($value);

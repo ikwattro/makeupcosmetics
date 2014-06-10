@@ -282,7 +282,7 @@ body
     color: #f40a9f;
 }
 
-.catalogh
+.catalogh h3
 {
     font-weight: bold;
     font-family: 'BenchNine', sans-serif;
@@ -351,7 +351,7 @@ body > div:nth-child(2) > div > div.col-md-9 > div > ul > li:nth-child(2) > div.
     margin: 0 0 0 10px;
 }
 
-h4.ps_title a
+h1.ps_title a
 {
     color: #f40a9f;
     font-size: 24px;
@@ -359,12 +359,17 @@ h4.ps_title a
     font-family: 'BenchNine', 'sans-serif';
 }
 
-h4.ps_title a span
+.product_show_div > h1 span
+{
+    font-size: 24px;
+}
+
+h1.ps_title a span
 {
     color: #f40a9f;
 }
 
-h4.ps_title a:hover
+h1.ps_title a:hover
 {
     text-decoration: underline;
 }
@@ -389,14 +394,14 @@ h4.ps_title a:hover
     margin-top:15px;
 }
 
-ul.catnav > li > a
+ul.catnav > li > h3 > a
 {
     color: #434242;
     font-family: 'BenchNine', sans-serif;
     font-size: 21px;
 }
 
-ul.catnav > li > a:hover
+ul.catnav > li > h3 > a:hover
 {
     color: #f40a9f;
 }
@@ -465,12 +470,27 @@ li#your-account:hover
     background-color: #fff;
 }
 
-ul.catnav > li.catalog_pill_white > a
+ul.catnav > li.catalog_pill_white > h3 > a
 {
     color: #f40a9f;
+    padding:10px;
 }
 
-ul.catnav > li.catalog_pill_white > a:hover
+ul.catnav > li.catnavstyle > h3
+{
+    padding:5px;
+    padding-left: 10px;
+    margin-top:0px;
+    margin-bottom: 0px;
+}
+
+ul.catnav > li.catnavstyle h3:hover
+{
+    color: #f40a9f;
+    background-color: #fff;
+}
+
+ul.catnav > li.catalog_pill_white > h3 > a:hover
 {
     color: #f40a9f;
     background-color: #fff;

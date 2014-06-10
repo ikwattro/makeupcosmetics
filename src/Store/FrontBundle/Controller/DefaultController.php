@@ -350,7 +350,7 @@ class DefaultController extends Controller
 
     /**
      * @Route("/sitemap.{_format}", name="front_sitemaps_sitemap", Requirements={"_format" = "xml"})
-     * @Template("StoreCoreBundle:Default:sitemap.xml.twig")
+     * @Template("StoreFrontBundle:Default:sitemap.xml.twig")
      */
     public function sitemapAction()
     {

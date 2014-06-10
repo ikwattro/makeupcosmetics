@@ -11,22 +11,10 @@
 {% endfor %}
 
 
-{% block title %} {{ product.name }} {{ titlevariant }} | {{ parent() }} {% endblock %}
+{% block title %} {{ product.name }} {{ titlevariant }} - {{ product.name }} pas cher sur MakeUpCosmetics.eu {% endblock %}
 
 {% block meta_description %}
-{% if product.description is not empty %}{{ product.name }}{{ titlevariant }}
-{{ product.description }}
-acheter {{ product.name }}
-discount {{ product.name }}
-{{ product.name }} pas cher
-maquillage discount pas cher cosmétique discount pas cher acheter maquillage discount acheter maquillage pas cher acheter cosmétique discount acheter cosmétique pas cher
-{% else %}
-{{ product.name }}{{ titlevariant }}, MakeUpCosmetics.eu spécialiste du maquillage discount.
-acheter {{ product.name }}
-discount {{ product.name }}
-{{ product.name }} pas cher
-maquillage discount pas cher cosmétique discount pas cher acheter maquillage discount acheter maquillage pas cher acheter cosmétique discount acheter cosmétique pas cher
-{% endif %}
+{{ product.name }} à prix discount, {{ product.name }} pas cher, {{ product.name }} {{ titlevariant }} pas cher.
 {% endblock %}
 
 {% block par_class %}product_show_div{% endblock %}

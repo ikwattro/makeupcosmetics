@@ -100,7 +100,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/catalog/{id}/{slug}", name="category_page")
+     * @Route("/catalog/category/{id}/{slug}", name="category_page")
      * @Template()
      */
     public function categoryAction($id, $slug)

@@ -365,6 +365,8 @@ class DefaultController extends Controller
         $language = array();
 
         $mv = $em->getRepository('StoreProductBundle:Variant')->findAll();
+        $cats = $em->getRepository('StoreProductBundle:Category')->findAll();
+
 
         foreach($mv as $p) {
 
@@ -374,6 +376,11 @@ class DefaultController extends Controller
             }
 
 
+        }
+
+        foreach ($cats as $c) {
+            $rc = $this->get('router')->generate('category_page', array('id' => $c->getId(), 'slug' => $c->getSlug()));
+            $urls[] = array('loc' => $rc, 'changefreq' > 'weekly', 'priority' => '0.9');
         }
 
         /**

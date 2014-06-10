@@ -157,10 +157,37 @@ class CheckoutController extends Controller
 
 
 
+
+
+        $twoPlusOneMap = array();
+        foreach ($cart->getItems() as $item) {
+            $v = $item->getProduct();
+            $p = $v->getProduct();
+            if ($p->getTwoPlusOne()) {
+                if (array_key_exists($p->getId(), $twoPlusOneMap)) {
+                    $twoPlusOneMap[$p->getId()] = $twoPlusOneMap[$p->getId()] + $item->getQuantity();
+                } else {
+                    $twoPlusOneMap[$p->getId()] = $item->getQuantity();
+                }
+            }
+
+        }
+        $twoPlusOneDiscountMap = 0;
+        $r = $em->getRepository('StoreProductBundle:Product');
+
+        foreach($twoPlusOneMap as $k => $q) {
+            if ($q >= 2) {
+                $pr = $r->find($k);
+                $price = $pr->getPrice();
+                $twoPlusOneDiscountMap = $twoPlusOneDiscountMap + (round($q/2, 0, PHP_ROUND_HALF_DOWN)*$price);
+            }
+        }
+
         $man->setCartConfirmStatus();
         $countries = Intl::getRegionBundle()->getCountryNames();
 
-        $ogone = $this->buildOgoneForm($total, $cart, $promotion, $countries);
+        $ogone = $this->buildOgoneForm($total, $cart, $promotion, $countries, $twoPlusOneDiscountMap);
+
 
         return array(
             'cart' => $cart,
@@ -169,10 +196,11 @@ class CheckoutController extends Controller
             'total' => $total,
             'ogone' => $ogone,
             'ogoneMode' => $this->container->getParameter('ogone_mode'),
+            'twoPlusOne' => $twoPlusOneDiscountMap,
         );
     }
 
-    private function buildOgoneForm($total, $cart, $promotion, $countries)
+    private function buildOgoneForm($total, $cart, $promotion, $countries, $twoPlusOneDiscountMap)
     {
         $locale = $this->get('request')->getLocale();
         $toLangs = array(
@@ -202,6 +230,8 @@ class CheckoutController extends Controller
         if ($amount <= 45) {
             $amount = $amount + $cart->getShippingMethod()->getPrice();
         }
+
+        $amount = $amount - $twoPlusOneDiscountMap;
 
 
 

@@ -104,6 +104,26 @@
                         <td>{{ promotion.new_total }}&euro;</td>
                     </tr>
                     {% endif %}
+
+                {% if twoPlusOne is not empty %}
+                    <tr>
+                        <td colspan="3">
+                            {{ 'twoPlusOne'|trans|capitalize }}
+                        </td>
+                        <td style="color:green;">
+                            <strong>-{{ twoPlusOne }}€</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="total_line_item">
+                            Total :
+                        </td>
+                        {% set int_total = total - twoPlusOne %}
+                        <td>{{ int_total }}€</td>
+                    </tr>
+                {% endif %}
+
+
                     <tr>
                         <td colspan="3">
                             {{ 'order.shipping_to'|trans|capitalize }} <strong>{{ countries[cart.shippingAddress.country] }}</strong> : {{ cart.shippingMethod.title }}
@@ -113,13 +133,13 @@
                         </td>
                     </tr>
                     {% if promotion is not empty %}
-                        {% set bigtotal = promotion.new_total + cart.shippingPrice %}
+                        {% set bigtotal = promotion.new_total + cart.shippingPrice - twoPlusOne %}
                     {% else %}
-                        {% set bigtotal = total + cart.shippingPrice %}
+                        {% set bigtotal = total + cart.shippingPrice - twoPlusOne %}
                     {% endif %}
                     <tr>
                         <td colspan="3" class="total_line_item"><span style="color:red;">{{ 'total'|trans|capitalize }} :</span></td>
-                        <td><span style="color:red;">{{ bigtotal }}&euro;</span></td>
+                        <td><span style="color:red;"><strong>{{ bigtotal }}&euro;</strong></span></td>
                     </tr>
 
 

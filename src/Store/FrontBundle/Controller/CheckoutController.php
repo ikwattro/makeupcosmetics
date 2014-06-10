@@ -140,11 +140,11 @@ class CheckoutController extends Controller
 
         if (!empty($promotion)) {
             if ($promotion['new_total'] > 45) {
-                $cart->setShippingPrice(0);
+                //$cart->setShippingPrice(0);
             }
         } elseif ($total > 45) {
-            $free_shipping = true;
-            $cart->setShippingPrice(0);
+            //$free_shipping = true;
+            //$cart->setShippingPrice(0);
         }
 
         if (count($promotion) > 0) {
@@ -227,9 +227,7 @@ class CheckoutController extends Controller
 
         }
 
-        if ($amount <= 45) {
             $amount = $amount + $cart->getShippingMethod()->getPrice();
-        }
 
         $amount = $amount - $twoPlusOneDiscountMap;
 
@@ -384,7 +382,7 @@ class CheckoutController extends Controller
         }
         if ($total > 45) {
             foreach ($available_methods as $m) {
-                $m->setPrice(0);
+                //$m->setPrice(0);
             }
         }
         return array(

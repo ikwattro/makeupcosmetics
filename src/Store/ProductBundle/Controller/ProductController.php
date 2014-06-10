@@ -296,4 +296,26 @@ class ProductController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * @Route("product/{id}/set/twoPlusOne", name="product_set_twoplusone")
+     */
+    public function twoPlusOneAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $p = $em->getRepository('StoreProductBundle:Product')->find($id);
+
+        if (!$p) {
+            throw new \InvalidArgumentException('Product not valid');
+        }
+        $status = $p->getTwoPlusOne();
+        if (false == $status) {
+            $p->setTwoPlusOne(true);
+        } else {
+            $p->setTwoPlusOne(false);
+        }
+        $em->persist($p);
+        $em->flush();
+        return $this->redirect($this->generateUrl('product'));
+    }
 }

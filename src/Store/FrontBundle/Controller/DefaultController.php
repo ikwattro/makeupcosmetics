@@ -164,11 +164,36 @@ class DefaultController extends Controller
             $free_shipping = true;
         }
 
+        $twoPlusOneMap = array();
+        foreach ($cart->getItems() as $item) {
+            $v = $item->getProduct();
+            $p = $v->getProduct();
+            if ($p->getTwoPlusOne()) {
+                if (array_key_exists($p->getId(), $twoPlusOneMap)) {
+                    $twoPlusOneMap[$p->getId()] = $twoPlusOneMap[$p->getId()] + $item->getQuantity();
+                } else {
+                    $twoPlusOneMap[$p->getId()] = $item->getQuantity();
+                }
+            }
+
+        }
+        $twoPlusOneDiscountMap = 0;
+        $r = $em->getRepository('StoreProductBundle:Product');
+
+        foreach($twoPlusOneMap as $k => $q) {
+            if ($q >= 2) {
+                $pr = $r->find($k);
+                $price = $pr->getPrice();
+                $twoPlusOneDiscountMap = $twoPlusOneDiscountMap + (round($q/2, 0, PHP_ROUND_HALF_DOWN)*$price);
+            }
+        }
+
         return array(
             'cart'  =>  $cart,
             'total' => $total,
             'promotion' => $promotion,
             'free_shipping' => $free_shipping,
+            'twoPlusOne' => $twoPlusOneDiscountMap,
         );
     }
 

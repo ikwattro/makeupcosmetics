@@ -98,6 +98,10 @@ class Product
      */
     protected $fileupdate;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    protected $twoPlusOne;
 
 
     public function __construct()
@@ -105,13 +109,6 @@ class Product
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
         $this->options = new \Doctrine\Common\Collections\ArrayCollection();
         $this->variants = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    public function setFileUpdate($update)
-    {
-        $this->fileupdate = $update;
-
-        return $this;
     }
 
     /**
@@ -494,5 +491,51 @@ class Product
     public function setFile($file)
     {
         $this->file = $file;
+    }
+
+    /**
+     * Set fileupdate
+     *
+     * @param string $fileupdate
+     * @return Product
+     */
+    public function setFileupdate($fileupdate)
+    {
+        $this->fileupdate = $fileupdate;
+
+        return $this;
+    }
+
+    /**
+     * Get fileupdate
+     *
+     * @return string 
+     */
+    public function getFileupdate()
+    {
+        return $this->fileupdate;
+    }
+
+    /**
+     * Set twoPlusOne
+     *
+     * @param boolean $twoPlusOne
+     * @return Product
+     */
+    public function setTwoPlusOne($twoPlusOne)
+    {
+        $this->twoPlusOne = $twoPlusOne;
+
+        return $this;
+    }
+
+    /**
+     * Get twoPlusOne
+     *
+     * @return boolean 
+     */
+    public function getTwoPlusOne()
+    {
+        return $this->twoPlusOne;
     }
 }

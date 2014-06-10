@@ -50,6 +50,10 @@
                     <li>
                         <a href="{{ path('product_edit', { 'id': entity.id }) }}">modifier</a>
                     </li>
+                    <li>
+                        {% if entity.twoPlusOne == false %} (inactif) {% else %} (actif) {% endif %}
+                        <a href="{{ path('product_set_twoplusone', {'id': entity.id}) }}">Activer/Désactiver 2+1</a>
+                    </li>
                 </ul>
                 </td>
             </tr>

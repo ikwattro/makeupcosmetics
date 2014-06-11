@@ -32,6 +32,19 @@
 </h1>
 <hr/>
     <div class="row">
+
+        {% if variant.product.id == 81 %}
+
+        <div class="col-xs-12 col-md-12">
+            <p style="text-align: center;">
+                <a href="http://www.makeup-cosmetics.eu/catalog/product/208/feutre-a-levres" title="Promo Feutre à Lèvres">
+                    <img class="img-responsive" src="{{ asset('/gefal_promo_' ~ app.session.get('lunetics_locale') ~ '.jpg') }}" alt="Promotion Feutre à Lèvres"/>
+                </a>
+            </p>
+        </div>
+        <hr />
+        {% endif %}
+
         <div class="col-md-5 col-xs-12 ps_img">
                 <div>
                     {% if variant.images is not empty %}

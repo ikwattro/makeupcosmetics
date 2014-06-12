@@ -183,7 +183,7 @@ class CampaignController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entities = $em->getRepository('StoreMarketingBundle:TargetEmail')->findAll();
         foreach ($entities as $target) {
-            if ($this->isValidForFrench($target)) {
+            if ($this->isValidForDutch($target)) {
 
                 if ($test) {
                     if ($target->getTestAllowed()) {

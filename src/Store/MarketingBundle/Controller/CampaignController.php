@@ -70,8 +70,8 @@ class CampaignController extends Controller
     private function sendCampaignEmail($followbackUrl, $email, $label)
     {
         $message = \Swift_Message::newInstance()
-            ->setSubject('Promo Feutre à Lèvres, 2 pour le prix d\'1')
-            ->setFrom(array('makeupcosmetics.eu@gmail.com' => 'MakeUp Cosmetics.eu'))
+            ->setSubject('Promo Vilt Lippen 1 + 1 gratis')
+            ->setFrom(array('makeupcosmetics.eu@gmail.com' => 'MakeUp Cosmetics.eu - Claude Haest'))
             ->setTo($email)
             ->setBody($this->renderView('StoreMarketingBundle:Campaign:promoFeutreNl.html.twig', array(
                 'followback_url' => $followbackUrl,

@@ -21,13 +21,13 @@ class FollowBackController extends Controller
         $label = $request->query->get('campaignLabel');
 
         $actionTargets = array(
-            'site' => $this->generateUrl('campaign_promo_feutre'),
+            'site' => $this->generateUrl('homeweb', array(), true),
             'facebook' => 'https://www.facebook.com/pages/MakeUp-Cosmetics-Professional/643352275751858',
             'twitter' => 'https://twitter.com/mUpCosmetics',
-            'blogger' => 'http://makeupcosmeticseu.blogger.com',
+            'blogger' => 'http://makeupcosmeticseu.blogspot.com',
             'promoFm' => 'http://www.makeup-cosmetics.eu/catalog/product/37/french-manucure',
             'promoFeutre' => 'http://www.makeup-cosmetics.eu/catalog/product/81/feutres-a-levres',
-            'readOnline' => $this->generateUrl('campaign_promo_feutre', array(), true),
+            'readOnline' => $this->generateUrl('campaign_promo_feutre', array('targetEmail' => $request->query->get('targetEmail')), true),
         );
 
         if (!isset($params['targetEmail']) || !isset($params['campaignLabel'])) {

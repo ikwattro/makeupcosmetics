@@ -58,7 +58,7 @@
                                 <td class="w30" width="30"></td>
                                 <td class="w580" width="580" valign="middle" align="left">
                                     <div class="pagetoplogo-content">
-                                        <a href="{{ followback_url }}?campaignLabel{{ label }}&amp;action=site&amp;targetEmail={{ email|default('wm@gmail.com') }}">
+                                        <a href="{{ followback_url }}?campaignLabel={{ label }}&amp;action=site&amp;targetEmail={{ email|default('wm@gmail.com') }}">
                                         <img class="w580" style="text-decoration: none; display: block; color:#476688; font-size:30px;" src="{{ app.request.scheme }}://{{ app.request.host }}{{ asset('logo2muc.png') }}" alt="Logo MakeUp Cosmetics" width="344" height="158">
                                         </a>
                                     </div>
@@ -89,14 +89,14 @@
                                         <tr>
                                             <td class="w580" width="580">
                                                 <h2 style="color:#0E7693; font-size:22px; padding-top:12px;">
-                                                    Promotion "Feutres à lèvres" : 1 acheté = 1 gratuit !  </h2>
+                                                    Promotion "Feutres à lèvres" : 1 acheté + 1 gratuit !  </h2>
                                                 <h3>Donc deux feutres à lèvres pour seulement 5 euros !</h3>
 
 
                                                 <div align="left" class="article-content">
 
                                                     <p style="text-align: center;">
-                                                        <a href="{{ followback_url }}?campaignLabel{{ label }}&amp;action=promoFeutre&amp;targetEmail={{ email|default('wm@gmail.com') }}">
+                                                        <a href="{{ followback_url }}?campaignLabel={{ label }}&amp;action=promoFeutre&amp;targetEmail={{ email|default('wm@gmail.com') }}">
                                                             <img class="w180" width="600" height="168" src="{{ app.request.scheme }}://{{ app.request.host }}{{ asset('gefal_promo_mail.jpg') }}" alt="promotion Feutres à Lèvres">
                                                         </a>
                                                     </p>
@@ -120,7 +120,7 @@
                                                             Rose Camélia
                                                         </li>
                                                     </ul>
-                                                    <p><a style="padding:5px; background-color: #fff; color: #f40a9f;" href="{{ followback_url }}?campaignLabel{{ label }}&amp;action=promoFeutre&amp;targetEmail={{ email }}" title="Profitez de la promotion Feutres à Lèvres">
+                                                    <p><a style="padding:5px; display:inline-block; overflow:hidden; background-color: #fff; color: #f40a9f;" href="{{ followback_url }}?campaignLabel={{ label }}&amp;action=promoFeutre&amp;targetEmail={{ email }}" title="Profitez de la promotion Feutres à Lèvres">
                                                             <strong>Profitez maintenant de cette promotion exclusive !</strong></a></p>
                                                 </div>
                                             </td>

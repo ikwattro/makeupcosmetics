@@ -28,6 +28,7 @@ class FollowBackController extends Controller
             'promoFm' => 'http://www.makeup-cosmetics.eu/catalog/product/37/french-manucure',
             'promoFeutre' => 'http://www.makeup-cosmetics.eu/catalog/product/208/feutres-a-levres',
             'readOnline' => $this->generateUrl('campaign_promo_feutre', array('targetEmail' => $request->query->get('targetEmail')), true),
+            'readOnlineNl' => $this->generateUrl('campaign_promo_feutre_nl', array('targetEmail' => $request->query->get('targetEmail')), true),
         );
 
         if (!isset($params['targetEmail']) || !isset($params['campaignLabel'])) {

@@ -52,13 +52,28 @@ class CampaignController extends Controller
         );
     }
 
+    /**
+     * @Route("/campaign/email/promoViltLippen", name="campaign_promo_feutre_nl")
+     * @Template()
+     */
+    public function promoFeutreNlAction()
+    {
+        //var_dump($this->generateUrl('email_followback'));
+        $em = $this->get('request')->query->get('targetEmail') ?: '';
+        return array(
+            'followback_url' => $this->generateUrl('email_followback', array(), true),
+            'email' => $em,
+            'label' => 'promoFeutre'
+        );
+    }
+
     private function sendCampaignEmail($followbackUrl, $email, $label)
     {
         $message = \Swift_Message::newInstance()
             ->setSubject('Promo Feutre à Lèvres, 2 pour le prix d\'1')
             ->setFrom(array('makeupcosmetics.eu@gmail.com' => 'MakeUp Cosmetics.eu'))
             ->setTo($email)
-            ->setBody($this->renderView('StoreMarketingBundle:Campaign:promoFeutre.html.twig', array(
+            ->setBody($this->renderView('StoreMarketingBundle:Campaign:promoFeutreNl.html.twig', array(
                 'followback_url' => $followbackUrl,
                 'email' => $email,
                 'label' => $label,
@@ -155,6 +170,44 @@ class CampaignController extends Controller
 
     }
 
+    /**
+     * @Route("/admin/campaign/email/send/nl/promoFeutre/{testOnly}", name="campaign_send_nl_promoFeutre")
+     * @Template()
+     */
+    public function sendPromoFeutreNlAction($testOnly)
+    {
+        $targets = array();
+
+        $test = $testOnly == 'reality' ? false : true;
+
+        $em = $this->getDoctrine()->getManager();
+        $entities = $em->getRepository('StoreMarketingBundle:TargetEmail')->findAll();
+        foreach ($entities as $target) {
+            if ($this->isValidForFrench($target)) {
+
+                if ($test) {
+                    if ($target->getTestAllowed()) {
+                        $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoFeutre');
+                        $targets[] = $target->getEmail();
+                    }
+                } else {
+                    $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoFeutre');
+                    $targets[] = $target->getEmail();
+                }
+
+
+
+
+            }
+        }
+
+        return array(
+            'count' => count($targets),
+            'targets' => $targets
+        );
+
+    }
+
     public function isValidForFrench($target)
     {
         if ($target->getLanguage() == 'fr') {
@@ -176,6 +229,48 @@ class CampaignController extends Controller
             return false;
         }
         return true;
+    }
+
+    /**
+     * @Route("/admin/targets/dutch", name="admin_dutch_emails")
+     * @Template()
+     */
+    public function dutchEmailsAction()
+    {
+        $targets = array();
+        $em = $this->getDoctrine()->getManager();
+        $entities = $em->getRepository('StoreMarketingBundle:TargetEmail')->findAll();
+        foreach ($entities as $target) {
+            if ($this->isValidForDutch($target)) {
+                $targets[] = $target->getEmail();
+            }
+        }
+        return array(
+            'targets' => $targets,
+        );
+    }
+
+    public function isValidForDutch($target)
+    {
+        if ($target->getLanguage() == 'nl') {
+            return true;
+        }
+
+        if (null !== $target->getLanguage() && ($target->getLanguage() == 'fr' || $target->getLanguage() == 'de')) {
+            return false;
+        }
+
+        $email = $target->getEmail();
+        $expl = explode('.', $email);
+        $c = count($expl);
+        $e = $expl[$c-1];
+        if ($e == 'nl') {
+            return true;
+        }
+        if (preg_match('/telenet/', $email)) {
+            return true;
+        }
+        return false;
     }
 
 

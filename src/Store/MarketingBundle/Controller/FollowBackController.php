@@ -18,11 +18,16 @@ class FollowBackController extends Controller
     {
         $params = $request->query->all();
 
+        $label = $request->query->get('campaignLabel');
+
         $actionTargets = array(
-            'site' => $this->generateUrl('homeweb'),
+            'site' => $this->generateUrl('campaign_promo_feutre'),
             'facebook' => 'https://www.facebook.com/pages/MakeUp-Cosmetics-Professional/643352275751858',
             'twitter' => 'https://twitter.com/mUpCosmetics',
+            'blogger' => 'http://makeupcosmeticseu.blogger.com',
             'promoFm' => 'http://www.makeup-cosmetics.eu/catalog/product/37/french-manucure',
+            'promoFeutre' => 'http://www.makeup-cosmetics.eu/catalog/product/81/feutres-a-levres',
+            'readOnline' => $this->generateUrl('campaign_promo_feutre', array(), true),
         );
 
         if (!isset($params['targetEmail']) || !isset($params['campaignLabel'])) {
@@ -34,7 +39,7 @@ class FollowBackController extends Controller
         $follow = new FollowBack();
 
         $follow->setDtg(new \DateTime("NOW"));
-        $follow->setCampaignLabel('newStart');
+        $follow->setCampaignLabel($label);
         $follow->setAction($params['action']);
         $follow->setTargetEmail($params['targetEmail']);
         $follow->setBrowserLanguage($request->getPreferredLanguage());

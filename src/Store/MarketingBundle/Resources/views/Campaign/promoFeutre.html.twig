@@ -42,7 +42,7 @@
                 </tr>
 
                 <tr>
-                    <td align="center" class="w640" width="640" height="20"> <a style="color:#ffffff; font-size:12px;" href="{{ followback_url }}?campaignLabel{{ label }}&amp;action=site&amp;targetEmail={{ email|default('wm@gmail.com') }}"><span style="color:#ffffff; font-size:12px;">Voir le contenu de cet e-mail en ligne</span></a> </td>
+                    <td align="center" class="w640" width="640" height="20"> <a style="color:#ffffff; font-size:12px;" href="{{ followback_url }}?campaignLabel={{ label }}&amp;action=readOnline&amp;targetEmail={{ email|default('wm@gmail.com') }}"><span style="color:#ffffff; font-size:12px;">Voir le contenu de cet e-mail en ligne</span></a> </td>
                 </tr>
                 <tr>
                     <td class="w640" width="640" height="10"></td>
@@ -59,7 +59,7 @@
                                 <td class="w580" width="580" valign="middle" align="left">
                                     <div class="pagetoplogo-content">
                                         <a href="{{ followback_url }}?campaignLabel{{ label }}&amp;action=site&amp;targetEmail={{ email|default('wm@gmail.com') }}">
-                                        <img class="w580" style="text-decoration: none; display: block; color:#476688; font-size:30px;" src="http://www.makeup-cosmetics.eu/logo2muc.png" alt="Mon Logo" width="344" height="158">
+                                        <img class="w580" style="text-decoration: none; display: block; color:#476688; font-size:30px;" src="{{ app.request.scheme }}://{{ app.request.host }}{{ asset('logo2muc.png') }}" alt="Logo MakeUp Cosmetics" width="344" height="158">
                                         </a>
                                     </div>
                                 </td>
@@ -89,36 +89,72 @@
                                         <tr>
                                             <td class="w580" width="580">
                                                 <h2 style="color:#0E7693; font-size:22px; padding-top:12px;">
-                                                    Promotion "French Manucure" !  </h2>
+                                                    Promotion "Feutres à lèvres" : 1 acheté = 1 gratuit !  </h2>
+                                                <h3>Donc deux feutres à lèvres pour seulement 5 euros !</h3>
 
 
                                                 <div align="left" class="article-content">
-                                                    <p style="text-align: center;"><img class="w180" width="600" height="387" src="http://www.makeup-cosmetics.eu/assets/campaign/promofm.jpg" alt="promotion French Manucure"></p>
 
-                                                    <p>Le kit French Manucure en promotion à 17,95&euro; à la place de 19,95&euro;</p>
-                                                    <p>Le kit comprend :
-                                                        <ul>
-                                                        <li>1 Lime</li>
-                                                        <li>2 Coupe ongles</li>
-                                                        <li>1 Ciseau</li>
-                                                        <li>1 Repoussoir</li>
-                                                        <li>1 Écarteur</li>
-                                                        <li>1 Nail stencil</li>
-                                                        <li>1 Crayon blanc</li>
-                                                        <li>1 Base</li>
-                                                        <li>1 Top coat</li>
-                                                        <li>1 Vernis</li>
-                                                        </ul>
-                                                        </p>
-                                                    <p><a href="{{ followback_url }}?campaignLabel{{ label }}&amp;action=site&amp;targetEmail={{ email }}" title="Profitez de la promotion French Manucure">Profitez de la promotion French Manucure</a></p>
+                                                    <p style="text-align: center;">
+                                                        <a href="{{ followback_url }}?campaignLabel{{ label }}&amp;action=promoFeutre&amp;targetEmail={{ email|default('wm@gmail.com') }}">
+                                                            <img class="w180" width="600" height="168" src="{{ app.request.scheme }}://{{ app.request.host }}{{ asset('gefal_promo_mail.jpg') }}" alt="promotion Feutres à Lèvres">
+                                                        </a>
+                                                    </p>
+
+                                                <p>Profitez de cette promotion valable jusqu'au 18 juin seulement et dans la limite des stocks disponibles. <br/><br/>
+                                                    Les couleurs de feutres disponibles sont :</p>
+                                                    <ul>
+                                                        <li>
+                                                            Rose Peau
+                                                        </li>
+                                                        <li>
+                                                            Beige de Luxe
+                                                        </li>
+                                                        <li>
+                                                            Rouge Provocant
+                                                        </li>
+                                                        <li>
+                                                            Rouge élégant
+                                                        </li>
+                                                        <li>
+                                                            Rose Camélia
+                                                        </li>
+                                                    </ul>
+                                                    <p><a style="padding:5px; background-color: #fff; color: #f40a9f;" href="{{ followback_url }}?campaignLabel{{ label }}&amp;action=promoFeutre&amp;targetEmail={{ email }}" title="Profitez de la promotion Feutres à Lèvres">
+                                                            <strong>Profitez maintenant de cette promotion exclusive !</strong></a></p>
                                                 </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="w580" width="580" height="1" bgcolor="#c7c5c5"></td>
                                         </tr>
+
+                                        <tr>
+                                            <td>
+                                                <h3>PS :</h3>
+                                            <p>Retrouvez-nous également sur :</p>
+
+                                            <ul>
+                                                <li><a style="color: #f40a9f;" href="{{ followback_url }}?campaignLabel={{ label }}&amp;action=facebook&amp;targetEmail={{ email }}" title="Notre page Facebook">Facebook</a></li>
+                                                <li><a style="color: #f40a9f;" href="{{ followback_url }}?campaignLabel={{ label }}&amp;action=twitter&amp;targetEmail={{ email }}" title="Notre page Twitter">Twitter</a></li>
+                                                <li><a style="color: #f40a9f;" href="{{ followback_url }}?campaignLabel={{ label }}&amp;action=blogger&amp;targetEmail={{ email }}" title="Notre blog">Blogger</a></li>
+                                            </ul>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><hr/></td>
+                                        </tr>
+
+                                        <tr><td><p><small>
+                                                    Vous avez reçu cet e-mail car vous étiez client(e) de <strong>makeupcosmeticsdiscount1euro.eu</strong> qui est devenu maintenant
+                                                    <strong><a href="http://www.makeup-cosmetics.eu" title="MakeUp Cosmetics">MakeUpCosmetics.eu</a></strong>.<br/>
+                                                        Si vous désirez vous désabonner de cette liste de diffusion, communiquez-le nous tout simplement en répondant à cet e-mail.
+                                        </small></p></td></tr>
+
                                         </tbody>
                                     </table>
+
+
                                     <!-- fin zone -->
 
 
@@ -127,6 +163,8 @@
                                 </td>
                                 <td class="w30" width="30"></td>
                             </tr>
+
+
                             </tbody>
                         </table>
                     </td>
@@ -149,7 +187,7 @@
                                 <td class="w30" width="30"></td>
                                 <td class="w580" width="580" valign="top">
                                     <p align="right" class="pagebottom-content-left">
-                                        <a style="color:#255D5C;" href="http://www.makeup-cosmetics.eu"><span style="color:#255D5C;">Claude Haest BVBA/SPRL<br />http://www.makeup-cosmetics.eu</span></a>
+                                        <a style="color: #f40a9f;"  href="http://www.makeup-cosmetics.eu"><span style="color: #f40a9f;" >Claude Haest BVBA/SPRL<br />http://www.makeup-cosmetics.eu</span></a>
                                     </p>
                                 </td>
 

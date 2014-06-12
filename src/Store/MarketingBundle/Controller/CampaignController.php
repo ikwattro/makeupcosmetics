@@ -38,7 +38,7 @@ class CampaignController extends Controller
     }
 
     /**
-     * @Route("/campaign/email/promoFeutre", name="campaign_promoFm")
+     * @Route("/campaign/email/promoFeutre", name="campaign_promo_feutre")
      * @Template()
      */
     public function promoFeutreAction()
@@ -118,21 +118,31 @@ class CampaignController extends Controller
     }
 
     /**
-     * @Route("/admin/campaign/email/send/promoFeutre", name="campaign_send_promoFeutre")
+     * @Route("/admin/campaign/email/send/promoFeutre/{testOnly}", name="campaign_send_promoFeutre")
      * @Template()
      */
-    public function sendPromoFeutreAction()
+    public function sendPromoFeutreAction($testOnly)
     {
         $targets = array();
+
+        $test = $testOnly == 'reality' ? false : true;
 
         $em = $this->getDoctrine()->getManager();
         $entities = $em->getRepository('StoreMarketingBundle:TargetEmail')->findAll();
         foreach ($entities as $target) {
             if ($this->isValidForFrench($target)) {
-                if ($target->getTestAllowed()) {
-                    $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoFeutre');
+
+                if ($test) {
+                    if ($target->getTestAllowed()) {
+                        $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoFeutre');
+                        $targets[] = $target->getEmail();
+                    }
+                } else {
+                    //$this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoFeutre');
                     $targets[] = $target->getEmail();
                 }
+
+
 
 
             }

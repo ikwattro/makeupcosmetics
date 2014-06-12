@@ -138,7 +138,7 @@ class CampaignController extends Controller
                         $targets[] = $target->getEmail();
                     }
                 } else {
-                    //$this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoFeutre');
+                    $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoFeutre');
                     $targets[] = $target->getEmail();
                 }
 

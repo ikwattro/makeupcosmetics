@@ -26,7 +26,7 @@ class FollowBackController extends Controller
             'twitter' => 'https://twitter.com/mUpCosmetics',
             'blogger' => 'http://makeupcosmeticseu.blogspot.com',
             'promoFm' => 'http://www.makeup-cosmetics.eu/catalog/product/37/french-manucure',
-            'promoFeutre' => 'http://www.makeup-cosmetics.eu/catalog/product/81/feutres-a-levres',
+            'promoFeutre' => 'http://www.makeup-cosmetics.eu/catalog/product/208/feutres-a-levres',
             'readOnline' => $this->generateUrl('campaign_promo_feutre', array('targetEmail' => $request->query->get('targetEmail')), true),
         );
 

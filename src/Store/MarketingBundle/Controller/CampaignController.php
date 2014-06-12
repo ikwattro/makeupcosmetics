@@ -18,7 +18,7 @@ class CampaignController extends Controller
     {
         //var_dump($this->generateUrl('email_followback'));
         return array(
-            'followback_url' => $this->generateUrl('email_followback'),
+            'followback_url' => $this->generateUrl('email_followback', array(), true),
             'email' => 'willemsen.christophe@gmail.com'
         );
     }
@@ -32,20 +32,36 @@ class CampaignController extends Controller
         //var_dump($this->generateUrl('email_followback'));
         $em = $this->get('request')->query->get('targetEmail') ?: '';
         return array(
-            'followback_url' => $this->generateUrl('email_followback'),
+            'followback_url' => $this->generateUrl('email_followback', array(), true),
             'email' => $em,
         );
     }
 
-    private function sendCampaignEmail($followbackUrl, $email)
+    /**
+     * @Route("/campaign/email/promoFeutre", name="campaign_promoFm")
+     * @Template()
+     */
+    public function promoFeutreAction()
+    {
+        //var_dump($this->generateUrl('email_followback'));
+        $em = $this->get('request')->query->get('targetEmail') ?: '';
+        return array(
+            'followback_url' => $this->generateUrl('email_followback', array(), true),
+            'email' => $em,
+            'label' => 'promoFeutre'
+        );
+    }
+
+    private function sendCampaignEmail($followbackUrl, $email, $label)
     {
         $message = \Swift_Message::newInstance()
-            ->setSubject('MakeUp Cosmetics de Claude Haest')
+            ->setSubject('Promo Feutre à Lèvres, 2 pour le prix d\'1')
             ->setFrom(array('makeupcosmetics.eu@gmail.com' => 'MakeUp Cosmetics.eu'))
             ->setTo($email)
-            ->setBody($this->renderView('StoreMarketingBundle:Campaign:promoFm.html.twig', array(
+            ->setBody($this->renderView('StoreMarketingBundle:Campaign:promoFeutre.html.twig', array(
                 'followback_url' => $followbackUrl,
-                'email' => $email
+                'email' => $email,
+                'label' => $label,
             )), 'text/html')
         ;
         $this->get('mailer')->send($message);
@@ -89,8 +105,36 @@ class CampaignController extends Controller
         $entities = $em->getRepository('StoreMarketingBundle:TargetEmail')->findAll();
         foreach ($entities as $target) {
             if ($this->isValidForFrench($target)) {
-                $this->sendCampaignEmail($this->generateUrl('email_followback'), strtolower($target->getEmail()));
+                $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()));
                 $targets[] = $target->getEmail();
+            }
+        }
+
+        return array(
+            'count' => count($targets),
+            'targets' => $targets
+        );
+
+    }
+
+    /**
+     * @Route("/admin/campaign/email/send/promoFeutre", name="campaign_send_promoFeutre")
+     * @Template()
+     */
+    public function sendPromoFeutreAction()
+    {
+        $targets = array();
+
+        $em = $this->getDoctrine()->getManager();
+        $entities = $em->getRepository('StoreMarketingBundle:TargetEmail')->findAll();
+        foreach ($entities as $target) {
+            if ($this->isValidForFrench($target)) {
+                if ($target->getTestAllowed()) {
+                    $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoFeutre');
+                    $targets[] = $target->getEmail();
+                }
+
+
             }
         }
 

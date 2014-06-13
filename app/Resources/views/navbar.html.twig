@@ -1,3 +1,6 @@
+
+{% trans_default_domain 'Interface' %}
+
 <div class="row">
 
 
@@ -16,11 +19,9 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <!--
                 <a class="navbar-brand blink" href="{{ path('page_shipping') }}" title="Livraison !">
-                    <img src="{{ asset('freeshipping.png') }}" alt="livraison gratuite"/> Livraison gratuite àpd 45€
+                    <img src="{{ asset('freeshipping.png') }}" alt="{{ 'free_shipping'|trans }}"/> {{ 'free_shipping'|trans|capitalize }}
                 </a>
-            -->
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="https://www.facebook.com/pages/MakeUp-Cosmetics-Professional/643352275751858" title="Find us on Facebook">
                         <img src="{{ asset('assets/social_icons/facebook.png') }}" alt="Like us on Facebook"/></a></li>

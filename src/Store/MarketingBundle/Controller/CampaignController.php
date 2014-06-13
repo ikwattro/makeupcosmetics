@@ -182,16 +182,19 @@ class CampaignController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $entities = $em->getRepository('StoreMarketingBundle:TargetEmail')->findAll();
+
+        var_dump(count($entities));
+
         foreach ($entities as $target) {
             if ($this->isValidForDutch($target)) {
 
                 if ($test) {
                     if ($target->getTestAllowed()) {
-                        $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoFeutre');
+                        //$this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoFeutre');
                         $targets[] = $target->getEmail();
                     }
                 } else {
-                    $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoFeutre');
+                    //$this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoFeutre');
                     $targets[] = $target->getEmail();
                 }
 

@@ -158,10 +158,10 @@ class DefaultController extends Controller
 
         if (!empty($promotion)) {
             if ($promotion['new_total'] > 45) {
-                //$free_shipping = true;
+                $free_shipping = true;
             }
         } elseif ($total > 45) {
-            //$free_shipping = true;
+            $free_shipping = true;
         }
 
         $twoPlusOneMap = array();

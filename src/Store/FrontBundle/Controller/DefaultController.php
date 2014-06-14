@@ -123,6 +123,23 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/catalog/{id}/{slug}", name="category_page_old")
+     * @Template()
+     */
+    public function categoryOldAction($id, $slug)
+    {
+        $man = $this->get('store.store_manager');
+        $categories = $man->getCategories(true);
+        $htmlTree = $man->getMyTree();
+
+        $category = $man->getCategory($id);
+        if (!$category){
+            throw new \InvalidParameterException('The category does not exist');
+        }
+        return $this->redirect($this->generateUrl('category_page', array('id' => $id, 'slug' => $category->getSlug())));
+    }
+
+    /**
      * @Route("/cart/view", name="front_cart")
      * @Template()
      */

@@ -51,13 +51,13 @@
                         {% for image in variant.images %}
                             {% if loop.index <= 1 %}
                                 <a href="{{ asset('uploads/product_images/' ~ image.path) }}" class="fancybox" title="{{ product.name }}">
-                                <img itemprop="image" class="img-responsive" src="{{ asset('uploads/product_images/' ~ image.path) | imagine_filter('product_show_bigimg')}}" />
+                                <img itemprop="image" class="img-responsive" src="{{ asset('uploads/product_images/' ~ image.path) | imagine_filter('product_show_bigimg')}}" alt="{{ product.name }} {{ titlevariant }}" />
                                 </a>
                             {% endif %}
                         {% endfor %}
                     {% else %}
                         <a href="{{ asset('uploads/documents/' ~ product.path) }}" class="fancybox" title="{{ product.name }}">
-                            <img itemprop="image" class="img-responsive" src="{{ asset('uploads/documents/' ~ product.path) | imagine_filter('product_show_bigimg')}}" />
+                            <img itemprop="image" class="img-responsive" src="{{ asset('uploads/documents/' ~ product.path) | imagine_filter('product_show_bigimg')}}" alt="{{ product.name }}{{ titlevariant }}"/>
                         </a>
 
                     {% endif %}
@@ -68,7 +68,7 @@
                     {% for image in variant.images %}
                         <li class="ps_mini_img">
                             <a class="fancybox" rel="variant-{{ variant.id }}" href="{{ asset('uploads/product_images/' ~ image.path) }}">
-                                <img class="img-responsive" src="{{ asset('uploads/product_images/' ~ image.path) | imagine_filter('product_list_thumb')}}" />
+                                <img class="img-responsive" src="{{ asset('uploads/product_images/' ~ image.path) | imagine_filter('product_list_thumb')}}" alt="{{ product.name }}{{ titlevariant }}"/>
                             </a>
                         </li>
 

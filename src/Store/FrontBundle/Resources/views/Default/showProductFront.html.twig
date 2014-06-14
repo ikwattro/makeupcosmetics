@@ -117,7 +117,7 @@
             <div>
 
 
-                <select class="form-control" id="product_option_select" current-page="{{ path('product_front_show', {'id': variant.id, 'slug': variant.vslug }) }}">
+                <select class="form-control" id="product_option_select" current-page="{{ path('product_front_show', {'id': variant.id, 'slug': variant.vslug }) }}" current-page-old="current-page="{{ path('product_front_show', {'id': variant.id, 'slug': product.slug }) }}">
                 {% for variante in product.variants %}
                     {% set sl = variante.vslug %}
 
@@ -220,12 +220,13 @@
 <script type="text/javascript">
     $(document).ready(function(){
         var current = $('#product_option_select').attr('current-page');
+        var current_old = $('#product_option_select').attr('current-page-old');
         $('#product_option_select').ddslick({
 
             onSelected: function(selectedData){
                 var index = selectedData.selectedIndex;
                 var relLink = selectedData.original.context[index].getAttribute('rel');
-                if (relLink != current) {
+                if (relLink != current && relLink != current_old) {
                     window.location = relLink;
                 }
 

@@ -350,6 +350,28 @@ class Variant
      */
     public function getVslug()
     {
-        return $this->vslug;
+        if(empty($this->vslug)) {
+            return $this->getProduct()->getSlug();
+        } else {
+            return $this->getProduct()->getSlug().'-'.$this->vslug;
+        }
+    }
+
+    public function getName()
+    {
+        $title = '';
+        foreach ($this->getValues() as $val) {
+            $title = $title.' '.$val->getName();
+        }
+        return $title;
+    }
+
+    public function getFullName()
+    {
+        $title = $this->getProduct()->getName();
+        foreach ($this->getValues() as $val) {
+            $title = $title.' '.$val->getName();
+        }
+        return $title;
     }
 }

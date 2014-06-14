@@ -155,6 +155,16 @@ class VariantController extends Controller
             $variant->setPromoPrice(null);
         }
 
+        $productName = $variant->getProduct()->getName();
+        $vslug = '';
+        foreach ($variant->getValues() as $val) {
+            $vslug .= $vslug.$val->getName();
+
+        }
+        $sl = $vslug;
+        $vslug = \URLify::filter($sl);
+        $variant->setVslug($this->removedTirets($vslug));
+
         $em->persist($variant);
         $em->flush();
 
@@ -202,9 +212,9 @@ class VariantController extends Controller
             $vslug .= $vslug.$val->getName();
 
         }
-        $sl = $productName.'-'.$vslug;
+        $sl = $vslug;
         $vslug = \URLify::filter($sl);
-        $variant->setVslug($vslug);
+        $variant->setVslug($this->removedTirets($vslug));
 
         $em->persist($variant);
         $em->flush();
@@ -372,6 +382,15 @@ class VariantController extends Controller
             foreach($options as $option){
                 $entity->addValue($editForm[$option->getName()]->getData());
             }
+            $productName = $entity->getProduct()->getName();
+            $vslug = '';
+            foreach ($entity->getValues() as $val) {
+                $vslug .= $vslug.$val->getName();
+
+            }
+            $sl = $vslug;
+            $vslug = URLify::filter($sl);
+            $entity->setVslug($this->removedTirets($vslug));
             $em->persist($entity);
             $em->flush();
 
@@ -425,5 +444,39 @@ class VariantController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+
+    private function removedTirets($slug)
+    {
+        return str_replace('--', '-', $slug);
+    }
+
+    /**
+     * @Route("/soft/regenerateslugs", name="variant_slug_regen")
+     * @Template()
+     */
+    public function regenerateVariantSlugsAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $variants = $em->getRepository('StoreProductBundle:Variant')->findAll();
+        $done = array();
+
+        foreach ($variants as $variant) {
+            $slug = '';
+            foreach ($variant->getValues() as $val) {
+                $slug .= $val->getName();
+            }
+            $vslug = $this->removedTirets($slug);
+            $variant->setVslug(\URLify::filter($vslug));
+            $em->persist($variant);
+            $em->flush();
+            $done[] = array(
+                'product' => $variant->getProduct()->getName(),
+                'vslug' => \URLify::filter($vslug),
+            );
+        }
+        return array(
+            'done' => $done,
+        );
     }
 }

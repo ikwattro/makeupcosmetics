@@ -116,8 +116,11 @@
 
             <div>
 
-                <select class="form-control" id="product_option_select" current-page="{{ path('product_front_show', {'id': variant.id, 'slug': product.slug }) }}">
+
+                <select class="form-control" id="product_option_select" current-page="{{ path('product_front_show', {'id': variant.id, 'slug': variant.vslug }) }}">
                 {% for variante in product.variants %}
+                    {% set sl = variante.vslug %}
+
 
 
 
@@ -131,7 +134,8 @@
                                 {% else %}
                                     {% set select = '' %}
                                 {% endif %}
-                                <option value="{{ variante.id }}" {{ select }} rel="{{ path('product_front_show', {'id': variante.id, 'slug': product.slug }) }}"
+
+                                <option value="{{ variante.id }}" {{ select }} rel="{{ path('product_front_show', {'id': variante.id, 'slug': variante.vslug }) }}"
                                         data-imagesrc="{{ asset('/uploads/documents/vignettes/' ~ options.path ) }}"
                                         data-description="{{ options.name }}">{{ options.name }}</option>
                             {% else %}
@@ -188,6 +192,25 @@
             <p><span itemprop="description">{{ product.description|nl2br }}</span></p>
         </div>
 
+    </div>
+    <hr/>
+    <div class="row ps_links_to_variants">
+        <div class="col-md-12">
+            <h6>Déclinaisons disponibles pour "{{ product.name }}"</h6>
+        <ul class="list-unstyled">
+
+
+
+            {% for v in product.variants %}
+                <li>
+                    <a href="{{ path('product_front_show', {'id': v.id, 'slug': v.vslug }) }}" title="{{ v.fullName }}">
+                        {{ v.name }}
+                    </a>
+                </li>
+            {% endfor %}
+         </ul>
+
+        </div>
     </div>
 
 

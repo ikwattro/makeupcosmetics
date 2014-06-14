@@ -2,12 +2,12 @@
     <div class="mini_fiche_holder">
 
         <div class="mini_fiche_holder_name">
-            <a href="{{ path('product_front_show', {'id': product.masterVariant.id, 'slug': product.slug}) }}"
+            <a href="{{ path('product_front_show', {'id': product.masterVariant.id, 'slug': product.masterVariant.vslug}) }}"
                     title="{{ product.name }}">{{ product.name }}</a>
         </div>
 
     <div class="mini_fiche_holder_img">
-        <a href="{{ path('product_front_show', {'id': product.masterVariant.id, 'slug': product.slug }) }}">
+        <a href="{{ path('product_front_show', {'id': product.masterVariant.id, 'slug': product.masterVariant.vslug }) }}">
             <img class="img-responsive" src="{{ asset('uploads/documents/' ~ product.path) | imagine_filter('frontlist_thumb_new')}}"
                     alt="{{ product.name }}"/>
         </a>

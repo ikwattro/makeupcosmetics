@@ -381,6 +381,9 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
+        $man = $this->get('store.store_manager');
+        $prods = $man->getMasterVariants();
+
         $urls = array();
         $hostname = $this->getRequest()->getHost();
 
@@ -396,7 +399,7 @@ class DefaultController extends Controller
         foreach($mv as $p) {
 
             if ($p->getProduct()->getAvailable() !== false && $p->getOutOfStock() == false) {
-                $r = $this->get('router')->generate('product_front_show', array('id' => $p->getId(), 'slug' => $p->getProduct()->getSlug()));
+                $r = $this->get('router')->generate('product_front_show', array('id' => $p->getId(), 'slug' => $p->getVslug()));
                 $urls[] = array('loc' => $r, 'changefreq' => 'weekly', 'priority' => '0.9');
             }
 

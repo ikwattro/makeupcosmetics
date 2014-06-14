@@ -59,7 +59,7 @@ class ProductController extends Controller
             $variant->setIsMaster(true);
             $variant->setPrice($form['price']->getData());
             $variant->setProduct($entity);
-            $variant->setVslug(URLify::filter($product->getName()));
+            //$variant->setVslug(str_replace('--','-',URLify::filter($variant->getProduct()->getName())));
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
@@ -319,4 +319,5 @@ class ProductController extends Controller
         $em->flush();
         return $this->redirect($this->generateUrl('product'));
     }
+
 }

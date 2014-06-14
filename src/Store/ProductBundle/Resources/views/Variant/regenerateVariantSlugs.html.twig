@@ -1,0 +1,14 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+
+<table class="table">
+    {% for d in done %}
+        <tr>
+            <td>{{ d.product }}</td>
+            <td>{{ d.vslug }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

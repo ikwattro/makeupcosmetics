@@ -63,6 +63,11 @@ class Variant
     protected $promoPrice;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $vslug;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -323,5 +328,28 @@ class Variant
     public function removeImage(\Store\ProductBundle\Entity\VariantImage $images)
     {
         $this->images->removeElement($images);
+    }
+
+    /**
+     * Set vslug
+     *
+     * @param string $vslug
+     * @return Variant
+     */
+    public function setVslug($vslug)
+    {
+        $this->vslug = $vslug;
+
+        return $this;
+    }
+
+    /**
+     * Get vslug
+     *
+     * @return string 
+     */
+    public function getVslug()
+    {
+        return $this->vslug;
     }
 }

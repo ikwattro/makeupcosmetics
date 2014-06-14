@@ -59,6 +59,7 @@ class ProductController extends Controller
             $variant->setIsMaster(true);
             $variant->setPrice($form['price']->getData());
             $variant->setProduct($entity);
+            $variant->setVslug(URLify::filter($product->getName()));
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);

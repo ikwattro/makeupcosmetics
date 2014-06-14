@@ -51,6 +51,15 @@ class VariantController extends Controller
         if ($form->isValid()) {
             $options = $entity->getProduct()->getOptions();
             $em = $this->getDoctrine()->getManager();
+            $vslug = '';
+            $productName = $entity->getProduct()->getName();
+            $vslug .= $vslug.$productName ;
+            foreach ($entity->getValues() as $val) {
+                $vslug .= $vslug.$val->getName();
+            }
+            $entity->setVslug($vslug);
+
+
             $em->persist($entity);
             $em->flush();
 
@@ -187,6 +196,15 @@ class VariantController extends Controller
         }
         $variant->setPrice($price);
         $variant->setIsMaster(false);
+        $productName = $product->getName();
+        $vslug = '';
+        foreach ($variant->getValues() as $val) {
+            $vslug .= $vslug.$val->getName();
+
+        }
+        $sl = $productName.'-'.$vslug;
+        $vslug = \URLify::filter($sl);
+        $variant->setVslug($vslug);
 
         $em->persist($variant);
         $em->flush();

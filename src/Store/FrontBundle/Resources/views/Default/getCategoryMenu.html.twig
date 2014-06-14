@@ -2,24 +2,20 @@
 
 <ul class="nav nav-pills nav-stacked catnav" role="menu">
     <li class="catalog_pill_white">
-        <h3>
             <a href="#">{{ 'catalogue'|trans|upper }}</a>
-        </h3>
+
         </li>
 
     {% if categories is not empty %}
         {% for category in categories %}
             {% if category.children is empty %}
             <li class="catnavstyle">
-                <h3>
                     <a href="{{ path('category_page', {'id': category.id, 'slug': category.slug|default('slug') }) }}">{{ category.title|upper }}</a></li>
-                </h3>
+
 
             {% else %}
                 <li class="parent_cat" id="{{ category.id }}">
-                <h3>
                     <a href="#">{{ category.title|upper }} <span class="caret"></span></a>
-                </h3>
 
                 {% for child in category.children %}
                     <li class="cat_child child_{{ category.id }} catnavstyle">

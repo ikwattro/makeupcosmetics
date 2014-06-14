@@ -470,27 +470,25 @@ li#your-account:hover
     background-color: #fff;
 }
 
-ul.catnav > li.catalog_pill_white > h3 > a
+ul.catnav > li.catalog_pill_white > a
 {
     color: #f40a9f;
     padding:10px;
 }
 
-ul.catnav > li.catnavstyle > h3
+ul.catnav > li.catnavstyle > a
 {
     padding:5px;
     padding-left: 10px;
-    margin-top:0px;
-    margin-bottom: 0px;
 }
 
-ul.catnav > li.catnavstyle h3:hover
+ul.catnav > li.catnavstyle > a:hover
 {
     color: #f40a9f;
     background-color: #fff;
 }
 
-ul.catnav > li.catalog_pill_white > h3 > a:hover
+ul.catnav > li.catalog_pill_white > a:hover
 {
     color: #f40a9f;
     background-color: #fff;

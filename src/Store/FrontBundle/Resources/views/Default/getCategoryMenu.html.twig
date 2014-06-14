@@ -10,7 +10,7 @@
         {% for category in categories %}
             {% if category.children is empty %}
             <li class="catnavstyle">
-                    <a href="{{ path('category_page', {'id': category.id, 'slug': category.slug|default('slug') }) }}">{{ category.title|upper }}</a></li>
+                    <a href="{{ path('category_page', {'id': category.id, 'slug': category.slug|default('slug') }) }}" title="{{ category.title }} - Maquillage et Cosmétique">{{ category.title|upper }}</a></li>
 
 
             {% else %}
@@ -19,9 +19,9 @@
 
                 {% for child in category.children %}
                     <li class="cat_child child_{{ category.id }} catnavstyle">
-                        <h3>
-                            <a href="{{ path('category_page', {'id': category.id, 'slug': child.slug|default('slug') }) }}">{{ child.title|upper }}</a></li>
-                        </h3>
+
+                            <a href="{{ path('category_page', {'id': category.id, 'slug': child.slug|default('slug') }) }}" title="{{ category.title }}">{{ child.title|upper }}</a></li>
+
 
                 {% endfor %}
             {% endif %}

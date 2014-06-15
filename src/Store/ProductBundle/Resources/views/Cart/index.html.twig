@@ -5,6 +5,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>N° Commande</th>
                 <th>DateTime</th>
                 <th>User</th>
                 <th>Nombre de Produits</th>
@@ -17,6 +18,7 @@
             {% if entity.items.count > 0 %}
             <tr>
                 <td><a href="{{ path('cart_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.orderId }}</td>
                 <td>
                     {{ entity.CartDtg |date('d-m-Y H:i:s') }}
                 </td>

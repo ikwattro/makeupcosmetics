@@ -3,6 +3,7 @@
 {% block body -%}
 
     <h2>Panier #{{ entity.id }}</h2>
+    <h2>Numéro commande : #{{ entity.orderId }}</h2>
     <hr/>
 
     <h4>Statut : <span class="label label-primary">{{ entity.processStatus }}</span></h4>
@@ -16,14 +17,37 @@
         </tr>
         {% for item in entity.items %}
             <tr>
-                <td>{{ item.product.product.name }}</td>
+                <td>{{ item.product.product.name }}
+                    {% for val in item.product.values %}
+                        - {{ val.name }}
+                    {% endfor %}
+
+                </td>
                 <td>{{ item.quantity }}</td>
             </tr>
-
-            {% set total = total + item.product.price %}
+            {% set subtotal = item.quantity * item.product.price %}
+            {% set total = total + subtotal %}
         {% endfor %}
 
 
         <tr><td colspan="2"><strong>Montant hors promotions et livraison: <span class="label label-primary">{{ total }}&euro;</span></strong></td></tr>
     </table>
+    <h2>Client :</h2>
+    <p>
+        {{ entity.billingAddress.lastname }} {{ entity.billingAddress.firstname }}<br />
+        {{ entity.billingAddress.line1 }}<br/>
+        {{ entity.billingAddress.line2 }}<br/>
+        {{ entity.billingAddress.zipCode }} {{ entity.billingAddress.province }}<br/>
+        {{ entity.billingAddress.country }}
+    </p>
+    <h2>Livraison :</h2>
+    <p>
+        {{ entity.shippingAddress.lastname }} {{ entity.shippingAddress.firstname }}<br />
+        {{ entity.shippingAddress.line1 }}<br/>
+        {{ entity.shippingAddress.line2 }}<br/>
+        {{ entity.shippingAddress.zipCode }} {{ entity.shippingAddress.province }}<br/>
+        {{ entity.shippingAddress.country }}
+    </p>
+    <p>Méthode de livraison : {{ entity.shippingMethod.title }} ({{ entity.shippingMethod.price }}&euro;)</p>
+
 {% endblock %}

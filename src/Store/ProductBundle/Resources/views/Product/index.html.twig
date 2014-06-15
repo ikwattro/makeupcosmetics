@@ -5,16 +5,14 @@
     <div>
         <a class="btn btn-warning" href="{{ path('product_new') }}">+ nouveau produit</a>
     </div>
-    <table class="records_list table table-condensed table-hover">
+    <table class="table table-responsive table-hover">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Nom</th>
                 <th>Image</th>
-                <th>Sku</th>
                 <th>Prix</th>
                 <th>Déscription</th>
-                <th>Catégories</th>
                 <th>Disponible</th>
                 <th>Actions</th>
             </tr>
@@ -29,15 +27,8 @@
                 {% else %}
                 <td><img src="{{ asset('uploads/documents/' ~ entity.path) | imagine_filter('product_list_thumb')}}" class=""/></td>
                 {% endif %}
-                <td>{{ entity.sku }}</td>
                 <td>{{ entity.getPrice }} &euro;</td>
-                <td>{{ entity.description | truncate(32, true, '...')}}</td>
-                <td><ul>
-                    {% for cat in entity.categories %}
-                        <li>{{ cat.title }}</li>
-                    {% endfor %}
-                    </ul>
-                </td>
+                <td>{{ entity.description | truncate(10, true, '...')}}</td>
                 <td>
                     {% if entity.available is not empty %}
                         <span style="color:green;" class="glyphicon glyphicon-ok-sign"></span>

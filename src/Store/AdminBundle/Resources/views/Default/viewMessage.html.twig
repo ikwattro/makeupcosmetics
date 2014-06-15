@@ -1,0 +1,15 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+
+<h1>Message</h1>
+
+<h2>{{ message.name }}</h2>
+<h3>{{ message.email }}</h3>
+<h3>{{ message.dtg|date('d/m/Y H:i:s') }}</h3>
+<div>
+    <p>
+        {{ message.message|nl2br }}
+    </p>
+</div>
+{% endblock %}

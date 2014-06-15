@@ -1,0 +1,25 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+
+<h1>Messages</h1>
+
+<table class="table">
+    {% for message in messages %}
+        <tr>
+            <td>
+                {{ message.dtg|date('d/m/Y H:i:s') }}
+            </td>
+            <td>
+                {{ message.name }}
+            </td>
+            <td>
+                {{ message.email }}
+            </td>
+            <td>
+                <a href="{{ path('admin_message_view', {'id': message.id}) }}">Voir</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

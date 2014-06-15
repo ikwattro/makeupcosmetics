@@ -54,7 +54,11 @@ class MessageController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('message_sent'));
+            if ($this->notifyAdmin($entity->getName(), $entity->getEmail(), $entity->getMessage())) {
+                return $this->redirect($this->generateUrl('message_sent'));
+            }
+
+
         }
 
         return array(
@@ -255,5 +259,23 @@ class MessageController extends Controller
         return array(
 
         );
+    }
+
+    private function notifyAdmin($name, $email, $message)
+    {
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Nouveau Message sur le site')
+            ->setFrom(array('makeupcosmetics.eu@gmail.com' => 'MakeUp Cosmetics.eu - System'))
+            ->setTo(array('makeupcosmetics.eu@gmail.com', 'absoluttly@gmail.com', 'claudehaest@gmail.com'))
+            ->setBody($this->renderView('StoreAdminBundle:Default:notification_new_message.html.twig', array(
+                'name' => $name,
+                'email' => $email,
+                'message' => $message,
+            )), 'text/html')
+        ;
+        if ($this->get('mailer')->send($message)) {
+            return true;
+        }
+        return false;
     }
 }

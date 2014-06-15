@@ -60,11 +60,15 @@
         <div class="col-md-3 col-xs-12">
             <a href="{{ path('homeweb') }}" title="MakeUp Cosmetics like Professionals"><img src="/logomcp.png" alt="logo MakeUpCosmetics"/></a>
 
+            <a class="blink hidden-md hidden-lg" href="{{ path('page_shipping') }}" title="Livraison !">
+                <img src="{{ asset('freeshipping.png') }}" alt="{{ 'free_shipping'|trans }}"/> {{ 'free_shipping'|trans|capitalize }}
+            </a>
+
         </div>
 
 
 
-        <div class="col-md-9">
+        <div class="col-md-9 hidden-xs hidden-sm">
 
             <div class="account">
                 <ul id="account-cart">

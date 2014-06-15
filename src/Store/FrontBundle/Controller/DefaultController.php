@@ -100,6 +100,22 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Template()
+     */
+    public function getMobileCategoryMenuAction()
+    {
+        $man = $this->get('store.store_manager');
+        $parcours = $man->getCategoriesWithChildren();
+        $categories = $man->getCategories(true);
+        $htmlTree = $man->getMyTree();
+
+        return array(
+            'categories' => $categories,
+            'htmlTree'  => $htmlTree,
+        );
+    }
+
+    /**
      * @Route("/catalog/category/{id}/{slug}", name="category_page")
      * @Template()
      */

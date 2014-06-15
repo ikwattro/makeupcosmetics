@@ -1,15 +1,15 @@
 {% trans_default_domain 'Interface' %}
 
-<ul class="nav nav-pills nav-stacked catnav navcollapse" role="menu">
-    <li class="catalog_pill_white">
+<ul class="nav navbarnav hidden-md hidden-lg" role="menu">
+    <li>
             <a href="#">{{ 'catalogue'|trans|upper }}</a>
 
-        </li>
+    </li>
 
     {% if categories is not empty %}
         {% for category in categories %}
             {% if category.children is empty %}
-            <li class="catnavstyle">
+            <li>
                     <a href="{{ path('category_page', {'id': category.id, 'slug': category.slug|default('slug') }) }}" title="{{ category.title }} - Maquillage et Cosmétique">{{ category.title|upper }}</a></li>
 
 

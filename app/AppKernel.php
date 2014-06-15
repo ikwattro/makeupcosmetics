@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             new Store\MarketingBundle\StoreMarketingBundle(),
             new Store\ContactBundle\StoreContactBundle(),
             new Store\AdminBundle\StoreAdminBundle(),
+            new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

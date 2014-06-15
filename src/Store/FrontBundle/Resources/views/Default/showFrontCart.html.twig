@@ -9,7 +9,7 @@
 {% endif %}
 
 <div class="hidden-xs">
-    <h4><a href="{{ path('front_cart') }}"><img src="{{ asset('assets/icons/shopping-cart32.png') }}" alt="cart icon"/> {{ 'panier'|trans }}</a></h4>
+    <a class="acchead" href="{{ path('front_cart') }}" title="{{ 'panier'|trans }}"><img src="{{ asset('assets/icons/shopping-cart32.png') }}" alt="cart icon"/> {{ 'panier'|trans }}</a></h4>
     <p><span class="badge">{{ cart.itemsTotal }}</span> {{ word }}</p>
 </div>
 <div class="visible-xs">

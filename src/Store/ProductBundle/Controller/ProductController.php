@@ -234,6 +234,8 @@ class ProductController extends Controller
 
         if (null !== $locale) {
             $entity->setTranslatableLocale($locale);
+        } else {
+            $entity->setTranslatableLocale('fr');
         }
 
         $deleteForm = $this->createDeleteForm($id);

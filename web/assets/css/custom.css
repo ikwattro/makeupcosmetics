@@ -325,10 +325,10 @@ h1 span
     display: inline-block;
 }
 
-.account ul li h4 a
+.account ul li a.acchead
 {
     text-decoration: none;
-    color: #212121;
+    color: #f40a9f;
 }
 
 body > div:nth-child(2) > div > div.col-md-9 > div > ul > li:nth-child(2) > div.hidden-xs > p > span
@@ -454,7 +454,7 @@ ul.catnav li.cat_child
 
 li#your-account:hover
 {
-    color: #f40a9f;
+    #color: #f40a9f;
 }
 
 .account ul li:hover h4, .account ul li:hover h4 a

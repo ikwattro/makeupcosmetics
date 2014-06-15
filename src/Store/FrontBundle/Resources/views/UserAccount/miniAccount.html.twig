@@ -2,7 +2,7 @@
 
 <li id="your-account">
     <div class="hidden-xs">
-        <h4><a href="{{ path('myaccount_home') }}"><img src="{{ asset('assets/icons/customer32.png') }}"/> {{ 'mon_compte'|trans }}</a>
+        <a class="acchead" href="{{ path('myaccount_home') }}" title="{{ 'mon_compte'|trans|capitalize }}"><img src="{{ asset('assets/icons/customer32.png') }}" /> {{ 'mon_compte'|trans }}</a>
         </h4>
         <p>
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') == true %}

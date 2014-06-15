@@ -170,7 +170,7 @@ class ProductController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('StoreProductBundle:Product')->find($id);
+        $entity = $em->getRepository('StoreProductBundle:Product')->findByLocale($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Product entity.');

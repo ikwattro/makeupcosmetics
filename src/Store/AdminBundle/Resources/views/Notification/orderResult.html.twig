@@ -1,0 +1,15 @@
+<h3>Notification Commande MakeUp Cosmetics</h3>
+
+{% if result == false %}
+
+<p>
+    Un paiement a été refusé sur le site, le numéro de référence est le {{ orderId }}
+</p>
+
+{% else %}
+<p>
+    Une nouvelle commande a été passée et le paiement a été autorisé.
+
+    Retrouvez cette commande portant le numéro {{ orderId }} dans <a href="http://www.makeup-cosmetics.eu/admin">l'administration du site</a>
+</p>
+{% endif %}

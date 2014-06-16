@@ -315,6 +315,8 @@ class CheckoutController extends Controller
 
             $this->get('store.store_manager')->resetCart();
 
+            $this->notifyAdmin(true, $cart->getOrderId());
+
             return array(
                 'status' => $cart->getState(),
                 'orderId' => $cart->getOrderId(),
@@ -328,6 +330,9 @@ class CheckoutController extends Controller
             $result->setPaymentValid(false);
             $em->persist($result);
             $em->flush();
+
+            $this->notifyAdmin(false, $cart->getOrderId());
+
             return $this->render(
                 'StoreFrontBundle:Checkout:checkoutInvalid.html.twig',
                 array('status' => $params['STATUS'], 'locale' => $loc)
@@ -674,6 +679,20 @@ class CheckoutController extends Controller
             'error'         => $error,
             'csrf_token' => $csrfToken,
         );
+    }
+
+    public function notifyAdmin($result, $orderId)
+    {
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Notification Commande MakeUp Cosmetics')
+            ->setFrom(array('makeupcosmetics.eu@gmail.com' => 'MakeUpCosmetics - System'))
+            ->setTo(array('absoluttly@gmail.com', 'claudehaest@gmail.com'))
+            ->setBody($this->renderView('StoreAdminBundle:Notification:orderResult.html.twig', array(
+                'result' => $result,
+                'orderId' => $orderId,
+            )), 'text/html')
+        ;
+        $this->get('mailer')->send($message);
     }
 
 

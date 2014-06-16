@@ -12,11 +12,15 @@
             <argument type="service" id="router"/>
             <argument type="service" id="request"/>
             <argument type="service" id="session"/>
+
         </service>
 
-        <service id="store_core.authentication_listener" class="Store\CoreBundle\EventListener\AuthenticationListener">
+        <service id="store_core.authentication_listener" class="Store\CoreBundle\EventListener\AuthenticationListener" scope="request">
             <tag name="kernel.event_subscriber"/>
             <argument type="service" id="store.customer_manager"/>
+            <argument type="service" id="security.context"/>
+            <argument type="service" id="request"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
     </services>
 

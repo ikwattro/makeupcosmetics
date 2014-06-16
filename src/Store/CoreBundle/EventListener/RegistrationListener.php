@@ -19,6 +19,10 @@ class RegistrationListener implements EventSubscriberInterface
 
     private $session;
 
+    private $context;
+
+    private $em;
+
     public function __construct(UrlGeneratorInterface $router, Request $request, SessionInterface $session)
     {
         $this->router = $router;
@@ -36,6 +40,8 @@ class RegistrationListener implements EventSubscriberInterface
 
     public function onRegistrationSuccess(FormEvent $event)
     {
+
+
         $url = $this->router->generate('checkout_account');
         if($this->session->get('from_checkout', null)){
             $this->session->set('from_checkout', false);

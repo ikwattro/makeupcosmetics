@@ -37,7 +37,7 @@
         {{ entity.billingAddress.lastname }} {{ entity.billingAddress.firstname }}<br />
         {{ entity.billingAddress.line1 }}<br/>
         {{ entity.billingAddress.line2 }}<br/>
-        {{ entity.billingAddress.zipCode }} {{ entity.billingAddress.province }}<br/>
+        {{ entity.billingAddress.zipCode }} {{ entity.billingAddress.state }}<br/>
         {{ entity.billingAddress.country }}
     </p>
     <h2>Livraison :</h2>
@@ -45,7 +45,7 @@
         {{ entity.shippingAddress.lastname }} {{ entity.shippingAddress.firstname }}<br />
         {{ entity.shippingAddress.line1 }}<br/>
         {{ entity.shippingAddress.line2 }}<br/>
-        {{ entity.shippingAddress.zipCode }} {{ entity.shippingAddress.province }}<br/>
+        {{ entity.shippingAddress.zipCode }} {{ entity.shippingAddress.state }}<br/>
         {{ entity.shippingAddress.country }}
     </p>
     <p>Méthode de livraison : {{ entity.shippingMethod.title }} ({{ entity.shippingMethod.price }}&euro;)</p>

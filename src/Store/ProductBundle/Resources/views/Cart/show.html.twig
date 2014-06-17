@@ -1,12 +1,10 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-
-    <h2>Panier #{{ entity.id }}</h2>
     <h2>Numéro commande : #{{ entity.orderId }}</h2>
     <hr/>
 
-    <h4>Statut : <span class="label label-primary">{{ entity.processStatus }}</span></h4>
+    <h4>Statut : <span class="label label-primary">{{ entity.orderProcessStatus|default('PANIER') }}</span></h4>
 
     {% set total = 0 %}
 

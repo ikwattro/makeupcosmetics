@@ -248,4 +248,26 @@ class CartController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * @Route("/cart/{id}/change_order_process_status", name="cart_change_order_process_status")
+     * @Method("POST")
+     */
+    public function changeOrderProcessStatus($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $cart = $em->getRepository('StoreProductBundle:Cart')->find($id);
+
+        if (!$cart) {
+            throw new \InvalidArgumentException('Bad Cart Id');
+        }
+
+        $params = $this->get('request')->request;
+        $status = $params->get('process_status');
+
+        $this->get('store.store_manager')->setOrderProcessStatus($id, $status);
+
+        return $this->redirect($this->generateUrl('admin_home'));
+    }
 }

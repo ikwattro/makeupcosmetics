@@ -114,6 +114,11 @@ class Cart
     protected $isBot;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $orderProcessStatus;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -528,5 +533,28 @@ class Cart
     public function getUserAgent()
     {
         return $this->userAgent;
+    }
+
+    /**
+     * Set isBot
+     *
+     * @param boolean $isBot
+     * @return Cart
+     */
+    public function setIsBot($isBot)
+    {
+        $this->isBot = $isBot;
+
+        return $this;
+    }
+
+    /**
+     * Get isBot
+     *
+     * @return boolean 
+     */
+    public function getIsBot()
+    {
+        return $this->isBot;
     }
 }

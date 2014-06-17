@@ -377,6 +377,79 @@ class StoreManager
         return $repo->findAllForUser($user->getId());
     }
 
+    private function getCartForId($id)
+    {
+        $cart = $this->cart_repository->find($id);
+        if (!$cart) {
+            throw new \InvalidArgumentException('Bad Cart Id');
+        }
+        return $cart;
+
+    }
+
+    public function setOrderProcessStatus($id, $status)
+    {
+        $cart = $this->getCartForId($id);
+
+        $cart->setOrderProcessStatus($status);
+        $this->em->persist($cart);
+        $this->em->flush();
+
+        return $cart;
+
+
+    }
+
+    public function setOrderReceived($id)
+    {
+        $cart = $this->getCartForId($id);
+
+
+        $cart->setOrderProcessStatus('RECEIVED');
+        $this->em->persist($cart);
+        $this->em->flsuh();
+    }
+
+    public function setOrderReady($id)
+    {
+        $cart = $this->getCartForId($id);
+
+
+        $cart->setOrderProcessStatus('READY');
+        $this->em->persist($cart);
+        $this->em->flsuh();
+    }
+
+    public function setOrderShipped($id)
+    {
+        $cart = $this->getCartForId($id);
+
+
+        $cart->setOrderProcessStatus('SHIPPED');
+        $this->em->persist($cart);
+        $this->em->flsuh();
+    }
+
+    public function setOrderTerminated($id)
+    {
+        $cart = $this->getCartForId($id);
+
+
+        $cart->setOrderProcessStatus('TERMINATED');
+        $this->em->persist($cart);
+        $this->em->flsuh();
+    }
+
+    public function setOrderError($id)
+    {
+        $cart = $this->getCartForId($id);
+
+
+        $cart->setOrderProcessStatus('ERROR');
+        $this->em->persist($cart);
+        $this->em->flsuh();
+    }
+
 
 
 }

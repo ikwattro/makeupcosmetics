@@ -9,8 +9,10 @@
                 <th>DateTime</th>
                 <th>User</th>
                 <th>Nombre de Produits</th>
+                <th>Etat Commande</th>
                 <th>Statut</th>
                 <th>Processus</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -30,6 +32,7 @@
                     {% endif %}
                 </td>
                 <td>{{ entity.itemsTotal }}</td>
+                <td>{{ entity.orderProcessStatus|lower|trans|default('PANIER') }}</td>
                 <td>
                     {% if (entity.state is empty or entity.state == 'CART') %}
                         <span class="label label-default">Panier</span>
@@ -38,6 +41,15 @@
                     {% endif %}
                 </td>
                 <td>{{ entity.processStatus }}</td>
+                <td>
+                    <form action="{{ path('cart_change_order_process_status', {'id': entity.id}) }}" method="POST">
+                        <select name="process_status">
+                            <option value="RECEIVED">RECEIVED</option>
+                            <option value="READY">READY</option>
+                        </select>
+                        <input type="submit" value="envoyer"/>
+                    </form>
+                </td>
             </tr>
             {% endif %}
         {% endfor %}

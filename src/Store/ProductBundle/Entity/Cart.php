@@ -114,11 +114,17 @@ class Cart
     protected $isBot;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $orderProcessStatus;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->items = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->orderProcessStatus = 'CART';
     }
     
     /**
@@ -551,5 +557,28 @@ class Cart
     public function getIsBot()
     {
         return $this->isBot;
+    }
+
+    /**
+     * Set orderProcessStatus
+     *
+     * @param string $orderProcessStatus
+     * @return Cart
+     */
+    public function setOrderProcessStatus($orderProcessStatus)
+    {
+        $this->orderProcessStatus = $orderProcessStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get orderProcessStatus
+     *
+     * @return string 
+     */
+    public function getOrderProcessStatus()
+    {
+        return $this->orderProcessStatus;
     }
 }

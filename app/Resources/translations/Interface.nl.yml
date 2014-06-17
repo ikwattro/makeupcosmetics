@@ -89,3 +89,10 @@ contact:
   submit: verzenden
   sent: uw bericht werd verzonden, wij antwoorden in de beste tijden
   sent_title: bericht verzonden
+
+order_state:
+    received: In behandeling
+    ready: Klaar
+    shipped: Verzonden
+    terminated: Afgewerkt
+    error: Fout

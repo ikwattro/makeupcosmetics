@@ -315,6 +315,8 @@ class CheckoutController extends Controller
 
             $this->get('store.store_manager')->resetCart();
 
+            $this->get('store.store_manager')->setOrderReceived($cart);
+
             $this->notifyAdmin(true, $cart->getOrderId());
 
             return array(
@@ -330,6 +332,8 @@ class CheckoutController extends Controller
             $result->setPaymentValid(false);
             $em->persist($result);
             $em->flush();
+
+            $this->get('store.store_manager')->setOrderError($cart);
 
             $this->notifyAdmin(false, $cart->getOrderId());
 

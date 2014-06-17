@@ -89,4 +89,12 @@ contact:
   message: votre message :
   submit: envoyer
   sent: votre message a été envoyé, nous le traiterons dans les plus brefs délais
-  sent_title: bericht_verzonden
+  sent_title: Message envoyé
+
+order_state:
+    received: En cours
+    ready: Prête
+    shipped: Envoyée
+    terminated: Terminée
+    error: Erreur
+

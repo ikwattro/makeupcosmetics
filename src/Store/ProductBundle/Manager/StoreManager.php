@@ -407,7 +407,7 @@ class StoreManager
 
         $cart->setOrderProcessStatus('RECEIVED');
         $this->em->persist($cart);
-        $this->em->flsuh();
+        $this->em->flush();
     }
 
     public function setOrderReady($id)

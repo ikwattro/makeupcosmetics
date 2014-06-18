@@ -221,6 +221,14 @@ class DefaultController extends Controller
             }
         }
 
+        if (($total - $twoPlusOneDiscountMap) > 45)
+        {
+            $free_shipping = true;
+        } else
+        {
+            $free_shipping = false;
+        }
+
         return array(
             'cart'  =>  $cart,
             'total' => $total,

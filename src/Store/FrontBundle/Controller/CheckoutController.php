@@ -138,27 +138,6 @@ class CheckoutController extends Controller
             break;
         }
 
-        if (!empty($promotion)) {
-            if ($promotion['new_total'] > 45) {
-                $cart->setShippingPrice(0);
-            }
-        } elseif ($total > 45) {
-            $free_shipping = true;
-            $cart->setShippingPrice(0);
-        }
-
-        if (count($promotion) > 0) {
-            $cart->setPromotionDiscount($promotion['discount_amount']);
-            $em->persist($cart);
-            $em->flush();
-        }
-
-
-
-
-
-
-
         $twoPlusOneMap = array();
         foreach ($cart->getItems() as $item) {
             $v = $item->getProduct();
@@ -182,6 +161,31 @@ class CheckoutController extends Controller
                 $twoPlusOneDiscountMap = $twoPlusOneDiscountMap + (round($q/2, 0, PHP_ROUND_HALF_DOWN)*$price);
             }
         }
+
+        if (!empty($promotion)) {
+            if ($promotion['new_total']-$twoPlusOneDiscountMap > 45) {
+                $cart->setShippingPrice(0);
+            }
+        } elseif (($total-$twoPlusOneDiscountMap) > 45) {
+            $free_shipping = true;
+            $cart->setShippingPrice(0);
+        } else {
+            $free_shipping = false;
+        }
+
+        if (count($promotion) > 0) {
+            $cart->setPromotionDiscount($promotion['discount_amount']);
+            $em->persist($cart);
+            $em->flush();
+        }
+
+
+
+
+
+
+
+
 
         $man->setCartConfirmStatus();
         $countries = Intl::getRegionBundle()->getCountryNames();
@@ -222,12 +226,12 @@ class CheckoutController extends Controller
 
         if (!empty($promotion)) {
                 if ($promotion['disabled'] == false) {
-                    $amount = $amount - $cart->getPromotionDiscount();
+                    $amount = $amount - $cart->getPromotionDiscount() - $twoPlusOneDiscountMap;
                 }
 
         }
 
-        if ($amount < 45) {
+        if ($amount-$twoPlusOneDiscountMap < 45) {
             $amount = $amount + $cart->getShippingMethod()->getPrice();
         }
 
@@ -392,7 +396,32 @@ class CheckoutController extends Controller
         if (null != $cart->getPromotionDiscount()) {
             $total = ($total - $cart->getPromotionDiscount());
         }
-        if ($total > 45) {
+
+        $twoPlusOneMap = array();
+        foreach ($cart->getItems() as $item) {
+            $v = $item->getProduct();
+            $p = $v->getProduct();
+            if ($p->getTwoPlusOne()) {
+                if (array_key_exists($p->getId(), $twoPlusOneMap)) {
+                    $twoPlusOneMap[$p->getId()] = $twoPlusOneMap[$p->getId()] + $item->getQuantity();
+                } else {
+                    $twoPlusOneMap[$p->getId()] = $item->getQuantity();
+                }
+            }
+
+        }
+        $twoPlusOneDiscountMap = 0;
+        $r = $em->getRepository('StoreProductBundle:Product');
+
+        foreach($twoPlusOneMap as $k => $q) {
+            if ($q >= 2) {
+                $pr = $r->find($k);
+                $price = $pr->getPrice();
+                $twoPlusOneDiscountMap = $twoPlusOneDiscountMap + (round($q/2, 0, PHP_ROUND_HALF_DOWN)*$price);
+            }
+        }
+
+        if ($total-$twoPlusOneDiscountMap > 45) {
             foreach ($available_methods as $m) {
                 $m->setPrice(0);
             }

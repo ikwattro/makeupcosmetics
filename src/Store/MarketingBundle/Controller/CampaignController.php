@@ -82,13 +82,28 @@ class CampaignController extends Controller
         );
     }
 
+    /**
+     * @Route("/campaign/email/promoMascaraNl", name="campaign_promo_mascara_nl")
+     * @Template()
+     */
+    public function promoMascaraNlAction()
+    {
+        //var_dump($this->generateUrl('email_followback'));
+        $em = $this->get('request')->query->get('targetEmail') ?: '';
+        return array(
+            'followback_url' => $this->generateUrl('email_followback', array(), true),
+            'email' => $em,
+            'label' => 'promoMascara'
+        );
+    }
+
     private function sendCampaignEmail($followbackUrl, $email, $label)
     {
         $message = \Swift_Message::newInstance()
-            ->setSubject('Promo Mascara 1+1 gratuit')
+            ->setSubject('Promo Mascara 1+1 gratis')
             ->setFrom(array('makeupcosmetics.eu@gmail.com' => 'MakeUp Cosmetics.eu - Claude Haest'))
             ->setTo($email)
-            ->setBody($this->renderView('StoreMarketingBundle:Campaign:promoMascara.html.twig', array(
+            ->setBody($this->renderView('StoreMarketingBundle:Campaign:promoMascaraNl.html.twig', array(
                 'followback_url' => $followbackUrl,
                 'email' => $email,
                 'label' => $label,
@@ -248,6 +263,45 @@ class CampaignController extends Controller
                     }
                 } else {
                     //$this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoFeutre');
+                    $targets[] = $target->getEmail();
+                }
+
+
+
+
+            }
+        }
+
+        return array(
+            'count' => count($targets),
+            'targets' => $targets
+        );
+
+    }
+
+    /**
+     * @Route("/admin/campaign/email/send/nl/promoMascara/{testOnly}", name="campaign_send_nl_promoMascara")
+     * @Template()
+     */
+    public function sendPromoMascaraNlAction($testOnly)
+    {
+        $targets = array();
+
+        $test = $testOnly == 'reality' ? false : true;
+
+        $em = $this->getDoctrine()->getManager();
+        $entities = $em->getRepository('StoreMarketingBundle:TargetEmail')->findAll();
+
+        foreach ($entities as $target) {
+            if ($this->isValidForDutch($target) || $target->getTestAllowed()) {
+
+                if ($test) {
+                    if ($target->getTestAllowed()) {
+                        $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoMascara');
+                        $targets[] = $target->getEmail();
+                    }
+                } else {
+                    $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoMascara');
                     $targets[] = $target->getEmail();
                 }
 

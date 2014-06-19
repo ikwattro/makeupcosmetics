@@ -23,9 +23,20 @@ class DefaultController extends Controller
 
         $cart = $man->getCart();
 
+        $loc = $this->get('request')->getLocale();
+        var_dump($loc);
+
+        $e = explode('_', $loc);
+        $l = $e[0];
+
+        if ($l != 'fr' && $l != 'nl') {
+            $l = 'fr';
+        }
+
         return array(
             'cart'  =>  $cart,
             'products'  =>  $masterVariants,
+            'imgloc' => $l,
         );
     }
 

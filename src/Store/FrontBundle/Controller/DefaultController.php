@@ -24,7 +24,7 @@ class DefaultController extends Controller
         $cart = $man->getCart();
 
         $loc = $this->get('request')->getLocale();
-        var_dump($loc);
+        //var_dump($loc);
 
         $e = explode('_', $loc);
         $l = $e[0];

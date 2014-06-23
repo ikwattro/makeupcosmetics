@@ -55,9 +55,12 @@ class DefaultController extends Controller
             throw new \InvalidArgumentException("The product does not exist");
         }
 
+        $meta_desc = str_replace('#', '', $product->getDescription());
+
         return array(
             'variant'   => $variant,
-            'product'   =>  $product
+            'product'   =>  $product,
+            'metadesc' => $meta_desc,
         );
     }
 

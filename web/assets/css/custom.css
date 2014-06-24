@@ -538,10 +538,11 @@ h2.indexslogan
     margin:0;
     margin-top:10px;
     padding-left:2px;
-    padding-right:1px;
+    padding-right:3px;
     background-color: #f40a9f;
-    color: #ccc;
+    color: #fff;
     display: inline-block;
+    font-size: 12px;
 }
 
 .tagholder div strong

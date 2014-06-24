@@ -156,4 +156,42 @@ class ProductRepository extends TranslationRepository
         );
         return $query->getSingleResult();
     }
+
+    public function findLatestByLocale($locale = 'fr', $limit = null, $onlyAvailable = 1)
+    {
+        $strip = explode('_', $locale);
+        $locale = $strip[0];
+        //Make a Select query
+        $qb = $this->createQueryBuilder('a');
+        $qb->select('a');
+        $qb->addSelect('c')
+            ->addSelect('v')
+            ->leftJoin('a.categories', 'c')
+            ->leftJoin('a.variants', 'v');
+        if ($onlyAvailable) {
+            $qb->where('a.available = 1');
+        }
+
+        $qb->andWhere('v.is_master IS NOT null')
+            ->orderBy('a.id', 'DESC');
+
+        //->orderBy(...) customize it
+
+
+        // Use Translation Walker
+        $query = $qb->getQuery();
+
+        $query->setHint(
+            \Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER,
+            'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker'
+        );
+
+        $query->setHint(\Gedmo\Translatable\TranslatableListener::HINT_FALLBACK, 1);
+        // Force the locale
+        $query->setHint(
+            \Gedmo\Translatable\TranslatableListener::HINT_TRANSLATABLE_LOCALE,
+            $locale
+        );
+        return $query->getResult();
+    }
 }

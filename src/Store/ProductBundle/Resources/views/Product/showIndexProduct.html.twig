@@ -1,5 +1,13 @@
 <div class="col-md-3 col-lg-3 col-xs-12 product_mini_fiche">
+
     <div class="mini_fiche_holder">
+{% if new is defined and new == true %}
+    <div class="tagholder">
+    <div>
+    <strong>#new</strong>
+    </div>
+</div>
+{% endif %}
 
         <div class="mini_fiche_holder_name">
             <a href="{{ path('product_front_show', {'id': product.masterVariant.id, 'slug': product.masterVariant.vslug}) }}"
@@ -15,6 +23,7 @@
 
 
     <div class="mini_fiche_holder_price">
+    
         <p>
             {% if product.masterVariant.isPromo is not empty %}
                 <span class="price-striped">{{ product.masterVariant.promoPrice }}&euro;</span>&nbsp;&nbsp;

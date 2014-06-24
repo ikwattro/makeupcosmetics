@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-xs-12 col-md-12">
             <p style="text-align: center;">
-                <img class="img-responsive" src="{{ asset('/promo_mascara_' ~ imgloc ~ '.jpg') }}" alt="Promotion Feutre à Lèvres"/>
+                <img class="img-responsive" src="{{ asset('/promo_mascara_' ~ imgloc ~ '.jpg') }}" alt="Promotion sur les Mascaras"/>
             </p>
         </div>
     </div>
@@ -17,6 +17,21 @@
 
     <div class="row demo">
     <h1 class="hidden-xs hidden-sm">{{ 'welcome'|trans }}</h1>
+    <h2 class="hidden-xs hidden-sm indexslogan">{{ 'welcome_slogan'|trans}}</h2>
+
+    <section>
+        <h3>{{ 'latest'|trans }}</h3>
+        {% set loopin = 0 %}
+        {% for last in latest %}
+            {% if last.masterVariant.outOfStock is empty and loopin < 4 %}
+                {% include 'StoreProductBundle:Product:showIndexProduct.html.twig' with {'product': last, 'new': true} %}
+                {% set loopin = loopin +1 %}
+            {% endif %}
+        {% endfor %}
+    </section>
+
+    <section>
+
     {% set looping = 0 %}
   {% for prod in products %}
       {% if prod.masterVariant.outOfStock is empty and looping < 20 %}
@@ -27,5 +42,6 @@
         </div><div class="row demo">
             {% endif %}
             {% endfor %}
+    </section>
     </div>
 {% endblock %}

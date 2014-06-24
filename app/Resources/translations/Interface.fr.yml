@@ -14,8 +14,10 @@ home: accueil
 continue: continuer
 validate: valider
 welcome: Bienvenue sur MakeUp Cosmetics
+welcome_slogan: Spécialiste makeup, vente de maquillage et cosmétique à prix discount
 twoPlusOne: Ristourne totale promotion 1+1 gratuit
 free_shipping: livraison gratuite à partir de 45€
+latest: Derniers produits
 
 #Connexion
 connexion:

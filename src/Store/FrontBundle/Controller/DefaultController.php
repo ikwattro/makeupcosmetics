@@ -17,12 +17,6 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $man = $this->get('store.store_manager');
-
-        $masterVariants = $man->getMasterVariants(null, 20);
-
-        $cart = $man->getCart();
-
         $loc = $this->get('request')->getLocale();
         //var_dump($loc);
 
@@ -33,10 +27,21 @@ class DefaultController extends Controller
             $l = 'fr';
         }
 
+        $latest = $em->getRepository('StoreProductBundle:Product')->findLatestByLocale($l);
+
+        $man = $this->get('store.store_manager');
+
+        $masterVariants = $man->getMasterVariants(null, 20);
+
+        $cart = $man->getCart();
+
+        
+
         return array(
             'cart'  =>  $cart,
             'products'  =>  $masterVariants,
             'imgloc' => $l,
+            'latest' => $latest,
         );
     }
 

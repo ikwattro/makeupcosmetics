@@ -23,12 +23,23 @@
                     <img src="{{ asset('freeshipping.png') }}" alt="{{ 'free_shipping'|trans }}"/> {{ 'free_shipping'|trans|capitalize }}
                 </a>
             <ul class="nav navbar-nav navbar-right hidden-xs hidden-sm">
-                <li><a href="https://www.facebook.com/pages/MakeUp-Cosmetics-Professional/643352275751858" title="Find us on Facebook">
+                <li><a href="https://www.facebook.com/pages/MakeUp-Cosmetics-Professional/643352275751858" title="Find us on Facebook" target="_blank">
                         <img src="{{ asset('assets/social_icons/facebook.png') }}" alt="Like us on Facebook"/></a></li>
-                <li><a href="https://twitter.com/mUpCosmetics" title="Follow us on Twitter">
+                <li><a href="https://twitter.com/mUpCosmetics" title="Follow us on Twitter" target="_blank">
                         <img src="{{ asset('assets/social_icons/twitter.png') }}" alt="Follow us on Twitter"/></a></li>
-                <li><a href="#" title="Find us on Pinterest">
-                        <img src="{{ asset('assets/social_icons/pinterest.png') }}" alt="Pin us on Pinterest"/></a></li>
+                <!--<li><a href="#" title="Find us on Pinterest" target="_blank">
+                        <img src="{{ asset('assets/social_icons/pinterest.png') }}" alt="Pin us on Pinterest"/></a>
+                    </li>-->
+                <li>
+                    <a href="https://www.google.com/+MakeupcosmeticsEumcp" title="find us on Google+" target="_blank">
+                        <img src="{{ asset('assets/social_icons/googleplus.png')}}" alt="Google +" />
+                    </a>
+                </li>
+                <li>
+                    <a href="http://instagram.com/makeupcosmetics.eu" title="Instagram Profile" target="_blank">
+                        <img src="{{ asset('assets/social_icons/instagram.png')}}" alt="Instagram Profile"/>
+                    </a>
+                </li>
                 {{ locale_switcher() }}
                 <li><a href="{{ path('contact_new') }}" title="Contact"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
             </ul>

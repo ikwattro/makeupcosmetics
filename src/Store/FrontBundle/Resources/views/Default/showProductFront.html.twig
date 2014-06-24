@@ -24,30 +24,12 @@
 {% block par_class %}product_show_div{% endblock %}
 
 {% block content %}
-    {#
-    <ol class="breadcrumb">
-        <li><a href="#">Catalogue</a></li>
-        <li><a href="#">Teint</a></li>
-        <li class="active">Fonds de teint</li>
-    </ol>
-    #}
+    
 <h1 class="ps_title" xmlns="http://www.w3.org/1999/html">
     <a href="#"><span itemprop="name">{{ product.name|upper }} {{ titlevariant|upper }}</span><span>.</span></a>
 </h1>
 <hr/>
     <div class="row">
-
-        {% if variant.product.id == 8112345678987654323456789 %}
-
-        <div class="col-xs-12 col-md-12">
-            <p style="text-align: center;">
-                <a href="http://www.makeup-cosmetics.eu/catalog/product/208/feutre-a-levres" title="Promo Feutre à Lèvres">
-                    <img class="img-responsive" src="{{ asset('/gefal_promo_' ~ app.session.get('lunetics_locale') ~ '.jpg') }}" alt="Promotion Feutre à Lèvres"/>
-                </a>
-            </p>
-        </div>
-        <hr />
-        {% endif %}
 
         <div class="col-md-5 col-xs-12 ps_img">
                 <div>

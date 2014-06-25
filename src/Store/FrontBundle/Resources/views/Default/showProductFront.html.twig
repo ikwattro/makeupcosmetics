@@ -22,10 +22,11 @@
 {% endblock %}
 
 {% block par_class %}product_show_div{% endblock %}
+{% block microdata %}itemscope itemtype="http://schema.org/Product"{% endblock %}
 
 {% block content %}
     
-<h1 class="ps_title" xmlns="http://www.w3.org/1999/html">
+<h1 class="ps_title">
     <a href="#"><span itemprop="name">{{ product.name|upper }} {{ titlevariant|upper }}</span><span>.</span></a>
 </h1>
 <hr/>
@@ -140,14 +141,14 @@
 
             <div class="ps_price">
                 <h4>{{ 'product_page.price'|trans|capitalize }} :</h4>
-                <span itemprop="offerDetails" itemscope itemtype="http://data-vocabulary.org/Offer">
-                    <meta itemprop="currency" content="EUR" />
-                <p><span itemprop="price">
+                <span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                <p itemprop="price">
                         {% if variant.isPromo is not empty %}<span class="price-striped">{{ variant.promoPrice }}&euro;</span>
                         <span class="price-promo">{{ variant.price }}&euro;</span>
                         {% else %}
                         {{ variant.price }}</span>&euro;
-                        {% endif %}</p>
+                        {% endif %}
+                </p>
             </div>
 
 

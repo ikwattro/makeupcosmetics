@@ -2,6 +2,7 @@ set :domain,      "217.70.189.241"
 set :deploy_to,   "/srv/webdisk/web/www/makeupcosmetics/"
 set :app_path,    "app"
 set :cache_path,          app_path + "/cache"
+set :logs_path, app_path + "/logs"
 
 set :repository,  "git@github.com:kwattro/makeupcosmetics.git"
 set :scm,         :git
@@ -45,6 +46,8 @@ end
 task :set_correct_cache do
     try_sudo "chown -R angusyoung:www-data #{latest_release}/#{cache_path}"
     try_sudo "chmod -R g+w #{latest_release}/#{cache_path}"
+    try_sudo "chown -R angusyoung:www-data #{latest_release}/#{logs_path}"
+        try_sudo "chmod -R g+w #{latest_release}/#{logs_path}"
 end
 
 task :set_media_writable do

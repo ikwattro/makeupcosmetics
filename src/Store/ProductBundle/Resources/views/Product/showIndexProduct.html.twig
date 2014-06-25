@@ -9,27 +9,27 @@
 </div>
 {% endif %}
 
-        <div class="mini_fiche_holder_name">
+        <div itemscope itemtype="http://schema.org/Product" class="mini_fiche_holder_name">
             <a href="{{ path('product_front_show', {'id': product.masterVariant.id, 'slug': product.masterVariant.vslug}) }}"
-                    title="{{ product.name }}">{{ product.name }}</a>
+                    title="{{ product.name }}"><span itemprop="name">{{ product.name }}</span></a>
         </div>
 
     <div class="mini_fiche_holder_img">
         <a href="{{ path('product_front_show', {'id': product.masterVariant.id, 'slug': product.masterVariant.vslug }) }}">
-            <img class="img-responsive" src="{{ asset('uploads/documents/' ~ product.path) | imagine_filter('frontlist_thumb_new')}}"
+            <img itemprop="image" class="img-responsive" src="{{ asset('uploads/documents/' ~ product.path) | imagine_filter('frontlist_thumb_new')}}"
                     alt="{{ product.name }}"/>
         </a>
     </div>
 
 
-    <div class="mini_fiche_holder_price">
+    <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mini_fiche_holder_price">
     
         <p>
             {% if product.masterVariant.isPromo is not empty %}
                 <span class="price-striped">{{ product.masterVariant.promoPrice }}&euro;</span>&nbsp;&nbsp;
-            <span class="price-promo">{{ product.masterVariant.price }}&euro;</span>
+            <span class="price-promo" itemprop="price">{{ product.masterVariant.price }}&euro;</span>
             {% else %}
-            {{ product.masterVariant.price }}&euro;
+            <span itemprop="price">{{ product.masterVariant.price }}&euro;</span>
             {% endif %}
         </p>
     </div>

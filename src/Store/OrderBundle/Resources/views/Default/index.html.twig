@@ -1,0 +1,79 @@
+{% extends "StoreOrderBundle:Default:invoice_layout.html.twig" %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-xs-12">
+        <h1>Note d'envoi <small>numéro #12344</small></h1>
+        <hr>
+    </div>
+</div>
+
+    <div class="row">
+        <table class="table table-bordered">
+            <tr><th>
+                Produit
+            </th>
+            <th>
+                Quantité
+            </th>
+            <th>
+                Prix unitaire
+            </th>
+            <th>
+                Prix Total
+            </th>
+            </tr>
+
+            <tr>
+                <td>
+                    Vernis à Ongles - VE01 - Groseille
+                </td>
+                <td>
+                    2
+                </td>
+                <td>
+                    1,5€
+                </td>
+                <td>
+                    3€
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Mascara Volume - MV03 - Pourpre
+                </td>
+                <td>
+                    3
+                </td>
+                <td>
+                    1,5€
+                </td>
+                <td>
+                    4,5€
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+            </tr>
+            <tr>
+                <td>
+                    Promotion Mascaras 1+1
+                </td>
+                <td colspan="2"></td>
+                <td>-1,5€</td>
+            </tr>
+            <tr>
+                <td>Methode de Livraison : BPOST National</td>
+                <td colspan="2"></td>
+                <td>5,95€</td>
+            </tr>
+            <tr>
+                <td colspan="3" class="text-right">Total :</td>
+                <td><strong>11,95€</strong></td>
+            </tr>
+        </table>
+    </div>
+
+{% endblock %}

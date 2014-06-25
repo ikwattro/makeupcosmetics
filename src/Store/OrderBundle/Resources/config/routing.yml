@@ -1,0 +1,3 @@
+store_order_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: StoreOrderBundle:Default:index }

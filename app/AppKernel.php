@@ -31,6 +31,8 @@ class AppKernel extends Kernel
             new Store\ContactBundle\StoreContactBundle(),
             new Store\AdminBundle\StoreAdminBundle(),
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
+            new Store\OrderBundle\StoreOrderBundle(),
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

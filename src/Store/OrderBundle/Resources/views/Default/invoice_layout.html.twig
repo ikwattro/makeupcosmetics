@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Invoice Template</title>
+
+    <!-- Bootstrap -->
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6">
+            <address>
+                <strong>MakeUp Cosmetics</strong><br>
+                <strong>Claude Haest S.P.R.L/B.V.B.A</strong><br>
+                Rue de Linkebeek, 50<br>
+                Bruxelles, 1180<br>
+                Belgique<br>
+                <abbr title="contact">@:</abbr> makeupcosmetics.eu@gmail.com
+            </address>
+        </div>
+
+        <div class="col-xs-6 text-right">
+            Bruxelles, le {{ date|date('d-m-Y') }}<br><br>
+            <address>
+                <strong>Christophe Willemsen</strong><br>
+                Leopold Debruynestraat, 125<br>
+                Bruges Sainte-Croix, 8310<br>
+                Belgique<br>
+            </address>
+        </div>
+    </div>
+
+    {% block body %} {% endblock %}
+</div>
+</body>
+</html>

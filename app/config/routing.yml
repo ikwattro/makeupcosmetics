@@ -1,3 +1,8 @@
+store_order:
+    resource: "@StoreOrderBundle/Controller"
+    prefix:   /admin
+    type: annotation
+
 store_admin:
     resource: "@StoreAdminBundle/Controller"
     prefix:   /admin

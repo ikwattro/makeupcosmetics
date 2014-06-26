@@ -461,6 +461,8 @@ class CampaignController extends Controller
     public function sendPromoVernisNlAction($testOnly)
     {
         $targets = array();
+        $subject = 'Promotie Nagellak 1+1 gratis';
+        $template = 'StoreMarketingBundle:Campaign:promoVernisNl.html.twig';
 
         $test = $testOnly == 'reality' ? false : true;
 
@@ -472,11 +474,11 @@ class CampaignController extends Controller
 
                 if ($test) {
                     if ($target->getTestAllowed()) {
-                        $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoVernis');
+                        $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoVernis', $subject, $template);
                         $targets[] = $target->getEmail();
                     }
                 } else {
-                    $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoVernis');
+                    $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoVernis', $subject, $template);
                     $targets[] = $target->getEmail();
                 }
 

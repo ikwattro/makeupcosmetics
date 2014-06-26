@@ -32,6 +32,7 @@ class FollowBackController extends Controller
             'readOnlineNl' => $this->generateUrl('campaign_promo_vernis_nl', array('targetEmail' => $request->query->get('targetEmail')), true),
             'promoMascara' => $this->generateUrl('homeweb'),
             'promoVernis' => $this->generateUrl('homeweb'),
+            'promoVernisNl' => $this->generateUrl('homeweb'),
 
         );
 

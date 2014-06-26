@@ -97,6 +97,36 @@ class CampaignController extends Controller
         );
     }
 
+    /**
+     * @Route("/campaign/email/promoVernis", name="campaign_promo_vernis")
+     * @Template()
+     */
+    public function promoVernisAction()
+    {
+        //var_dump($this->generateUrl('email_followback'));
+        $em = $this->get('request')->query->get('targetEmail') ?: '';
+        return array(
+            'followback_url' => $this->generateUrl('email_followback', array(), true),
+            'email' => $em,
+            'label' => 'promoMascara'
+        );
+    }
+
+    /**
+     * @Route("/campaign/email/promoNagellakNl", name="campaign_promo_vernis_nl")
+     * @Template()
+     */
+    public function promoVernisNlAction()
+    {
+        //var_dump($this->generateUrl('email_followback'));
+        $em = $this->get('request')->query->get('targetEmail') ?: '';
+        return array(
+            'followback_url' => $this->generateUrl('email_followback', array(), true),
+            'email' => $em,
+            'label' => 'promoMascara'
+        );
+    }
+
     private function sendCampaignEmail($followbackUrl, $email, $label, $subject, $template)
     {
         $message = \Swift_Message::newInstance()

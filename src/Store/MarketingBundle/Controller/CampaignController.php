@@ -97,13 +97,13 @@ class CampaignController extends Controller
         );
     }
 
-    private function sendCampaignEmail($followbackUrl, $email, $label)
+    private function sendCampaignEmail($followbackUrl, $email, $label, $subject, $template)
     {
         $message = \Swift_Message::newInstance()
-            ->setSubject('Promo Mascara 1+1 gratis')
-            ->setFrom(array('makeupcosmetics.eu@gmail.com' => 'MakeUp Cosmetics.eu - Claude Haest'))
+            ->setSubject($subject)
+            ->setFrom(array('makeupcosmetics.eu@gmail.com' => 'MakeUp Cosmetics - Claude Haest'))
             ->setTo($email)
-            ->setBody($this->renderView('StoreMarketingBundle:Campaign:promoMascaraNl.html.twig', array(
+            ->setBody($this->renderView($template, array(
                 'followback_url' => $followbackUrl,
                 'email' => $email,
                 'label' => $label,
@@ -381,6 +381,86 @@ class CampaignController extends Controller
             return true;
         }
         return false;
+    }
+
+    /**
+     * @Route("/admin/campaign/email/send/promoVernis/{testOnly}", name="campaign_send_promoVernis")
+     * @Template()
+     */
+    public function sendPromoVernisAction($testOnly)
+    {
+        $targets = array();
+        $subject = 'Promotion Vernis à Ongles 1+1 gratuit';
+        $template = 'StoreMarketingBundle:Campaign:promoVernis.html.twig';
+
+        $test = $testOnly == 'reality' ? false : true;
+
+        $em = $this->getDoctrine()->getManager();
+        $entities = $em->getRepository('StoreMarketingBundle:TargetEmail')->findAll();
+        foreach ($entities as $target) {
+            if ($this->isValidForFrench($target)) {
+
+                if ($test) {
+                    if ($target->getTestAllowed()) {
+                        $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoVernis', $subject, $template);
+                        $targets[] = $target->getEmail();
+                    }
+                } else {
+                    $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoVernis', $subject, $template);
+                    $targets[] = $target->getEmail();
+                }
+
+
+
+
+            }
+        }
+
+        return array(
+            'count' => count($targets),
+            'targets' => $targets
+        );
+
+    }
+
+
+    /**
+     * @Route("/admin/campaign/email/send/nl/promoVernis/{testOnly}", name="campaign_send_nl_promoVernis")
+     * @Template()
+     */
+    public function sendPromoVernisNlAction($testOnly)
+    {
+        $targets = array();
+
+        $test = $testOnly == 'reality' ? false : true;
+
+        $em = $this->getDoctrine()->getManager();
+        $entities = $em->getRepository('StoreMarketingBundle:TargetEmail')->findAll();
+
+        foreach ($entities as $target) {
+            if ($this->isValidForDutch($target) || $target->getTestAllowed()) {
+
+                if ($test) {
+                    if ($target->getTestAllowed()) {
+                        $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoVernis');
+                        $targets[] = $target->getEmail();
+                    }
+                } else {
+                    $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoVernis');
+                    $targets[] = $target->getEmail();
+                }
+
+
+
+
+            }
+        }
+
+        return array(
+            'count' => count($targets),
+            'targets' => $targets
+        );
+
     }
 
 

@@ -25,11 +25,14 @@ class FollowBackController extends Controller
             'facebook' => 'https://www.facebook.com/pages/MakeUp-Cosmetics-Professional/643352275751858',
             'twitter' => 'https://twitter.com/mUpCosmetics',
             'blogger' => 'http://makeupcosmeticseu.blogspot.com',
+            'googleplus' => 'https://www.google.com/+MakeupcosmeticsEumcp',
             'promoFm' => 'http://www.makeup-cosmetics.eu/catalog/product/37/french-manucure',
             'promoFeutre' => 'http://www.makeup-cosmetics.eu/catalog/product/208/feutres-a-levres',
-            'readOnline' => $this->generateUrl('campaign_promo_mascara', array('targetEmail' => $request->query->get('targetEmail')), true),
-            'readOnlineNl' => $this->generateUrl('campaign_promo_mascara_nl', array('targetEmail' => $request->query->get('targetEmail')), true),
+            'readOnline' => $this->generateUrl('campaign_promo_vernis', array('targetEmail' => $request->query->get('targetEmail')), true),
+            'readOnlineNl' => $this->generateUrl('campaign_promo_vernis_nl', array('targetEmail' => $request->query->get('targetEmail')), true),
             'promoMascara' => $this->generateUrl('homeweb'),
+            'promoVernis' => $this->generateUrl('homeweb'),
+
         );
 
         if (!isset($params['targetEmail']) || !isset($params['campaignLabel'])) {

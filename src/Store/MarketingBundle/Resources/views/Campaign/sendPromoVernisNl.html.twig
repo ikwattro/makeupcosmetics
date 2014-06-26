@@ -1,0 +1,17 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <h1>Promo Vernis NL</h1>
+
+    <h3>Email envoyé à {{ count }} destinataires</h3>
+
+    <table class="table table-condensed">
+        {% for target in targets %}
+            <tr>
+                <td>Email sent to : </td>
+                <td>{{ target }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

@@ -247,6 +247,12 @@ class ProductController extends Controller
                 $entity->setSlug(URLify::filter($entity->getName()));
             }
             $entity->setFileUpdate(md5(time()));
+
+            $em->persist($entity);
+            $em->flush();
+            if ($locale == 'fr_FR') {
+                $entity->setTranslatableLocale('fr');
+            }
             $em->persist($entity);
             $em->flush();
 

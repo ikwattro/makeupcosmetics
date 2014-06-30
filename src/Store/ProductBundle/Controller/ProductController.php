@@ -250,7 +250,7 @@ class ProductController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            if ($locale == 'fr_FR' || null == $locale) {
+            if ($locale == 'fr' || null == $locale) {
                 //exit('yes');
                 $x = $em->getRepository('StoreProductBundle:Product')->find($id);
                 //$x->setTranslatableLocale('fr_FR');

@@ -203,7 +203,7 @@ class ProductController extends Controller
             throw $this->createNotFoundException('Unable to find Product entity.');
         }
 
-        $editForm = $this->createForm(new ProductType(), $entity);
+        $editForm = $this->createForm(new ProductType(true), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
@@ -239,7 +239,7 @@ class ProductController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new ProductType(), $entity);
+        $editForm = $this->createForm(new ProductType(true), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
@@ -247,14 +247,22 @@ class ProductController extends Controller
                 $entity->setSlug(URLify::filter($entity->getName()));
             }
             $entity->setFileUpdate(md5(time()));
+            $em->persist($entity);
+            $em->flush();
 
-            $em->persist($entity);
-            $em->flush();
-            if ($locale == 'fr_FR') {
-                $entity->setTranslatableLocale('fr');
+            if ($locale == 'fr_FR' || null == $locale) {
+                //exit('yes');
+                $x = $em->getRepository('StoreProductBundle:Product')->find($id);
+                //$x->setTranslatableLocale('fr_FR');
+                $x->setDescription($entity->getDescription());
+                $x->setName($entity->getName());
+                $em->persist($x);
+                $em->flush();
+
+                $entity->setTranslatableLocale('fr_FR');
+                $em->persist($entity);
+                $em->flush();
             }
-            $em->persist($entity);
-            $em->flush();
 
             return $this->redirect($this->generateUrl('product_show', array('id' => $id)));
         }

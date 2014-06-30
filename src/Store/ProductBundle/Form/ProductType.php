@@ -13,6 +13,7 @@ class ProductType extends AbstractType
     public function __construct($edition = false)
     {
         $this->edition = $edition;
+        var_dump($edition);
     }
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -63,7 +64,7 @@ class ProductType extends AbstractType
 
         if (false === $this->edition) {
             $builder->add('price', 'number', array(
-                //'mapped' => false,
+                'mapped' => false,
                 'label' => 'Prix : '
             ));
         }

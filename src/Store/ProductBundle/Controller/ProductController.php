@@ -226,13 +226,17 @@ class ProductController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('StoreProductBundle:Product')->findByLocale($id);
+        $entity = $em->getRepository('StoreProductBundle:Product')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Product entity.');
         }
 
-        $entity->setTranslatableLocale('fr');
+        if (null !== $locale) {
+            $entity->setTranslatableLocale($locale);
+        } else {
+            $entity->setTranslatableLocale('fr');
+        }
 
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new ProductType(), $entity);

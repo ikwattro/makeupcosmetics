@@ -63,7 +63,7 @@ class ProductType extends AbstractType
 
         if (false === $this->edition) {
             $builder->add('price', 'number', array(
-                'mapped' => false,
+                //'mapped' => false,
                 'label' => 'Prix : '
             ));
         }

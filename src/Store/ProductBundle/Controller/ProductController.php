@@ -232,11 +232,7 @@ class ProductController extends Controller
             throw $this->createNotFoundException('Unable to find Product entity.');
         }
 
-        if (null !== $locale) {
-            $entity->setTranslatableLocale($locale);
-        } else {
-            $entity->setTranslatableLocale('fr');
-        }
+        $entity->setTranslatableLocale('fr');
 
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new ProductType(), $entity);

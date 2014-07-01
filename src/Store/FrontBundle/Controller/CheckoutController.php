@@ -394,7 +394,7 @@ class CheckoutController extends Controller
             $total = $total + ($item->getProduct()->getPrice() * $item->getQuantity());
         }
         if (null != $cart->getPromotionDiscount()) {
-            $total = ($total - $cart->getPromotionDiscount());
+            //$total = ($total - $cart->getPromotionDiscount());
         }
 
         $twoPlusOneMap = array();
@@ -421,7 +421,29 @@ class CheckoutController extends Controller
             }
         }
 
-        if ($total-$twoPlusOneDiscountMap > 45) {
+        $repo = $em->getRepository('StoreProductBundle:Promotion');
+        $promotions = $repo->findIfActual();
+        $promotion = array();
+
+        if ($total !== 0){
+            foreach($promotions as $pro){
+                $promotion['detail'] = $pro;
+                $promotion['discount_amount'] = (($total / 100) * $pro->getDiscount());
+                $promotion['new_total'] = $total - $promotion['discount_amount'];
+                break;
+            }
+        }
+
+        if (!empty($promotion)) {
+            var_dump($promotion);
+            var_dump($promotion['new_total']);
+            if ($promotion['new_total'] - $twoPlusOneDiscountMap > 45) {
+                foreach ($available_methods as $m) {
+                    $m->setPrice(0);
+                }
+            }
+        }
+        elseif ($total-$twoPlusOneDiscountMap > 45) {
             foreach ($available_methods as $m) {
                 $m->setPrice(0);
             }

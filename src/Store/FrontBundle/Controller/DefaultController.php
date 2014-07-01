@@ -212,6 +212,7 @@ class DefaultController extends Controller
                 break;
             }
         }
+        //var_dump($promotion['new_total']);
 
         $free_shipping = false;
 
@@ -247,7 +248,12 @@ class DefaultController extends Controller
             }
         }
 
-        if (($total - $twoPlusOneDiscountMap) > 45)
+        if (!empty($promotion)) {
+            if ($promotion['new_total'] - $twoPlusOneDiscountMap > 45) {
+                $free_shipping = true;
+            }
+        }
+        elseif (($total - $twoPlusOneDiscountMap) > 45)
         {
             $free_shipping = true;
         } else

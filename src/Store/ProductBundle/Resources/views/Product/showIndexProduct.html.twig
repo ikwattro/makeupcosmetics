@@ -35,7 +35,7 @@
                     {% set dis = pricey*disc %}
                     {% set pricez = pricex - dis %}
                     <span class="price-striped">{{ product.masterVariant.price }}&euro;</span>&nbsp;&nbsp;
-                    <span class="price-promo" itemprop="price">{{ pricez|round(2, 'ceil') }}&euro;</span>
+                    <span class="price-promo" itemprop="price">{{ pricez|round(2) }}&euro;</span>
 
 
             {% else %}

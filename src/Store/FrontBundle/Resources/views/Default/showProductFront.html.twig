@@ -152,7 +152,7 @@
                         {% set dis = pricey*disc %}
                         {% set pricez = pricex - dis %}
                         <span class="price-striped">{{ variant.price }}&euro;</span>
-                        <span class="price-promo">{{ pricez }}&euro;</span>
+                        <span class="price-promo">{{ pricez|round(2) }}&euro;</span>
                         {% else %}
                         {{ variant.price }}</span>&euro;
                         {% endif %}

@@ -58,6 +58,7 @@ class DefaultController extends Controller
 
         $variant = $manager->getVariant($id);
         $product = $manager->getProductForVariant($variant->getProduct()->getId());
+        $promo = $manager->isActivePromo();
 
         if(!$product){
             throw new \InvalidArgumentException("The product does not exist");
@@ -69,6 +70,7 @@ class DefaultController extends Controller
             'variant'   => $variant,
             'product'   =>  $product,
             'metadesc' => $meta_desc,
+            'promo' => $promo,
         );
     }
 
@@ -146,6 +148,7 @@ class DefaultController extends Controller
         $man = $this->get('store.store_manager');
         $categories = $man->getCategories(true);
         $htmlTree = $man->getMyTree();
+        $promo = $man->isActivePromo();
 
         $category = $man->getCategory($id);
         if (!$category){
@@ -157,6 +160,7 @@ class DefaultController extends Controller
             'products' => $products,
             'categories' => $categories,
             'htmlTree' => $htmlTree,
+            'promo' => $promo,
         );
     }
 

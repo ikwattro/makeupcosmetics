@@ -145,6 +145,14 @@
                 <p itemprop="price">
                         {% if variant.isPromo is not empty %}<span class="price-striped">{{ variant.promoPrice }}&euro;</span>
                         <span class="price-promo">{{ variant.price }}&euro;</span>
+                    {% elseif promo is not empty %}
+                        {% set pricex = product.masterVariant.price %}
+                        {% set disc = promo.discount %}
+                        {% set pricey = pricex/100 %}
+                        {% set dis = pricey*disc %}
+                        {% set pricez = pricex - dis %}
+                        <span class="price-striped">{{ variant.price }}&euro;</span>
+                        <span class="price-promo">{{ pricez }}&euro;</span>
                         {% else %}
                         {{ variant.price }}</span>&euro;
                         {% endif %}

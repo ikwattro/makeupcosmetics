@@ -450,6 +450,20 @@ class StoreManager
         $this->em->flsuh();
     }
 
+    public function isActivePromo()
+    {
+        $promos = $this->em->getRepository('StoreProductBundle:Promotion')->findAll();
+        $now = new \DateTime("NOW");
+        foreach ($promos as $promo) {
+            if ($promo->getDisabled() !== true) {
+                if ($promo->getStart() <= $now && $promo->getEnd() > $now) {
+                    return $promo;
+                }
+            }
+        }
+        return false;
+    }
+
 
 
 }

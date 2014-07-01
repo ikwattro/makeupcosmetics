@@ -35,6 +35,8 @@ class DefaultController extends Controller
 
         $cart = $man->getCart();
 
+        $promo = $man->isActivePromo();
+
         
 
         return array(
@@ -42,6 +44,7 @@ class DefaultController extends Controller
             'products'  =>  $masterVariants,
             'imgloc' => $l,
             'latest' => $latest,
+            'promo' => $promo,
         );
     }
 

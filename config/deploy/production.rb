@@ -18,7 +18,7 @@ server '217.70.189.241', user: 'angusyoung', roles: %w{app}, my_property: :my_va
 
 
 set :deploy_to, '/srv/webdisk/web/www/makeupcosmetics/'
-set :composer_install_flags, '--no-dev --no-interaction --prefer-source --optimize-autoloader --no-scripts'
+set :composer_install_flags, '--no-dev --no-interaction --prefer-source'
 
 set :keep_releases, 5
 

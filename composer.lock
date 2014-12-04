@@ -4,48 +4,8 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "657f0869800a2569540cf5db3ae3d234",
+    "hash": "e2f8028454bb22fe20e44042088925f6",
     "packages": [
-        {
-            "name": "behat/transliterator",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Behat/Transliterator.git",
-                "reference": "2fd406df003d18fc53eb5fa3e89da52068fad6c6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Transliterator/zipball/2fd406df003d18fc53eb5fa3e89da52068fad6c6",
-                "reference": "2fd406df003d18fc53eb5fa3e89da52068fad6c6",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Behat\\Transliterator": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Artistic-1.0"
-            ],
-            "description": "String transliterator",
-            "keywords": [
-                "i18n",
-                "slug",
-                "transliterator"
-            ],
-            "time": "2014-09-04 13:06:40"
-        },
         {
             "name": "dflydev/markdown",
             "version": "dev-master",
@@ -311,16 +271,16 @@
         },
         {
             "name": "doctrine/common",
-            "version": "dev-master",
+            "version": "2.4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/common.git",
-                "reference": "559a805125524b0bb6742638784c2979a5c5e607"
+                "reference": "ae92d076442e27b6910dd86a1292a8867cf5cfe4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/common/zipball/559a805125524b0bb6742638784c2979a5c5e607",
-                "reference": "559a805125524b0bb6742638784c2979a5c5e607",
+                "url": "https://api.github.com/repos/doctrine/common/zipball/ae92d076442e27b6910dd86a1292a8867cf5cfe4",
+                "reference": "ae92d076442e27b6910dd86a1292a8867cf5cfe4",
                 "shasum": ""
             },
             "require": {
@@ -337,7 +297,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5.x-dev"
+                    "dev-master": "2.4.x-dev"
                 }
             },
             "autoload": {
@@ -351,6 +311,17 @@
             ],
             "authors": [
                 {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com",
+                    "homepage": "http://www.jwage.com/",
+                    "role": "Creator"
+                },
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com",
+                    "homepage": "http://www.instaclick.com"
+                },
+                {
                     "name": "Roman Borschel",
                     "email": "roman@code-factory.org"
                 },
@@ -359,16 +330,10 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Guilherme Blanco",
-                    "email": "guilhermeblanco@gmail.com"
-                },
-                {
-                    "name": "Jonathan Wage",
-                    "email": "jonwage@gmail.com"
-                },
-                {
                     "name": "Johannes Schmitt",
-                    "email": "schmittjoh@gmail.com"
+                    "email": "schmittjoh@gmail.com",
+                    "homepage": "https://github.com/schmittjoh",
+                    "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
             "description": "Common Library for Doctrine projects",
@@ -380,7 +345,7 @@
                 "persistence",
                 "spl"
             ],
-            "time": "2014-07-27 17:39:50"
+            "time": "2014-05-21 19:29:23"
         },
         {
             "name": "doctrine/data-fixtures",
@@ -994,31 +959,35 @@
         },
         {
             "name": "gedmo/doctrine-extensions",
-            "version": "dev-master",
+            "version": "v2.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Atlantic18/DoctrineExtensions.git",
-                "reference": "b1c364389992c248fcf50d6793e2fe4042021682"
+                "reference": "d2bef940268e4dc5f0f050e80458169a7267813a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/b1c364389992c248fcf50d6793e2fe4042021682",
-                "reference": "b1c364389992c248fcf50d6793e2fe4042021682",
+                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/d2bef940268e4dc5f0f050e80458169a7267813a",
+                "reference": "d2bef940268e4dc5f0f050e80458169a7267813a",
                 "shasum": ""
             },
             "require": {
-                "behat/transliterator": "~1.0",
-                "doctrine/common": "~2.4",
+                "doctrine/common": ">=2.2,<2.5-dev",
                 "php": ">=5.3.2"
             },
             "require-dev": {
-                "doctrine/mongodb-odm": "~1.0-BETA10",
-                "doctrine/orm": "~2.4",
-                "symfony/yaml": "~2.3"
+                "doctrine/common": ">=2.4.0-RC3",
+                "doctrine/dbal": ">=2.4.0-RC1",
+                "doctrine/mongodb": ">=1.0.3",
+                "doctrine/mongodb-odm": ">=1.0.0-BETA9",
+                "doctrine/orm": ">=2.4.0-RC1",
+                "symfony/yaml": "2.3.1"
             },
             "suggest": {
-                "doctrine/mongodb-odm": "to use the extensions with the MongoDB ODM",
-                "doctrine/orm": "to use the extensions with the ORM"
+                "doctrine/dbal": ">=2.3.2",
+                "doctrine/mongodb": ">=1.0.1",
+                "doctrine/mongodb-odm": ">=1.0.0-BETA7",
+                "doctrine/orm": ">=2.3.2"
             },
             "type": "library",
             "extra": {
@@ -1066,7 +1035,7 @@
                 "tree",
                 "uploadable"
             ],
-            "time": "2014-10-05 20:50:56"
+            "time": "2013-11-09 21:23:13"
         },
         {
             "name": "imagine/imagine",
@@ -1733,17 +1702,17 @@
         },
         {
             "name": "liip/imagine-bundle",
-            "version": "dev-master",
+            "version": "1.0.5",
             "target-dir": "Liip/ImagineBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/liip/LiipImagineBundle.git",
-                "reference": "9a7f49505741d84d78929a99c9c4c45e17d0497a"
+                "reference": "334653cb692331fc3791f9da6aab7517fba8fa6f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/9a7f49505741d84d78929a99c9c4c45e17d0497a",
-                "reference": "9a7f49505741d84d78929a99c9c4c45e17d0497a",
+                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/334653cb692331fc3791f9da6aab7517fba8fa6f",
+                "reference": "334653cb692331fc3791f9da6aab7517fba8fa6f",
                 "shasum": ""
             },
             "require": {
@@ -1761,7 +1730,7 @@
                 "doctrine/mongodb-odm": "1.0.*",
                 "doctrine/orm": "~2.3",
                 "ext-gd": "*",
-                "phpunit/phpunit": "~4.3",
+                "phpunit/phpunit": "~3.7",
                 "psr/log": "~1.0",
                 "symfony/browser-kit": "~2.3",
                 "symfony/console": "~2.3",
@@ -1803,21 +1772,21 @@
                 "image",
                 "imagine"
             ],
-            "time": "2014-11-18 13:03:01"
+            "time": "2014-09-15 11:12:49"
         },
         {
             "name": "lunetics/locale-bundle",
-            "version": "dev-master",
+            "version": "v2.3.1",
             "target-dir": "Lunetics/LocaleBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lunetics/LocaleBundle.git",
-                "reference": "3684d0532f5cfcfb65cd02d84d67a76a20409acb"
+                "reference": "4297886c8a4837334c527c6ab7bdbe07fc62ce87"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lunetics/LocaleBundle/zipball/3684d0532f5cfcfb65cd02d84d67a76a20409acb",
-                "reference": "3684d0532f5cfcfb65cd02d84d67a76a20409acb",
+                "url": "https://api.github.com/repos/lunetics/LocaleBundle/zipball/4297886c8a4837334c527c6ab7bdbe07fc62ce87",
+                "reference": "4297886c8a4837334c527c6ab7bdbe07fc62ce87",
                 "shasum": ""
             },
             "require": {
@@ -1871,7 +1840,7 @@
                 "multilanguage",
                 "router"
             ],
-            "time": "2014-12-04 15:08:31"
+            "time": "2014-09-10 07:48:45"
         },
         {
             "name": "monolog/monolog",
@@ -2710,10 +2679,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "gedmo/doctrine-extensions": 20,
-        "lunetics/locale-bundle": 20,
         "friendsofsymfony/user-bundle": 20,
-        "liip/imagine-bundle": 20,
         "jbroadway/urlify": 20,
         "knplabs/knp-markdown-bundle": 20,
         "vich/uploader-bundle": 20,

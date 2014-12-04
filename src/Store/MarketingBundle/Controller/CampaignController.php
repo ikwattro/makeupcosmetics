@@ -10,122 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class CampaignController extends Controller
 {
-    /**
-     * @Route("/campaign/email/newstart", name="campaign_newstart")
-     * @Template()
-     */
-    public function newStartAction()
-    {
-        //var_dump($this->generateUrl('email_followback'));
-        return array(
-            'followback_url' => $this->generateUrl('email_followback', array(), true),
-            'email' => 'willemsen.christophe@gmail.com'
-        );
-    }
 
-    /**
-     * @Route("/campaign/email/promoFm", name="campaign_promoFm")
-     * @Template()
-     */
-    public function promoFmAction()
-    {
-        //var_dump($this->generateUrl('email_followback'));
-        $em = $this->get('request')->query->get('targetEmail') ?: '';
-        return array(
-            'followback_url' => $this->generateUrl('email_followback', array(), true),
-            'email' => $em,
-        );
-    }
-
-    /**
-     * @Route("/campaign/email/promoFeutre", name="campaign_promo_feutre")
-     * @Template()
-     */
-    public function promoFeutreAction()
-    {
-        //var_dump($this->generateUrl('email_followback'));
-        $em = $this->get('request')->query->get('targetEmail') ?: '';
-        return array(
-            'followback_url' => $this->generateUrl('email_followback', array(), true),
-            'email' => $em,
-            'label' => 'promoFeutre'
-        );
-    }
-
-    /**
-     * @Route("/campaign/email/promoViltLippen", name="campaign_promo_feutre_nl")
-     * @Template()
-     */
-    public function promoFeutreNlAction()
-    {
-        //var_dump($this->generateUrl('email_followback'));
-        $em = $this->get('request')->query->get('targetEmail') ?: '';
-        return array(
-            'followback_url' => $this->generateUrl('email_followback', array(), true),
-            'email' => $em,
-            'label' => 'promoFeutre'
-        );
-    }
-
-    /**
-     * @Route("/campaign/email/promoMascara", name="campaign_promo_mascara")
-     * @Template()
-     */
-    public function promoMascaraAction()
-    {
-        //var_dump($this->generateUrl('email_followback'));
-        $em = $this->get('request')->query->get('targetEmail') ?: '';
-        return array(
-            'followback_url' => $this->generateUrl('email_followback', array(), true),
-            'email' => $em,
-            'label' => 'promoMascara'
-        );
-    }
-
-    /**
-     * @Route("/campaign/email/promoMascaraNl", name="campaign_promo_mascara_nl")
-     * @Template()
-     */
-    public function promoMascaraNlAction()
-    {
-        //var_dump($this->generateUrl('email_followback'));
-        $em = $this->get('request')->query->get('targetEmail') ?: '';
-        return array(
-            'followback_url' => $this->generateUrl('email_followback', array(), true),
-            'email' => $em,
-            'label' => 'promoMascara'
-        );
-    }
-
-    /**
-     * @Route("/campaign/email/promoVernis", name="campaign_promo_vernis")
-     * @Template()
-     */
-    public function promoVernisAction()
-    {
-        //var_dump($this->generateUrl('email_followback'));
-        $em = $this->get('request')->query->get('targetEmail') ?: '';
-        return array(
-            'followback_url' => $this->generateUrl('email_followback', array(), true),
-            'email' => $em,
-            'label' => 'promoMascara'
-        );
-    }
-
-    /**
-     * @Route("/campaign/email/promoNagellakNl", name="campaign_promo_vernis_nl")
-     * @Template()
-     */
-    public function promoVernisNlAction()
-    {
-        //var_dump($this->generateUrl('email_followback'));
-        $em = $this->get('request')->query->get('targetEmail') ?: '';
-        return array(
-            'followback_url' => $this->generateUrl('email_followback', array(), true),
-            'email' => $em,
-            'label' => 'promoMascara'
-        );
-    }
 
     private function sendCampaignEmail($followbackUrl, $email, $label, $subject, $template)
     {
@@ -144,128 +29,42 @@ class CampaignController extends Controller
         return true;
     }
 
-    /**
-     * @Route("/admin/campaign/email/send/newStart", name="campaign_send_newstart")
-     * @Template()
-     */
-    public function sendNewStartEmailAction()
-    {
-        $targets = array();
-
-        $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('StoreMarketingBundle:TargetEmail')->findAll();
-        foreach ($entities as $target) {
-            if ($this->isValidForFrench($target)) {
-                //$this->sendCampaignEmail($this->generateUrl('email_followback'), strtolower($target->getEmail()));
-                $targets[] = $target->getEmail();
-            }
-        }
-
-        return array(
-            'count' => count($targets),
-            'targets' => $targets
-        );
-
-    }
 
     /**
-     * @Route("/admin/campaign/email/send/promoFm", name="campaign_send_promoFm")
-     * @Template()
+     * @Route("/admin/campaign/email/send/endyear/{testOnly}", name="campaign_end_year")
+     * @Tempate()
      */
-    public function sendPromoFmAction()
+    public function endYearCampaignAction($testOnly)
     {
         $targets = array();
-
-        $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('StoreMarketingBundle:TargetEmail')->findAll();
-        foreach ($entities as $target) {
-            if ($this->isValidForFrench($target)) {
-                $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()));
-                $targets[] = $target->getEmail();
-            }
-        }
-
-        return array(
-            'count' => count($targets),
-            'targets' => $targets
-        );
-
-    }
-
-    /**
-     * @Route("/admin/campaign/email/send/promoFeutre/{testOnly}", name="campaign_send_promoFeutre")
-     * @Template()
-     */
-    public function sendPromoFeutreAction($testOnly)
-    {
-        $targets = array();
+        $template = 'StoreMarketingBundle:Campaign:endYearCampaign.html.twig'
 
         $test = $testOnly == 'reality' ? false : true;
 
         $em = $this->getDoctrine()->getManager();
         $entities = $em->getRepository('StoreMarketingBundle:TargetEmail')->findAll();
         foreach ($entities as $target) {
-            if ($this->isValidForFrench($target)) {
 
                 if ($test) {
                     if ($target->getTestAllowed()) {
-                        $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoFeutre');
+                        $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'endYear', 'Promo einde-fin 2014', $template);
                         $targets[] = $target->getEmail();
                     }
                 } else {
-                    $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoFeutre');
+                    $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'endYear', 'Promo einde-fin 2014', $template);
                     $targets[] = $target->getEmail();
                 }
 
 
 
 
-            }
+
         }
 
         return array(
             'count' => count($targets),
             'targets' => $targets
         );
-
-    }
-
-    /**
-     * @Route("/admin/campaign/email/send/promoMascara/{testOnly}", name="campaign_send_promoMascara")
-     * @Template()
-     */
-    public function sendPromoMascaraAction($testOnly)
-    {
-        $targets = array();
-
-        $test = $testOnly == 'reality' ? false : true;
-
-        $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('StoreMarketingBundle:TargetEmail')->findAll();
-        foreach ($entities as $target) {
-            if ($this->isValidForFrench($target)) {
-
-                if ($test) {
-                    if ($target->getTestAllowed()) {
-                        $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoMascara');
-                        $targets[] = $target->getEmail();
-                    }
-                } else {
-                    $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoMascara');
-                    $targets[] = $target->getEmail();
-                }
-
-
-
-
-            }
-        }
-
-        return array(
-            'count' => count($targets),
-            'targets' => $targets
-        );
-
     }
 
     /**
@@ -293,45 +92,6 @@ class CampaignController extends Controller
                     }
                 } else {
                     //$this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoFeutre');
-                    $targets[] = $target->getEmail();
-                }
-
-
-
-
-            }
-        }
-
-        return array(
-            'count' => count($targets),
-            'targets' => $targets
-        );
-
-    }
-
-    /**
-     * @Route("/admin/campaign/email/send/nl/promoMascara/{testOnly}", name="campaign_send_nl_promoMascara")
-     * @Template()
-     */
-    public function sendPromoMascaraNlAction($testOnly)
-    {
-        $targets = array();
-
-        $test = $testOnly == 'reality' ? false : true;
-
-        $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('StoreMarketingBundle:TargetEmail')->findAll();
-
-        foreach ($entities as $target) {
-            if ($this->isValidForDutch($target) || $target->getTestAllowed()) {
-
-                if ($test) {
-                    if ($target->getTestAllowed()) {
-                        $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoMascara');
-                        $targets[] = $target->getEmail();
-                    }
-                } else {
-                    $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoMascara');
                     $targets[] = $target->getEmail();
                 }
 
@@ -413,87 +173,6 @@ class CampaignController extends Controller
         return false;
     }
 
-    /**
-     * @Route("/admin/campaign/email/send/promoVernis/{testOnly}", name="campaign_send_promoVernis")
-     * @Template()
-     */
-    public function sendPromoVernisAction($testOnly)
-    {
-        $targets = array();
-        $subject = 'Promotion Vernis à Ongles 1+1 gratuit';
-        $template = 'StoreMarketingBundle:Campaign:promoVernis.html.twig';
-
-        $test = $testOnly == 'reality' ? false : true;
-
-        $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('StoreMarketingBundle:TargetEmail')->findAll();
-        foreach ($entities as $target) {
-            if ($this->isValidForFrench($target)) {
-
-                if ($test) {
-                    if ($target->getTestAllowed()) {
-                        $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoVernis', $subject, $template);
-                        $targets[] = $target->getEmail();
-                    }
-                } else {
-                    $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoVernis', $subject, $template);
-                    $targets[] = $target->getEmail();
-                }
-
-
-
-
-            }
-        }
-
-        return array(
-            'count' => count($targets),
-            'targets' => $targets
-        );
-
-    }
-
-
-    /**
-     * @Route("/admin/campaign/email/send/nl/promoVernis/{testOnly}", name="campaign_send_nl_promoVernis")
-     * @Template()
-     */
-    public function sendPromoVernisNlAction($testOnly)
-    {
-        $targets = array();
-        $subject = 'Promotie Nagellak 1+1 gratis';
-        $template = 'StoreMarketingBundle:Campaign:promoVernisNl.html.twig';
-
-        $test = $testOnly == 'reality' ? false : true;
-
-        $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('StoreMarketingBundle:TargetEmail')->findAll();
-
-        foreach ($entities as $target) {
-            if ($this->isValidForDutch($target) || $target->getTestAllowed()) {
-
-                if ($test) {
-                    if ($target->getTestAllowed()) {
-                        $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoVernis', $subject, $template);
-                        $targets[] = $target->getEmail();
-                    }
-                } else {
-                    $this->sendCampaignEmail($this->generateUrl('email_followback', array(), true), strtolower($target->getEmail()), 'promoVernis', $subject, $template);
-                    $targets[] = $target->getEmail();
-                }
-
-
-
-
-            }
-        }
-
-        return array(
-            'count' => count($targets),
-            'targets' => $targets
-        );
-
-    }
 
 
 }

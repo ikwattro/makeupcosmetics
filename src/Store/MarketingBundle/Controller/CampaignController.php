@@ -37,7 +37,7 @@ class CampaignController extends Controller
     public function endYearCampaignAction($testOnly)
     {
         $targets = array();
-        $template = 'StoreMarketingBundle:Campaign:endYearCampaign.html.twig'
+        $template = 'StoreMarketingBundle:Campaign:endYearCampaign.html.twig';
 
         $test = $testOnly == 'reality' ? false : true;
 

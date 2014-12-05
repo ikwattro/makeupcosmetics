@@ -32,7 +32,7 @@ class CampaignController extends Controller
 
     /**
      * @Route("/admin/campaign/email/send/endyear/{testOnly}", name="campaign_end_year")
-     * @Tempate()
+     * @Template()
      */
     public function endYearCampaignAction($testOnly)
     {
